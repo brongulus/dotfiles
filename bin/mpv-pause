@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# TODO Look into what to do if multiple mpv windows are playing, also
+# See if the socket problem persists
+
+# Erroneous behaviour, whenever a new mpv window is added, the socket
+# attaches to that and detaches from the old one, so even if new window 
+# closes, the old one can't be controlled.
+
+# For playing option check if it's possible to look at current desktop's
+# mpv window and only play that
+
+# needs xtitle, socat
+# Small utility to check if current bspwm desktop has an mpv window
+# If it does not, stop the mpv video otherwise play it.
+out=$(xtitle $(bspc query -N -d) | grep 'mpv\|Memento')
+
+if [[ $out == "" ]]; then
+    echo '{ "command": ["set_property", "pause", true] }' | socat - /tmp/mpvsocket;
+else
+    echo '{ "command": ["set_property", "pause", false] }' | socat - /tmp/mpvsocket;
+fi

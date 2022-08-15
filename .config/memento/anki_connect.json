@@ -1,0 +1,104 @@
+{
+    "enabled": true,
+    "profiles": [
+        {
+            "audio-db": -20,
+            "audio-name": "JapanesePod101",
+            "audio-normalize": false,
+            "audio-pad-end": 0,
+            "audio-pad-start": 0,
+            "audio-skiphash": "7e2c2f954ef6051373ba916f000168dc",
+            "audio-url": "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji={expression}&kana={reading}",
+            "duplicate": 1,
+            "ex-glos": [
+            ],
+            "host": "localhost",
+            "kanji": {
+                "deck": "Active::Mining",
+                "fields": {
+                    "Audio": "{audio}",
+                    "Glossary": "{pitch-accent-positions} {test}",
+                    "Graph": "{pitch-accent-graphs}",
+                    "Hint": "",
+                    "Picture": "",
+                    "Reading": "{reading}",
+                    "Sentence": "",
+                    "SentenceAudio": "",
+                    "front": "{expression}"
+                },
+                "model": "Mining-475ae"
+            },
+            "name": "Default",
+            "port": "8765",
+            "screenshot": 0,
+            "tags": [
+                "memento"
+            ],
+            "term": {
+                "deck": "Active::Mining",
+                "fields": {
+                    "Audio": "{audio}",
+                    "Glossary": "{pitch-accent-positions} {test}",
+                    "Graph": "{pitch-accent-graphs}",
+                    "Hint": "",
+                    "Picture": "",
+                    "Reading": "{reading}",
+                    "Sentence": "",
+                    "SentenceAudio": "",
+                    "front": "{expression}"
+                },
+                "model": "Mining-475ae"
+            }
+        },
+        {
+            "audio-db": -20,
+            "audio-name": "JapanesePod101",
+            "audio-normalize": false,
+            "audio-pad-end": 0,
+            "audio-pad-start": 0,
+            "audio-skiphash": "7e2c2f954ef6051373ba916f000168dc",
+            "audio-url": "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji={expression}&kana={reading}",
+            "duplicate": 1,
+            "ex-glos": [
+            ],
+            "host": "localhost",
+            "kanji": {
+                "deck": "Active::Mining",
+                "fields": {
+                    "Audio": "{audio}",
+                    "Glossary": "{pitch} {glossary-brief}",
+                    "Graph": "{pitch-graph}",
+                    "Hint": "",
+                    "Picture": "{screenshot-video}",
+                    "Reading": "",
+                    "Sentence": "",
+                    "SentenceAudio": "{audio-media}",
+                    "front": "{expression}"
+                },
+                "model": "Mining-475ae"
+            },
+            "name": "Test",
+            "port": "8765",
+            "screenshot": 0,
+            "tags": [
+                "memento"
+            ],
+            "term": {
+                "deck": "Active::Mining",
+                "fields": {
+                    "Audio": "{audio}",
+                    "Glossary": "{pitch} {glossary-brief}",
+                    "Graph": "{pitch-graph}",
+                    "Hint": "",
+                    "Picture": "{screenshot}",
+                    "Reading": "",
+                    "Sentence": "",
+                    "SentenceAudio": "{audio-media}",
+                    "front": "{expression}"
+                },
+                "model": "Mining-475ae"
+            }
+        }
+    ],
+    "setProfile": "Test"
+}

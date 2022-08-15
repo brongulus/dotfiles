@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+find -name *.mp4 -exec ffmpeg -i {} -c:v libx264 -crf 27 -c:a copy {}.mkv \; -exec rm {} \;
+
+# G4G DSA
+#-vf scale=-1:720 

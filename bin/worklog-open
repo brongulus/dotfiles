@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+line=$(cat /home/prashant/blog/org/blog.org | grep -n '\+ \[\-\]' | cut -d : -f 1)
+echo "$line" | xargs -I{} ~/bin/scratch 'emacs -nw /home/prashant/blog/org/blog.org +{}' &

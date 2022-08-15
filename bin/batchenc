@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+for f in *.mp4;
+do ffmpeg -i "$f" -c copy -aspect 4:3 out/"${f%.*}.mkv";
+done

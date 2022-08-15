@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+# TODO Look into checking for when channels go live and add an
+# icon in front of channel name
+# MEGA TODO Look into incorporating chat w/ emotes alongwith mpv
+
+# follows(){
+#     printf "1.Forsen\n"
+#     printf "2.ppy\n"
+#     printf "3.XQC\n"
+#     printf "4.Pokimane\n"
+#     printf "5.lilypichu\n"
+#     printf "6.AriaSaki\n"
+#     printf "7.ecnerwala\n"
+#     printf "8.pashka\n"
+#     printf "9.petr\n"
+#     printf "10.tourist\n"
+#     printf "11.Neal Wu\n"
+#     printf "12.Monogon\n"
+#     printf "13.S1mple\n"
+#     printf "14.Hyoon\n"
+#     printf "15.Vylerria\n"
+# }
+
+main(){
+    channel=$(echo "" | rofi -dmenu -p "Channel" -theme-str 'listview { enabled: false;}');
+
+    # choice=$(follows | rofi -i -dmenu | cut -d. -f1)
+
+    # case $choice in
+    #     1)
+    #         channel="forsen"
+    #         break
+    #         ;;
+    #     2)
+    #         channel="ppy"
+    #         break
+    #         ;;
+    #     3)
+    #         channel="xqc"
+    #         break
+    #         ;;
+    #     4)
+    #         channel="pokimane"
+    #         break
+    #         ;;
+    #     5)
+    #         channel="lilypichu"
+    #         break
+    #         ;;
+    #     6)
+    #         channel="ariasaki"
+    #         break
+    #         ;;
+    #     7)
+    #         channel="ecnerwala"
+    #         break
+    #         ;;
+    #     8)
+    #         channel="pmavrin"
+    #         break
+    #         ;;
+    #     9)
+    #         channel="petrmitrichev"
+    #         break
+    #         ;;
+    #     10)
+    #         channel="the__tourist"
+    #         break
+    #         ;;
+    #     11)
+    #         channel="nealwu"
+    #         break
+    #         ;;
+    #     12)
+    #         channel="monogoncoding"
+    #         break
+    #         ;;
+    #     13)
+    #         channel="s1mple"
+    #         break;;
+    #     14)
+    #         channel="hyoon"
+    #         break;;
+    #     15)
+    #         channel="vylerria"
+    #         break;;
+    #     *)
+    #         if [[ -z "${choice// }" ]]; then
+    #             exit 1
+    #         fi
+    #         break
+    #         ;;
+    # esac
+
+    
+    if [[ -z "${channel// }" ]]; then
+        exit 1
+    fi
+
+    off_check=$(curl -sL https://twitch.tv/$channel | grep -c isLiveBroadcast)
+
+    if [[ $off_check == 0 ]]
+    then
+        echo $channel 'is offline' | rofi -dmenu -l 1;
+        main
+    else
+        mpv --ytdl-format="bestvideo[height<=?1080]+bestaudio/best" --no-resume-playback https://twitch.tv/$channel & sleep 5;
+        if [[ $channel == "forsen" ]]; then 
+            chatterino -c $channel;
+        fi
+    fi
+
+# ytdl-format="bestvideo[height<=?1080]+bestaudio/best"
+# --ytdl-format="720p"
+# Offline Echo message
+# [ytdl_hook] ERROR: [twitch:stream] ppy: ppy is offline
+# [ytdl_hook] youtube-dl failed: unexpected error occurred
+}
+main

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Indivial exec command example:
+# ln -sf ~/Dotfiles/.bashrc ~
+# The find command lists all the files in Dotfiles dir 
+# and performs the exec command (being ln -sf here) on
+# all of them. We perform symlinks for individual files 
+# since there might be directories inside the target 
+# folder which we aren't tracking in Dots but still need
+# for functioning so this doesn't overwrite them 
+# -f is for force if existing
+
+echo "Running find..." 
+find ~/Dotfiles -type f -exec bash -c "f='{}' ; echo ln -sf {} ~\${f#\"/home/prashant/Dotfiles\"}" \; > tmp.txt
+echo "Making symlinks..."
+sh tmp.txt
+echo "Removing tempfile..."
+rm tmp.txt
+echo "Done :)"

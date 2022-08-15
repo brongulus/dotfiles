@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+menu(){
+    printf "1. Devmacs\n"
+    printf "2. Emacs\n"
+}
+
+main(){
+    emacs=$(menu | rofi -i -dmenu -p "Choose your emacs:" | cut -d. -f1);
+
+    case $emacs in
+        1)
+            emacs --profile dev
+            break
+            ;;
+        2)
+            emacs
+            break
+            ;;
+        *)
+            if [[ -z "${emacs}" ]]; then
+                exit 1
+            fi
+            break
+            ;;
+    esac
+}
+main

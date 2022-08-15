@@ -1,0 +1,18 @@
+{
+  "clangd.semanticHighlighting": true,
+  "diagnostic.locationlistUpdate": true,
+  "diagnostic.refreshOnInsertMode": true,
+
+  "zig.enabled": true,
+  "zig.startUpMessage": true,
+  "zig.path": "zls",
+  "zig.debugLog": false,
+
+  "languageserver": {
+    "zls" : {
+      "command": "/usr/bin/zls",
+      "filetypes": ["zig"]
+
+    }
+  }
+}

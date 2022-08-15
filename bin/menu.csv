@@ -1,0 +1,9 @@
+Hidden Windows,$HOME/bin/rofi_hidden
+Open Twitch Follows,$HOME/bin/rofi_twitch
+Open Favourite Browser,$HOME/bin/rofi_edit
+Open Power Menu,$HOME/bin/rofi_power
+Gaki No Tsukai,mpv --no-resume-playback 'https://gaki-no-tsukai.eu/'
+JLPT N5,mpv --resume-playback '/mnt/Data/Documents/japanese/Videos/NNMori/part1/file.m3u'
+IPTV,mpv --no-resume-playback 'https://iptv-org.github.io/iptv/languages/jpn.m3u'
+2b2t Japanese,~/bin/Memento_Linux_x86_64.AppImage 'https://www.youtube.com/playlist?list=PL_RkFtrkEp5oX-z9v1xrlgSOl0EkoMiQr&index=1'
+MSYS2,cd /mnt/Data/MSYS2/opt/ || exit; echo "$(rg --files --color=never | rofi -no-disable-history -sort -i -p "File:" -dmenu -fuzzy -show-icons)" | xargs -I{} mpv {}

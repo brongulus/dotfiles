@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for a in *.jpg; do
+  b=$(printf %04d.jpg ${a%.jpg})
+  if [ $a != $b ]; then
+    mv $a $b
+  fi
+done

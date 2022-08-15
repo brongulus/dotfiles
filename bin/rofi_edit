@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# Rofi menu for quickly opening a file in some directory
+# Requires ripgrep
+#
+
+menu(){
+    printf "1.Dots\n"
+    printf "2.4-2\n"
+    printf "3.Programming\n"
+    printf "4.Media-Data\n"
+    printf "5.MEGAsync\n"
+    printf "6.Media-Manjaro\n"
+}
+
+main(){
+
+    choice=$(menu | rofi -i -dmenu | cut -d. -f1)
+
+# Directory to search in
+    case $choice in
+        1)
+            dir="$HOME/.config"
+            break
+            ;;
+        2)
+            dir="/mnt/Data/Documents/4-2"
+            break
+            ;;
+        3)
+            dir="/mnt/Data/Documents/Programming/"
+            break
+            ;;
+        4)
+            dir="/mnt/Data/Downloads/Media"
+            break
+            ;;
+        5)
+            dir="/run/media/prashant/Windows-SSD/Users/prash/Documents/MEGAsync Downloads"
+            break
+            ;;
+        6)
+            dir="/mnt/manjaro/home/prashant/Downloads/Media"
+            break
+            ;;
+        *)
+            if [[ -z "${choice// }" ]]; then
+                exit 1
+            fi
+            break
+            ;;
+    esac
+
+# Ignore files or directories relative to the directory you want to search
+ignore="
+chromium
+enchant
+elvish/lib
+mpv/watch_later
+ncmpcpp/lyrics
+spotify
+transmission/torrents
+transmission/resume
+microsoft-edge-dev
+obs-studio
+hakuneko-desktop
+vivaldi
+pulse
+JetBrains
+discord
+libreoffice
+Ganache
+Japanesepod101"
+
+ignore_file="/tmp/rofi_edit_ignore_file"
+# Write ignore file in tmpfs
+echo "$ignore" > "$ignore_file"
+
+# Rofi prompt
+rofi_prompt="File:"
+
+# Change directory so that the paths are shorter in rofi
+cd "$dir" || exit
+choice="$(rg --files --color=never --ignore-file "$ignore_file" | rofi -no-disable-history -sort -i -p "$rofi_prompt" -dmenu -fuzzy -show-icons)"
+
+# If the search is cancelled by the user (e.g. Escape button)
+if [[ -z "${choice// }" ]]; then
+    exit 1
+fi
+
+# Edit the selected file
+xdg-open "$choice"
+}
+
+main
