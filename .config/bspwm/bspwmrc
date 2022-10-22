@@ -25,7 +25,8 @@ bspc config pointer_action2 resize_corner
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 # bspc rule -a Chromium desktop='^2'
 bspc rule -a firefox desktop='^2'
-bspc rule -a Pavucontrol state=floating rectangle=600x300+1020+30
+bspc rule -a Pavucontrol state=floating rectangle=600x300+1120+730
+bspc rule -a Blueman-manager state=floating rectangle=500x400+1350+630
 bspc rule -a mplayer2 state=floating
 bspc rule -a mpv state=tiled
 bspc rule -a Yad state=floating
@@ -39,7 +40,7 @@ bspc rule -a Screenkey manage=off
 bspc rule -a Emacs state=tiled desktop='^1' follow=on
 bspc rule -a Code state=tiled desktop='^2' follow=on
 bspc rule -a Microsoft-edge desktop='^3' follow=on
-bspc rule -a Teams state=tiled desktop='^4' follow=on
+bspc rule -a 'Microsoft Teams - Preview' state=tiled desktop='^4' 
 bspc rule -a Zathura state=tiled
 # Scratch: wxh+x+y
 bspc rule -a '*:scratch' state=floating sticky=on rectangle=1500x700+210+190
@@ -59,7 +60,7 @@ bspc config active_border_color         "#1b2124"
 sh ~/.screenlayout/monitor.sh &
 # Conky
 conky -c ~/.config/conky/conky.conf &
-# conky -c ~/.config/conky/compre.conf &
+conky -c ~/Dotfiles/.config/conky/tracker.conf &
 # Bar
 # killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
 killall -q polybar; polybar -r top &

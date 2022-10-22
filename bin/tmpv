@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+mpv $1 -wid $(xwininfo | awk '{if(/Window id:/) print $4}' & xdotool click 1)
