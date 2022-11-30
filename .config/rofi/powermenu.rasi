@@ -4,24 +4,25 @@
  *******************************************************/
 
 configuration {
-    font:                           "Sourcecode Pro Regular 10";
+    font:                           "MesloLGS Nerd Font Mono 12";
     show-icons:                     false;
-    icon-theme: 		    "Arc-X-D";
+    icon-theme: 		                "Arc-X-D";
     scroll-method:                  0;
     disable-history:                false;
-    sidebar-mode: 		    false;
+    sidebar-mode: 		              false;
 }
 
 @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
 
 window {
-    background-color:               #21222c;
+    background-color:               #1E272C;
     border:                         0;
     padding:                        10;
     transparency:                   "real";
     width:                          180px;
     location:                       southwest;
-    y-offset:                       -30;
+    y-offset:                       -35;
+    x-offset:                       10;
     /*x-offset:	                    850;*/
     transparency:                   "real";
 }
@@ -35,7 +36,7 @@ element {
     padding: 1px ;
 }
 element-text {
-    background-color: #21222c;
+    background-color: #1E272C;
     text-color:       inherit;
 }
 element.normal.normal {

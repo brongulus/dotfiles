@@ -12,23 +12,23 @@ require('packer').startup(function()
 	use 'tpope/vim-eunuch' -- For sudo, check x11-ssh-keypass
 	use 'tpope/vim-characterize'
 	use 'tpope/vim-fugitive'
+	use 'tpope/vim-scriptease'
 
 	use 'junegunn/vim-easy-align'
+	use 'airblade/vim-gitgutter'
+	use 'mhinz/vim-startify'
+	use { 
+		"sindrets/diffview.nvim",
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			vim.cmd[[set fillchars+=diff:╱]]
+		end
+	}
+	use 'karb94/neoscroll.nvim'
 	use 'rmehri01/onenord.nvim'
-	use 'olivertaylor/vacme'
-	use { 'Everblush/everblush.nvim', as = 'everblush' }
-	use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    tag = 'v1.*',
-    -- config = function()
-			-- vim.o.background = "light"
-    --   vim.cmd('colorscheme rose-pine')
-    -- end
-	})
+	use 'marko-cerovac/material.nvim'
 	use 'christoomey/vim-tmux-navigator'
 	use 'lukas-reineke/indent-blankline.nvim'
-	use 'akinsho/toggleterm.nvim'
 	use 'sheerun/vim-polyglot'
 	use {
 				"windwp/nvim-autopairs",
@@ -36,9 +36,9 @@ require('packer').startup(function()
 					require("nvim-autopairs").setup {}
 				end
 			}
-	use 'dylanaraps/fff.vim'
 
 	use {'neoclide/coc.nvim', branch = 'release'}
+	use {'jalvesaq/Nvim-R', branch = 'stable'}
 	use {
   	"folke/trouble.nvim",
   	requires = "kyazdani42/nvim-web-devicons",
@@ -69,20 +69,13 @@ require('packer').startup(function()
             require "icons"
         end,
   	  }
-	use {
-        "kyazdani42/nvim-tree.lua",
-        after = "nvim-web-devicons",
-        config = function()
-            require "nvimtree"
-        end,
-    	}
 	use 'vim-pandoc/vim-pandoc'
 	use 'vim-pandoc/vim-pandoc-syntax'
-	use 'SirVer/ultisnips'
+	-- use 'SirVer/ultisnips' -- ruins <tab>
 	-- use 'kyazdani42/nvim-tree.lua'
 	use 'junegunn/goyo.vim'
 	use 'nvim-treesitter/nvim-treesitter' -- :TSUpdate; ;TSInstall
-	use 'norcalli/nvim-colorizer.lua' -- Rainbow mod
+	use 'NvChad/nvim-colorizer.lua' -- Rainbow mod
 	use {'nvim-orgmode/orgmode', config = function()
         require('orgmode').setup{}
 	end

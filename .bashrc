@@ -171,15 +171,8 @@ PERL_LOCAL_LIB_ROOT="/home/prashant/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LI
 PERL_MB_OPT="--install_base \"/home/prashant/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/prashant/perl5"; export PERL_MM_OPT;
 
-# FZF theming: everblush
-export FZF_DEFAULT_OPTS='
-  --color fg:#5d6466,bg:#1e2527
-  --color bg+:#ef7d7d,fg+:#2c2f30
-  --color hl:#dadada,hl+:#26292a,gutter:#1e2527
-  --color pointer:#373d49,info:#606672
-  --border
-  --color border:#1e2527
-  --height 20'
+# arcticicestudio/nord-vim
+export FZF_DEFAULT_OPTS='--color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1'
 
 fzf-open(){
  file="$(fzf --height 40% --reverse)" && [ -f "$file" ] && xdg-open "$file"
@@ -187,11 +180,33 @@ fzf-open(){
 
 bind -x '"\C-xf": fzf-open'
 
-# fish
-exec fish
-
 # FFF
 export FFF_KEY_MKDIR="+"
+export FFF_COL2=0
+export FFF_COL5=7
+export FFF_KEY_PARENT4="-"
+
+### File operations.
+
+export FFF_KEY_YANK="y"
+export FFF_KEY_MOVE="m"
+export FFF_KEY_TRASH="d"
+export FFF_KEY_LINK="s"
+export FFF_KEY_BULK_RENAME="b"
+
+export FFF_KEY_YANK_ALL="Y"
+export FFF_KEY_MOVE_ALL="M"
+export FFF_KEY_TRASH_ALL="D"
+export FFF_KEY_LINK_ALL="S"
+export FFF_KEY_BULK_RENAME_ALL="B"
+
+export FFF_KEY_PASTE="p"
+export FFF_KEY_CLEAR="c"
+
+export FFF_KEY_RENAME="r"
+# export FFF_KEY_MKDIR="n"
+export FFF_KEY_MKFILE="f"
+export FFF_KEY_IMAGE="i" # display image with w3m-img
 
 # SSH + Kitty fix
 [[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
@@ -211,3 +226,6 @@ _direnv_hook() {
 }
 # Nix Shiz
 # export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
+
+# fish
+exec fish

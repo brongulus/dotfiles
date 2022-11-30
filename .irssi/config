@@ -219,6 +219,8 @@ channels = (
   { name = "#irssi"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#gentoo"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#gentoo-chat"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#gentoo-soc"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#mlpack"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#zig"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "##rust"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#security"; chatnet = "Libera"; autojoin = "no"; },

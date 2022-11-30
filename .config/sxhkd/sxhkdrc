@@ -175,13 +175,13 @@ XF86AudioMute
   amixer -D pulse sset Master toggle-mute
 
 XF86AudioPlay
-  mpc toggle
+  playerctl play-pause
 
 XF86AudioNext
-  mpc next
+  playerctl next
 
 XF86AudioPrev
-  mpc prev
+  playerctl prev
 
 XF86TouchpadOn
 	~/bin/worklog-open &	
@@ -206,16 +206,22 @@ Print
 
 # Shortcuts
 super+ F1
-  ~/bin/rofi_emacs
+  emacs
 
 super + F2
   microsoft-edge-stable
 
 super + F3
-  thunar 
+  nautilus 
 
 super + F4
 	anki -b /mnt/Data/AnkiData
+
+super + F5
+	teams
+
+super + F6
+	code
 
 super + w
   quickmedia

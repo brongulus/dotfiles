@@ -42,6 +42,7 @@ bspc rule -a Code state=tiled desktop='^2' follow=on
 bspc rule -a Microsoft-edge desktop='^3' follow=on
 bspc rule -a 'Microsoft Teams - Preview' state=tiled desktop='^4' 
 bspc rule -a Zathura state=tiled
+bspc rule -a 'easyeffects' state=floating
 # Scratch: wxh+x+y
 bspc rule -a '*:scratch' state=floating sticky=on rectangle=1500x700+210+190
 bspc rule -a 'ru-turikhay-tlauncher-bootstrap-Bootstrap' state=pseudo_tiled
@@ -49,7 +50,7 @@ bspc rule -a 'ru-turikhay-tlauncher-bootstrap-Bootstrap' state=pseudo_tiled
 # HELP: xprop | grep WM_CLASS
 
 # Border
-bspc config focused_border_color        "#6c71c4"
+bspc config focused_border_color        "#009688"
 bspc config normal_border_color         "#817c9c"
 bspc config active_border_color         "#1b2124"
 
@@ -79,7 +80,7 @@ picom -CGb &
 nm-applet --indicator &
 # mpd
 pkill mpd; mpd &
-
+pkill mpDris2; mpDris2 &
 # Cursor
 xsetroot -cursor_name left_ptr &
 

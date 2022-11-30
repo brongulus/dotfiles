@@ -5,13 +5,14 @@ map('n', '<leader>r', ':luafile %<CR>', { noremap = true, silent = true })
 map('n', '<leader>hrr', ':PackerSync<CR>', { noremap = true, silent = true})
 map('i', 'jk', '<Esc>', { noremap = true, silent = true })
 map('i', 'kj', '<Esc>', { noremap = true, silent = true })
-map('n', '<leader>qq', ':q<cr>', { noremap = true, silent = true })
+map('n', '<leader>qq', ':qa<cr>', { noremap = true, silent = true })
 -- map('n', '<Esc>', ':set hidden<cr> :e #<cr>', { noremap = true, silent = true })
 map('n', ';', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
 map('n', '<leader>fp', ':e ~/.config/nvim/init.lua<CR>', { noremap = true, silent = true})
 map('n', '<leader>fu', ':SudoWrite<CR>', { noremap = true, silent = true})
 map('n', '<leader>y', '"+y', { noremap = true, silent = true })
 map('v', '<leader>y', '"+y', { noremap = true, silent = true })
+map('n', '<leader>p', '"+p', { noremap = true, silent = true })
 map('i', '<C-e>', '<C-o>$', { noremap = true, silent = true})
 
 --Windows
@@ -35,7 +36,8 @@ map('n', '<C-w>', ':tabclose<cr>', { noremap = true, silent = true})
 map('n', '<leader>op', ':CocCommand explorer<CR>', { noremap = true, silent = true })
 -- map('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\<CR>"', { noremap = true, silent = true })
 vim.cmd[[
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+"inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
@@ -77,12 +79,15 @@ nmap <leader>ac  <Plug>(coc-codeaction-cursor)
 " Show all diagnostics.
 nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
 nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>`
+
+" Show outline
+nnoremap <silent><nowait> <space>si  :<C-u>CocList outline<cr>
 ]]
 
 --Buffers
 map('n', '<leader><left>', ':set hidden<CR> :bprevious<CR>', { noremap = true, silent = true})
 map('n', '<leader><right>', ':set hidden<CR> :bnext<CR>', { noremap = true, silent = true})
-map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true})
+map('n', '<leader>bd', ':b#<bar>bd#<CR>', { noremap = true, silent = true})
 map('n', '<leader>bk', ':bd!<CR>', { noremap = true, silent = true})
 map('n', '<leader>bs', ':w<CR>', { noremap = true, silent = true})
 map('n', '<leader>fu', ':SudoWrite<CR>', { noremap = true, silent = true })
@@ -104,7 +109,7 @@ map('n', '<leader>sp', ':FzfLua grep_project<cr>', { noremap = true, silent = tr
 map('n', '<leader>;', ':FzfLua commands<cr>', { noremap = true, silent = true})
 map('n', '<leader>x', ':FzfLua command_history<cr>', { noremap = true, silent = true})
 map('n', '<leader>h', ':FzfLua help_tags<cr>', { noremap = true, silent = true})
-map('n', '<leader>p', ':Telescope media_files<cr>', { noremap = true, silent = true })
+map('n', '<leader>h\'', ':FzfLua highlights<cr>', { noremap = true, silent = true})
 map('n', '<leader>hk', ':FzfLua keymaps<cr>', { noremap = true, silent = true })
 map('n', '<leader>d', ':CocCommand explorer<cr>', {noremap = true, silent = true})
 map('n', '<leader>gs', ':FzfLua git_status<cr>', { noremap = true, silent = true})

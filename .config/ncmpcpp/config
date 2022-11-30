@@ -16,8 +16,8 @@ store_lyrics_in_song_dir                    = "no"
 fetch_lyrics_for_current_song_in_background = "yes"
 
 ### Integration with external programs ###
-#execute_on_song_change = "bash ~/.config/ncmpcpp/music-notify.sh"
-execute_on_song_change = notify-send "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"
+execute_on_song_change = "~/.config/ncmpcpp/songinfo"
+# execute_on_song_change = notify-send "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"
 external_editor = "vim"
 use_console_editor = yes
 mouse_support = "yes"
@@ -37,7 +37,7 @@ color2 = "green"
 # this is basically the color that they use to color columns and some of the text
 main_window_color = "cyan"
 # main_window_highlight_color = "green" # deprecated, use the two below
-current_item_prefix = "$(magenta)$r"
+current_item_prefix = "$(green)$r"
 current_item_suffix = "$/r$(green)"
 # state_line_color = "blue"
 # state_flags_color = "green" #this seems to change color of volume displayer
@@ -59,7 +59,7 @@ progressbar_look = "━━─"
 #progressbar_look = "◾◾◽"
 # progressbar_look = "─╼─"
 progressbar_color = "black"
-progressbar_elapsed_color = "default" #this basically sets it to the foreground color
+progressbar_elapsed_color = "green" #this basically sets it to the foreground color
 
 ### Song status ###
 # this is the info you're shown as whether the song is playing,
@@ -137,7 +137,7 @@ playlist_editor_display_mode = "classic"
 ###################
 ### Visualizer ###
 visualizer_data_source = /tmp/mpd.fifo
-visualizer_output_name = "mpd_visualizer"
+visualizer_output_name = "mpd_fifo"
 visualizer_in_stereo = "yes"
 
 ###############################################################################
