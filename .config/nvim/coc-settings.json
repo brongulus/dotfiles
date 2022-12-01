@@ -1,4 +1,8 @@
 {
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+
   "clangd.semanticHighlighting": true,
   "diagnostic.locationlistUpdate": true,
   "diagnostic.refreshOnInsertMode": true,
@@ -14,5 +18,6 @@
       "filetypes": ["zig"]
 
     }
-  }
+  },
+  "Lua.telemetry.enable": false
 }

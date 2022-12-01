@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+# TODO: Look into how to improve perf, get rid of lynx dependency if possible, get rid of japanese text from atcoder
+
+# Uncovered cases: \geq, \neq, \ri, \sum, \limits, \lfloor, \rfloor
+# Look into improving situation of subscript text, rn it looks ugly
+
+# https://codeforces.com/contest/../problems
+# https://atcoder.jp/contest/a*cXXX/tasks_print
+
+if ! command -v lynx &> /dev/null; then 
+    echo ERROR: Lynx not found. Consider installing it via your package manager. Not downloading contest statements, only tests.
+    # exit
+fi
+
+clean_tex() {
+    sed -E -e 's/\\(le|leq)/\<\=/g ; s/\\(l|c)dots/\.\.\./g ; s/\\(times|cdot)/x/g ; s/\$\$\$//g ; s/\\frac\{(.*)\}\{(.*)\}/\1\/\2/g ; s/\\oplus/XOR/g'
+}
+
+if [ -z $1 ]; then
+
+    # echo What platform are you looking to download from\? \(Codeforces\(default\), atcoder\)
+    # read -p 'Platform: ' platform
+
+    echo What\'s the contest number\? \(e\.g\. 1752, abc123\)
+    read -p 'Contest: ' contest
+
+    echo Downloading problemset $contest from codeforces.
+
+    # TODO: Add code for downloading testcases and add options for running them 
+else
+    echo Cleaning problemset file and opening in your editor, please wait...
+    lynx --hiddenlinks=ignore --image_links --nolist --nonumbers --dump $1 | clean_tex | $EDITOR
+fi

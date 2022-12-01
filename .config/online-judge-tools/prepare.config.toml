@@ -1,0 +1,7 @@
+contest_directory = "/mnt/Data/Documents/problems/{service_name}/{contest_id}/{problem_id}"
+problem_directory = "/mnt/Data/Documents/problems/{service_name}/{contest_id}/{problem_id}"
+
+[templates]
+"main.py" = "main.py"
+"main.cpp" = "template-ext.cpp"
+"generate.py" = "generate.py"

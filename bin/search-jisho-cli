@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+line="$1"
+
+IFS=' '
+
+for word in ${line}
+do
+    $HOME/bin/jisho-cli $word
+    echo "------------------"
+done
+
+pidof 'goldendict' &> /dev/null
+
+if [ $? -ne 0 ]
+then
+    echo -n "Press ESC to close this window."
+    while read -s -n1 input; do
+        case $input in 
+            $'\e') exit;;
+        esac
+    done
+fi

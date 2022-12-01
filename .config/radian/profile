@@ -1,0 +1,20 @@
+# see https://help.farbox.com/pygments.html
+# for a list of supported color schemes, default scheme is "native"
+options(radian.color_scheme = "monokai")
+
+# either  `"emacs"` (default) or `"vi"`.
+options(radian.editing_mode = "vi")
+# enable various emacs bindings in vi insert mode
+options(radian.emacs_bindings_in_vi_insert_mode = TRUE)
+# show vi mode state when radian.editing_mode is `vi`
+options(radian.show_vi_mode_prompt = TRUE)
+options(radian.vi_mode_prompt = "\033[0;34m[{}]\033[0m ")
+
+# highlight matching bracket
+options(radian.highlight_matching_bracket = TRUE)
+
+# custom prompt for different modes
+options(radian.prompt = "\033[0;34mr$>\033[0m ")
+options(radian.shell_prompt = "\033[0;31m#!>\033[0m ")
+options(radian.browse_prompt = "\033[0;33mBrowse[{}]>\033[0m ")
+
