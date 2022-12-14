@@ -16,7 +16,7 @@ store_lyrics_in_song_dir                    = "no"
 fetch_lyrics_for_current_song_in_background = "yes"
 
 ### Integration with external programs ###
-execute_on_song_change = "~/.config/ncmpcpp/songinfo"
+# execute_on_song_change = "~/.config/ncmpcpp/songinfo"
 # execute_on_song_change = notify-send "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"
 external_editor = "vim"
 use_console_editor = yes

@@ -12,6 +12,8 @@
   "zig.path": "zls",
   "zig.debugLog": false,
 
+  "rust-analyzer.checkOnSave.command": "clippy",
+
   "languageserver": {
     "zls" : {
       "command": "/usr/bin/zls",

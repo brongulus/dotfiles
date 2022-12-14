@@ -7,6 +7,7 @@ map('i', 'jk', '<Esc>', { noremap = true, silent = true })
 map('i', 'kj', '<Esc>', { noremap = true, silent = true })
 map('n', '<leader>qq', ':qa<cr>', { noremap = true, silent = true })
 -- map('n', '<Esc>', ':set hidden<cr> :e #<cr>', { noremap = true, silent = true })
+map('n', '<Esc>x', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
 map('n', ';', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
 map('n', '<leader>fp', ':e ~/.config/nvim/init.lua<CR>', { noremap = true, silent = true})
 map('n', '<leader>fu', ':SudoWrite<CR>', { noremap = true, silent = true})
@@ -14,6 +15,8 @@ map('n', '<leader>y', '"+y', { noremap = true, silent = true })
 map('v', '<leader>y', '"+y', { noremap = true, silent = true })
 map('n', '<leader>p', '"+p', { noremap = true, silent = true })
 map('i', '<C-e>', '<C-o>$', { noremap = true, silent = true})
+map('n', ':Q', ':q', { noremap = true, silent = true })
+map('n', ':W', ':w', { noremap = true, silent = true })
 
 --Windows
 map('n', '<leader>wmm', '<C-w>o', { noremap = true, silent = true})
@@ -33,7 +36,6 @@ map('n', '<C-t>', ':tabnew<cr>', { noremap = true, silent = true})
 map('n', '<C-w>', ':tabclose<cr>', { noremap = true, silent = true})
 
 --COC
-map('n', '<leader>op', ':CocCommand explorer<CR>', { noremap = true, silent = true })
 -- map('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\<CR>"', { noremap = true, silent = true })
 vim.cmd[[
 "inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
@@ -111,7 +113,6 @@ map('n', '<leader>x', ':FzfLua command_history<cr>', { noremap = true, silent = 
 map('n', '<leader>h', ':FzfLua help_tags<cr>', { noremap = true, silent = true})
 map('n', '<leader>h\'', ':FzfLua highlights<cr>', { noremap = true, silent = true})
 map('n', '<leader>hk', ':FzfLua keymaps<cr>', { noremap = true, silent = true })
-map('n', '<leader>d', ':CocCommand explorer<cr>', {noremap = true, silent = true})
 map('n', '<leader>gs', ':FzfLua git_status<cr>', { noremap = true, silent = true})
 map('n', '<leader>gc', ':FzfLua git_commits<cr>', { noremap = true, silent = true})
 map('n', '<leader>gb', ':FzfLua git_branches<cr>', { noremap = true, silent = true})

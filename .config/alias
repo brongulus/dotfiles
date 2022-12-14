@@ -32,8 +32,18 @@ alias dired="emacsclient -nw --eval '(dired default-directory)'"
 
 alias devmacs="emacs --profile dev"
 
-alias kinaramosh="mosh --server=/users/iprashant/bin/mosh-server iprashant@vendor03.dc.kinara.ai"
-
 alias tmpv="mpv $1 -wid $(xwininfo | awk '{if(/Window id:/) print $4}' & xdotool click 1)"
 
 alias ls='ls --hyperlink=auto --color=auto'
+
+alias grep='grep --binary-files=text'
+
+alias yt-dlp='yt-dlp -R 5000'
+
+alias gss='git status -s'
+
+alias glog='git log --oneline --graph'
+
+alias mwps='push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds'
+
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

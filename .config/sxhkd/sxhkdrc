@@ -35,9 +35,8 @@ super + e
 super + z
   ~/bin/scratch
 
-# kinara / emacs everywhere
+# emacs everywhere
 super + x
-	~/bin/kinara
   # emacsclient --eval "(emacs-everywhere)"
 
 # power-menu 
@@ -212,7 +211,7 @@ super + F2
   microsoft-edge-stable
 
 super + F3
-  nautilus 
+  thunar
 
 super + F4
 	anki -b /mnt/Data/AnkiData

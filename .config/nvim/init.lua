@@ -20,7 +20,6 @@ require('pkgs')
 -- Install coc language servers
 vim.cmd[[
 let g:coc_global_extensions = [
-\ 'coc-explorer',
 \ 'coc-clangd',
 \ 'coc-zig',
 \ 'coc-pyright',
@@ -116,8 +115,6 @@ vim.api.nvim_set_keymap('i', '<F2>', '<ESC> :w <CR>', { noremap = true, silent =
 vim.api.nvim_set_keymap('n', '<F2>', ':w <CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in<CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in<CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<F4>', '<ESC> :w <CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = false})
-vim.api.nvim_set_keymap('n', '<F4>', '<ESC> :w <CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F10>', 'bufname() == "" ? ":q<CR>" : ":lua buf_kill(0)<CR>"', { noremap = true, silent = true, expr = true})
@@ -138,6 +135,11 @@ let R_bracketed_paste = 1
 vim.api.nvim_set_keymap('n', '<leader>>', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
+
+vim.cmd[[
+autocmd BufEnter term://* startinsert
+set go+=!
+]]
 
 -- All space is good space
 vim.opt.cmdheight = 0
@@ -171,7 +173,11 @@ vim.wo.number = true
 vim.cmd[[set mouse=a]]
 
 -- Auto cd
-vim.cmd [[set autochdir]]
+vim.cmd [[
+set autochdir
+au VimEnter * cd %:p:h
+]]
+
 
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -211,7 +217,7 @@ vim.g.tex_conceal='abdmg'
 vim.cmd [[
 	augroup YankHighlight
 		autocmd!
-		autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+		autocmd TextYankPost * silent! lua vim.highlight.on_yank{ timeout = 250, higroup = "Visual" }
 	augroup end
 ]]
 

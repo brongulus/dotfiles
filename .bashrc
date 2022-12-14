@@ -172,6 +172,7 @@ PERL_MB_OPT="--install_base \"/home/prashant/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/prashant/perl5"; export PERL_MM_OPT;
 
 # arcticicestudio/nord-vim
+export FZF_DEFAULT_COMMAND="find -L"
 export FZF_DEFAULT_OPTS='--color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1'
 
 fzf-open(){

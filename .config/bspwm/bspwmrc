@@ -78,9 +78,11 @@ dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 picom -CGb &
 # Network Applet
 nm-applet --indicator &
-# mpd
+
+# daemons
 pkill mpd; mpd &
 pkill mpDris2; mpDris2 &
+
 # Cursor
 xsetroot -cursor_name left_ptr &
 

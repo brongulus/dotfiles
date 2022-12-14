@@ -1,12 +1,12 @@
 [Added Associations]
 text/x-emacs-lisp=emacs.desktop;
-text/x-lua=emacs.desktop;
+text/x-lua=neovim.desktop;
 application/x-partial-download=mpv.desktop;
 image/png=viewnior.desktop;
 image/vnd.djvu+multipage=org.pwmt.zathura.desktop;
 application/vnd.sqlite3=emacs.desktop;
 application/vnd.comicbook+zip=org.pwmt.zathura.desktop;
-text/plain=emacs.desktop;xed.desktop;
+text/plain=neovim.desktop;xed.desktop;
 application/x-ms-dos-executable=wine.desktop;
 text/x-verilog=emacs.desktop;
 application/x-executable=wine.desktop;
@@ -17,7 +17,7 @@ application/vnd.rar=org.gnome.FileRoller.desktop;
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;sigil.desktop;com.github.babluboy.bookworm.desktop;emacs.desktop;org.gnome.Evince.desktop;
 image/x-nikon-nef=geeqie.desktop;viewnior.desktop;
 image/gif=viewnior.desktop;
-application/json=emacs.desktop;
+application/json=neovim.desktop;
 video/mp4=mpv.desktop;Memento_Linux_x86_64.desktop;
 application/x-subrip=emacs.desktop;userapp-SubtitleEdit.exe $0-U0J9M1.desktop;
 application/x-apple-diskimage=org.gnome.FileRoller.desktop;
@@ -28,7 +28,7 @@ image/heif=viewnior.desktop;
 text/html=org.gnome.Epiphany.desktop;
 
 [Default Appplications]
-text/plain=emacs.desktop;
+text/plain=neovim.desktop;
 video/x-matroska=mpv.desktop;
 video/webm=mpv.desktop;
 video/mp4=mpv.desktop;
