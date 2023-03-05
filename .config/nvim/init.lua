@@ -20,6 +20,7 @@ require('pkgs')
 -- Install coc language servers
 vim.cmd[[
 let g:coc_global_extensions = [
+\ 'coc-pairs',
 \ 'coc-clangd',
 \ 'coc-zig',
 \ 'coc-pyright',
@@ -119,8 +120,24 @@ vim.api.nvim_set_keymap('n', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true
 vim.api.nvim_set_keymap('i', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F10>', 'bufname() == "" ? ":q<CR>" : ":lua buf_kill(0)<CR>"', { noremap = true, silent = true, expr = true})
 vim.api.nvim_set_keymap('n', '<F12>', ':FzfLua buffers<cr>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', 'tt<tab>', 'int tt; cin >> tt;<ESC>owhile(tt--) {<ESC>o<CR>}<Up><tab>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', 'for<tab>', 'for(int i = 0; i < n; i++){<ESC>o<CR>}<Up><tab>', { noremap = true, silent = true})
 
 ---------------------------
+-- Improved find
+vim.cmd[[
+" :find
+set path=**
+" set suffixesadd=.java,.py
+
+" :find gets better more
+set nocompatible
+set wildmode=full
+set wildmenu
+set wildignore=*.out,*.exe
+]]
+
+
 -- R stuff
 vim.cmd[[
 let R_app = "radian"
@@ -132,9 +149,24 @@ let R_bracketed_paste = 1
 
 ---------------------------
 
+-- COC config
+-- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+-- delays and poor user experience
+vim.opt.updatetime = 300
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appeared/became resolved
+vim.opt.signcolumn = "yes"
+-- Highlight the symbol and its references on a CursorHold event(cursor is idle)
+vim.api.nvim_create_augroup("CocGroup", {})
+vim.api.nvim_create_autocmd("CursorHold", {
+    group = "CocGroup",
+    command = "silent call CocActionAsync('highlight')",
+    desc = "Highlight symbol under cursor on CursorHold"
+})
+
 vim.api.nvim_set_keymap('n', '<leader>>', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
 
 vim.cmd[[
 autocmd BufEnter term://* startinsert
@@ -255,21 +287,7 @@ require('material').setup({
     colors.editor.cursor = colors.main.yellow
   end
 })
-vim.cmd 'colorscheme material'
--- local colors = require("onenord.colors").load()
--- require('onenord').setup({
---   styles = {
---     comments = "italic",
---     strings = "italic",
---   },
---   disable = {
---     background = true,
---     eob_lines = false,
---k  },
---   custom_highlights = {
---     StatusLine = { fg = colors.bg, bg = colors.blue },
---   },
--- })
+-- vim.cmd 'colorscheme material'
 
 require('fine-cmdline').setup({
   popup = {
@@ -290,11 +308,42 @@ au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=N
 vim.cmd[[
 set statusline=\ %{v:lua.require'nvim-web-devicons'.get_icon_by_filetype(&filetype)}\ 
 set statusline+=%f\ %h%w%m%r\ 
-set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
-"set statusline+=%{coc#status()}
+" set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%=%(%l\ %=\ %P%)\ 
 ]]
 
+
+-- Neovide
+if vim.g.neovide then
+  vim.g.neovide_transparency = 0.9
+  vim.opt.guifont = { "Victor Mono SemiBold", "h18" }
+  vim.g.neovide_cursor_animation_length = 0
+  
+  vim.keymap.set('n', '<C-S-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<C-S-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<C-S-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<C-S-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<C-S-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pli') -- Paste insert mode
+
+  local colors = require("onenord.colors").load()
+  require('onenord').setup({
+    styles = {
+      comments = "italic",
+      strings = "italic",
+    },
+    disable = {
+      -- background = true,
+      eob_lines = false,
+    },
+    custom_highlights = {
+      StatusLine = { fg = colors.bg, bg = colors.blue },
+    },
+  })
+  vim.cmd 'colorscheme onenord'
+end
+
+vim.cmd 'colorscheme flatwhite'
 
 -- Rainbow mode
 require'colorizer'.setup()

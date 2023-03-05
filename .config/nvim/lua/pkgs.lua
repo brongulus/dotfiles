@@ -26,16 +26,19 @@ require('packer').startup(function()
 	}
 	use 'karb94/neoscroll.nvim'
 	use 'rmehri01/onenord.nvim'
+	use 'shaunsingh/solarized.nvim'
 	use 'marko-cerovac/material.nvim'
 	use 'christoomey/vim-tmux-navigator'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'sheerun/vim-polyglot'
-	use {
-				"windwp/nvim-autopairs",
-    		config = function() 
-					require("nvim-autopairs").setup {}
-				end
-			}
+	-- use {
+	-- 	"windwp/nvim-autopairs",
+	-- 	config = function() 
+	-- 		require("nvim-autopairs").setup {
+	-- 			map_bs = false,
+	-- 		}
+	-- 	end
+	-- }
 
 	use {'neoclide/coc.nvim', branch = 'release'}
 	use {'jalvesaq/Nvim-R', branch = 'stable'}
@@ -74,15 +77,13 @@ require('packer').startup(function()
 	-- use 'SirVer/ultisnips' -- ruins <tab>
 	-- use 'kyazdani42/nvim-tree.lua'
 	use 'junegunn/goyo.vim'
+	use 'maguroguma/vim-oj-helper'
 	use 'nvim-treesitter/nvim-treesitter' -- :TSUpdate; ;TSInstall
 	use 'NvChad/nvim-colorizer.lua' -- Rainbow mod
 	use {'nvim-orgmode/orgmode', config = function()
         require('orgmode').setup{}
 	end
 	}
+	use 'nvim-telescope/telescope.nvim'
 	-- use 'liuchengxu/vim-which-key'
 end)
-
-
-
-

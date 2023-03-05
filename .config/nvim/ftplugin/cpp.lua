@@ -4,3 +4,5 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 vim.api.nvim_buf_set_keymap(0, 'i', '<F4>', '<ESC> :w <CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = false})
 vim.api.nvim_buf_set_keymap(0, 'n', '<F4>', '<ESC> :w <CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = false})
+vim.api.nvim_buf_set_keymap(0, 'i', '<F5>', '<ESC> :w <CR> :!cf test %<cr>', { noremap = true, silent = false})
+vim.api.nvim_buf_set_keymap(0, 'n', '<F5>', '<ESC> :w <CR> :!cf test %<CR>', { noremap = true, silent = false})

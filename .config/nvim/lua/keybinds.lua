@@ -28,63 +28,56 @@ map('n', '<S-down>', '<C-w>j', { noremap = true, silent = true})
 map('n', '<S-up>', '<C-w>k', { noremap = true, silent = true})
 map('n', '<S-right>', '<C-w>l', { noremap = true, silent = true})
 map('n', '<S-f>', '<C-w><C-p>', { noremap = true, silent = true})
+map('n', ',,', '<c-^>', { noremap = true, silent = true})
 
 --Tabs
-map('n', '<M->>', ':tabNext<cr>', { noremap = true, silent = true})
-map('n', '<M-<>', ':tabprevious<cr>', { noremap = true, silent = true})
+map('n', '<leader>j', ':tabNext<cr>', { noremap = true, silent = true})
+map('n', '<leader>k', ':tabprevious<cr>', { noremap = true, silent = true})
 map('n', '<C-t>', ':tabnew<cr>', { noremap = true, silent = true})
 map('n', '<C-w>', ':tabclose<cr>', { noremap = true, silent = true})
 
 --COC
--- map('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\<CR>"', { noremap = true, silent = true })
-vim.cmd[[
-"inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>cr <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>cf  <Plug>(coc-format-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
-nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>`
-
-" Show outline
-nnoremap <silent><nowait> <space>si  :<C-u>CocList outline<cr>
-]]
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+-- Autocomplete
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+map("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+-- Make <CR> to accept selected completion item or notify coc.nvim to format
+-- <C-g>u breaks current undo, please make your own choice
+map("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+-- Use <c-j> to trigger snippets
+map("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)", {silent = true})
+-- Use <c-space> to trigger completion
+map("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
+-- Use `[g` and `]g` to navigate diagnostics
+-- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+map("n", "<leader>ca", ":<C-u>CocList diagnostics<cr>", {silent = true})
+map("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
+map("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
+-- GoTo code navigation
+map("n", "gd", "<Plug>(coc-definition)", {silent = true})
+map("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
+map("n", "gi", "<Plug>(coc-implementation)", {silent = true})
+map("n", "gr", "<Plug>(coc-references)", {silent = true})
+-- Code Actions
+map("n", "<leader>cr", "<Plug>(coc-rename)", {silent = true})
+map("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", {silent = true})
+map("n", "<leader>si", ":<C-u>CocList outline<cr>", {silent = true})
+-- Use K to show documentation in preview window
+function _G.show_docs()
+    local cw = vim.fn.expand('<cword>')
+    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+        vim.api.nvim_command('h ' .. cw)
+    elseif vim.api.nvim_eval('coc#rpc#ready()') then
+        vim.fn.CocActionAsync('doHover')
+    else
+        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+    end
+end
+map("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 --Buffers
 map('n', '<leader><left>', ':set hidden<CR> :bprevious<CR>', { noremap = true, silent = true})
