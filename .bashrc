@@ -93,6 +93,11 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 # Look for uninstalled packages
 source /usr/share/doc/pkgfile/command-not-found.bash
 
+
+export PATH=$PATH:/home/prashant/bin
+export PATH=$PATH:/home/prashant/.local/bin
+export PATH=$PATH:/home/prashant/.cargo/bin
+
 # Auto CD
 shopt -s autocd
 
@@ -173,7 +178,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/prashant/perl5"; export PERL_MM_OPT;
 
 # arcticicestudio/nord-vim
 export FZF_DEFAULT_COMMAND="find -L"
-export FZF_DEFAULT_OPTS='--color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1'
+# export FZF_DEFAULT_OPTS='--color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1'
 
 fzf-open(){
  file="$(fzf --height 40% --reverse)" && [ -f "$file" ] && xdg-open "$file"
@@ -223,7 +228,7 @@ copy_function() {
 copy_function _direnv_hook _direnv_hook__old
 
 _direnv_hook() {
-	_direnv_hook__old "$@" 2> >(egrep -v '^direnv: (export)')
+	_direnv_hook__old "$@" 2> >(grep -E -v '^direnv: (export)')
 }
 # Nix Shiz
 # export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels

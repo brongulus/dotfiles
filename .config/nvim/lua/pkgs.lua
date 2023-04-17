@@ -9,7 +9,7 @@ require('packer').startup(function()
 	use 'tpope/vim-commentary' -- commenting: gcc/gcgc
 	use 'tpope/vim-unimpaired' -- complementary mappings: ]x/[y
 	use 'tpope/vim-dispatch' -- compiler plugin
-	use 'tpope/vim-eunuch' -- For sudo, check x11-ssh-keypass
+	-- use 'tpope/vim-eunuch' -- For sudo, check x11-ssh-keypass
 	use 'tpope/vim-characterize'
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-scriptease'
@@ -26,21 +26,17 @@ require('packer').startup(function()
 	}
 	use 'karb94/neoscroll.nvim'
 	use 'rmehri01/onenord.nvim'
-	use 'shaunsingh/solarized.nvim'
 	use 'marko-cerovac/material.nvim'
+	use 'talha-akram/noctis.nvim'
 	use 'christoomey/vim-tmux-navigator'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'sheerun/vim-polyglot'
-	-- use {
-	-- 	"windwp/nvim-autopairs",
-	-- 	config = function() 
-	-- 		require("nvim-autopairs").setup {
-	-- 			map_bs = false,
-	-- 		}
-	-- 	end
-	-- }
-
 	use {'neoclide/coc.nvim', branch = 'release'}
+	use {
+		'xeluxee/competitest.nvim',
+		requires = 'MunifTanjim/nui.nvim',
+		config = function() require'competitest'.setup() end
+	}
 	use {'jalvesaq/Nvim-R', branch = 'stable'}
 	use {
   	"folke/trouble.nvim",

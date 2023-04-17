@@ -25,7 +25,14 @@ if [ -z $1 ]; then
     echo What\'s the contest number\? \(e\.g\. 1752, abc123\)
     read -p 'Contest: ' contest
 
-    echo Downloading problemset $contest from codeforces.
+    if [[ "$contest" == a* ]]; then
+        echo Downloading problemset for $contest from atcoder.
+        lynx --hiddenlinks=ignore --image_links --nolist --nonumbers --dump "https://atcoder.jp/contests/$contest/tasks_print?lang=en" | clean_tex > $contest
+        $EDITOR $contest
+    else
+        echo Downloading problemset for $contest from codeforces.
+        lynx --hiddenlinks=ignore --image_links --nolist --nonumbers --dump "https://codeforces.com/contest/$contest/problems" | clean_tex | $EDITOR
+    fi
 
     # TODO: Add code for downloading testcases and add options for running them 
 else

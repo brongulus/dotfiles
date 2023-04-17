@@ -4,6 +4,8 @@ alias ytm="youtube-dl --audio-quality 0 -i --extract-audio --audio-format mp3 -o
 
 alias ytsub="youtube-dl --write-auto-sub --embed-subs --merge-output-format mp4 --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
 
+alias dlp='yt-dlp -o "%(playlist_title)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s" --download-archive archive.txt'
+
 alias mp="ncmpcpp"
 
 alias bashr=". ~/.bashrc"
@@ -16,7 +18,7 @@ alias pacman="sudo pacman"
 
 alias nm="nightmode"
 
-alias enw="emacs -nw"
+alias enw="emacsclient -nw"
 
 alias scratchmux="tmux -u new-session -A -s scratch -n scratch"
 
@@ -47,3 +49,12 @@ alias glog='git log --oneline --graph'
 alias mwps='push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds'
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+alias r='radian'
+
+alias irb='irb --simple-prompt'
+alias pry='pry --simple-prompt'
+
+alias cff='cd /mnt/Data/Documents/problems/Codeforces'
+
+alias mkdircd='mkdir "$1" && cd "$1"'

@@ -5,3 +5,5 @@
 	user = brongulus
 [FORGE "HOST"]
 	user = brongulus
+[safe]
+	directory = /mnt/Data/Documents/5-2/TS/DATA

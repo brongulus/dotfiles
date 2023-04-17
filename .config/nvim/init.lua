@@ -25,6 +25,7 @@ let g:coc_global_extensions = [
 \ 'coc-zig',
 \ 'coc-pyright',
 \ 'coc-rust-analyzer',
+\ 'coc-snippets',
 \ ]
 ]]
 
@@ -93,35 +94,34 @@ end
 
 -- Template for new cpp files 
 vim.cmd [[ 
-	augroup Template
+	augroup CFTemplate
 		autocmd!
-		autocmd BufNewFile *.cpp silent! 0r ~/.config/nvim/base.cpp 
-		autocmd BufNewFile *.cpp silent! 3$pu=strftime('%d-%m-%Y %H:%M:%S')
-		autocmd BufNewFile *.cpp silent! :normal kJ15ja
+		autocmd BufNewFile */Codeforces/*.cpp silent! 0r ~/.config/nvim/base.cpp 
+		autocmd BufNewFile */Codeforces/*.cpp silent! 3$pu=strftime('%d-%m-%Y %H:%M:%S')
+		autocmd BufNewFile */Codeforces/*.cpp silent! :normal kJ15ja
+		autocmd BufNewFile */atcoder/*.cpp silent! 0r ~/.config/nvim/base.cpp 
+		autocmd BufNewFile */atcoder/*.cpp silent! 3$pu=strftime('%d-%m-%Y %H:%M:%S')
+		autocmd BufNewFile */atcoder/*.cpp silent! :normal kJ15ja
+		autocmd BufNewFile */google/*.cpp silent! 0r ~/.config/nvim/base.cpp 
+		autocmd BufNewFile */google/*.cpp silent! 3$pu=strftime('%d-%m-%Y %H:%M:%S')
+		autocmd BufNewFile */google/*.cpp silent! :normal kJ15ja
+    "autocmd BufNewFile */usaco_training/*.cpp silent! :normal iusaco
+    "autocmd BufNewFile */usaco_training/*.cpp execute "normal $<Plug>(coc-snippets-expand)<CR>"
 	augroup end
 ]]
 
 -- Legend
--- F1: Save, copy entire text and test using oj
 -- F2: Save file
--- F3: Paste clipboard content & compile file & run against in
--- F4: Compile and run against in
 -- F9: Copy current buffer into clipboard
 -- F10: Close buffer
 -- F12: List open buffers
 
-vim.api.nvim_set_keymap('i', '<F1>', '<ESC> :w <CR> gg0vG$"+y :!g++ main.cpp && oj t', { noremap = true, silent = false})
-vim.api.nvim_set_keymap('n', '<F1>', '<ESC> :w <CR> gg0vG$"+y :!g++ main.cpp && oj t<CR>', { noremap = true, silent = false})
 vim.api.nvim_set_keymap('i', '<F2>', '<ESC> :w <CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F2>', ':w <CR>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in<CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in<CR> :!g++ -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -I/mnt/Data/Documents/problems/include % && ./a.out < ./in<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<F9>', '<ESC> :w <CR> gg0vG$"+y', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F10>', 'bufname() == "" ? ":q<CR>" : ":lua buf_kill(0)<CR>"', { noremap = true, silent = true, expr = true})
 vim.api.nvim_set_keymap('n', '<F12>', ':FzfLua buffers<cr>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', 'tt<tab>', 'int tt; cin >> tt;<ESC>owhile(tt--) {<ESC>o<CR>}<Up><tab>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', 'for<tab>', 'for(int i = 0; i < n; i++){<ESC>o<CR>}<Up><tab>', { noremap = true, silent = true})
 
 ---------------------------
 -- Improved find
@@ -169,6 +169,7 @@ vim.api.nvim_set_keymap('n', '<leader>>', 'o<C-r>=strftime("%F %H:%M ")<CR>', { 
 -- vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
 
 vim.cmd[[
+autocmd! BufRead,BufNewFile *.pypy3 silent! set ft=python
 autocmd BufEnter term://* startinsert
 set go+=!
 ]]
@@ -184,22 +185,22 @@ require'nvim-treesitter.configs'.setup {
   -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
   highlight = {
     enable = true,
-    disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+    -- disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
     additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
   },
+  ensure_installed = {'org'},
 	indent = {
 		enable = true,
 	}
 }
-
 require('orgmode').setup({
   org_agenda_files = {'/mnt/manjaro/home/prashant/Dropbox/org/*'},
   org_default_notes_file = '/mnt/manjaro/home/prashant/Dropbox/org/notes.org',
 })
 
 -- Line Numbers
-vim.wo.relativenumber = true
-vim.wo.number = true
+-- vim.wo.relativenumber = true
+-- vim.wo.number = true
 
 -- Mouse support 
 vim.cmd[[set mouse=a]]
@@ -287,7 +288,7 @@ require('material').setup({
     colors.editor.cursor = colors.main.yellow
   end
 })
--- vim.cmd 'colorscheme material'
+vim.cmd 'colorscheme material'
 
 require('fine-cmdline').setup({
   popup = {
@@ -298,7 +299,7 @@ require('fine-cmdline').setup({
 })
 
 vim.cmd[[
-au ColorScheme * hi Comment cterm=italic gui=italic
+" au ColorScheme * hi Comment cterm=italic gui=italic
 au InsertEnter * hi StatusLine ctermfg=Yellow guibg=#EBCB8B guifg=#25363B
 au TermEnter * hi StatusLine ctermfg=Green guibg=#A3BE8C guifg=#25363B
 au TextChangedI * hi StatusLine ctermfg=Red guibg=#D57780 guifg=#25363B
@@ -307,6 +308,7 @@ au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=N
 
 vim.cmd[[
 set statusline=\ %{v:lua.require'nvim-web-devicons'.get_icon_by_filetype(&filetype)}\ 
+set statusline+=%{expand('%:p:h:t')}\/
 set statusline+=%f\ %h%w%m%r\ 
 " set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%=%(%l\ %=\ %P%)\ 
@@ -316,7 +318,7 @@ set statusline+=%=%(%l\ %=\ %P%)\
 -- Neovide
 if vim.g.neovide then
   vim.g.neovide_transparency = 0.9
-  vim.opt.guifont = { "Victor Mono SemiBold", "h18" }
+  vim.opt.guifont = { "Victor Mono", "h15" }
   vim.g.neovide_cursor_animation_length = 0
   
   vim.keymap.set('n', '<C-S-s>', ':w<CR>') -- Save
@@ -326,24 +328,24 @@ if vim.g.neovide then
   vim.keymap.set('c', '<C-S-v>', '<C-R>+') -- Paste command mode
   vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pli') -- Paste insert mode
 
-  local colors = require("onenord.colors").load()
-  require('onenord').setup({
-    styles = {
-      comments = "italic",
-      strings = "italic",
-    },
-    disable = {
-      -- background = true,
-      eob_lines = false,
-    },
-    custom_highlights = {
-      StatusLine = { fg = colors.bg, bg = colors.blue },
-    },
-  })
-  vim.cmd 'colorscheme onenord'
+  -- local colors = require("onenord.colors").load()
+  -- require('onenord').setup({
+  --   styles = {
+  --     comments = "italic",
+  --     strings = "italic",
+  --   },
+  --   disable = {
+  --     -- background = true,
+  --     eob_lines = false,
+  --   },
+  --   custom_highlights = {
+  --     StatusLine = { fg = colors.bg, bg = colors.blue },
+  --   },
+  -- })
+  -- vim.cmd 'colorscheme onenord'
 end
 
-vim.cmd 'colorscheme flatwhite'
+-- vim.cmd 'colorscheme flatwhite'
 
 -- Rainbow mode
 require'colorizer'.setup()

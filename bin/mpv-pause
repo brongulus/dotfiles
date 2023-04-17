@@ -12,10 +12,20 @@
 # needs xtitle, socat
 # Small utility to check if current bspwm desktop has an mpv window
 # If it does not, stop the mpv video otherwise play it.
-out=$(xtitle $(bspc query -N -d) | grep 'mpv\|Memento')
+out_mpv=($(xtitle $(bspc query -N -d) | grep 'mpv'))
+out_memento=($(xtitle $(bspc query -N -d) | grep 'Memento'))
+out_qm=($(xtitle $(bspc query -N -d) | grep 'QuickMedia'))
 
-if [[ $out == "" ]]; then
-    echo '{ "command": ["set_property", "pause", true] }' | socat - /tmp/mpvsocket;
-else
+awk_res=$(xtitle $(bspc query -N -d) | awk 'xor(/mpv/,/Memento/,/QuickMedia/)')
+
+xor=$((out_memento ^= out_qm ^= out_mpv))
+
+notify-send "mpv: ${out_mpv} mem: ${out_memento} qm: ${out_qm}"
+notify-send "xor: ${xor}"
+notify-send "awk: ${awk_res}"
+
+if [[ $awk_res != "" ]]; then
     echo '{ "command": ["set_property", "pause", false] }' | socat - /tmp/mpvsocket;
+else
+    echo '{ "command": ["set_property", "pause", true] }' | socat - /tmp/mpvsocket;
 fi

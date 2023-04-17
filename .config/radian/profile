@@ -9,12 +9,25 @@ options(radian.emacs_bindings_in_vi_insert_mode = TRUE)
 # show vi mode state when radian.editing_mode is `vi`
 options(radian.show_vi_mode_prompt = TRUE)
 options(radian.vi_mode_prompt = "\033[0;34m[{}]\033[0m ")
-
-# highlight matching bracket
-options(radian.highlight_matching_bracket = TRUE)
-
+options(
+    radian.vi_mode_prompt = list(
+        "ins" = "\x1b[34m[I]\x1b[0m ",
+        "nav" = "\x1b[7;33m[N]\x1b[0m ",
+        "rep" = "\x1b[34m[R]\x1b[0m "
+    )
+)
 # custom prompt for different modes
-options(radian.prompt = "\033[0;34mr$>\033[0m ")
+options(radian.prompt = "\033[0;34m>\033[0m ")
 options(radian.shell_prompt = "\033[0;31m#!>\033[0m ")
 options(radian.browse_prompt = "\033[0;33mBrowse[{}]>\033[0m ")
 
+options(radian.insert_new_line = FALSE)
+options(radian.highlight_matching_bracket = TRUE)
+
+# allows user defined shortcuts, these keys should be escaped when send through the terminal.
+# In the following example, `esc` + `-` sends `<-` and `esc` + `m` sends `%>%`.
+# Note that in some terminals, you could mark `alt` as `escape` so you could use `alt` + `-` instead.
+options(radian.escape_key_map = list(
+    list(key = "-", value = " <- "),
+    list(key = "m", value = " %>% ")
+))

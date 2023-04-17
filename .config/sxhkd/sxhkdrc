@@ -205,7 +205,7 @@ Print
 
 # Shortcuts
 super+ F1
-  emacs
+  emacsclient -c
 
 super + F2
   microsoft-edge-stable
@@ -217,11 +217,14 @@ super + F4
 	anki -b /mnt/Data/AnkiData
 
 super + F5
-	teams
-
-super + F6
-	code
+	kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
+	# neovide /mnt/Data/Documents/problems/Codeforces/
 
 super + w
   quickmedia
 #  ~/.config/bspwm/scripts/keybindings_rofi.sh
+
+# ~button1
+#   ~/.config/bspwm/bspdragwin
+# @button1
+#   ~/.config/bspwm/bspdragwin stop

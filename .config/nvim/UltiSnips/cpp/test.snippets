@@ -2,6 +2,24 @@
 # ($1)$0
 # endsnippet
 
+snippet usaco "Template for usaco" iA
+/*
+ID: prashan96
+LANG: C++
+TASK: `!p snip.rv = snip.basename`
+*/
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  ofstream fout ("`!p snip.rv = snip.basename`.out");
+  ifstream fin ("`!p snip.rv = snip.basename`.in");
+  $0
+  return 0;
+}
+endsnippet
+
 snippet vectin "Take an line of int input as vector"
 	vector<int> input;
 
@@ -16,9 +34,20 @@ snippet vectin "Take an line of int input as vector"
   $0
 endsnippet
 
- 
 snippet forl "for"
-for (int ${1:i} = 0; $1 < ${2:n}; $1++) {
-    $0
+for(int ${1:i} = 0; $1 < ${2:n}; $1++) {
+  $0
+}
+endsnippet
+
+snippet alll "iterate over all elements" iA
+$1.begin(), $1.end()$0
+endsnippet
+
+snippet gtc "testcase output for google comp" iA
+int tt; cin >> tt;
+for(int t = 1; t <= tt; t++) {
+  cout << "Case #" << t << ": ";
+  $0
 }
 endsnippet

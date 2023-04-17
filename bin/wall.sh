@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-hour=$(echo $(date +r) | cut -d : -f 1)
-# hour=19
-if [ bc<<<"$hour >= 05" ] && [ bc<<<"$hour <= 18" ]; then
-    nitrogen --set-zoom-fill ~/Pictures/unsplash-3.jpg
+hour=$(echo $(date +%H))
+
+if [ "$hour" -gt "05" ] && [ "$hour" -lt "18" ]; then
+    nitrogen --set-zoom-fill ~/Pictures/macOS-0.jpeg
 else
     nitrogen --set-zoom-fill ~/Pictures/macOS-1.jpeg
 fi

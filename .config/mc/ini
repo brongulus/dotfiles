@@ -89,7 +89,7 @@ filepos_max_saved_entries=1024
 
 [Layout]
 output_lines=0
-left_panel_size=74
+left_panel_size=54
 top_panel_size=0
 message_visible=false
 keybar_visible=true
@@ -111,6 +111,8 @@ source_codepage=Other_8_bit
 autodetect_codeset=
 clipboard_store=
 clipboard_paste=
+
+spell_language=en
 
 [Colors]
 base_color=

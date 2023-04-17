@@ -5,11 +5,12 @@
 
 menu(){
     printf "1.Dots\n"
-    printf "2.4-2\n"
-    printf "3.Programming\n"
-    printf "4.Media-Data\n"
-    printf "5.MEGAsync\n"
-    printf "6.Media-Manjaro\n"
+    printf "2.5-2\n"
+    printf "3.Misc Docs\n"
+    printf "4.Programming\n"
+    printf "5.Media-Data\n"
+    printf "6.MEGAsync\n"
+    printf "7.Media-Manjaro\n"
 }
 
 main(){
@@ -23,22 +24,26 @@ main(){
             break
             ;;
         2)
-            dir="/mnt/Data/Documents/4-2"
+            dir="/mnt/Data/Documents/5-2"
             break
             ;;
         3)
-            dir="/mnt/Data/Documents/Programming/"
+            dir="/mnt/Data/Documents/Misc/"
             break
             ;;
         4)
-            dir="/mnt/Data/Downloads/Media"
+            dir="/mnt/Data/Documents/Programming/"
             break
             ;;
         5)
-            dir="/run/media/prashant/Windows-SSD/Users/prash/Documents/MEGAsync Downloads"
+            dir="/mnt/Data/Downloads/Media"
             break
             ;;
         6)
+            dir="/run/media/prashant/Windows-SSD/Users/prash/Documents/MEGAsync Downloads"
+            break
+            ;;
+        7)
             dir="/mnt/manjaro/home/prashant/Downloads/Media"
             break
             ;;

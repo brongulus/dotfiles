@@ -11,6 +11,8 @@ if status is-interactive
     set PATH ~/bin $PATH
     set PATH ~/.cargo/bin $PATH
     set PATH ~/.local/bin $PATH
+    set PATH ~/.local/share/gem/ruby/3.0.0/bin $PATH
+    set PATH ~/.spicetify $PATH
 
     function f
         fff $argv

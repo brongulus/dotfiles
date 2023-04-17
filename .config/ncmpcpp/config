@@ -513,14 +513,14 @@ visualizer_in_stereo = "yes"
 ## Note: You can define startup screen
 ## by choosing screen from the list above.
 ##
-#startup_screen = playlist
+startup_screen = playlist
 #
 ##
 ## Note: You can define startup slave screen
 ## by choosing screen from the list above or
 ## an empty value for no slave screen.
 ##
-#startup_slave_screen = ""
+startup_slave_screen = browser
 #
 #startup_slave_screen_focus = no
 #
@@ -529,9 +529,9 @@ visualizer_in_stereo = "yes"
 ## Acceptable values are from 20 to 80.
 ##
 #
-#locked_screen_width_part = 50
+locked_screen_width_part = 30
 #
-#ask_for_locked_screen_width_part = yes
+ask_for_locked_screen_width_part = no
 #
 #jump_to_now_playing_song_at_start = yes
 #
