@@ -129,7 +129,6 @@ vim.cmd[[
 " :find
 set path=**
 " set suffixesadd=.java,.py
-
 " :find gets better more
 set nocompatible
 set wildmode=full
@@ -166,10 +165,13 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 vim.api.nvim_set_keymap('n', '<leader>>', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true})
 
--- vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
 
 vim.cmd[[
 autocmd! BufRead,BufNewFile *.pypy3 silent! set ft=python
+"autocmd! BufNewFile,BufRead *.hlsl silent! set ft=glsl
+set rtp^=~/.config/nvim/hlsl.vim
+autocmd BufRead,BufNewFile *.fx,*.fxc,*.fxh,*.hlsl setfiletype hlsl
 autocmd BufEnter term://* startinsert
 set go+=!
 ]]
@@ -288,7 +290,7 @@ require('material').setup({
     colors.editor.cursor = colors.main.yellow
   end
 })
-vim.cmd 'colorscheme material'
+-- vim.cmd 'colorscheme material'
 
 require('fine-cmdline').setup({
   popup = {
@@ -303,17 +305,141 @@ vim.cmd[[
 au InsertEnter * hi StatusLine ctermfg=Yellow guibg=#EBCB8B guifg=#25363B
 au TermEnter * hi StatusLine ctermfg=Green guibg=#A3BE8C guifg=#25363B
 au TextChangedI * hi StatusLine ctermfg=Red guibg=#D57780 guifg=#25363B
-au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=NONE ctermfg=NONE guibg=#314549 guifg=#B0BEC5
+au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=NONE ctermfg=NONE guibg=#81A1C1 guifg=#25363B
 ]]
 
 vim.cmd[[
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E:' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W:' . info['warning'])
+  endif
+  return join(msgs, ' ') . ' |' . get(g:, 'coc_status', '')
+endfunction
+
 set statusline=\ %{v:lua.require'nvim-web-devicons'.get_icon_by_filetype(&filetype)}\ 
 set statusline+=%{expand('%:p:h:t')}\/
 set statusline+=%f\ %h%w%m%r\ 
-" set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%=%(%l\ %=\ %P%)\ 
+set statusline+=%=%(%{StatusDiagnostic()}\ %l\ %=\ %P%)\ 
+"set statusline+=%=%(%{coc#status()}%{get(b:,'coc_current_function','')}\ \ %l\ %=\ %P%)\ 
+"set statusline+=%=%(%l\ %=\ %P%)\ 
 ]]
 
+-- Notify
+vim.notify = require("notify")
+vim.notify.setup({
+  background_colour = "#000",
+})
+vim.cmd[[
+lua << EOF
+
+local coc_status_record = {}
+
+function coc_status_notify(msg, level)
+  local notify_opts = { title = "LSP Status", timeout = 500, hide_from_history = true, on_close = reset_coc_status_record }
+  -- if coc_status_record is not {} then add it to notify_opts to key called "replace"
+  if coc_status_record ~= {} then
+    notify_opts["replace"] = coc_status_record.id
+  end
+  coc_status_record = vim.notify(msg, level, notify_opts)
+end
+
+function reset_coc_status_record(window)
+  coc_status_record = {}
+end
+
+local coc_diag_record = {}
+
+function coc_diag_notify(msg, level)
+  local notify_opts = { title = "LSP Diagnostics", timeout = 500, on_close = reset_coc_diag_record }
+  -- if coc_diag_record is not {} then add it to notify_opts to key called "replace"
+  if coc_diag_record ~= {} then
+    notify_opts["replace"] = coc_diag_record.id
+  end
+  coc_diag_record = vim.notify(msg, level, notify_opts)
+end
+
+function reset_coc_diag_record(window)
+  coc_diag_record = {}
+end
+EOF
+
+function! s:DiagnosticNotify() abort
+  let l:info = get(b:, 'coc_diagnostic_info', {})
+  if empty(l:info) | return '' | endif
+  let l:msgs = []
+  let l:level = 'info'
+   if get(l:info, 'warning', 0)
+    let l:level = 'warn'
+  endif
+  if get(l:info, 'error', 0)
+    let l:level = 'error'
+  endif
+ 
+  if get(l:info, 'error', 0)
+    call add(l:msgs, ' Errors: ' . l:info['error'])
+  endif
+  if get(l:info, 'warning', 0)
+    call add(l:msgs, ' Warnings: ' . l:info['warning'])
+  endif
+  if get(l:info, 'information', 0)
+    call add(l:msgs, ' Infos: ' . l:info['information'])
+  endif
+  if get(l:info, 'hint', 0)
+    call add(l:msgs, ' Hints: ' . l:info['hint'])
+  endif
+  let l:msg = join(l:msgs, "\n")
+  if empty(l:msg) | let l:msg = ' All OK' | endif
+  call v:lua.coc_diag_notify(l:msg, l:level)
+endfunction
+
+function! s:StatusNotify() abort
+  let l:status = get(g:, 'coc_status', '')
+  let l:level = 'info'
+  if empty(l:status) | return '' | endif
+  call v:lua.coc_status_notify(l:status, l:level)
+endfunction
+
+function! s:InitCoc() abort
+  execute "lua vim.notify('Initialized coc.nvim for LSP support', 'info', { title = 'LSP Status' })"
+endfunction
+
+" notifications
+"autocmd User CocNvimInit call s:InitCoc()
+"autocmd User CocDiagnosticChange call s:DiagnosticNotify()
+"autocmd User CocStatusChange call s:StatusNotify()
+]]
+
+-- Tabline
+require("bufferline").setup{
+	options = {
+		mode = "tabs",
+		diagnostics = "coc",
+		show_buffer_icons = true,
+  }
+}
+
+local colors = require("onenord.colors").load()
+require('onenord').setup({
+  styles = {
+    comments = "italic",
+    strings = "italic",
+  },
+  disable = {
+    background = true,
+    eob_lines = false,
+  },
+  custom_highlights = {
+    StatusLine = { fg = colors.bg, bg = colors.blue },
+    CocFloating = { bg = colors.bg },
+  },
+})
+vim.cmd 'colorscheme onenord'
 
 -- Neovide
 if vim.g.neovide then
@@ -327,25 +453,7 @@ if vim.g.neovide then
   vim.keymap.set('v', '<C-S-v>', '"+P') -- Paste visual mode
   vim.keymap.set('c', '<C-S-v>', '<C-R>+') -- Paste command mode
   vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pli') -- Paste insert mode
-
-  -- local colors = require("onenord.colors").load()
-  -- require('onenord').setup({
-  --   styles = {
-  --     comments = "italic",
-  --     strings = "italic",
-  --   },
-  --   disable = {
-  --     -- background = true,
-  --     eob_lines = false,
-  --   },
-  --   custom_highlights = {
-  --     StatusLine = { fg = colors.bg, bg = colors.blue },
-  --   },
-  -- })
-  -- vim.cmd 'colorscheme onenord'
 end
-
--- vim.cmd 'colorscheme flatwhite'
 
 -- Rainbow mode
 require'colorizer'.setup()

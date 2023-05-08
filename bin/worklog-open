@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 line=$(cat /home/prashant/blog/org/blog.org | grep -n '+ \[-\]' | cut -d : -f 1 | { read first last ; echo $first ; })
-~/bin/scratch "emacsclient -nw +${line} /home/prashant/blog/org/blog.org"
+# ~/bin/scratch "emacsclient -nw +${line} /home/prashant/blog/org/blog.org"
+emacsclient -c +${line} /home/prashant/blog/org/blog.org

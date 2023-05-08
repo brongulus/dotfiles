@@ -15,7 +15,7 @@ configuration {
 @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
 
 window {
-    background-color:               #1E272C;
+    background-color:               #282a36;
     border:                         0;
     padding:                        10;
     transparency:                   "real";
@@ -36,7 +36,7 @@ element {
     padding: 1px ;
 }
 element-text {
-    background-color: #1E272C;
+    background-color: #282a36;
     text-color:       inherit;
 }
 element.normal.normal {

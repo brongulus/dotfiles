@@ -1,7 +1,45 @@
 {
+  "snippets.autoTrigger": true,
+
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
+
+  "codeLens.enable": true,
+  "colors.enable": true,
+
+  "suggest.pumFloatConfig": {
+    "rounded": true,
+    "border": false,
+  },
+
+  "suggest.formatItems": [
+    "kind", "abbr", "menu"
+  ],
+  "suggest.completionItemKindLabels": {
+    "text": "\ue612",
+    "field": "\uf93d",
+    "variable": "\uf71b",
+    "class": "\uf0e8",
+    "interface": "\ufa52",
+    "property": "\ufab6",
+    "unit": "\uf475",
+    "value": "\uf8a3",
+    "enum": "\uf435",
+    "keyword": "\uf893",
+    "snippet": "\uf64d",
+    "color": "\ue22b",
+    "file": "\uf471",
+    "reference": "\uf87a",
+    "folder": "\uf115",
+    "enumMember": "\uf02b",
+    "constant": "\uf8ff",
+    "struct": "\ufb44",
+    "event": "\ufacd",
+    "operator": "\uf915",
+    "typeParameter": "\uf278",
+    "default": "\uf29c"
+  },
 
   "clangd.semanticHighlighting": true,
   "diagnostic.locationlistUpdate": true,
@@ -21,5 +59,6 @@
 
     }
   },
-  "Lua.telemetry.enable": false
+  "Lua.telemetry.enable": false,
+  "snippets.ultisnips.pythonPrompt": false
 }

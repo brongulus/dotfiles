@@ -9,7 +9,6 @@ require('packer').startup(function()
 	use 'tpope/vim-commentary' -- commenting: gcc/gcgc
 	use 'tpope/vim-unimpaired' -- complementary mappings: ]x/[y
 	use 'tpope/vim-dispatch' -- compiler plugin
-	-- use 'tpope/vim-eunuch' -- For sudo, check x11-ssh-keypass
 	use 'tpope/vim-characterize'
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-scriptease'
@@ -28,6 +27,7 @@ require('packer').startup(function()
 	use 'rmehri01/onenord.nvim'
 	use 'marko-cerovac/material.nvim'
 	use 'talha-akram/noctis.nvim'
+	use 'rcarriga/nvim-notify'
 	use 'christoomey/vim-tmux-navigator'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'sheerun/vim-polyglot'
@@ -46,6 +46,10 @@ require('packer').startup(function()
 				mode = "loclist", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
 			}
   	end
+	}
+	use { 'akinsho/bufferline.nvim', 
+				requires = 'kyazdani42/nvim-web-devicons',
+				-- commit = "0a83c615a8ab49718d9b4cdc60127003307829b2",
 	}
 	use 'mfussenegger/nvim-dap'
 	use { 'ibhagwan/fzf-lua',

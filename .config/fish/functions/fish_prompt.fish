@@ -4,7 +4,8 @@ function fish_prompt
     set -l normal (set_color normal)
     set -l usercolor (set_color $fish_color_user)
 
-    set -l delim \ \U25BA\ 
+    set -l delim " > "
+    #\U25BA\ 
     # If we don't have unicode use a simpler delimiter
     string match -qi "*.utf-8" -- $LANG $LC_CTYPE $LC_ALL; or set delim "> "
 

@@ -8,15 +8,18 @@ map('i', 'kj', '<Esc>', { noremap = true, silent = true })
 map('n', '<leader>qq', ':qa<cr>', { noremap = true, silent = true })
 -- map('n', '<Esc>', ':set hidden<cr> :e #<cr>', { noremap = true, silent = true })
 map('n', '<Esc>x', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
-map('n', ';', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
+map('n', ';', '<Esc>:', { noremap = true})
+map('n', ':', '<cmd>FineCmdline<CR>', { noremap = true, silent = true})
 map('n', '<leader>fp', ':e ~/.config/nvim/init.lua<CR>', { noremap = true, silent = true})
-map('n', '<leader>fu', ':SudoWrite<CR>', { noremap = true, silent = true})
+map('n', '<leader>fu', ':SudaWrite<CR>', { noremap = true, silent = true})
 map('n', '<leader>y', '"+y', { noremap = true, silent = true })
 map('v', '<leader>y', '"+y', { noremap = true, silent = true })
 map('n', '<leader>p', '"+p', { noremap = true, silent = true })
 map('i', '<C-e>', '<C-o>$', { noremap = true, silent = true})
 map('n', ':Q', ':q', { noremap = true, silent = true })
 map('n', ':W', ':w', { noremap = true, silent = true })
+-- map('n', '<leader>tw', 'wrap ? ":set nowrap<CR>" : ":set wrap<CR>"', { noremap = true, silent = true })
+map('n', '<leader>tw', ':set wrap!<CR>', { noremap = true, silent = true })
 
 --Windows
 map('n', '<leader>wmm', '<C-w>o', { noremap = true, silent = true})
@@ -33,24 +36,25 @@ map('n', ',,', '<c-^>', { noremap = true, silent = true})
 --Tabs
 map('n', '<leader>j', ':tabNext<cr>', { noremap = true, silent = true})
 map('n', '<leader>k', ':tabprevious<cr>', { noremap = true, silent = true})
-map('n', '<C-t>', ':tabnew<cr>', { noremap = true, silent = true})
+map('n', '<C-t>', ':tabnew<cr>:Startify<CR>', { noremap = true, silent = true})
 map('n', '<C-w>', ':tabclose<cr>', { noremap = true, silent = true})
 
 --COC
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 -- Autocomplete
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
-map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
--- vim.cmd[[
--- inoremap <silent><expr> <TAB>
---       \ coc#pum#visible() ? coc#_select_confirm() :
---       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
---       \ CheckBackspace() ? "\<TAB>" :
---       \ coc#refresh()
--- ]]
+-- function _G.check_back_space()
+--     local col = vim.fn.col('.') - 1
+--     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+-- end
+-- map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) :  v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+vim.cmd[[
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+let g:coc_snippet_next = '<tab>'
+]]
+map("i", "<TAB>", [[coc#pum#visible() ? coc#_select_confirm() : coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : CheckBackspace() ? "\<TAB>" : coc#refresh()]], opts)
 map("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 -- Make <CR> to accept selected completion item or notify coc.nvim to format
 -- <C-g>u breaks current undo, please make your own choice
@@ -92,7 +96,6 @@ map('n', '<leader><right>', ':set hidden<CR> :bnext<CR>', { noremap = true, sile
 map('n', '<leader>bd', ':b#<bar>bd#<CR>', { noremap = true, silent = true})
 map('n', '<leader>bk', ':bd!<CR>', { noremap = true, silent = true})
 map('n', '<leader>bs', ':w<CR>', { noremap = true, silent = true})
-map('n', '<leader>fu', ':SudoWrite<CR>', { noremap = true, silent = true })
 
 --Line Navigation
 map('i', '<C-a>', '<Home>', { noremap = true, silent = true })

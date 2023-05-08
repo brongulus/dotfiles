@@ -41,4 +41,4 @@ vim.api.nvim_buf_set_keymap(0, 'n', '<F8>', '<ESC> :w <CR> :!cf submit -f % %:p:
 
 -- Snippets
 vim.api.nvim_buf_set_keymap(0, 'i', 'tt<tab>', 'int tt; cin >> tt;<ESC>owhile(tt--) {<ESC>o<CR>}<Up><tab>', { noremap = true, silent = false})
-vim.api.nvim_buf_set_keymap(0, 'i', 'for<tab>', 'for(int i = 0; i < n; i++) {<ESC>o<CR>}<Up><tab>', { noremap = true, silent = false})
+-- vim.api.nvim_buf_set_keymap(0, 'i', 'for<tab>', 'for(int i = 0; i < n; i++) {<ESC>o<CR>}<Up><tab>', { noremap = true, silent = false})

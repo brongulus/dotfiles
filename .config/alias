@@ -1,6 +1,8 @@
 # alias sdcv="sdcv -n --utf8-output --color "$@""
 
-alias ytm="youtube-dl --audio-quality 0 -i --extract-audio --audio-format mp3 -o './%(playlist_index)3d - %(title)s.%(ext)s' --add-metadata --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
+# alias ytm="youtube-dl --audio-quality 0 -i --extract-audio --audio-format mp3 -o './%(playlist_index)3d - %(title)s.%(ext)s' --add-metadata --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
+
+alias ytm="yt-dlp -f 'ba' -x --audio-format mp3"
 
 alias ytsub="youtube-dl --write-auto-sub --embed-subs --merge-output-format mp4 --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
 
@@ -40,7 +42,7 @@ alias ls='ls --hyperlink=auto --color=auto'
 
 alias grep='grep --binary-files=text'
 
-alias yt-dlp='yt-dlp -R 5000'
+alias yt-dlp='yt-dlp -R 5000 --cookies-from-browser edge'
 
 alias gss='git status -s'
 
@@ -57,4 +59,4 @@ alias pry='pry --simple-prompt'
 
 alias cff='cd /mnt/Data/Documents/problems/Codeforces'
 
-alias mkdircd='mkdir "$1" && cd "$1"'
+# alias mkcd='{ IFS= read -r d && mkdir "$d" && cd "$d"; } <<<'

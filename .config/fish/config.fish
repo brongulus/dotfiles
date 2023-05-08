@@ -13,6 +13,7 @@ if status is-interactive
     set PATH ~/.local/bin $PATH
     set PATH ~/.local/share/gem/ruby/3.0.0/bin $PATH
     set PATH ~/.spicetify $PATH
+    set PATH ~/.guix-profile/bin $PATH
 
     function f
         fff $argv
@@ -29,6 +30,19 @@ if status is-interactive
        set -l file
        set file (fzf --height 60% --border --reverse) &&
        setsid xdg-open "$file"
+    end
+
+    function mkcd -d "Create a directory and set CWD"
+      command mkdir $argv
+        if test $status = 0
+            switch $argv[(count $argv)]
+                case '-*'
+
+                case '*'
+                    cd $argv[(count $argv)]
+                return
+            end
+        end
     end
 
     fzf_configure_bindings --directory=\cf

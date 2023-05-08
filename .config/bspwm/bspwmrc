@@ -46,6 +46,7 @@ bspc rule -a Zathura state=tiled
 bspc rule -a 'easyeffects' state=floating
 # Scratch: wxh+x+y
 bspc rule -a '*:scratch' state=floating sticky=on rectangle=1500x700+210+190
+bspc rule -a 'nmtui' state=floating rectangle=500x550+20+450
 bspc rule -a 'ru-turikhay-tlauncher-bootstrap-Bootstrap' state=pseudo_tiled
 
 # HELP: xprop | grep WM_CLASS
@@ -64,20 +65,19 @@ conky -c ~/.config/conky/conky.conf &
 conky -c ~/Dotfiles/.config/conky/tracker.conf &
 pkill mpd; mpd &
 # killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
-killall -q polybar; polybar -r top &
 # ~/.config/polybar/launch.sh &
 /usr/bin/dunst &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-~/bin/wall.sh &
+# ~/bin/wall.sh &
 dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 picom -CGb --window-shader-fg=/home/prashant/config/bw_picom.glsl &
 nm-applet --indicator &
-# pkill mpDris2; mpDris2 &
 xsetroot -cursor_name left_ptr &
 xset b off &
 ~/.config/bspwm/scripts/low_bat_notifier.sh
-emacs --daemon &
+# emacs --daemon &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
-# watcher -ds / -ws
-# killall watcher; watcher --start &
+# killall -q polybar; polybar -r top &
+# pkill xfdesktop; xfdesktop &
+# bspi_listen --config ~/.config/bspwm/bspi.ini &

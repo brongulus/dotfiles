@@ -121,7 +121,7 @@ f() {
 
 export FFF_FAV1=~
 export FFF_FAV2=~/.bashrc
-export FFF_FAV3=/mnt/Data/Documents
+export FFF_FAV3=/mnt/Data/Downloads/Media
 export FFF_FAV4=/mnt/manjaro/home/prashant/Downloads/Media
 export FFF_FAV5=/
 export FFF_FAV6=
@@ -233,5 +233,18 @@ _direnv_hook() {
 # Nix Shiz
 # export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
 
+# Automatically added by the Guix install script.
+if [ -n "$GUIX_ENVIRONMENT" ]; then
+    if [[ $PS1 =~ (.*)"\\$" ]]; then
+        PS1="${BASH_REMATCH[1]} [env]\\\$ "
+    fi
+fi
+
+export PATH=$PATH:/home/prashant/.guix-profile/bin
+export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+
 # fish
-exec fish
+if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
+then
+    exec fish
+fi

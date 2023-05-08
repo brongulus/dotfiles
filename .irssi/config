@@ -214,6 +214,7 @@ channels = (
   { name = "#doomemacs"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#nonguix"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#linux"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#qutebrowser"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#neovim"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#emacs"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "Libera"; autojoin = "yes"; },
