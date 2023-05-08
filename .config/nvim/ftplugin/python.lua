@@ -1,0 +1,6 @@
+vim.api.nvim_buf_set_keymap(0, 'i', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in%:r<CR> :!python % < ./in%:r<CR>', { noremap = true, silent = true})
+vim.api.nvim_buf_set_keymap(0, 'n', '<F3>', '<ESC> :w <CR> :!xclip -sel c -o > %:p:h/in%:r<CR> :!python % < ./in%:r<CR>', { noremap = true, silent = true})
+vim.api.nvim_buf_set_keymap(0, 'i', '<F4>', '<ESC> :w <CR> :!python % < ./in%:r<CR>', { noremap = true, silent = true})
+vim.api.nvim_buf_set_keymap(0, 'n', '<F4>', '<ESC> :w <CR> :!python % < ./in%:r<CR>', { noremap = true, silent = true})
+vim.api.nvim_buf_set_keymap(0, 'i', '<F5>', '<ESC> :w <CR> :!python %<CR>', { noremap = true, silent = true})
+vim.api.nvim_buf_set_keymap(0, 'n', '<F5>', '<ESC> :w <CR> :!python %<CR>', { noremap = true, silent = true})
