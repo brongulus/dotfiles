@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+
+import requests
+from bs4 import BeautifulSoup
+
+URL = "https://atcoder.jp/contests/abc301/tasks_print"
+page = requests.get(URL)
+
+tex_clean = {
+    "\\rightarrow" : "->",
+    "\\neq" : "!=",
+    "\\leq" : "<=",
+    "\\vdots" : "...",
+    "\\ldots" : "...",
+    "\\lbrace" : "{",
+    "\\rbrace" : "}",
+    "\\times" : "X",
+}
+
+newline_list = ["h3"] #, "h2", "h3", "h4", "h5", "h6"]
+
+soup = BeautifulSoup(page.content, "html.parser")
+
+problems = soup.find_all("span", class_="lang-en")
+
+output = ""
+
+i = 0
+for task in problems:
+    print ("Problem " + chr(ord('A')+i))
+    output += "\n* Problem " + chr(ord('A')+i) + "\n"
+    i += 1
+    # print("-------------------------------------")
+    task = task.find_all("div", class_="part")
+    for elem in task:
+        for tag in newline_list:
+            elem.find(tag).insert_before("** ")
+            elem.find(tag).append('\n')
+        content = elem.text
+        for item in tex_clean:
+            content = content.replace(item, tex_clean[item])
+
+        print(content.strip())
+
+        output += content.strip()
+        output += "\n"
+    # print("-------------------------------------")
+
+with open("./out.org", mode="wt", encoding="utf-8") as file:
+    file.write(output) # TODO: Fix ^M EOL
