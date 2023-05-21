@@ -15,6 +15,8 @@
 // @match        *://*/*
 // @match        https://bflix.to/*
 // @exclude      *://www.diancigaoshou.com/*
+// @exclude      *://www.leetcode.com/*
+// @exclude      *://leetcode.com/*
 // @require      https://cdn.jsdelivr.net/npm/m3u8-parser@4.7.1/dist/m3u8-parser.min.js
 // @connect      *
 // @grant        unsafeWindow
@@ -226,7 +228,7 @@
                 try {
                     let content = this.responseText;
                     if (checkContent(content)) doM3U({ url: args[1], content });
-                } catch { }
+                } catch {}
             });
             // checkUrl(args[1]);
             return _open.apply(this, args);

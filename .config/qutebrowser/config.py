@@ -55,6 +55,8 @@ config.bind(',n', f'config-cycle content.user_stylesheets {css} ""')
 c.url.searchengines['yt'] = 'https://youtube.com/results?search_query={}'
 c.url.searchengines['cpp'] = 'https://en.cppreference.com/mwiki/index.php?search={}'
 c.url.searchengines['aur'] = 'https://aur.archlinux.org/packages?O=0&K={}'
+c.url.searchengines['lg'] = 'https://libgen.is/search.php?req={}&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def'
+# http://libgen.is/search.php?req=the+little+schemer&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def
 
 c.url.start_pages = ['file:///home/prashant/.config/qutebrowser/startpage/index.html']
 c.url.default_page = 'file:///home/prashant/.config/qutebrowser/startpage/index.html'
