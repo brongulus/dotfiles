@@ -25,6 +25,7 @@ let g:coc_global_extensions = [
 \ 'coc-zig',
 \ 'coc-pyright',
 \ 'coc-rust-analyzer',
+\ 'coc-tsserver',
 \ 'coc-snippets',
 \ ]
 ]]
@@ -96,6 +97,8 @@ end
 vim.cmd [[ 
 	augroup CFTemplate
 		autocmd!
+    autocmd BufNewFile */problems/*.py silent! 0r ~/.config/nvim/template.py
+    autocmd BufNewFile */problems/*.py silent! :normal 7ji
 		autocmd BufNewFile */Codeforces/*.cpp silent! 0r ~/.config/nvim/base.cpp 
 		autocmd BufNewFile */Codeforces/*.cpp silent! 3$pu=strftime('%d-%m-%Y %H:%M:%S')
 		autocmd BufNewFile */Codeforces/*.cpp silent! :normal kJ15ja

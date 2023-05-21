@@ -208,7 +208,8 @@ super+ F1
   emacsclient -c
 
 super + F2
-  microsoft-edge-stable
+	qutebrowser
+  # microsoft-edge-stable
 
 super + F3
   thunar
@@ -217,8 +218,8 @@ super + F4
 	anki -b /mnt/Data/AnkiData
 
 super + F5
-	kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
-	# neovide /mnt/Data/Documents/problems/Codeforces/
+	emacsclient -c /mnt/Data/Documents/problems/Codeforces/
+	# kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
 
 super + w
   quickmedia

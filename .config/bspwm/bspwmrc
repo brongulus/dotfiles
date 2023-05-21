@@ -7,7 +7,7 @@ bspc config ignore_ewmh_focus true
 bspc monitor -d I II III IV V
 # VIII IX X
 
-bspc config border_width         1
+bspc config border_width         2
 bspc config window_gap           5
 # 8
 bspc config split_ratio          0.52
@@ -78,6 +78,7 @@ xset b off &
 # emacs --daemon &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
+fcitx5 --replace -d &
 # killall -q polybar; polybar -r top &
 # pkill xfdesktop; xfdesktop &
 # bspi_listen --config ~/.config/bspwm/bspi.ini &

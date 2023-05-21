@@ -121,7 +121,7 @@ f() {
 
 export FFF_FAV1=~
 export FFF_FAV2=~/.bashrc
-export FFF_FAV3=/mnt/Data/Downloads/Media
+export FFF_FAV3=/mnt/Data
 export FFF_FAV4=/mnt/manjaro/home/prashant/Downloads/Media
 export FFF_FAV5=/
 export FFF_FAV6=

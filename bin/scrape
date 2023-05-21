@@ -1,9 +1,17 @@
 #!/usr/bin/python3
 
+import sys
+import re
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://atcoder.jp/contests/abc301/tasks_print"
+if re.match("^[A-Za-z]*$", sys.argv[1][:3]):
+    ATC = 1
+    URL = "https://atcoder.jp/contests/" + sys.argv[1] + "/tasks_print"
+else:
+    ATC = 0
+    URL = "https://codeforces.com/contest/" + sys.argv[1] + "/problems"
+
 page = requests.get(URL)
 
 tex_clean = {
@@ -15,36 +23,61 @@ tex_clean = {
     "\\lbrace" : "{",
     "\\rbrace" : "}",
     "\\times" : "X",
-}
+    "\\cdot" : "X",
+    "$$$" : "",
+    "\\{" : "{",
+    "\\}" : "}",
+    "\\oplus" : "XOR",
+} # TODO: Frac
 
-newline_list = ["h3"] #, "h2", "h3", "h4", "h5", "h6"]
+atc_nl = ["h3"] #, "h2", "h3", "h4", "h5", "h6"]
 
 soup = BeautifulSoup(page.content, "html.parser")
-
-problems = soup.find_all("span", class_="lang-en")
-
 output = ""
 
-i = 0
-for task in problems:
-    print ("Problem " + chr(ord('A')+i))
-    output += "\n* Problem " + chr(ord('A')+i) + "\n"
-    i += 1
-    # print("-------------------------------------")
-    task = task.find_all("div", class_="part")
-    for elem in task:
-        for tag in newline_list:
-            elem.find(tag).insert_before("** ")
-            elem.find(tag).append('\n')
-        content = elem.text
-        for item in tex_clean:
-            content = content.replace(item, tex_clean[item])
+if ATC:
+    problems = soup.find_all("span", class_="lang-en")
+    output += "#+TITLE: " + sys.argv[1].upper() + "\n"
+    i = 0
+    for task in problems:
+        print ("Problem " + chr(ord('A')+i)) # FIXME: Auto
+        output += "\n* Problem " + chr(ord('A')+i) + "\n"
+        i += 1
+        # print("-------------------------------------")
+        task = task.find_all("div", class_="part")
+        for elem in task:
+            for tag in atc_nl:
+                elem.find(tag).insert_before("** ")
+                elem.find(tag).append('\n')
+            content = elem.text
+            for item in tex_clean:
+                content = content.replace(item, tex_clean[item])
 
-        print(content.strip())
+            output += content.strip()
+            output += "\n"
+        # print("-------------------------------------")
+else:
+    problems = soup.find_all("div", class_="problem-statement")
+    output += "\n* Problem "
+    print(len(problems))
+    print("-----------")
+    for task in problems:
+        print(task.text) # FIXME:)
+        print("-----------")
+        ip = task.find("div", class_="input_specification").get_text()
+        op = task.find("div", class_="output_specification").text
+        tests = task.find("div", class_="sample_tests").text
+        note = task.find("div", class_="note").text
+        content = ip + "\n" + op + "\n" + tests + "\n" + note
 
-        output += content.strip()
+        print("-----------")
+        print(re.split(r"(\b[\w]+\b)(?:.+|$)", content)[1])
+        output += content
         output += "\n"
-    # print("-------------------------------------")
+        output += "\n"
 
-with open("./out.org", mode="wt", encoding="utf-8") as file:
-    file.write(output) # TODO: Fix ^M EOL
+with open("./" + sys.argv[1] + ".org", mode="wt", encoding="utf-8") as file:
+    file.write(output) # FIXME: ^M EOL
+
+# TODO: Images!
+# TODO: Use Cookies for ongoing atcoder contests

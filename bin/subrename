@@ -46,7 +46,7 @@ for f in *.{srt,ssa,sub,ass} ; do
       # search for a matching film
       for movie in *.{avi,mkv,mp4} ; do
         if [ -e "$movie" ]; then
-          if [[ "$movie" =~ ${SEASON}${EPISODE} || "$movie" =~ s0?${SEASON}e${EPISODE} || "$movie" =~ ${SEASON}x${EPISODE} || "$movie" =~ ${EPISODE} ]]; then
+          if [[ "$movie" =~ ${SEASON}${EPISODE} || "$movie" =~ s0?${SEASON}e${EPISODE} || "$movie" =~ ${SEASON}x${EPISODE} || "$movie" =~ ${EPISODE} || "$movie" =~ E${EPISODE} ]]; then
 
             NEW_NAME=`echo "${movie%.*}".srt`
             echo $NEW_NAME

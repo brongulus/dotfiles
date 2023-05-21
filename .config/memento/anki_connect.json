@@ -3,12 +3,9 @@
     "profiles": [
         {
             "audio-db": -20,
-            "audio-name": "JapanesePod101",
             "audio-normalize": false,
             "audio-pad-end": 0,
             "audio-pad-start": 0,
-            "audio-skiphash": "7e2c2f954ef6051373ba916f000168dc",
-            "audio-url": "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji={expression}&kana={reading}",
             "duplicate": 1,
             "ex-glos": [
             ],
@@ -29,6 +26,7 @@
                 "model": "Mining-475ae"
             },
             "name": "Default",
+            "newline-replace": "<br>",
             "port": "8765",
             "screenshot": 0,
             "tags": [
@@ -52,18 +50,15 @@
         },
         {
             "audio-db": -20,
-            "audio-name": "JapanesePod101",
             "audio-normalize": false,
             "audio-pad-end": 0,
             "audio-pad-start": 0,
-            "audio-skiphash": "7e2c2f954ef6051373ba916f000168dc",
-            "audio-url": "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji={expression}&kana={reading}",
             "duplicate": 1,
             "ex-glos": [
             ],
             "host": "localhost",
             "kanji": {
-                "deck": "Active::Mining",
+                "deck": "0 a",
                 "fields": {
                     "Audio": "{audio}",
                     "Glossary": "{pitch} {glossary-brief}",
@@ -77,28 +72,29 @@
                 },
                 "model": "Mining-475ae"
             },
-            "name": "Test",
+            "name": "User 1",
+            "newline-replace": "<br>",
             "port": "8765",
             "screenshot": 0,
             "tags": [
                 "memento"
             ],
             "term": {
-                "deck": "Active::Mining",
+                "deck": "Bank::subs2srs",
                 "fields": {
-                    "Audio": "{audio}",
-                    "Glossary": "{pitch} {glossary-brief}",
-                    "Graph": "{pitch-graph}",
-                    "Hint": "",
-                    "Picture": "{screenshot}",
-                    "Reading": "",
-                    "Sentence": "",
-                    "SentenceAudio": "{audio-media}",
-                    "front": "{expression}"
+                    "definition": "{glossary-brief}",
+                    "frequency": "{frequencies}",
+                    "picture": "{screenshot-video}",
+                    "pitchAccent": "{pitch-graph}",
+                    "reading": "{reading}",
+                    "sentence": "{cloze-prefix}<span class=\"highlight\">{cloze-body}</span>{cloze-suffix}",
+                    "sentenceAudio": "{audio-media}",
+                    "wordAudio": "{audio}",
+                    "wordDictionaryForm": "{expression}"
                 },
-                "model": "Mining-475ae"
+                "model": "Eminent V2.4"
             }
         }
     ],
-    "setProfile": "Test"
+    "setProfile": "User 1"
 }

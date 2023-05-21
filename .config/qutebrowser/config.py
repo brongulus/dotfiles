@@ -24,26 +24,44 @@ dracula.draw.blood(c, {
 })
 
 config.bind(';', 'set-cmd-text :')
-
 config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
 config.bind('<Ctrl+l>', 'spawn --userscript qt-bw --auto-lock=0', 'insert')
 config.bind('<Ctrl+b>', 'spawn --userscript marks-menu', 'insert')
 config.bind('<Ctrl+b>', 'spawn --userscript marks-menu')
+for mode in ["normal", "caret"]:
+    config.bind('gs', 'spawn --userscript yomichad', mode=mode)
+    config.bind('gS', 'spawn --userscript yomichad --prefix-search', mode=mode)
+
 config.bind('<Ctrl+r>', 'config-source')
 config.bind('<Ctrl+g>', 'greasemonkey-reload')
 config.bind('u', 'fake-key <PgUp>')
 config.bind('d', 'fake-key <PgDown>')
 config.bind('x', 'tab-close')
+config.bind('<F12>', 'devtools')
+config.bind('<F12>', 'devtools', 'insert')
+config.bind('T', 'open -w')
 config.bind('X', 'undo')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
-
 config.bind(',z','config-cycle statusbar.show always in-mode')
 config.bind(',x','config-cycle tabs.show always never')
-
 config.bind('<Ctrl+t>', 'open -t file:///home/prashant/.config/qutebrowser/startpage/index.html')
 config.bind('t', 'open -t file:///home/prashant/.config/qutebrowser/startpage/index.html')
+
+# css = '~/.config/qutebrowser/nord.css'
+css = '~/.config/qutebrowser/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css'
+config.bind(',n', f'config-cycle content.user_stylesheets {css} ""')
+
+c.url.searchengines['yt'] = 'https://youtube.com/results?search_query={}'
+c.url.searchengines['cpp'] = 'https://en.cppreference.com/mwiki/index.php?search={}'
+c.url.searchengines['aur'] = 'https://aur.archlinux.org/packages?O=0&K={}'
+
 c.url.start_pages = ['file:///home/prashant/.config/qutebrowser/startpage/index.html']
+c.url.default_page = 'file:///home/prashant/.config/qutebrowser/startpage/index.html'
+c.editor.command = ['kitty', '-e', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
+# c.content.pdfjs = True # pacman -S pdfjs-legacy
+config.set('input.mode_override', "passthrough", '*://colab.research.google.com/*')
+config.set('input.mode_override', "passthrough", '*://www.youtube.com/*')
 
 c.bindings.key_mappings = { 
     '<Ctrl+s>': 'gd', 
