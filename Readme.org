@@ -3,3 +3,9 @@
 They're managed by a custom [[./bin/make_symlink][script]] that I wrote, which is very much prone to breakages, so use it at your own risk.
 
 [[./showcase.png]]
+
++ *WM*: bspwm (with xfdesktop)
++ *Bar*: Polybar
++ *Editor*: emacs/nvim
++ *Terminal*: kitty (with tmux)
++ *Shell*: fish
