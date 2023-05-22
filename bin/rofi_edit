@@ -4,13 +4,12 @@
 #
 
 menu(){
-    printf "1.Dots\n"
-    printf "2.5-2\n"
-    printf "3.Misc Docs\n"
-    printf "4.Programming\n"
-    printf "5.Media-Data\n"
+    printf "1.Programming\n"
+    printf "2.Misc Docs\n"
+    printf "3.Dots\n"
+    printf "4.Media-Data\n"
+    printf "5.Media-Manjaro\n"
     printf "6.MEGAsync\n"
-    printf "7.Media-Manjaro\n"
 }
 
 main(){
@@ -20,31 +19,27 @@ main(){
 # Directory to search in
     case $choice in
         1)
-            dir="$HOME/.config"
-            break
-            ;;
-        2)
-            dir="/mnt/Data/Documents/5-2"
-            break
-            ;;
-        3)
-            dir="/mnt/Data/Documents/Misc/"
-            break
-            ;;
-        4)
             dir="/mnt/Data/Documents/Programming/"
             break
             ;;
-        5)
+        2)
+            dir="/mnt/Data/Documents/Misc/"
+            break
+            ;;
+        3)
+            dir="$HOME/.config"
+            break
+            ;;
+        4)
             dir="/mnt/Data/Downloads/Media"
+            break
+            ;;
+        5)
+            dir="/mnt/manjaro/home/prashant/Downloads/Media"
             break
             ;;
         6)
             dir="/run/media/prashant/Windows-SSD/Users/prash/Documents/MEGAsync Downloads"
-            break
-            ;;
-        7)
-            dir="/mnt/manjaro/home/prashant/Downloads/Media"
             break
             ;;
         *)
