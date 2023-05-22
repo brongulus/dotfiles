@@ -62,3 +62,5 @@ alias cff='cd /mnt/Data/Documents/problems/Codeforces'
 alias pandoc='pandoc --pdf-engine=tectonic'
 
 alias memento='~/bin/Memento_Linux_x86_64.AppImage'
+
+alias mc='mc --nosubshell'
