@@ -408,7 +408,7 @@ settings = {
     awl_shared_sbar = "OFF";
     twitch_channels = "forsen ppy akb48_taiwan_clubs togglebit xqc gamesdonequick";
     mpd_port = "6600";
-    queryresume_lines = "1000";
+    queryresume_lines = "1000000000";
   };
   "irc/dcc" = {
     dcc_autoget = "yes";
@@ -427,8 +427,11 @@ keyboard = (
   },
   { key = "^J"; id = "scroll_forward"; data = ""; },
   { key = "^K"; id = "scroll_backward"; data = ""; },
+  { key = "^G"; id = "scroll_end"; data = ""; },
   { key = "^Q"; id = "command"; data = "exit"; },
   { key = "^R"; id = "command"; data = "reload"; },
+  { key = "^S"; id = "command"; data = "save"; },
+  { key = "^W"; id = "command"; data = "wc"; },
   # Use function keys to switch channels
   { key = "^[OP"; id = "change_window"; data = "1"; },
   { key = "^[OQ"; id = "change_window"; data = "2"; },
@@ -439,7 +442,7 @@ keyboard = (
   { key = "^[[18~"; id = "change_window"; data = "7"; },
   { key = "^[[19~"; id = "change_window"; data = "8"; },
   { key = "^[[20~"; id = "change_window"; data = "9"; },
-  { key = "^[[21~"; id = "change_window"; data = "0"; }
+  { key = "^[[21~"; id = "change_window"; data = "10"; },
 );
 logs = { };
 ignores = (
