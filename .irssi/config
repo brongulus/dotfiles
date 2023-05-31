@@ -398,7 +398,7 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; indent = "14"; };
   "fe-common/core" = {
-    theme = "hultner";
+    theme = "weed2";
     autolog = "yes";
     completion_auto = "no";
     window_history = "yes";
