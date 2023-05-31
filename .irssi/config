@@ -406,9 +406,9 @@ settings = {
   };
   "perl/core/scripts" = {
     awl_shared_sbar = "OFF";
-    twitch_channels = "forsen";
-    ppy = "akb48_taiwan_clubs";
+    twitch_channels = "forsen ppy akb48_taiwan_clubs togglebit xqc gamesdonequick";
     mpd_port = "6600";
+    queryresume_lines = "1000";
   };
   "irc/dcc" = {
     dcc_autoget = "yes";
@@ -419,7 +419,7 @@ settings = {
 };
 keyboard = (
   { key = "meta-[M"; id = "command"; data = "mouse_xterm "; },
-  { key = "^R"; id = "command"; data = "history_search "; },
+  { key = "^F"; id = "command"; data = "history_search "; },
   {
     key = "^U";
     id = "command";
@@ -427,6 +427,8 @@ keyboard = (
   },
   { key = "^J"; id = "scroll_forward"; data = ""; },
   { key = "^K"; id = "scroll_backward"; data = ""; },
+  { key = "^Q"; id = "command"; data = "exit"; },
+  { key = "^R"; id = "command"; data = "reload"; },
   # Use function keys to switch channels
   { key = "^[OP"; id = "change_window"; data = "1"; },
   { key = "^[OQ"; id = "change_window"; data = "2"; },
@@ -437,8 +439,8 @@ keyboard = (
   { key = "^[[18~"; id = "change_window"; data = "7"; },
   { key = "^[[19~"; id = "change_window"; data = "8"; },
   { key = "^[[20~"; id = "change_window"; data = "9"; },
-  { key = "^[[21~"; id = "change_window"; data = "0"; },
-  );
+  { key = "^[[21~"; id = "change_window"; data = "0"; }
+);
 logs = { };
 ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#SubsPlease" ); },
