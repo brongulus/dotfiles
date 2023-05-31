@@ -424,6 +424,36 @@ keyboard = (
     key = "^U";
     id = "command";
     data = "script exec Irssi::Script::tmux_nicklist_portable::toggle_nicklist";
+  },
+  {
+    key = "^J";
+    id = "scroll_forward";
+    data = "";
+  },
+  {
+    key = "^K";
+    id = "scroll_backward";
+    data = "";
+  },
+  {
+    key = "^@";
+    id = "change_window";
+    data = "2";
+  },
+  {
+    key = "^]";
+    id = "change_window";
+    data = "5";
+  },
+  {
+    key = "^^";
+    id = "change_window";
+    data = "6";
+  },
+  {
+    key = "^_";
+    id = "change_window";
+    data = "7";
   }
 );
 logs = { };
