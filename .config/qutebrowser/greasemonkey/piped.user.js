@@ -5,6 +5,7 @@
 // @grant       none
 // @version     1.0
 // @author      -
+// @run-at      document-start
 // @license MIT
 // ==/UserScript==
 

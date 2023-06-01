@@ -28,6 +28,7 @@ config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
 config.bind('<Ctrl+l>', 'spawn --userscript qt-bw --auto-lock=0', 'insert')
 config.bind('<Ctrl+b>', 'spawn --userscript marks-menu', 'insert')
 config.bind('<Ctrl+b>', 'spawn --userscript marks-menu')
+config.bind('<Shift+r>', 'spawn --userscript readability')
 for mode in ["normal", "caret"]:
     config.bind('gs', 'spawn --userscript yomichad', mode=mode)
     config.bind('gS', 'spawn --userscript yomichad --prefix-search', mode=mode)
@@ -52,18 +53,23 @@ config.bind('t', 'open -t file:///home/prashant/.config/qutebrowser/startpage/in
 css = '~/.config/qutebrowser/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css'
 config.bind(',n', f'config-cycle content.user_stylesheets {css} ""')
 
+c.url.searchengines = {
+    # 'DEFAULT': 'https://lite.duckduckgo.com/lite/?q={}',
+    'DEFAULT': 'https://duckduckgo.com/html/?q={}',
+}
+
 c.url.searchengines['yt'] = 'https://youtube.com/results?search_query={}'
 c.url.searchengines['cpp'] = 'https://en.cppreference.com/mwiki/index.php?search={}'
 c.url.searchengines['aur'] = 'https://aur.archlinux.org/packages?O=0&K={}'
 c.url.searchengines['lg'] = 'https://libgen.is/search.php?req={}&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def'
-# http://libgen.is/search.php?req=the+little+schemer&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def
+c.url.searchengines['g'] = 'https://google.com/search?q={}'
 
 c.url.start_pages = ['file:///home/prashant/.config/qutebrowser/startpage/index.html']
 c.url.default_page = 'file:///home/prashant/.config/qutebrowser/startpage/index.html'
 c.editor.command = ['kitty', '-e', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
 # c.content.pdfjs = True # pacman -S pdfjs-legacy
 config.set('input.mode_override', "passthrough", '*://colab.research.google.com/*')
-config.set('input.mode_override', "passthrough", '*://www.youtube.com/*')
+# config.set('input.mode_override', "passthrough", '*://www.youtube.com/*')
 
 c.bindings.key_mappings = { 
     '<Ctrl+s>': 'gd', 

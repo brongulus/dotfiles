@@ -73,6 +73,7 @@ dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 picom -CGb --window-shader-fg=/home/prashant/config/bw_picom.glsl &
 nm-applet --indicator &
 xsetroot -cursor_name left_ptr &
+dropbox &
 xset b off &
 ~/.config/bspwm/scripts/low_bat_notifier.sh
 # emacs --daemon &

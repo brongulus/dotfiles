@@ -28,7 +28,8 @@ tex_clean = {
     "\\{" : "{",
     "\\}" : "}",
     "\\oplus" : "XOR",
-} # TODO: Frac
+    "\r" : "\\\\",
+} # TODO: Frac, TODO: Fix input/output not all on newline
 
 atc_nl = ["h3"] #, "h2", "h3", "h4", "h5", "h6"]
 
@@ -77,7 +78,7 @@ else:
         output += "\n"
 
 with open("./" + sys.argv[1] + ".org", mode="wt", encoding="utf-8") as file:
-    file.write(output) # FIXME: ^M EOL
+    file.write(output) 
 
 # TODO: Images!
 # TODO: Use Cookies for ongoing atcoder contests
