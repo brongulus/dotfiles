@@ -13,7 +13,7 @@ set -euo pipefail
 
 cd ~
 echo "Running find..." 
-find ~/Dotfiles -type f -not -path '*/\.git/*' -exec bash -c "f='{}' ; echo ln -sf {} ~\${f#\"/home/prashant/Dotfiles\"}" \; > tmp.txt
+find ~/Dotfiles -type f -not -path '*/\.git/*' -not -path '*/\.log/*' -exec bash -c "f='{}' ; echo ln -sf {} ~\${f#\"/home/prashant/Dotfiles\"}" \; > tmp.txt
 echo "Making symlinks..."
 sh tmp.txt
 echo "Removing tempfile..."
