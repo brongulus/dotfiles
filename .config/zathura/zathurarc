@@ -1,0 +1,29 @@
+# set recolor true
+set lightcolor "#ebdbb2"
+set default-bg "#282a36"
+set recolor-lightcolor "#282a36"
+set recolor-darkcolor "#ECEFF4"
+# set adjust-open "width"
+
+set sandbox none
+
+# map K scroll half-up
+# map J scroll half-down
+map r recolor
+map R rotate
+# map D toggle_page_mode
+
+#disable statusbar
+map ` toggle_statusbar
+# set guioptions none
+
+set window-title-basename true
+set selection-clipboard "clipboard"
+
+set statusbar-bg "#21222c"
+set statusbar-fg "#ECEFF4"
+
+set font "MesloLGS Nerd Font Mono 12"
+
+set page-padding 0
+set adjust-open "width" #best-fit

@@ -429,7 +429,7 @@ if (caller) {
   setup_changed();
 
   Irssi::theme_register([
-    'urlinfo' => '$0 %Kinfo:%n $1',
+    'urlinfo' => '$0 %Kinfo │ %n $1',
   ]);
 
 } else {
