@@ -58,9 +58,12 @@ alias irb='irb --simple-prompt'
 alias pry='pry --simple-prompt'
 
 alias cff='cd /mnt/Data/Documents/problems/Codeforces'
+alias dff='cd ~/Dotfiles'
 
 alias pandoc='pandoc --pdf-engine=tectonic'
 
 alias memento='~/bin/Memento_Linux_x86_64.AppImage'
 
 alias mc='mc --nosubshell'
+
+alias lf='lfcd'

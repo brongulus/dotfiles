@@ -22,6 +22,7 @@ settings:
     https://codeforces.com: true
     https://colab.research.google.com: true
     https://meet.google.com: true
+    https://web.telegram.org: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
   content.user_stylesheets:

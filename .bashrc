@@ -184,7 +184,7 @@ fzf-open(){
  file="$(fzf --height 40% --reverse)" && [ -f "$file" ] && xdg-open "$file"
 }
 
-bind -x '"\C-xf": fzf-open'
+# bind -x '"\C-xf": fzf-open'
 
 # FFF
 export FFF_KEY_MKDIR="+"

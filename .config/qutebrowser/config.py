@@ -79,6 +79,9 @@ c.bindings.key_mappings = {
 c.fonts.default_family = ["JetBrains Mono"]
 c.fonts.default_size = '10pt'
 
+c.content.blocking.method = "both"
+
+
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
 ## Type: Dict

@@ -1,0 +1,73 @@
+# FIXME:
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
+set drawbox
+set mouse
+set hidden
+# set icons
+set shellopts '-eu'
+set ifs "\n"
+
+# ---------
+# Functions
+# ---------
+cmd edit-config ${{
+    $EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+cmd conf_rel ${{
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+# Courtesy of folks at LARBS
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete? [y/N] "
+	read ans
+	[ $ans = "y" ] && rm -rf -- $fx
+}}
+
+cmd moveto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; echo "Move to where?"
+	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+	for x in $fx; do
+		eval mv -iv \"$x\" \"$dest\"
+	done &&
+	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+}}
+
+cmd copyto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; echo "Copy to where?"
+	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+	for x in $fx; do
+		eval cp -ivr \"$x\" \"$dest\"
+	done &&
+	notify-send "📋 File(s) copied." "File(s) copies to $dest."
+}}
+
+# ---------
+# Mappings
+# ---------
+map C edit-config
+map - updir
+map D delete
+map E extract
+map C copyto
+map M moveto
+map + push :mkdir<space>
+map <f-1> :cd ~ <enter>; set hidden false; 
+map <f-2> :cd /mnt/Data/Downloads/Media <enter>
+map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>
+map <f-4> :cd ~/Dotfiles/.config <enter>; set hidden true;
+map m toggle
+map <c-e> edit-config
+map R conf_rel

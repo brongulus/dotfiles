@@ -8,23 +8,20 @@ bspc monitor -d I II III IV V
 # VIII IX X
 
 bspc config border_width         2
-bspc config window_gap           5
-# 8
+bspc config window_gap           5 # 8
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config pointer_follows_focus false
 bspc config focus_follows_pointer true
 
-# Mouse support is garbage
+# Mouse
 bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action2 resize_corner
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-# bspc rule -a Chromium desktop='^2'
-# bspc rule -a firefox desktop='^2'
 bspc rule -a Pavucontrol state=floating rectangle=600x300+1120+730
 bspc rule -a Blueman-manager state=floating rectangle=500x400+1350+630
 bspc rule -a mplayer2 state=floating
@@ -64,22 +61,17 @@ sh ~/.screenlayout/monitor.sh &
 conky -c ~/.config/conky/conky.conf &
 conky -c ~/Dotfiles/.config/conky/tracker.conf &
 pkill mpd; mpd &
-# killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
-# ~/.config/polybar/launch.sh &
 /usr/bin/dunst &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# ~/bin/wall.sh &
 dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 picom -CGb --window-shader-fg=/home/prashant/config/bw_picom.glsl &
 nm-applet --indicator &
 xsetroot -cursor_name left_ptr &
-dropbox &
 xset b off &
 ~/.config/bspwm/scripts/low_bat_notifier.sh
-# emacs --daemon &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 fcitx5 --replace -d &
-# killall -q polybar; polybar -r top &
-# pkill xfdesktop; xfdesktop &
-# bspi_listen --config ~/.config/bspwm/bspi.ini &
+# killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
+# dropbox &
+# pgrep ~/.config/bswpm/bspswallow || ~/.config/bspwm/bspswallow &

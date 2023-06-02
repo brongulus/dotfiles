@@ -45,7 +45,7 @@ if status is-interactive
         end
     end
 
-    fzf_configure_bindings --directory=\cf
+    # fzf_configure_bindings --directory=\cf
 
     bind \cp 'xclip -o'
 
