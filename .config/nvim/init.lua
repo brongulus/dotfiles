@@ -296,14 +296,6 @@ require('material').setup({
 })
 -- vim.cmd 'colorscheme material'
 
-require('fine-cmdline').setup({
-  popup = {
-    win_options = {
-      winhighlight = 'Normal:Normal,FloatBorder:Border',
-    },
-  }
-})
-
 vim.cmd[[
 " au ColorScheme * hi Comment cterm=italic gui=italic
 au InsertEnter * hi StatusLine ctermfg=Yellow guibg=#EBCB8B guifg=#25363B

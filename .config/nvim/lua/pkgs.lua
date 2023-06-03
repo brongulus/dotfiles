@@ -26,7 +26,14 @@ require('packer').startup(function()
 	use 'karb94/neoscroll.nvim'
 	use 'rmehri01/onenord.nvim'
 	use 'marko-cerovac/material.nvim'
-	use 'talha-akram/noctis.nvim'
+	use {
+		'Mofiqul/dracula.nvim',
+		config = function()
+			require('dracula').setup({
+				italic_comment = true,
+			})
+		end
+	}
 	use 'rcarriga/nvim-notify'
 	use 'christoomey/vim-tmux-navigator'
 	use 'lukas-reineke/indent-blankline.nvim'
@@ -63,7 +70,6 @@ require('packer').startup(function()
 	use 'lervag/vimtex'
 
   -- Personal additions
-	use { 'VonHeikemen/fine-cmdline.nvim', requires = {{'MunifTanjim/nui.nvim'}} }
 	use 'lambdalisue/suda.vim'
 	use {
 		'TimUntersberger/neogit',
