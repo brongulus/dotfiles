@@ -112,23 +112,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 alias matlinux='env LD_PRELOAD=/usr/lib/libstdc++.so.6 /home/prashant/bin/Matlab/bin/matlab -desktop'
 
-# Add this to your .bashrc, .zshrc or equivalent.
-# Run 'fff' with 'f' or whatever you decide to name the function.
-f() {
-    fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-}
-
-export FFF_FAV1=~
-export FFF_FAV2=~/.bashrc
-export FFF_FAV3=/mnt/Data
-export FFF_FAV4=/mnt/manjaro/home/prashant/Downloads/Media
-export FFF_FAV5=/
-export FFF_FAV6=
-export FFF_FAV7=
-export FFF_FAV8=
-export FFF_FAV9=
-
 export EDITOR="nvim"
 
 # export TERM="tmux-256color"
@@ -185,34 +168,6 @@ fzf-open(){
 }
 
 # bind -x '"\C-xf": fzf-open'
-
-# FFF
-export FFF_KEY_MKDIR="+"
-export FFF_COL2=0
-export FFF_COL5=7
-export FFF_KEY_PARENT4="-"
-
-### File operations.
-
-export FFF_KEY_YANK="y"
-export FFF_KEY_MOVE="m"
-export FFF_KEY_TRASH="d"
-export FFF_KEY_LINK="s"
-export FFF_KEY_BULK_RENAME="b"
-
-export FFF_KEY_YANK_ALL="Y"
-export FFF_KEY_MOVE_ALL="M"
-export FFF_KEY_TRASH_ALL="D"
-export FFF_KEY_LINK_ALL="S"
-export FFF_KEY_BULK_RENAME_ALL="B"
-
-export FFF_KEY_PASTE="p"
-export FFF_KEY_CLEAR="c"
-
-export FFF_KEY_RENAME="r"
-# export FFF_KEY_MKDIR="n"
-export FFF_KEY_MKFILE="f"
-export FFF_KEY_IMAGE="i" # display image with w3m-img
 
 # SSH + Kitty fix
 [[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"

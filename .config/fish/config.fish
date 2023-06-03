@@ -15,12 +15,6 @@ if status is-interactive
     set PATH ~/.spicetify $PATH
     set PATH ~/.guix-profile/bin $PATH
 
-    # function f
-    #     fff $argv
-    #     set -q XDG_CACHE_HOME; or set XDG_CACHE_HOME $HOME/.cache
-    #     cd (cat $XDG_CACHE_HOME/fff/.fff_d)
-    # end
-
     set --export FZF_COMPLETION_TRIGGER "``"
     set --export FZF_DEFAULT_OPTS "--color=bg+:#3B4252,border:#D8DEE9,bg:#263238,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1"
     set fzf_fd_opts --hidden --exclude=.git
