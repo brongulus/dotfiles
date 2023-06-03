@@ -34,7 +34,10 @@ case "$(file --dereference --brief --mime-type -- "$1")" in
 		[ ! -f "$CACHE" ] && convert "$1" "$CACHE.jpg"
 		image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1" ;;
 	image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
-	text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1" ;;
+	text/html) 
+		# lynx -width="$4" -display_charset=utf-8 -dump "$1" 
+		elinks -dump-width $4 -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$1"
+		;;
 	text/troff) man ./ "$1" | col -b ;;
 	text/* | */xml | application/json) 
 		bat --style="changes,header-filename,header-filesize,rule,snip" --theme="Dracula" --map-syntax='*.conf:INI' --terminal-width "$(($4-2))" -f "$1" 

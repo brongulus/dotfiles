@@ -13,6 +13,7 @@ set ifs "\n"
 ## Use nvim as EDITOR only in lf
 cmd open ${{
 	case $(file --mime-type "$f" -bL) in
+		text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
 		text/*|application/json) $EDITOR "$fx";;
 		*) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
 	esac
