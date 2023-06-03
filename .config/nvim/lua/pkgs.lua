@@ -70,6 +70,14 @@ require('packer').startup(function()
 		config = function()
 			require("neogit").setup {
 				use_magit_keybindings = true,
+				mappings = {
+					status = {
+						["p"] = "",
+						["p"] = "PushPopup",
+						["P"] = "",
+						["P"] = "PullPopup",
+					}
+				}
 			}
 		end
 	}
