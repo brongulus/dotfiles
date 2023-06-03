@@ -11,13 +11,26 @@ set ifs "\n"
 # ---------
 # Functions
 # ---------
+## Use nvim as EDITOR only in lf
+cmd open ${{
+	case $(file --mime-type "$f" -bL) in
+		text/*|application/json) $EDITOR "$fx";;
+		*) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
+	esac
+}}
+
 cmd edit-config ${{
-    $EDITOR ~/.config/lf/lfrc
-    lf -remote "send $id source ~/.config/lf/lfrc"
+  $EDITOR ~/.config/lf/lfrc
+  lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+## Depends on dragon-drop package
+cmd dragon ${{
+	dragon-drop -a -x $fx &>/dev/null 2>&1 & disown;
 }}
 
 cmd conf_rel ${{
-    lf -remote "send $id source ~/.config/lf/lfrc"
+  lf -remote "send $id source ~/.config/lf/lfrc"
 }}
 
 # Courtesy of folks at LARBS
@@ -57,17 +70,24 @@ cmd copyto ${{
 # ---------
 # Mappings
 # ---------
+map l open
 map C edit-config
 map - updir
 map D delete
 map E extract
 map C copyto
 map M moveto
+map H set hidden!
 map + push :mkdir<space>
 map <f-1> :cd ~ <enter>; set hidden false; 
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
 map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>
 map <f-4> :cd ~/Dotfiles/.config <enter>; set hidden true;
-map m toggle
+map gd :cd ~/Dotfiles/.config <enter>; set hidden true;
+map gt :cd /mnt/Data/Documents/Programming/Teach\ Yourself\ CS <enter>
+map gc :cd /mnt/Data/Documents/problems/Codeforces <enter>
+map m :toggle; down;
+map <space> dragon
 map <c-e> edit-config
+map <c-d> dragon
 map R conf_rel
