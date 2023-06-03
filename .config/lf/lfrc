@@ -3,7 +3,7 @@ set cleaner ~/.config/lf/lf_kitty_clean
 set drawbox
 set mouse
 set hidden
-# set icons
+set icons
 set shellopts '-eu'
 set ifs "\n"
 

@@ -175,6 +175,7 @@ autocmd! BufRead,BufNewFile *.pypy3 silent! set ft=python
 "autocmd! BufNewFile,BufRead *.hlsl silent! set ft=glsl
 set rtp^=~/.config/nvim/hlsl.vim
 autocmd BufRead,BufNewFile *.fx,*.fxc,*.fxh,*.hlsl setfiletype hlsl
+autocmd BufRead,BufNewFile *rc setfiletype conf
 autocmd BufEnter term://* startinsert
 set go+=!
 ]]
