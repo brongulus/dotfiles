@@ -231,7 +231,8 @@ channels = (
   { name = "#zig"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#THE.SOURCE"; chatnet = "Scene"; autojoin = "no"; },
   { name = "#MOVIEGODS"; chatnet = "Abjects"; autojoin = "no"; },
-  { name = "#arcan"; chatnet = "Libera"; autojoin = "yes"; }
+  { name = "#arcan"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#elinks"; chatnet = "Libera"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -467,5 +468,6 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#rice" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#neovim" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#qutebrowser" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "#arcan" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#arcan" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#elinks" ); }
 );

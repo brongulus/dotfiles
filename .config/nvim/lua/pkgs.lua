@@ -65,7 +65,14 @@ require('packer').startup(function()
   -- Personal additions
 	use { 'VonHeikemen/fine-cmdline.nvim', requires = {{'MunifTanjim/nui.nvim'}} }
 	use 'lambdalisue/suda.vim'
-	use 'TimUntersberger/neogit'
+	use {
+		'TimUntersberger/neogit',
+		config = function()
+			require("neogit").setup {
+				use_magit_keybindings = true,
+			}
+		end
+	}
 	use {
         "kyazdani42/nvim-web-devicons",
         config = function()

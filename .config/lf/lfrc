@@ -79,6 +79,7 @@ map E extract
 map C copyto
 map M moveto
 map H set hidden!
+map . set hidden!
 map + push :mkdir<space>
 map <f-1> :cd ~ <enter>; set hidden false; 
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
