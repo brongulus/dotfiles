@@ -73,5 +73,5 @@ yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 fcitx5 --replace -d &
 # killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
-# dropbox &
 # pgrep ~/.config/bswpm/bspswallow || ~/.config/bspwm/bspswallow &
+rclone mount dropbox: ~/Dropbox/ --allow-non-empty --daemon &

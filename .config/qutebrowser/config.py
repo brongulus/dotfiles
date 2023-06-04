@@ -64,6 +64,8 @@ c.url.searchengines['aur'] = 'https://aur.archlinux.org/packages?O=0&K={}'
 c.url.searchengines['aw'] = 'https://wiki.archlinux.org/index.php?search={}'
 c.url.searchengines['lg'] = 'https://libgen.is/search.php?req={}&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def'
 c.url.searchengines['g'] = 'https://google.com/search?q={}'
+# FIXME:
+# c.url.searchengines['wb'] = 'https://web.archive.org/web/*/{}'
 
 c.url.start_pages = ['file:///home/prashant/.config/qutebrowser/startpage/index.html']
 c.url.default_page = 'file:///home/prashant/.config/qutebrowser/startpage/index.html'
@@ -80,7 +82,7 @@ c.bindings.key_mappings = {
 c.fonts.default_family = ["JetBrains Mono"]
 c.fonts.default_size = '10pt'
 
-c.content.blocking.method = "both"
+# c.content.blocking.method = "both"
 
 
 ## Aliases for commands. The keys of the given dictionary are the
