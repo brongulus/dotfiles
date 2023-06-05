@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# This scripts runs newsboat, elinks and irssi
+# if internet connectivity is there and they're not
+# already running and ataches them to my scratch tmux
+# session in their own separate windows.
+
+# DONE; Add ping check, only run these commands if connected to the internet
+# Source: https://stackoverflow.com/a/26820300
+# DONE: Add existing running checks for both elinks and irssi
+
+
+echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+  CMD=${1:-'tmux -u new-session -A -s scratch -n scratch \; detach-client'}
+  if [[ -n $(tmux ls | grep scratch) ]]; then
+    echo "scratch already exists"
+  else
+    kitty --name scratch -e bash -c "$CMD";
+  fi
+
+  tmux movew -r;
+
+  if [[ $(pgrep -f newsboat) ]]; then
+    echo "newsboat instance already running";
+  else
+    tmux a -t scratch \; new-window -n newsboat \; send-keys "newsboat" C-m \; swap-window -t 1 \; detach-client;
+  fi
+
+  if [[ $(pgrep -f elinks) ]]; then
+    echo "elinks instance already running";
+  else
+    tmux a -t scratch \; new-window -n elinks \; send-keys "elinks" C-m \; swap-window -t 2 \; detach-client;
+  fi
+
+  if [[ $(pgrep -f irssi) ]]; then
+    echo "irssi instance already running";
+  else
+    tmux a -t scratch \; new-window -n irssi \; send-keys "irssi" C-m \; swap-window -t 3 \; detach-client;
+  fi
+
+  tmux movew -r;
+
+  setsid -f ~/bin/scratch >/dev/null;
+fi
+
+# ALT Check:
+# if pidof newsboat &>/dev/null 2>&1; then

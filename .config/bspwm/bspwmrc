@@ -72,6 +72,7 @@ xset b off &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 fcitx5 --replace -d &
+xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
 # killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
 # pgrep ~/.config/bswpm/bspswallow || ~/.config/bspwm/bspswallow &
-rclone mount dropbox: ~/Dropbox/ --allow-non-empty --daemon &
+pgrep rclone || rclone mount dropbox: ~/Dropbox/ --allow-non-empty --daemon &

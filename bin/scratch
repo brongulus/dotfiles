@@ -11,7 +11,8 @@ if [[ -n $scratch ]]; then
     if [[ $focused == $scratch ]]; then
         xdotool windowkill $scratch
     else
-        xdotool windowactivate $scratch
+        tmux movew -r; # FIXME:
+        xdotool windowactivate $scratch;
     fi
 elif command -v urxvt >/dev/null; then
     urxvt -name $SCRID \

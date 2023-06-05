@@ -88,6 +88,7 @@ map <f-4> :cd ~/Dotfiles/.config <enter>; set hidden true;
 map gd :cd ~/Dotfiles/.config <enter>; set hidden true;
 map gt :cd /mnt/Data/Documents/Programming/Teach\ Yourself\ CS <enter>
 map gc :cd /mnt/Data/Documents/problems/Codeforces <enter>
+map sm !~/bin/make_symlink
 map m :toggle; down;
 map <space> dragon
 map gs !lazygit

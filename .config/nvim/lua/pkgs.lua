@@ -78,10 +78,10 @@ require('packer').startup(function()
 				use_magit_keybindings = true,
 				mappings = {
 					status = {
-						["p"] = "",
-						["p"] = "PushPopup",
 						["P"] = "",
 						["P"] = "PullPopup",
+						["p"] = "",
+						["p"] = "PushPopup",
 					}
 				}
 			}

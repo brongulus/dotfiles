@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
-emacsclient -c -eval "(compose-mail \"$1\")"
+if emacsclient -c &>/dev/null 2>&1; then
+    # echo "Using client"
+    emacsclient -c -eval "(compose-mail \"$1\")";
+else
+    # echo "Using normal"
+    # # I apologize to anyone who has to see this
+    tmux a -t scratch \; new-window -n mail \; send-keys emacs\ -nw\ -eval\ \"\(compose-mail\ \\\"$1\\\"\)\" C-m;
+    # kitty sh -c "emacs -nw -eval \"(compose-mail \"$1\")\"";
+fi
