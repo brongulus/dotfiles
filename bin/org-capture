@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Open an org-capture popup frame from the shell. This opens a temporary emacs
+# daemon if emacs isn't already running.
+#
+# Usage: org-capture [-k KEY] [MESSAGE]
+# Examples:
+#   org-capture -k n "To the mind that is still, the whole universe surrenders."
+
+set -e
+
+# org-capture key mapped to argument flags
+# keys=$(emacsclient -e "(+org-capture-available-keys)" | cut -d '"' -f2)
+while getopts "hk:" opt; do
+  key="\"$OPTARG\""
+  break
+done
+shift $((OPTIND-1))
+
+# use remaining args, else read from stdin if passed a single dash
+str="$*"
+case "$str" in
+  -) str=$(cat) ;;
+esac
+
+# Fix incompatible terminals that cause odd 'not a valid terminal' errors
+[ "$TERM" = "alacritty" ] && export TERM=xterm-256color
+
+# If emacs isn't running, we start a temporary daemon
+if ! emacsclient --suppress-output --eval nil 2>/dev/null; then
+  emacs --daemon
+fi
+
+# Non-daemon servers flicker a lot if frames are created from terminal, so we do
+# it internally instead.
+emacsclient -a "" \
+  -e "(progn (+org-capture/open-frame \"${str}\" ${key:-nil})(doom/reload-font))"

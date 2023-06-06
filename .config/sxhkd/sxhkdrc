@@ -7,7 +7,8 @@ super + Return
 	kitty -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
 # rofi test
-# super + x
+super + x
+	~/bin/org-capture -k l
   # rofi -show run -run-command 'xterm -e bash -ic "{cmd} && read"'
 
 # program launcher
@@ -36,7 +37,7 @@ super + z
   ~/bin/scratch
 
 # emacs everywhere
-super + x
+# super + x
   # emacsclient --eval "(emacs-everywhere)"
 
 # power-menu 

@@ -78,7 +78,8 @@ else:
         output += "\n"
 
 with open("./" + sys.argv[1] + ".org", mode="wt", encoding="utf-8") as file:
-    file.write(output) 
+    file.write(output)
 
 # TODO: Images!
 # TODO: Use Cookies for ongoing atcoder contests
+# TODO: If emacs binary exists, use -eval to convert org to pdf?

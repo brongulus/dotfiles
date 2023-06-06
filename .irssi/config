@@ -251,6 +251,7 @@ aliases = {
   ATAG = "WINDOW SERVER";
   ADD = "CHANNEL ADD -AUTO";
   IGNCH = "IGNORE $0 JOINS PARTS QUITS";
+  # SHRUG = "¯\_(ツ)_/¯";
   ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{visible_name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
   B = "BAN";
   BACK = "AWAY";
@@ -488,7 +489,8 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#programming" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#os" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#thutters" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "#text-editors" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#text-editors" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#general" ); }
 );
 
 # --------------------------------------------

@@ -12,11 +12,17 @@ set ifs "\n"
 # ---------
 ## Use nvim as EDITOR only in lf
 cmd open ${{
-	case $(file --mime-type "$f" -bL) in
-		text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
-		text/*|application/json) $EDITOR "$fx";;
-		*) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
-	esac
+	if [[ "$f" = *.m3u ]]; then
+		setsid -f mpv "$f" &>/dev/null;
+	elif [[ "$f" = *.org ]]; then
+		emacs -nw "$f";
+	else
+		case $(file --mime-type "$f" -bL) in
+			text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
+			text/*|application/json) $EDITOR "$fx";;
+			*) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
+		esac
+	fi
 }}
 
 cmd edit-config ${{
@@ -85,6 +91,7 @@ map <f-1> :cd ~ <enter>; set hidden false;
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
 map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>
 map <f-4> :cd ~/Dotfiles/.config <enter>; set hidden true;
+map <f-5> :cd /mnt/Data/Documents <enter>
 map gd :cd ~/Dotfiles/.config <enter>; set hidden true;
 map gt :cd /mnt/Data/Documents/Programming/Teach\ Yourself\ CS <enter>
 map gc :cd /mnt/Data/Documents/problems/Codeforces <enter>

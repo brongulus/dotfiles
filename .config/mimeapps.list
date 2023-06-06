@@ -39,7 +39,7 @@ text/xml=org.qutebrowser.qutebrowser.desktop;
 x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop;
 x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop;
 x-scheme-handler/ftp=org.qutebrowser.qutebrowser.desktop;
-x-scheme-handler/mailto=microsoft-edge.desktop;
+x-scheme-handler/mailto=emacsmail.desktop;
 x-scheme-handler/webcal=microsoft-edge.desktop;
 
 [Removed Associations]

@@ -166,7 +166,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
     desc = "Highlight symbol under cursor on CursorHold"
 })
 
-vim.api.nvim_set_keymap('n', '<leader>>', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>>', 'O<backspace>+ <C-r>=strftime("<%F %a %H:%M> ")<CR>', { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>ot', '<C-w>s<C-w>j :cd %:p:h<CR> :terminal<CR>i', { noremap = true, silent = true})
 

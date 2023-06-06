@@ -14,9 +14,11 @@ bind-key l open
 bind-key h quit
 
 color listfocus green black standout bold
+confirm-mark-all-feeds-read no # FIXME: wtf?
 
+browser "elinks -remote %u"
 macro , open-in-browser
-macro y set browser "setsid -f mpv %u" ; open-in-browser ; set browser "elinks %u"
+macro y set browser "setsid -f mpv %u" ; open-in-browser ; set browser "elinks -remote %u"
 
 # FIXME: Add regex matching, this might be exact match
 ignore-article https://nitter.net/hermitcraft_/rss "title =~ \"joehills\""

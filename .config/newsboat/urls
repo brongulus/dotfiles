@@ -2,6 +2,7 @@
 "query:Unread:unread = \"yes\""
 https://lobste.rs/rss
 https://lwn.net/headlines/rss
+https://api.quantamagazine.org/feed/
 https://nitter.net/hermitcraft_/rss
 https://nitter.net/kotatsugame_t/rss
 https://nitter.net/maspy_stars/rss

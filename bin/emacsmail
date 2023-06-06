@@ -6,6 +6,6 @@ if emacsclient -c &>/dev/null 2>&1; then
 else
     # echo "Using normal"
     # # I apologize to anyone who has to see this
-    tmux a -t scratch \; new-window -n mail \; send-keys emacs\ -nw\ -eval\ \"\(compose-mail\ \\\"$1\\\"\)\" C-m;
+    kitty tmux a -t scratch \; new-window -n mail \; send-keys emacs\ -nw\ -f\ message-mailto\ \"$1\" C-m;
     # kitty sh -c "emacs -nw -eval \"(compose-mail \"$1\")\"";
 fi
