@@ -24,6 +24,7 @@ dracula.draw.blood(c, {
 })
 
 config.bind(';', 'set-cmd-text :')
+config.bind(':', 'hint inputs --first')
 config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
 config.bind('<Ctrl+l>', 'spawn --userscript qt-bw --auto-lock=0', 'insert')
 config.bind('<Ctrl+b>', 'spawn --userscript marks-menu', 'insert')
@@ -82,7 +83,7 @@ c.bindings.key_mappings = {
 c.fonts.default_family = ["JetBrains Mono"]
 c.fonts.default_size = '10pt'
 
-# c.content.blocking.method = "both"
+c.content.blocking.method = "auto"
 
 
 ## Aliases for commands. The keys of the given dictionary are the

@@ -6,10 +6,9 @@
 super + Return
 	kitty -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
-# rofi test
+# org capture
 super + x
-	~/bin/org-capture -k l
-  # rofi -show run -run-command 'xterm -e bash -ic "{cmd} && read"'
+	~/bin/org-capture # -k l
 
 # program launcher
 super + d

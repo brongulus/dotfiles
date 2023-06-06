@@ -40,6 +40,10 @@ if status is-interactive
         end
     end
 
+    function eman -d "Open man page in emacs"
+        command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
+    end
+
     # fzf_configure_bindings --directory=\cf
 
     bind \cp 'xclip -o'

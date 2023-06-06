@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+cd ~/bin/elinks
+# TODO: Add steps to change feature.conf bitorrent and nntp
+
+autoreconf -ifv
+
+./configure --prefix=/home/prashant/.local \
+    --mandir=/home/prashant/.local/share/man \
+    --sysconfdir=/home/prashant/.local/etc \
+    --with-luapkg=lua54 \
+    --with-zlib --without-lzma \
+    --without-x --without-spidermonkey \
+    --enable-cgi --enable-leds --disable-smb \
+    --disable-sm-scripting --enable-256-colors \
+    --enable-html-highlight --enable-exmode
+
+make -j1
+
+make install
