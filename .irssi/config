@@ -44,6 +44,7 @@ servers = (
     port = "6697";
     use_tls = "yes";
     tls_verify = "yes";
+    autoconnect = "yes";
   },
   { 
     address = "irc.quakenet.org";
@@ -226,12 +227,12 @@ channels = (
   { name = "#nonguix"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#linux"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#qutebrowser"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#neovim"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#emacs"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#gentoo"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#gentoo-chat"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#emacs"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#gentoo"; chatnet = "Libera"; autojoin = "no"; },
+  { name = "#irssi"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#gentoo-soc"; chatnet = "Libera"; autojoin = "no"; },
+  { name = "#neovim"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "##rust"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#security"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#org-mode"; chatnet = "Libera"; autojoin = "no"; },
@@ -244,7 +245,8 @@ channels = (
   { name = "#arcan"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#elinks"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#fvwm"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#doomemacs"; chatnet = "Libera"; autojoin = "no"; }
+  { name = "#doomemacs"; chatnet = "Libera"; autojoin = "no"; },
+  { name = "#bitlbee"; chatnet = "OFTC"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -490,7 +492,8 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#os" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#thutters" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#text-editors" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "#general" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#general" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#bitlbee" ); }
 );
 
 # --------------------------------------------

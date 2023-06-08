@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 
+# (check for libcss, libdom, quickjs)
+# Nvm its crashing with that xD
+
 cd ~/bin/elinks
 # TODO: Add steps to change feature.conf bitorrent and nntp
 
 autoreconf -ifv
 
+# Check ./configure --help in src
+
+# ./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc \
 ./configure --prefix=/home/prashant/.local \
     --mandir=/home/prashant/.local/share/man \
     --sysconfdir=/home/prashant/.local/etc \
-    --with-luapkg=lua54 \
+    --with-luapkg=lua54 --with-python \
     --with-zlib --without-lzma \
     --without-x --without-spidermonkey \
     --enable-cgi --enable-leds --disable-smb \
     --disable-sm-scripting --enable-256-colors \
-    --enable-html-highlight --enable-exmode
+    --enable-html-highlight --enable-exmode \
+    --with-mujs
+    # --with-quickjs
 
 make -j1
 

@@ -6,6 +6,9 @@
 super + Return
 	kitty -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
+super + alt + Return
+	kitty
+
 # org capture
 super + x
 	~/bin/org-capture # -k l
