@@ -44,7 +44,7 @@ servers = (
     port = "6697";
     use_tls = "yes";
     tls_verify = "yes";
-    autoconnect = "yes";
+    autoconnect = "no";
   },
   { 
     address = "irc.quakenet.org";
@@ -242,11 +242,11 @@ channels = (
   { name = "#zig"; chatnet = "Libera"; autojoin = "yes"; },
   { name = "#THE.SOURCE"; chatnet = "Scene"; autojoin = "no"; },
   { name = "#MOVIEGODS"; chatnet = "Abjects"; autojoin = "no"; },
-  { name = "#arcan"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#elinks"; chatnet = "Libera"; autojoin = "yes"; },
-  { name = "#fvwm"; chatnet = "Libera"; autojoin = "yes"; },
+  { name = "#arcan"; chatnet = "Libera"; autojoin = "no"; },
+  { name = "#elinks"; chatnet = "Libera"; autojoin = "no"; },
+  { name = "#fvwm"; chatnet = "Libera"; autojoin = "no"; },
   { name = "#doomemacs"; chatnet = "Libera"; autojoin = "no"; },
-  { name = "#bitlbee"; chatnet = "OFTC"; autojoin = "yes"; }
+  { name = "#bitlbee"; chatnet = "OFTC"; autojoin = "no"; }
 );
 
 aliases = {
@@ -450,7 +450,7 @@ keyboard = (
   { key = "^Q"; id = "command"; data = "exit"; },
   { key = "^R"; id = "command"; data = "reload"; },
   { key = "^S"; id = "command"; data = "save"; },
-  { key = "^W"; id = "command"; data = "wc"; },
+  # { key = "^W"; id = "command"; data = "wc"; },
   { key = "^L"; id = "command"; data = "trackbar"; },
   # Use function keys to switch channels (Only till 12 tho :/)
   { key = "^[OP"; id = "change_window"; data = "1"; },

@@ -21,11 +21,11 @@ use File::Glob ':glob';
 sub draw_box ($$$$) {
     my ($title, $text, $footer, $colour) = @_;
     my $box = '';
-    $box .= '%R,--[%n%9%U'.$title.'%U%9%R]%n'."\n";
+    $box .= '%R,——[%n%9%U'.$title.'%U%9%R]%n'."\n";
     foreach (split(/\n/, $text)) {
-        $box .= '%R|%n '.$_."\n";
+        $box .= '%R│%n '.$_."\n";
     }
-    $box .= '%R`--<%n'.$footer.'%R>->%n';
+    $box .= '%R`——<%n'.$footer.'%R>->%n';
     $box =~ s/%.//g unless $colour;
     return $box;
 }
@@ -42,12 +42,12 @@ sub sig_window_item_new ($$) {
     my @lt = localtime(time);
     my $zone;
     $filename = strftime($filename, @lt, $zone);
-    $filename =~ s/(\[|\])/\\$1/g;
+    $filename =~ s/(\[│\])/\\$1/g;
     local *F;
     open(F, "<", bsd_glob($filename));
     my $lines = Irssi::settings_get_int('queryresume_lines');
     foreach (<F>) {
-	unless (/^--- Log/) {
+	unless (/^——— Log/) {
 	    push(@data, $_);
 	    shift(@data) if (@data > $lines);
 	}

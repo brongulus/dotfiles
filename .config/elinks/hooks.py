@@ -1,4 +1,8 @@
 import soupmonkey
+import elinks
+import os
+from rss import feedreader
+# pip install feedparser
 
 # TODO: Clean GH, reddit, actually get rid of navbar of most websites
 
@@ -17,3 +21,6 @@ def goto_url_hook(url):
         url = url.replace("reddit.com", "old.reddit.com", 1)
 
     return url
+
+elinks.bind_key("!", feedreader)
+elinks.bind_key("Ctrl-S", feedreader.menuopener._seen, "menu") # FIXME

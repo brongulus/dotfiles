@@ -9,6 +9,9 @@ super + Return
 super + alt + Return
 	kitty
 
+super + alt + t
+	kitty
+
 # org capture
 super + x
 	~/bin/org-capture # -k l
@@ -227,6 +230,9 @@ super + F4
 super + F5
 	emacsclient -c /mnt/Data/Documents/problems/Codeforces/
 	# kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
+
+super + F6
+  emacs -q --load ~/doom-configs/.emacs.d/early-init.el --load ~/doom-configs/.emacs.d/init.el
 
 super + w
   quickmedia

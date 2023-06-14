@@ -1,3 +1,5 @@
+# articlelist-format "%4i %f %D %6L %?T? │ %-17T │  ?%t"
+
 auto-reload yes
 
 bind-key j down
@@ -14,7 +16,8 @@ bind-key l open
 bind-key h quit
 
 color listfocus green black standout bold
-confirm-mark-all-feeds-read no # FIXME: wtf?
+confirm-mark-all-feeds-read no
+confirm-mark-feed-read no
 
 browser "elinks -remote %u"
 macro , open-in-browser

@@ -5,10 +5,11 @@ from importlib import import_module
 
 modules = []
 for module in os.listdir(os.path.dirname(__file__)):
-    if module == '__init__.py' or module[-3:] != '.py':
+    if module == "__init__.py" or module[-3:] != ".py":
         continue
-    modules.append(import_module('.' + module[:-3], package = 'soupmonkey'))
+    modules.append(import_module("." + module[:-3], package="soupmonkey"))
     del module
+
 
 def _substitute(url, html):
     target = html
@@ -16,14 +17,17 @@ def _substitute(url, html):
         try:
             for p in filter(lambda pattern: re.search(pattern, url), module.substitute):
                 for substitute in module.substitute[p]:
-                    target = re.sub(substitute[0], substitute[1], target, flags=(re.DOTALL + re.I))
+                    target = re.sub(
+                        substitute[0], substitute[1], target, flags=(re.DOTALL + re.I)
+                    )
         except AttributeError:
             pass
     return target
 
+
 def inject(f):
     def _modify(url, html):
-        soup = bs4.BeautifulSoup(_substitute(url, html), 'html.parser')
+        soup = bs4.BeautifulSoup(_substitute(url, html), "html.parser")
         for module in modules:
             try:
                 for p in filter(lambda pattern: re.search(pattern, url), module.modify):
@@ -32,4 +36,5 @@ def inject(f):
             except AttributeError:
                 pass
         return f(url, str(soup))
+
     return _modify

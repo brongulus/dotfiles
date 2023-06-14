@@ -92,6 +92,7 @@ map sm !~/bin/make_symlink
 map m :toggle; down;
 map <space> dragon
 map gs !lazygit
+map <c-v> $nvim ./
 map <c-e> edit-config
 # map <c-d> dragon
 map R conf_rel
