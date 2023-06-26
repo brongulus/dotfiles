@@ -5,11 +5,11 @@ set mouse
 set hidden
 set icons
 set shellopts '-eu'
-set ifs "\n"
+set ifs
 
 # ---------
 # Functions
-# ---------
+ ---------
 ## Use nvim as EDITOR only in lf
 cmd open ${{
 	if [[ "$f" = *.m3u ]]; then
@@ -28,6 +28,27 @@ cmd open ${{
 cmd edit-config ${{
   $EDITOR ~/.config/lf/lfrc
   lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+cmd fzf-open ${{
+	file="$(fzf --height 60% --border --reverse)" \
+	&& [ -f "$file" ] && setsid -f xdg-open "$file";
+}}
+
+cmd fzf-cd ${{
+	dir=$(fd --type directory --hidden --exclude .git | fzf)
+	lf -remote "send $id cd \"$dir\""
+}}
+
+cmd fzf_search ${{
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    res="$(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1 | sed 's/\\/\\\\/g;s/"/\\"/g'
+    )"
+    [ -n "$res" ] && lf -remote "send $id select \"$res\""
 }}
 
 ## Depends on dragon-drop package
@@ -52,7 +73,8 @@ cmd mkdir %{{
 
 cmd delete %{{
 	set -f
-	lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
+	# lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
+	lf -remote "send $id echomsg Delete marked files? (y/N)\ "
 	read ans
 	[ "$ans" = "y" ] && rm -rf -- $fx
 	lf -remote "send clear"
@@ -92,7 +114,10 @@ map sm !~/bin/make_symlink
 map m :toggle; down;
 map <space> dragon
 map gs !lazygit
+map <c-s> :fzf_search
+map <c-f> fzf-open
+map <c-d> fzf-cd
 map <c-v> $nvim ./
 map <c-e> edit-config
 # map <c-d> dragon
-map R conf_rel
+map R :rename $fx

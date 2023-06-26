@@ -28,7 +28,7 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a mpv state=tiled
 bspc rule -a Yad state=floating
 bspc rule -a Kupfer.py focus=on
-bspc rule -a MEGAsync state=floating rectangle=400x500+1450+450
+bspc rule -a MEGAsync state=floating rectangle=400x500+1500+480
 bspc rule -a 'Gnome-pomodoro' state=floating rectangle=300x400+20+20
 bspc rule -a 'Emacs:doom-capture' state=floating sticky=on rectangle=1500x700+210+190
 # bspc rule -a 'Emacs:emacs-anywhere' state=floating sticky=on rectangle=1500x700+210+190
@@ -73,7 +73,5 @@ xset b off &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 fcitx5 --replace -d &
-xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
+# xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
 # killall -q polybar; polybar -r left & polybar -r center & polybar -r right &
-# pgrep ~/.config/bswpm/bspswallow || ~/.config/bspwm/bspswallow &
-pgrep rclone || rclone mount dropbox: ~/Dropbox/ --allow-non-empty --daemon &

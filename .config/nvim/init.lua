@@ -36,7 +36,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Load Keybindings( Tidy Config :)
--- FIXME: require('plenary.reload').reload_module('eybinds')
+-- FIXME: require('plenary.reload').reload_module('keybinds')
 require('keybinds')
 
 -- Cleaner gitgutters
@@ -136,6 +136,7 @@ set path=**
 set nocompatible
 set wildmode=full
 set wildmenu
+set ignorecase
 set wildignore=*.out,*.exe
 ]]
 
@@ -298,10 +299,10 @@ require('material').setup({
 
 vim.cmd[[
 " au ColorScheme * hi Comment cterm=italic gui=italic
-au InsertEnter * hi StatusLine ctermfg=Yellow guibg=#EBCB8B guifg=#25363B
-au TermEnter * hi StatusLine ctermfg=Green guibg=#A3BE8C guifg=#25363B
-au TextChangedI * hi StatusLine ctermfg=Red guibg=#D57780 guifg=#25363B
-au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=NONE ctermfg=NONE guibg=#81A1C1 guifg=#25363B
+" au InsertEnter * hi StatusLine ctermfg=Yellow guibg=yellow guifg=#25363B
+" au TermEnter * hi StatusLine ctermfg=Green guibg=greeen guifg=#25363B
+" au TextChangedI * hi StatusLine ctermfg=Red guibg=red guifg=#25363B
+" au BufRead,BufWrite,InsertLeave,TermLeave * hi StatusLine ctermfg=NONE ctermbg=NONE ctermfg=NONE guibg=#A4FFFF guifg=#25363B
 ]]
 
 vim.cmd[[
@@ -435,7 +436,7 @@ require('onenord').setup({
     CocFloating = { bg = colors.bg },
   },
 })
-vim.cmd 'colorscheme onenord'
+vim.cmd 'colorscheme dracula-soft'
 
 -- Neovide
 if vim.g.neovide then

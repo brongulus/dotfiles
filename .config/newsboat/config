@@ -14,6 +14,7 @@ bind-key d pagedown
 bind-key u pageup
 bind-key l open
 bind-key h quit
+bind-key - quit
 
 color listfocus green black standout bold
 confirm-mark-all-feeds-read no

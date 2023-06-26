@@ -15,9 +15,11 @@ if status is-interactive
     set PATH ~/.spicetify $PATH
     set PATH ~/.guix-profile/bin $PATH
 
+    set --export ALTERNATE_EDITOR ""
+    set --export EDITOR "emacsclient -t"
     set --export COLORTERM "truecolor"
     set --export FZF_COMPLETION_TRIGGER "``"
-    # set --export FZF_DEFAULT_OPTS "--color=bg+:#3B4252,border:#D8DEE9,bg:#263238,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1"
+    set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
     set fzf_fd_opts --hidden --exclude=.git
     set fzf_directory_opts --bind "enter:execute(setsid xdg-open {} &> /dev/tty)"
 
@@ -27,20 +29,21 @@ if status is-interactive
        setsid xdg-open "$file"
     end
 
-		function magit
-    	 set -l git_root (git rev-parse --show-toplevel)
-    	 vmacs -nw --eval "
-			 (progn
-				  (add-to-list 'load-path (locate-user-emacs-file \"el-get/dash\"))
-				  (add-to-list 'load-path (locate-user-emacs-file \"el-get/compat\"))
-  				(add-to-list 'load-path (locate-user-emacs-file \"el-get/transient/lisp\"))
-					(add-to-list 'load-path (locate-user-emacs-file \"el-get/ghub/lisp\"))
-				  (add-to-list 'load-path (locate-user-emacs-file \"el-get/magit-pop\"))
-				  (add-to-list 'load-path (locate-user-emacs-file \"el-get/with-editor/lisp\"))
-					(add-to-list 'load-path (locate-user-emacs-file \"el-get/magit/lisp\"))
-				  (require 'magit)
-					(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1) (magit-status \"$git_root\"))"
-		end
+    # Source: https://zenn.dev/takeokunn/articles/56010618502ccc
+    function magit
+        set -l git_root (git rev-parse --show-toplevel)
+        emacs -nw --eval "
+            (progn
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/dash\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/compat\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/transient/lisp\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/ghub/lisp\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/magit-pop\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/with-editor/lisp\"))
+                (add-to-list 'load-path (locate-user-emacs-file \"el-get/magit/lisp\"))
+                (require 'magit)
+                (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1) (magit-status \"$git_root\"))"
+    end
 
     function mkcd -d "Create a directory and set CWD"
       command mkdir $argv
@@ -55,13 +58,14 @@ if status is-interactive
         end
     end
 
+    # Source: hlissner/hey
     function eman -d "Open man page in emacs"
         command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
     end
 
     fzf_configure_bindings --directory=\cf
 
-		bind \eg magit
+    bind \eg magit
 
     bind \cp 'xclip -o'
 

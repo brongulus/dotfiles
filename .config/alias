@@ -39,4 +39,5 @@ alias elinksc='elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1
 alias rtv='rtv --enable-media'
 alias ekill='emacsclient --eval "(kill-emacs)"'
 alias mclf='tmux split -h lf; lf'
-alias vmacs='emacs -q --load ~/doom-configs/.emacs.d/early-init.el --load ~/doom-configs/.emacs.d/init.el'
+alias vmacs='emacs -nw'
+alias nb='newsboat'

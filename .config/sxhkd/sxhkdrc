@@ -215,7 +215,7 @@ Print
 
 # Shortcuts
 super+ F1
-  emacsclient -c
+  emacsclient -c -a ""
 
 super + F2
 	qutebrowser
@@ -228,11 +228,11 @@ super + F4
 	anki -b /mnt/Data/AnkiData
 
 super + F5
-	emacsclient -c /mnt/Data/Documents/problems/Codeforces/
+  emacsclient -c -a "" /mnt/Data/Documents/problems/Codeforces/
 	# kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
 
 super + F6
-  emacs -q --load ~/doom-configs/.emacs.d/early-init.el --load ~/doom-configs/.emacs.d/init.el
+  emacs -q --load ~/.emacs.d/early-init.el --load ~/.emacs.d/init.el
 
 super + w
   quickmedia
