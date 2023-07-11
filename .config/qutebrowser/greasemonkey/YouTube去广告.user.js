@@ -5,7 +5,7 @@
 // @name:zh-HK   YouTube去廣告
 // @name:zh-MO   YouTube去廣告
 // @namespace    http://tampermonkey.net/
-// @version      5.0
+// @version      5.2
 // @description         这是一个去除YouTube广告的脚本，轻量且高效，它能丝滑的去除界面广告和视频广告，包括6s广告。This is a script that removes ads on YouTube, it's lightweight and efficient, capable of smoothly removing interface and video ads, including 6s ads.
 // @description:zh-CN   这是一个去除YouTube广告的脚本，轻量且高效，它能丝滑的去除界面广告和视频广告，包括6s广告。
 // @description:zh-TW   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑地去除界面廣告和視頻廣告，包括6s廣告。
@@ -32,7 +32,7 @@
         `ytd-ad-slot-renderer`,//搜索页广告.
         `yt-mealbar-promo-renderer`,//播放页会员推荐广告.
     ];
-    const dev = false;//开发使用
+    const dev = true;//开发使用
     let video;//视频dom
 
     /**
@@ -130,6 +130,75 @@
     }
 
     /**
+    * 跳过广告
+    * @return {undefined}
+    */
+    function skipAd(mutationsList, observer) {
+        const minTime = 60;
+        const maxTime = 120;
+        const randomTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+
+        let skipButton = document.querySelector(`.ytp-ad-skip-button`);
+        let shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
+
+        if(!skipButton && !shortAdMsg){
+            log(`******广告结束变动******`);
+            return false;
+        }
+
+        const fn = () => {
+            skipButton = document.querySelector(`.ytp-ad-skip-button`);
+            shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
+
+            if(skipButton||shortAdMsg){
+                video.muted = true;//关闭广告声音
+            }
+
+            //拥有跳过按钮的广告.
+            if(skipButton)
+            {
+                log(`普通视频广告~~~~~~~~~~~~~`);
+                log(`总时长:`);
+                log(`${video.duration}`)
+                log(`当前时间:`);
+                log(`${video.currentTime}`)
+                skipButton.click();// 跳过广告.
+                log(`按钮跳过了该广告~~~~~~~~~~~~~`);
+                return false;//终止
+            }
+
+            //没有跳过按钮的短广告.
+            if(shortAdMsg){
+                log(`强制视频广告~~~~~~~~~~~~~`);
+                log(`总时长:`);
+                log(`${video.duration}`)
+                log(`当前时间:`);
+                log(`${video.currentTime}`)
+                video.currentTime = 1024;
+                log(`强制结束了该广告~~~~~~~~~~~~~`);
+                return false;//终止
+            }
+            video.muted = false;//开启视频声音
+            log(`######广告此前已关闭######`);
+        }
+        fn();//标准执行
+
+        let timer = setTimeout(fn, randomTime);//备执行
+
+        setTimeout(()=>{
+            skipButton = document.querySelector(`.ytp-ad-skip-button`);
+            shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
+            if(skipButton || shortAdMsg){
+                log(`******关闭广告失败，继续执行一轮Fn******`);
+            }else{
+                clearTimeout(timer);
+                log(`******关闭广告成功******`);
+            }
+        }, 0);
+
+    }
+
+    /**
     * 去除播放中的广告
     * @return {undefined}
     */
@@ -149,32 +218,21 @@
                 return false;
             }
 
-            // 监听视频中的广告并处理
+            //监听视频中的广告并处理
             const config = {childList: true, subtree: true };// 监听目标节点本身与子树下节点的变动
-            // 当观察到变动时执行的回调函数
-            const callback = function (mutationsList, observer) {
-                //拥有跳过按钮的广告.
-                let skipButton = document.querySelector(`.ytp-ad-skip-button`);
-                if(skipButton)
-                {
-                    skipButton.click();// 跳过广告.
-                    log(`刚刚监听到了广告节点变化并使用按钮跳过了一条广告`);
-                    return false;//终止
-                }
-
-                //没有跳过按钮的短广告.
-                let shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
-                if(shortAdMsg){
-                    log(`刚刚监听到了广告节点变化并即将跳过一条广告`);
-                    video.currentTime = 1024;
-                    return false;//终止
-                }
-
-                log(`刚刚监听到了广告节点变化但都没有处理:`);
-
-            }
-            observer = new MutationObserver(callback);// 创建一个观察器实例并传入回调函数
+            observer = new MutationObserver(skipAd);// 创建一个观察器实例并设置处理广告的回调函数
             observer.observe(targetNode, config);// 以上述配置开始观察广告节点
+
+            //初始化监听，发现并处理广告
+            let skipButton = document.querySelector(`.ytp-ad-skip-button`);
+            let shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
+            if(skipButton || shortAdMsg){
+                log(`初始化监听，发现并处理广告`);
+                skipAd();
+            }else{
+                log(`初始化监听，没有发现广告`);
+            }
+
         }
 
         //结束监听
@@ -198,7 +256,7 @@
                 }
                 closeObserve();
             }
-        },16.6);
+        },16);
 
         log(`去除视频广告脚本持续运行中`)
     }

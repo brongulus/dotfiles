@@ -123,7 +123,6 @@ export STARDICT_DATA_DIR="/mnt/Data/Documents/japanese/Dictionary Stuff/sdcv"
 
 export SDCV_PAGER='less --quit-if-one-screen -RX'
 
-
 if [ -f $HOME/.config/alias ]; then
     source $HOME/.config/alias
 fi

@@ -80,8 +80,9 @@ cmd delete %{{
 	lf -remote "send clear"
 }}
 
-cmd extract ${{
+cmd extract %{{
 	set -f
+	lf -remote "send $id echomsg Extracting files."
 	atool -x $f &>/dev/null 2>&1
 	lf -remote "send $id echomsg $fx extracted."
 }}
@@ -102,6 +103,7 @@ map X extract
 map H set hidden!
 map . set hidden!
 map + push :mkdir<space>
+map F push %touch<space>
 map <f-1> :cd ~ <enter>; set hidden false; 
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
 map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>

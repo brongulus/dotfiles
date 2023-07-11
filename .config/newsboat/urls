@@ -1,17 +1,18 @@
 "query:Inbox:age < 10"
 "query:Unread:unread = \"yes\""
 https://lobste.rs/rss
+https://drewdevault.com/blog/index.xml
 https://lwn.net/headlines/rss
-https://api.quantamagazine.org/feed/
-https://nitter.net/hermitcraft_/rss
-https://nitter.net/kotatsugame_t/rss
-https://nitter.net/maspy_stars/rss
-https://nitter.net/SSRS_cp/rss
+https://archlinux.org/feeds/news/
+https://emacs.ch/@sachac.rss
+https://matklad.github.io/feed.xml
 https://www.youtube.com/feeds/videos.xml?channel_id=UCpGJxlhKXfdOKkBhuDH6ujA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCL8EOznhSyreT9O0-KFxgZQ
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2_krAagEXVPftDXZCDiVZA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCSbH_BPR_AoARW6RDYLlLog
 https://www.youtube.com/feeds/videos.xml?channel_id=UCpGJxlhKXfdOKkBhuDH6ujA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCqnP1HkcAnueBjyKCdaoNHg
+https://www.hltv.org/rss/news
+https://api.quantamagazine.org/feed/
 https://psa.wf/feed/
 https://gluer.org/blog/atom.xml

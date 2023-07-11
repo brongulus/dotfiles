@@ -10,6 +10,11 @@ settings:
     global: true
   content.blocking.method:
     global: both
+  content.geolocation:
+    https://www.google.com: false
+  content.javascript.can_access_clipboard:
+    github.com: true
+    global: true
   content.media.audio_capture:
     https://discord.com: true
     https://meet.google.com: true

@@ -7,9 +7,9 @@ bspc config ignore_ewmh_focus true
 bspc monitor -d I II III IV V
 # VIII IX X
 
-bspc config border_width         2
-bspc config window_gap           5 # 8
-bspc config split_ratio          0.52
+bspc config border_width         1
+bspc config window_gap           4 # 8
+bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config pointer_follows_focus false
@@ -31,10 +31,8 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a MEGAsync state=floating rectangle=400x500+1500+480
 bspc rule -a 'Gnome-pomodoro' state=floating rectangle=300x400+20+20
 bspc rule -a 'Emacs:doom-capture' state=floating sticky=on rectangle=1500x700+210+190
-# bspc rule -a 'Emacs:emacs-anywhere' state=floating sticky=on rectangle=1500x700+210+190
-# bspc rule -a 'emacs-everywhere' state=floating sticky=on rectangle=1500x700+210+190
-bspc rule -a chatterino state=floating split_ratio 0.80
 bspc rule -a 'emacs-anywhere' state=floating sticky=on rectangle=1500x700+210+190
+bspc rule -a chatterino state=floating split_ratio 0.80
 bspc rule -a Screenkey manage=off
 bspc rule -a Emacs state=tiled # desktop='^1' follow=on
 bspc rule -a Code state=tiled desktop='^2' follow=on
@@ -50,9 +48,9 @@ bspc rule -a 'ru-turikhay-tlauncher-bootstrap-Bootstrap' state=pseudo_tiled
 # HELP: xprop | grep WM_CLASS
 
 # Border
-bspc config focused_border_color        "#BD93F9"  # "#009688"
-bspc config normal_border_color         "#817c9c"
-bspc config active_border_color         "#1b2124"
+bspc config focused_border_color        "#ff008bff"  # "#009688"
+bspc config normal_border_color         "#01000000"
+bspc config active_border_color         "#01000000"
 
 #
 # Autostart
@@ -73,5 +71,6 @@ xset b off &
 yams -k; yams &
 setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 fcitx5 --replace -d &
+killall -q polybar; polybar -r top &
+~/bin/wall.sh &
 # xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
-# killall -q polybar; polybar -r left & polybar -r center & polybar -r right &

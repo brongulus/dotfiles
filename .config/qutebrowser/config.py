@@ -77,8 +77,6 @@ config.set('input.mode_override', "passthrough", '*://colab.research.google.com/
 
 c.bindings.key_mappings = { 
     '<Ctrl+s>': 'gd', 
-    '<Ctrl+Tab>': 'K', 
-    '<Ctrl+Shift+Tab>': 'J'
 }
 c.fonts.default_family = ["JetBrains Mono"]
 c.fonts.default_size = '10pt'

@@ -428,6 +428,7 @@ settings = {
     twitch_channels = "forsen ppy akb48_taiwan_clubs togglebit xqc gamesdonequick";
     mpd_port = "6600";
     queryresume_lines = "1000000000";
+    awl_viewer = "yes";
   };
   "irc/dcc" = {
     dcc_autoget = "yes";
@@ -493,7 +494,9 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#thutters" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#text-editors" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#general" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "#bitlbee" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#Zucc18" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#RCT" ); },
+  { level = "JOINS PARTS QUITS MODES"; channels = ( "&bitlbee" ); }
 );
 
 # --------------------------------------------
@@ -533,3 +536,18 @@ ignores = (
 # 11. Save the changes
 # > /save
 # 12. Enjoy :)
+
+# --------------------------------------------
+# Guide to libpurple-whatsapp (Very unstable)
+# --------------------------------------------
+# 1. Install bitlbee-libpurple (will remove bitlbee)
+# 2. Install pidgin, purple-gowhatsapp-git
+# 3. Restart bitblee.service
+# 4. Type `plugin`, hehoe-whatsmeow should be there
+# 5. Add account, acc add hehoe-whatsmeow <intl-number>@s.whatsapp.net
+# 6. Verify by `acc l`, login with `acc hehoe-whatsmeow on`
+# 7. Add relevant chats, enjoy :)
+# > chat add hehoe-whatsmeow !<id> #<Chan>
+# > chan #<Chan> set auto_join true
+# > /IGNCH #<Chan>
+# > /join #<Chan>
