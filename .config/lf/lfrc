@@ -9,7 +9,7 @@ set ifs
 
 # ---------
 # Functions
- ---------
+# ---------
 ## Use nvim as EDITOR only in lf
 cmd open ${{
 	if [[ "$f" = *.m3u ]]; then
@@ -53,6 +53,7 @@ cmd fzf_search ${{
 
 ## Depends on dragon-drop package
 cmd dragon ${{
+  IFS="$(printf '\n\t')"
 	dragon-drop -a -x $fx &>/dev/null 2>&1 & disown;
 }}
 
@@ -73,6 +74,7 @@ cmd mkdir %{{
 
 cmd delete %{{
 	set -f
+  IFS="$(printf '\n\t')"
 	# lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
 	lf -remote "send $id echomsg Delete marked files? (y/N)\ "
 	read ans
@@ -104,6 +106,7 @@ map H set hidden!
 map . set hidden!
 map + push :mkdir<space>
 map F push %touch<space>
+map ~ :cd ~ <enter>; set hidden false; 
 map <f-1> :cd ~ <enter>; set hidden false; 
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
 map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>

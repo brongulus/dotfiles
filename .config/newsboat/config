@@ -1,4 +1,4 @@
-# articlelist-format "%4i %f %D %6L %?T? │ %-17T │  ?%t"
+articlelist-format "%4i %f %D %?T? │ %-17T │  ?%t"
 
 auto-reload yes
 
