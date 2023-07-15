@@ -20,7 +20,7 @@ cmd open ${{
 		case $(file --mime-type "$f" -bL) in
 			text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
 			text/*|application/json) $EDITOR "$fx";;
-			*) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
+			*) IFS="$(printf '\n\t')"; for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
 		esac
 	fi
 }}
@@ -74,10 +74,10 @@ cmd mkdir %{{
 
 cmd delete %{{
 	set -f
-  IFS="$(printf '\n\t')"
 	# lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
 	lf -remote "send $id echomsg Delete marked files? (y/N)\ "
 	read ans
+  IFS="$(printf '\n\t')"
 	[ "$ans" = "y" ] && rm -rf -- $fx
 	lf -remote "send clear"
 }}

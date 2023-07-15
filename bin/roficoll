@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+# Source: https://github.com/andersju/zzzfoo
+
+PATH_TO_STRIP="/home/foobar/"
+rofi_search=$(rofi -dmenu -p 'Search: ')
+
+main() {
+  if [ -n "${rofi_search}" ]; then
+    file_path=$(recoll -t -A -e -n 20 "${rofi_search}" \
+      | tail -n +3 \
+      | sed 'N;N;N;s/\n/ /g' \
+      | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g' \
+      | sed 's/'"'"'/\&#39;/g; s/&ldquo;/\"/g; s/&rdquo;/\"/g' \
+      | awk 'BEGIN {FS="\t"; OFS=FS}
+            {{gsub(/^ ABSTRACT  |\/ABSTRACT/, "", $6)}}
+            {print "<b>" substr($3,2,length($3)-2) "</b> <i>" $1 "</i>";
+              print "ZZZBAR" $2; print $6 "\n\n" $2 "ZZZFOO"}' \
+      | tr -d '\t' \
+      | awk '{gsub(/ZZZFOO$/,"\t");}1' \
+      | sed "s#^ZZZBAR\[file://${PATH_TO_STRIP}\(.*\)\]#\1#" \
+      | awk '{gsub(/^\[file:\/\//,"");}1' \
+      | awk '{gsub(/\]\t/,"\t");}1' \
+      | sed 's/+/ /g;s/%/\\x/g' \
+      | xargs -0 printf "%b" \
+      | sed -e ':a' -e 'N' -e '$!ba' -e 's/	\n/	/g' \
+      | sed '$ s/.$//' \
+      | rofi -dmenu -eh 3 -sep '\t' -markup-rows -p "Filter results: " \
+      | tail -n 1 \
+      | sed 's/&amp;/\&/g; s/&lt;/</g; s/&gt;/>/g; s/&quot;/"/g; s/&#39;/'"'"'/g' \
+      | tr -d '\n')
+
+    if [ -n "${file_path}" ]; then
+      xdg-open "${file_path}" & 
+      exit 0
+    fi
+  fi
+}
+
+main

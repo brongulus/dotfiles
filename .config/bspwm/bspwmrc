@@ -63,14 +63,20 @@ pkill mpd; mpd &
 /usr/bin/dunst &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dex -a -s /etc/xdg/autostart/:~/.config/autostart/
-picom -CGb --window-shader-fg=/home/prashant/config/bw_picom.glsl &
+# picom -CGb --window-shader-fg=/home/prashant/config/bw_picom.glsl &
 nm-applet --indicator &
 xsetroot -cursor_name left_ptr &
 xset b off &
 ~/.config/bspwm/scripts/low_bat_notifier.sh
 yams -k; yams &
-setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
+# holding caps acts as ctrl, turn on caps by pressing both shift
+setxkbmap -option caps:ctrl_modifier,shift:both_capslock & 
+# tapping caps acts as esc (needs xcape)
+xcape -e 'Caps_Lock=Escape' &
 fcitx5 --replace -d &
 killall -q polybar; polybar -r top &
-~/bin/wall.sh &
+nitrogen --set-zoom-fill ~/Pictures/rocks.png
+
+# ~/bin/wall.sh &
 # xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
+
