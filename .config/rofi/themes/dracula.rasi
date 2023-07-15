@@ -45,6 +45,7 @@ configuration {
 
 window {
   transparency: "real";
+  width: 30%;
 }
 
 mainbox {
@@ -67,7 +68,7 @@ prompt {
 }
 
 listview {
-  lines: 8;
+  lines: 6;
 }
 
 element {

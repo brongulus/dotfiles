@@ -20,7 +20,7 @@ super + x
 super + d
 	rofi  -matching fuzzy -show combi -combi-modi 'drun,run' -modi combi -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar -terminal kitty \
-                -show-icons -font "Droid Sans Regular 10"
+                -show-icons -font "Droid Sans Regular 14"
 
 # everything
 super + s

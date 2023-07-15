@@ -2,11 +2,11 @@
 # Source: https://github.com/andersju/zzzfoo
 
 PATH_TO_STRIP="/home/foobar/"
-rofi_search=$(rofi -dmenu -p 'Search: ')
+rofi_search=$(rofi -dmenu -p 'Search: ' -timeout-delay 60 -theme-str 'listview {enabled: false;}')
 
 main() {
   if [ -n "${rofi_search}" ]; then
-    file_path=$(recoll -t -A -e -n 20 "${rofi_search}" \
+    file_path=$(recoll -t -a -A -e -n 20 "${rofi_search}" \
       | tail -n +3 \
       | sed 'N;N;N;s/\n/ /g' \
       | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g' \
@@ -24,7 +24,7 @@ main() {
       | xargs -0 printf "%b" \
       | sed -e ':a' -e 'N' -e '$!ba' -e 's/	\n/	/g' \
       | sed '$ s/.$//' \
-      | rofi -dmenu -eh 3 -sep '\t' -markup-rows -p "Filter results: " \
+      | rofi -dmenu -eh 3 -sep '\t' -timeout-delay 60 -markup-rows -p "Filter results: " \
       | tail -n 1 \
       | sed 's/&amp;/\&/g; s/&lt;/</g; s/&gt;/>/g; s/&quot;/"/g; s/&#39;/'"'"'/g' \
       | tr -d '\n')
