@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+# Update db by: sudo updatedb (edit /etc/updatedb.conf)
+
+main() {
+  term="$(rofi -dmenu -p 'Locate:' -timeout-delay 60 -theme-str 'listview {enabled : false;}')"
+  if [[ -z "${term// }" ]]; then
+    exit 0
+  fi
+  chosen="$(locate -i ${term} | rofi -i -dmenu -fuzzy)"
+  if [[ -z "${chosen// }" ]]; then
+    exit 0
+  fi
+  xdg-open "${chosen}"
+}
+
+main

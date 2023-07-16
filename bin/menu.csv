@@ -1,7 +1,6 @@
-Open Favourite Browser,$HOME/bin/rofi_edit
 Open Twitch Follows,$HOME/bin/rofi_twitch
-Gaki No Tsukai,mpv --no-resume-playback 'https://gaki-no-tsukai.eu/'
 JLPT N5,mpv --resume-playback '/mnt/Data/Documents/japanese/Videos/NNMori/part1/file.m3u'
-PiroPito Minecraft,mpv 'https://www.youtube.com/playlist?list=PLbqkLu2V1bJJUQ2aLZjFdz8decGs1kHg-' --glsl-shader="~/.config/mpv/hardsub.hook.glsl"
 Joshua Chen,mpv '/mnt/Data/Documents/JoshuaChen/list.m3u'
+Gaki No Tsukai,mpv --no-resume-playback 'https://gaki-no-tsukai.eu/'
+PiroPito Minecraft,mpv 'https://www.youtube.com/playlist?list=PLbqkLu2V1bJJUQ2aLZjFdz8decGs1kHg-' --glsl-shader="~/.config/mpv/hardsub.hook.glsl"
 MSYS2,cd /mnt/Data/MSYS2/opt/ || exit; echo "$(rg --files --color=never | rofi -no-disable-history -sort -i -p "File:" -dmenu -fuzzy -show-icons)" | xargs -I{} mpv {}

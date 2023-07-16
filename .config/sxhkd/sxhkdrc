@@ -24,7 +24,7 @@ super + d
 
 # everything
 super + s
-  ~/bin/roficoll
+  ~/bin/rofilocate
 
 # show open window
 super + ctrl + d

@@ -30,7 +30,13 @@ main() {
       | tr -d '\n')
 
     if [ -n "${file_path}" ]; then
-      xdg-open "${file_path}" & 
+      case "$(file --dereference --brief --mime-type -- "${file_path}")" in
+        inode/directory)
+          cd "${file_path}"
+          xdg-open "$(rg --files --color=never | rofi -no-disable-history -sort -i -dmenu -fuzzy -show-icons)"
+          ;;
+        *) xdg-open "${file_path}" & ;;
+      esac
       exit 0
     fi
   fi
