@@ -1,11 +1,13 @@
 #+TITLE: My Janky Dotfiles
 
-They're managed by a custom [[./bin/make_symlink][script]] that I wrote, which is very much prone to breakages, so use it at your own risk.
+They're managed by a custom [[./bin/make_symlink][script]] that I wrote, which is
+very much prone to breakages, so use it at your own risk.
 
-[[./showcase.png]]
+This is an experimental branch where I'm testing nix-darwin.
 
-+ *WM*: bspwm (with xfdesktop)
-+ *Bar*: Polybar
-+ *Editor*: emacs/nvim
-+ *Terminal*: kitty (with tmux)
-+ *Shell*: fish
+* Installation
+- Get the list of packages to replace using =brew leaves=.
+- Install nix: =curl -L https://nixos.org/nix/install | sh=.
+- Try running: =nix-shell -p nix-info --run "nix-info -m"=. What does this do?
+  Builds a temporary environment where it installs =nix-info= package and runs
+  =nix-info -m= in the temporary shell.
