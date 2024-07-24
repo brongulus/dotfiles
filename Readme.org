@@ -3,7 +3,12 @@
 They're managed by a custom [[./bin/make_symlink][script]] that I wrote, which is
 very much prone to breakages, so use it at your own risk.
 
-This is an experimental branch where I'm testing nix-darwin.
+This is an experimental branch where I'm testing nix.
+
+* References:
+- https://blog.kubukoz.com/flakes-first-steps/
+- [[https://www.bekk.christmas/post/2021/16/dotfiles-with-nix-and-home-manager][Declarative management of dotfiles with Nix and Home Manager]]
+- https://seroperson.me/2024/01/16/managing-dotfiles-with-nix/
 
 * Installation
 - Get the list of packages to replace using =brew leaves=.
@@ -11,3 +16,11 @@ This is an experimental branch where I'm testing nix-darwin.
 - Try running: =nix-shell -p nix-info --run "nix-info -m"=. What does this do?
   Builds a temporary environment where it installs =nix-info= package and runs
   =nix-info -m= in the temporary shell.
+
+* Set-up home-manager flake
+- Enable experimental nix command and flake support, look at [[./.config/nix/nix.conf]]
+- Create [[./flake.nix]]
+- Create [[./home.nix]]
+- Add the files to version control, then run =nix --extra-experimental-features "nix-command flakes" run home-manager/release-24.05 -- init --switch $HOME/dotfiles/= to install home-manager and set-up the dotfiles.
+- Run =home-manager switch= whenever you update =home.nix=.
+
