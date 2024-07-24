@@ -42,6 +42,18 @@
           delta
           tmuxPlugins.resurrect
 
+          # dev
+          tectonic
+          pandoc
+          janet
+          racket-minimal
+          gdb
+          go
+          gopls
+          rustup # rust and rust-analyzer
+          zig
+          zls
+
           # fonts
           victor-mono
         ];
