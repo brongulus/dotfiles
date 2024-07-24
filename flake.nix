@@ -28,30 +28,50 @@
           git
           fish
           lf
-          # mpv
+          kitty
+          # mpv # nix is building and not downloading binary
           stow
           tmux
+
+          # utilities
+          fzf
+          fishPlugins.fzf-fish
+          ripgrep
+          bat
+          fd
+          delta
+          tmuxPlugins.resurrect
+
+          # fonts
+          victor-mono
         ];
-        pathsToLink = [ "/share/man" "/share/doc" "/bin" "/lib" ];
-        extraOutputsToInstall = [ "man" "doc" ];
+
+        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/bin" "/lib" ];
+        extraOutputsToInstall = [ "man" "doc" "fonts" ];
       };
 
       # emacs-overlay
       services.emacs.package = pkgs.emacs-unstable;
 
-      nixpkgs.overlays = [
-        (import (builtins.fetchTarball {
-          url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-        }))
-      ];
+      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
 
       programs.emacs = {
+        install = true;
         enable = true;
-        package = pkgs.emacs-unstable;
+        package = with pkgs; (emacsWithPackagesFromUsePackage
+          pkgs.emacs-unstable
+        );
         # extraPackages = epkgs: [ epkgs.vterm ];
       };
-      
-      programs.fish.enable = true;
+
+      # fonts.fontconfig.enable = true;
+      programs.fish = {
+        enable = true;
+        plugins = with pkgs.fishPlugins; [
+          fzf-fish.src
+        ];
+      };
+      programs.fzf.enableFishIntegration = false;
       environment.shells = with pkgs; [ fish ];
       users.defaultUserShell = pkgs.fish;
     };

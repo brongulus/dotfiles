@@ -13,14 +13,13 @@ This is an experimental branch where I'm testing nix.
 * Installation
 - Get the list of packages to replace using =brew leaves=.
 - Install nix: =curl -L https://nixos.org/nix/install | sh=.
-- Try running: =nix-shell -p nix-info --run "nix-info -m"=. What does this do?
-  Builds a temporary environment where it installs =nix-info= package and runs
+- Try running: =nix-shell -p nix-info --run "nix-info -m"=
+  This builds a temporary environment where it installs =nix-info= package and runs
   =nix-info -m= in the temporary shell.
 
-* Set-up home-manager flake
-- Enable experimental nix command and flake support, look at [[./.config/nix/nix.conf]]
+* Set-up the packages
 - Create [[./flake.nix]]
-- Create [[./home.nix]]
-- Add the files to version control, then run =nix --extra-experimental-features "nix-command flakes" run home-manager/release-24.05 -- init --switch $HOME/dotfiles/= to install home-manager and set-up the dotfiles.
-- Run =home-manager switch= whenever you update =home.nix=.
-
+- Run =nix --extra-experimental-features "nix-command flakes" profile install .= in the dotfiles directory.
+- Run =stow <dir>= to symlink the dotfiles. e.g.: =stow nix=
+- To upgrade the packages, run =nix flake update= and then =nix profile upgrade dotfiles=
+- To install emacs from emacs-overlay, use =nix profile install emacs-overlay#emacs-unstable=

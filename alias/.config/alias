@@ -18,8 +18,8 @@ alias mplay="echo '{ \"command\": [\"set_property\", \"pause\", false] }' | soca
 alias precomp="sudo g++ -H -std=c++17 -Wall -Wextra -Wshadow -O2 /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/stdc++.h"
 alias dired="emacsclient -nw --eval '(dired default-directory)'"
 alias devmacs="emacs --profile dev"
-alias tmpv="mpv $1 -wid $(xwininfo | awk '{if(/Window id:/) print $4}' & xdotool click 1)"
-alias ls='ls --hyperlink=auto --color=auto'
+# alias tmpv="mpv $1 -wid $(xwininfo | awk '{if(/Window id:/) print $4}' & xdotool click 1)"
+# alias ls='ls --hyperlink=auto --color=auto'
 alias grep='grep --binary-files=text'
 alias yt-dlp='yt-dlp -R 5000 --cookies-from-browser chromium:~/.local/share/qutebrowser'
 alias gss='git status -s'

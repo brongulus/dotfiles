@@ -6,6 +6,8 @@ if status is-interactive
     if [ -f $HOME/.config/alias ]
     source $HOME/.config/alias
     end
+
+    source ~/.config/fish/eat
     
     set PATH ~/.emacs.d/bin $PATH
     set PATH ~/bin $PATH
@@ -13,7 +15,7 @@ if status is-interactive
     set PATH ~/.local/bin $PATH
     set PATH ~/.local/share/gem/ruby/3.0.0/bin $PATH
     set PATH ~/.spicetify $PATH
-    set PATH ~/.guix-profile/bin $PATH
+    set PATH ~/.nix-profile/bin $PATH
 
     set --export ALTERNATE_EDITOR ""
     set --export EDITOR "emacsclient -t"
@@ -58,15 +60,23 @@ if status is-interactive
         end
     end
 
+    function frg --description "rg tui built with fzf and bat"
+      rg --ignore-case --color=always --line-number --no-heading "$argv" |
+         fzf --ansi \
+              --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+              --delimiter ':' \
+              --preview "bat --color=always {1} --theme='Dracula' --highlight-line {2}" \
+              --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+              --bind "enter:become(vim +{2} {1})"
+    end
+
+
+
     # Source: hlissner/hey
     function eman -d "Open man page in emacs"
         command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
     end
 
-    fzf_configure_bindings --directory=\cf
-
     bind \eg magit
-
-    bind \cp 'xclip -o'
 
 end
