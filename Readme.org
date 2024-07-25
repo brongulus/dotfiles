@@ -13,9 +13,6 @@ This is an experimental branch where I'm testing nix.
 * Installation
 - Get the list of packages to replace using =brew leaves=.
 - Install nix: =curl -L https://nixos.org/nix/install | sh=.
-- Try running: =nix-shell -p nix-info --run "nix-info -m"=
-  This builds a temporary environment where it installs =nix-info= package and runs
-  =nix-info -m= in the temporary shell.
 
 * Set-up the packages
 - Create [[./flake.nix]]

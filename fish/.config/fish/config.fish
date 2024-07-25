@@ -8,6 +8,7 @@ if status is-interactive
     end
 
     source ~/.config/fish/eat
+    alias find-file="_eat_msg ff"
     
     set PATH ~/.emacs.d/bin $PATH
     set PATH ~/bin $PATH
@@ -79,4 +80,11 @@ if status is-interactive
 
     bind \eg magit
 
+    if type -q nix
+       set -gx LC_ALL "C" # nix
+    end
+
+    if type -q direnv
+       direnv hook fish | source
+    end
 end

@@ -26,12 +26,15 @@
         name = "packages-dev";
         paths = with pkgs; [
           git
+          # glibcLocales # not needed on darwin
           fish
           lf
           kitty
           # mpv # nix is building and not downloading binary
           stow
           tmux
+          direnv
+          nix-direnv
 
           # utilities
           fzf
@@ -50,7 +53,7 @@
           gdb
           go
           gopls
-          rustup # rust and rust-analyzer
+          rustup
           zig
           zls
 
@@ -58,8 +61,8 @@
           victor-mono
         ];
 
-        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/bin" "/lib" ];
-        extraOutputsToInstall = [ "man" "doc" "fonts" ];
+        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv" "/bin" "/lib" ];
+        extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" ];
       };
 
       # emacs-overlay
@@ -67,7 +70,7 @@
 
       nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
 
-      programs.emacs = {
+      programs.emacs = { # FIXME
         install = true;
         enable = true;
         package = with pkgs; (emacsWithPackagesFromUsePackage
@@ -76,6 +79,16 @@
         # extraPackages = epkgs: [ epkgs.vterm ];
       };
 
+      programs.direnv = {
+        package = pkgs.direnv;
+        silent = false;
+        loadInNixShell = true;
+        direnvrcExtra = "";
+        nix-direnv = {
+          enable = true;
+          package = pkgs.nix-direnv;
+        };
+      };
       # fonts.fontconfig.enable = true;
       programs.fish = {
         enable = true;
