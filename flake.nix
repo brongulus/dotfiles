@@ -9,6 +9,8 @@
   # Specify the sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixgl.url = "github:nix-community/nixGL";
+    # nixgl.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -16,7 +18,10 @@
   outputs = { self, nixpkgs, emacs-overlay, ... }@inputs:
     let
       system = "x86_64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ emacs-overlay.overlay ];
+      };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       username = if isDarwin then "admin" else "prashant";
       homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
@@ -26,15 +31,16 @@
         name = "packages-dev";
         paths = with pkgs; [
           git
-          # glibcLocales # not needed on darwin
           fish
           lf
           kitty
-          # mpv # nix is building and not downloading binary
           stow
           tmux
           direnv
           nix-direnv
+          # glibcLocales # not needed on darwin
+          # mpv # nix is building and not downloading binary
+          # emacs-unstable # Takes an hour to build
 
           # utilities
           fzf
@@ -59,24 +65,12 @@
 
           # fonts
           victor-mono
+          (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
         ];
 
         pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
                         "/share/fish" "/share/tmux-plugins" "/bin" "/lib" ];
         extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
-      };
-
-      # emacs-overlay
-      services.emacs.package = pkgs.emacs-unstable;
-
-      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
-
-      programs.emacs = { # FIXME
-        install = true;
-        enable = true;
-        package = with pkgs; (emacsWithPackagesFromUsePackage
-          pkgs.emacs-unstable
-        );
       };
 
       programs.direnv = {
@@ -89,7 +83,9 @@
           package = pkgs.nix-direnv;
         };
       };
-      # fonts.fontconfig.enable = true;
+      
+      fonts.fontconfig.enable = true;
+      
       programs.fish = {
         enable = true;
         plugins = with pkgs.fishPlugins; [

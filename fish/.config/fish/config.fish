@@ -104,6 +104,7 @@ if status is-interactive
 
     if type -q nix
        set -gx LC_ALL "C"
+       set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf
     end
 
     if type -q direnv

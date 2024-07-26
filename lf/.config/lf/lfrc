@@ -111,9 +111,9 @@ map ~ :cd ~ <enter>; set hidden false;
 map <f-1> :cd ~ <enter>; set hidden false; 
 map <f-2> :cd /mnt/Data/Downloads/Media <enter>
 map <f-3> :cd /mnt/manjaro/home/prashant/Downloads/Media <enter>
-map <f-4> :cd ~/Dotfiles/.config <enter>; set hidden true;
+map <f-4> :cd ~/dotfiles/ <enter>; set hidden true;
 map <f-5> :cd /mnt/Data/Documents <enter>
-map gd :cd ~/Dotfiles/.config <enter>; set hidden true;
+map gd :cd ~/dotfiles/ <enter>; set hidden true;
 map gt :cd /mnt/Data/Documents/Programming/Teach\ Yourself\ CS <enter>
 map gc :cd /mnt/Data/Documents/problems/Codeforces <enter>
 map sm !~/bin/make_symlink

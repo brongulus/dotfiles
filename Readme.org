@@ -1,12 +1,17 @@
-#+TITLE: My Flaky Dotfiles
+#+TITLE: Flake it till you make it!
 
-They used to be managed by a custom [[./bin/make_symlink][script]] that I wrote, which was
-very much prone to breakages, so I took a flaky approach.
+The dots used to be managed by a custom [[./bin/make_symlink][script]] that I wrote,
+which was very much prone to breakages, so I took a flaky approach.
 
 This is an experimental branch where I'm testing nix.
 
+I wish to work with a single file mindset and see how far I can
+take it, that's why I opted to not use home-manager and use
+GNU Stow instead for dotfiles symlink.
+
 * References:
 - [[https://blog.kubukoz.com/flakes-first-steps/][Flakes first steps]]
+- [[https://blog.mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html][Installing a specific version with nix]] (explains how to work with overlays)
 - [[https://www.bekk.christmas/post/2021/16/dotfiles-with-nix-and-home-manager][Declarative management of dotfiles with Nix and Home Manager]]
 - [[https://seroperson.me/2024/01/16/managing-dotfiles-with-nix/][Managing dotfiles with nix]]
 
@@ -19,5 +24,5 @@ This is an experimental branch where I'm testing nix.
 - Run =nix --extra-experimental-features "nix-command flakes" profile install .= in the dotfiles directory.
 - Run =stow <dir>= to symlink the dotfiles. e.g.: =stow nix=
 - To upgrade the packages, run =nix flake update= and then =nix profile upgrade dotfiles=
-- To install emacs from emacs-overlay, use =nix profile install emacs-overlay#emacs-unstable=
+- To upgrade specific flake inputs =nix flake update --update-input nixpkgs --update-input nix=
 - Remember to run =nix-collect-garbage -d= to clean up old generations and to save space.
