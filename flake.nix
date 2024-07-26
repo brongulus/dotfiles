@@ -4,6 +4,13 @@
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
     allowUnfree = true;
+    # requires updating trusted-users in /etc/nix/nix.conf
+    extra-substituters = [
+      "https://nix-community.cachix.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
   
   # Specify the sources
@@ -12,7 +19,7 @@
     # nixgl.url = "github:nix-community/nixGL";
     # nixgl.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs"; # To use cachix dont follow
   };
 
   outputs = { self, nixpkgs, emacs-overlay, ... }@inputs:
@@ -38,9 +45,9 @@
           tmux
           direnv
           nix-direnv
-          # glibcLocales # not needed on darwin
           # mpv # nix is building and not downloading binary
           # emacs-unstable # Takes an hour to build
+          # glibcLocales # not needed on darwin
 
           # utilities
           fzf
