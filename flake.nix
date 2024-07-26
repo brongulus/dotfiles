@@ -61,8 +61,9 @@
           victor-mono
         ];
 
-        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv" "/bin" "/lib" ];
-        extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" ];
+        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
+                        "/share/fish" "/share/tmux-plugins" "/bin" "/lib" ];
+        extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
       };
 
       # emacs-overlay
@@ -76,7 +77,6 @@
         package = with pkgs; (emacsWithPackagesFromUsePackage
           pkgs.emacs-unstable
         );
-        # extraPackages = epkgs: [ epkgs.vterm ];
       };
 
       programs.direnv = {

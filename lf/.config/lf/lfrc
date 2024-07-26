@@ -1,3 +1,4 @@
+# TODO: add Darwin support
 set previewer ~/.config/lf/lf_kitty_preview
 set cleaner ~/.config/lf/lf_kitty_clean
 set drawbox
@@ -12,17 +13,17 @@ set ifs
 # ---------
 ## Use nvim as EDITOR only in lf
 cmd open ${{
-	if [[ "$f" = *.m3u ]]; then
-		setsid -f mpv "$f" &>/dev/null;
-	elif [[ "$f" = *.org ]]; then
-		emacs -nw "$f";
-	else
-		case $(file --mime-type "$f" -bL) in
-			text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
-			text/*|application/json) $EDITOR "$fx";;
-			*) IFS="$(printf '\n\t')"; for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
-		esac
-	fi
+  if [[ "$f" = *.m3u ]]; then
+    setsid -f mpv "$f" &>/dev/null;
+  elif [[ "$f" = *.org ]]; then
+    emacs -nw "$f";
+  else
+    case $(file --mime-type "$f" -bL) in
+      text/html) elinks -dump-charset utf-8 -dump -no-numbering -dump-color-mode 1 "$f" | bat;;
+      text/*|application/json) $EDITOR "$fx";;
+      *) IFS="$(printf '\n\t')"; for f in "$fx"; do $OPENER "$f"> /dev/null 2> /dev/null & done;;
+    esac
+  fi
 }}
 
 cmd edit-config ${{
@@ -31,13 +32,13 @@ cmd edit-config ${{
 }}
 
 cmd fzf-open ${{
-	file="$(fzf --height 60% --border --reverse)" \
-	&& [ -f "$file" ] && setsid -f xdg-open "$file";
+  file="$(fzf --height 60% --border --reverse)" \
+  && [ -f "$file" ] && setsid -f xdg-open "$file";
 }}
 
 cmd fzf-cd ${{
-	dir=$(fd --type directory --hidden --exclude .git | fzf)
-	lf -remote "send $id cd \"$dir\""
+  dir=$(fd --type directory --hidden --exclude .git | fzf)
+  lf -remote "send $id cd \"$dir\""
 }}
 
 cmd fzf_search ${{
@@ -54,7 +55,7 @@ cmd fzf_search ${{
 ## Depends on dragon-drop package
 cmd dragon ${{
   IFS="$(printf '\n\t')"
-	dragon-drop -a -x $fx &>/dev/null 2>&1 & disown;
+  dragon-drop -a -x $fx &>/dev/null 2>&1 & disown;
 }}
 
 cmd conf_rel ${{
@@ -62,8 +63,8 @@ cmd conf_rel ${{
 }}
 
 cmd share ${{
-	$curl -F"file=@$fx" -Fexpires=24 https://0x0.st | xclip -sel clip # FIXME
-	lf -remote "send $id echomsg Uploaded $fx to 0x0 for 24hrs."
+  $curl -F"file=@$fx" -Fexpires=24 https://0x0.st | xclip -sel clip # FIXME
+  lf -remote "send $id echomsg Uploaded $fx to 0x0 for 24hrs."
 }}
 
 cmd mkdir %{{
@@ -73,20 +74,20 @@ cmd mkdir %{{
 }}
 
 cmd delete %{{
-	set -f
-	# lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
-	lf -remote "send $id echomsg Delete marked files? (y/N)\ "
-	read ans
+  set -f
+  # lf -remote "send $id echomsg Delete marked files $fx? (y/N)\ "
+  lf -remote "send $id echomsg Delete marked files? (y/N)\ "
+  read ans
   IFS="$(printf '\n\t')"
-	[ "$ans" = "y" ] && rm -rf -- $fx
-	lf -remote "send clear"
+  [ "$ans" = "y" ] && rm -rf -- $fx
+  lf -remote "send clear"
 }}
 
 cmd extract %{{
-	set -f
-	lf -remote "send $id echomsg Extracting files."
-	atool -x $f &>/dev/null 2>&1
-	lf -remote "send $id echomsg $fx extracted."
+  set -f
+  lf -remote "send $id echomsg Extracting files."
+  atool -x $f &>/dev/null 2>&1
+  lf -remote "send $id echomsg $fx extracted."
 }}
 
 # ---------

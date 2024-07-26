@@ -2,7 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
     set fish_greeting
 
-    # Aliases
+    ########################
+    ### Aliases and Vars ###
+    ########################
     if [ -f $HOME/.config/alias ]
     source $HOME/.config/alias
     end
@@ -19,19 +21,51 @@ if status is-interactive
     set PATH ~/.nix-profile/bin $PATH
 
     set --export ALTERNATE_EDITOR ""
-    set --export EDITOR "emacsclient -t"
+    set --export EDITOR "emacs -nw"
     set --export COLORTERM "truecolor"
+
+    ###########
+    ### FZF ###
+    ###########
     set --export FZF_COMPLETION_TRIGGER "``"
     set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
-    set fzf_fd_opts --hidden --exclude=.git
-    set fzf_directory_opts --bind "enter:execute(setsid xdg-open {} &> /dev/tty)"
+    set --export FZF_DEFAULT_OPTS "--tmux 80% --bind 'tab:down,shift-tab:up'
+                                   --reverse --cycle --border=sharp --color=dark
+                                   --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+                                   --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7
+                                   --color=marker:#ff87d7,spinner:#ff87d7"
+                                   
+    set fzf_fd_opts --hidden --color=never --exclude=.git
+    switch (uname)
+        case Darwin
+             set fzf_directory_opts --bind "enter:become(open {} &> /dev/tty)"
+        case '*'
+             set fzf_directory_opts --bind "enter:become(setsid xdg-open {} &> /dev/tty)"
+    end
+    set fzf_diff_highlighter delta --paging=never --width=80
 
     function fzf-open
        set -l file
-       set file (fzf --height 60% --border --reverse --preview 'bat --style changes --color=always {} | head -500') &&
+       set file (fzf --height 60% --border --reverse
+                     --preview 'bat --style changes --color=always {} | head -500') &&
        setsid xdg-open "$file"
     end
 
+    # fzf --preview 'fzf-preview.sh {}'
+
+    function frg --description "rg tui built with fzf and bat"
+      rg --ignore-case --color=always --line-number --no-heading "$argv" |
+         fzf --ansi \
+              --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+              --delimiter ':' \
+              --preview "bat --color=always {1} --theme='Dracula' --highlight-line {2}" \
+              --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+              --bind "enter:become(vim +{2} {1})"
+    end
+
+    ############
+    ### Misc ###
+    ############
     # Source: https://zenn.dev/takeokunn/articles/56010618502ccc
     function magit
         set -l git_root (git rev-parse --show-toplevel)
@@ -48,6 +82,8 @@ if status is-interactive
                 (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1) (magit-status \"$git_root\"))"
     end
 
+    bind \eg magit
+    
     function mkcd -d "Create a directory and set CWD"
       command mkdir $argv
         if test $status = 0
@@ -61,27 +97,13 @@ if status is-interactive
         end
     end
 
-    function frg --description "rg tui built with fzf and bat"
-      rg --ignore-case --color=always --line-number --no-heading "$argv" |
-         fzf --ansi \
-              --color 'hl:-1:underline,hl+:-1:underline:reverse' \
-              --delimiter ':' \
-              --preview "bat --color=always {1} --theme='Dracula' --highlight-line {2}" \
-              --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-              --bind "enter:become(vim +{2} {1})"
-    end
-
-
-
     # Source: hlissner/hey
     function eman -d "Open man page in emacs"
         command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
     end
 
-    bind \eg magit
-
     if type -q nix
-       set -gx LC_ALL "C" # nix
+       set -gx LC_ALL "C"
     end
 
     if type -q direnv
