@@ -53,6 +53,7 @@
           fzf
           fishPlugins.fzf-fish
           ripgrep
+          bat
           fd
           delta
           tmuxPlugins.resurrect

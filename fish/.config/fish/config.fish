@@ -31,9 +31,9 @@ if status is-interactive
     set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
     set --export FZF_DEFAULT_OPTS "--tmux 80% --bind 'tab:down,shift-tab:up'
                                    --reverse --cycle --border=sharp --color=dark
-                                   --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
-                                   --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7
-                                   --color=marker:#ff87d7,spinner:#ff87d7"
+                                   --color=fg:-1,bg:-1,hl:#a7bf87,fg+:-1,bg+:-1,hl+:#d9c18c
+                                   --color=info:#81a2be,prompt:#a7bf87,pointer:#b294bb
+                                   --color=marker:#d9c18c,spinner:#d9c18c"
                                    
     set fzf_fd_opts --hidden --color=never --exclude=.git
     switch (uname)
@@ -58,7 +58,7 @@ if status is-interactive
          fzf --ansi \
               --color 'hl:-1:underline,hl+:-1:underline:reverse' \
               --delimiter ':' \
-              --preview "bat --color=always {1} --theme='Dracula' --highlight-line {2}" \
+              --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
               --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
               --bind "enter:become(vim +{2} {1})"
     end
