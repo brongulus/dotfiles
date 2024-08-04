@@ -39,7 +39,7 @@
         paths = with pkgs; [
           git
           fish
-          lf
+          yazi
           kitty
           stow
           tmux
@@ -53,10 +53,11 @@
           fzf
           fishPlugins.fzf-fish
           ripgrep
-          bat
           fd
           delta
           tmuxPlugins.resurrect
+          tmuxPlugins.tmux-fzf
+          tmuxPlugins.tmux-thumbs
 
           # dev
           tectonic
@@ -73,10 +74,11 @@
           # fonts
           victor-mono
           (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+          merriweather
         ];
 
         pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
-                        "/share/fish" "/share/tmux-plugins" "/bin" "/lib" ];
+                        "/share/fish" "/share/tmux-plugins" "/bin" "/lib" "/Applications" ];
         extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
       };
 

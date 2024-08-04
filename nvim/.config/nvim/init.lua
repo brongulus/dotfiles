@@ -74,7 +74,7 @@ require("lazy").setup({
       local ft = require('guard.filetype')
       ft('c,h,cpp'):fmt({
         cmd = "clang-format",
-        args = { "--style={BasedOnStyle: Google, IndentWidth: 2, TabWidth: 2, SortIncludes: false, ColumnLimit: 500}" },
+        args = { "--style={BasedOnStyle: Google, AllowShortLoopsOnASingleLine: true, AllowShortBlocksOnASingleLine: true, AllowShortFunctionsOnASingleLine: All, IndentWidth: 2, TabWidth: 2, SortIncludes: false, ColumnLimit: 500}" },
         stdin = true,
         ignore_patterns = { "**/param.j2" },
       })

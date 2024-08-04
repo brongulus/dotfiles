@@ -1,0 +1,16 @@
+[manager]
+ratio        = [ 1, 2, 3 ]
+sort_by      = "natural"
+linemode     = "size"
+show_hidden  = true
+show_symlink = true
+
+[preview]
+tab_width    = 2
+max_width    = 1800
+max_height   = 2300
+
+[opener]
+edit = [
+  { run = 'emacs -nw "$@"', block = true },
+]

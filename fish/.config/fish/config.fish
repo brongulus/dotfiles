@@ -97,6 +97,15 @@ if status is-interactive
         end
     end
 
+    function yy
+      set tmp (mktemp -t "yazi-cwd.XXXXXX")
+      yazi $argv --cwd-file="$tmp"
+      if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+         cd -- "$cwd"
+      end
+      rm -f -- "$tmp"
+    end
+
     # Source: hlissner/hey
     function eman -d "Open man page in emacs"
         command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
