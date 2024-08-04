@@ -6,21 +6,22 @@ if [[ -d ~/.nix-profile/share/fonts ]]; then
     find -L ~/.nix-profile/share/fonts -type f -o -name "*.ttf" -o -name "*.otf" | while read -r font_file; do
         font_name=$(basename "$font_file")
         # cp "$font_file" "$HOME/.local/share/fonts/$font_name"
-	rm -f "$HOME/Library/Fonts/$font_name"
+        rm -f "$HOME/Library/Fonts/$font_name"
         cp "$font_file" "$HOME/Library/Fonts/$font_name"
     done
+    fc-cache -r
 fi
 
 # Install all nix top level graphical apps
 if [[ -d ~/.nix-profile/Applications ]]; then
-  (cd ~/.nix-profile/Applications;
-  for f in *.app ; do
-    mkdir -p ~/Applications/
-    rm -f "$HOME/Applications/$f"
-    # Mac aliases don’t work on symlinks
-    f="$(readlink -f "$f")"
-    # Use Mac aliases because Spotlight doesn’t like symlinks
-    osascript -e "tell app \"Finder\" to make alias file at POSIX file \"$HOME/Applications\" to POSIX file \"$f\"" ;# done
-  done
-  )
+    (cd ~/.nix-profile/Applications;
+     mkdir -p ~/Applications/
+     for f in *.app ; do
+         rm -f $HOME/Applications/${f%.*}*alias*
+         # Mac aliases don’t work on symlinks
+         f="$(readlink -f "$f")"
+         # Use Mac aliases because Spotlight doesn’t like symlinks
+         osascript -e "tell app \"Finder\" to make alias file at POSIX file \"$HOME/Applications\" to POSIX file \"$f\"" ;# done
+     done
+    )
 fi

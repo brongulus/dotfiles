@@ -57,7 +57,7 @@
 
           # fonts
           (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "VictorMono" ]; })
-          merriweather
+          merriweather iosevka-comfy.comfy
         ];
 
         pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
