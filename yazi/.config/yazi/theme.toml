@@ -7,3 +7,9 @@ separator_style = { fg = "red", bg = "black" }
 mode_normal = { fg = "black", bg = "lightblue",    bold = false }
 mode_select = { fg = "black", bg = "lightgreen",   bold = false }
 mode_unset  = { fg = "black", bg = "lightmagenta", bold = false }
+
+# [filetype]
+# rules = [
+#     # Fallback
+#     { name = "*", fg = "white" }
+# ]

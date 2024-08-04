@@ -11,6 +11,7 @@ GNU Stow instead for dotfiles symlink.
 
 * References:
 - [[https://blog.kubukoz.com/flakes-first-steps/][Flakes first steps]]
+- [[https://ertt.ca/nix/shell-scripts/][Shell scripts with nix]]
 - [[https://blog.mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html][Installing a specific version with nix]] (explains how to work with overlays)
 - [[https://www.bekk.christmas/post/2021/16/dotfiles-with-nix-and-home-manager][Declarative management of dotfiles with Nix and Home Manager]]
 - [[https://seroperson.me/2024/01/16/managing-dotfiles-with-nix/][Managing dotfiles with nix]]

@@ -27,6 +27,7 @@ if status is-interactive
     ###########
     ### FZF ###
     ###########
+    set --export BAT_THEME "OneHalfDark"
     set --export FZF_COMPLETION_TRIGGER "``"
     set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
     set --export FZF_DEFAULT_OPTS "--bind 'tab:down,shift-tab:up'
@@ -58,7 +59,7 @@ if status is-interactive
          fzf --ansi \
               --color 'hl:-1:underline,hl+:-1:underline:reverse' \
               --delimiter ':' \
-              --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
+              # --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
               --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
               --bind "enter:become(vim +{2} {1})"
     end
@@ -112,8 +113,8 @@ if status is-interactive
     end
 
     if type -q nix
-       set -gx LC_ALL "C"
-       set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf
+       # set -gx LC_ALL "C" # messes up emacs -nw icons
+       # set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf
     end
 
     if type -q direnv

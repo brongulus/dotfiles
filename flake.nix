@@ -16,8 +16,6 @@
   # Specify the sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixgl.url = "github:nix-community/nixGL";
-    # nixgl.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs"; # To use cachix dont follow
   };
@@ -37,44 +35,28 @@
       defaultPackage.${system} = pkgs.buildEnv {
         name = "packages-dev";
         paths = with pkgs; [
-          git
-          fish
-          yazi
-          kitty
-          stow
-          tmux
-          direnv
-          nix-direnv
+          # dev
+          tectonic pandoc
+          janet racket-minimal
+          gdb go gopls rustup
+          zig zls
+
+          # misc
+          git fish yazi kitty stow
+          tmux direnv nix-direnv cachix
+          emacs
           # mpv # nix is building and not downloading binary
-          # emacs-unstable # Takes an hour to build
           # glibcLocales # not needed on darwin
 
           # utilities
-          fzf
-          fishPlugins.fzf-fish
-          ripgrep
-          bat
-          fd
-          delta
+          fzf fishPlugins.fzf-fish
+          ripgrep bat fd delta
           tmuxPlugins.resurrect
           tmuxPlugins.tmux-fzf
           tmuxPlugins.tmux-thumbs
 
-          # dev
-          tectonic
-          pandoc
-          janet
-          racket-minimal
-          gdb
-          go
-          gopls
-          rustup
-          zig
-          zls
-
           # fonts
-          victor-mono
-          (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+          (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "VictorMono" ]; })
           merriweather
         ];
 
