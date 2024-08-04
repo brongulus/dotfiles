@@ -29,7 +29,7 @@ if status is-interactive
     ###########
     set --export FZF_COMPLETION_TRIGGER "``"
     set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
-    set --export FZF_DEFAULT_OPTS "--tmux 80% --bind 'tab:down,shift-tab:up'
+    set --export FZF_DEFAULT_OPTS "--bind 'tab:down,shift-tab:up'
                                    --reverse --cycle --border=sharp --color=dark
                                    --color=fg:-1,bg:-1,hl:#a7bf87,fg+:-1,bg+:-1,hl+:#d9c18c
                                    --color=info:#81a2be,prompt:#a7bf87,pointer:#b294bb
