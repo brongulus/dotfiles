@@ -1,3 +1,7 @@
+[[input.prepend_keymap]]
+on = [ "<Esc>" ]
+run = [ 'close' ]
+
 [[manager.prepend_keymap]]
 on  = [ "+" ]
 run = 'create'
@@ -9,3 +13,15 @@ run = [ 'select --state=true', 'arrow 1' ]
 [[manager.prepend_keymap]]
 on = [ "u" ]
 run = [ 'select --state=false', 'arrow 1' ]
+
+[[manager.prepend_keymap]]
+on = [ "U" ]
+run = [ 'select_all --state=false' ]
+
+[[manager.prepend_keymap]]
+on = [ "t" ]
+run = [ 'select_all --state=none' ]
+
+[[manager.prepend_keymap]]
+on = [ "<C-t>" ]
+run = [ 'tab_create --current' ]

@@ -57,11 +57,11 @@ if status is-interactive
     function frg --description "rg tui built with fzf and bat"
       rg --ignore-case --color=always --line-number --no-heading "$argv" |
          fzf --ansi \
-              --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+              # --color 'hl:-1:underline,hl+:-1:underline:reverse' \
               --delimiter ':' \
               # --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
               --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-              --bind "enter:become(vim +{2} {1})"
+              --bind 'enter:become(emacs -nw +{2} {1})'
     end
 
     ############
@@ -72,15 +72,11 @@ if status is-interactive
         set -l git_root (git rev-parse --show-toplevel)
         emacs -nw --eval "
             (progn
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/dash\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/compat\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/transient/lisp\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/ghub/lisp\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/magit-pop\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/with-editor/lisp\"))
-                (add-to-list 'load-path (locate-user-emacs-file \"el-get/magit/lisp\"))
                 (require 'magit)
-                (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1) (magit-status \"$git_root\"))"
+                (when (require 'popper nil t)
+                  (popper-mode -1))
+                (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+                (magit-status \"$git_root\"))"
     end
 
     bind \eg magit
@@ -109,7 +105,9 @@ if status is-interactive
 
     # Source: hlissner/hey
     function eman -d "Open man page in emacs"
-        command emacsclient -nw --eval "(switch-to-buffer (man \"$argv\"))"
+        command emacs -nw --eval "(progn
+                                    (switch-to-buffer (man \"$argv\"))
+                                    (delete-other-windows))"
     end
 
     if type -q nix

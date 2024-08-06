@@ -9,7 +9,7 @@ I wish to work with a single file mindset and see how far I can
 take it, that's why I opted to not use home-manager and use
 GNU Stow instead for dotfiles symlink.
 
-* References:
+* References
 - [[https://blog.kubukoz.com/flakes-first-steps/][Flakes first steps]]
 - [[https://ertt.ca/nix/shell-scripts/][Shell scripts with nix]]
 - [[https://blog.mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html][Installing a specific version with nix]] (explains how to work with overlays)
@@ -29,6 +29,6 @@ GNU Stow instead for dotfiles symlink.
 - Remember to run =nix-collect-garbage -d= to clean up old generations and to save space.
 
 * Miscellaneous Tips
-- If you're using macos, check [[./bin/nix-mac-app]] to add nix apps so that
-  they can be indexed by spotlight.
+- If you're using macos, check [[./bin/nix-mac-app]] to add nix apps so that they can
+  be indexed by spotlight and copy nix fonts to a location where they're discoverable.
 

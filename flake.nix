@@ -37,9 +37,10 @@
         paths = with pkgs; [
           # dev
           tectonic pandoc
+          imagemagick ffmpeg
           janet racket-minimal
           gdb go gopls rustup
-          zig zls
+          tree-sitter zig zls
 
           # misc
           git fish yazi kitty stow
