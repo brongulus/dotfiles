@@ -1,27 +1,44 @@
 [[input.prepend_keymap]]
-on = [ "<Esc>" ]
-run = [ 'close' ]
+on   = [ "<Esc>" ]
+run  = [ 'close' ]
 
 [[manager.prepend_keymap]]
-on  = [ "+" ]
-run = 'create'
+on   = [ "+" ]
+run  = [ 'create' ]
 
 [[manager.prepend_keymap]]
-on  = [ "m" ]
-run = [ 'select --state=true', 'arrow 1' ]
+on   = [ "R" ]
+run  = [ 'yank --cut' ]
 
 [[manager.prepend_keymap]]
-on = [ "u" ]
-run = [ 'select --state=false', 'arrow 1' ]
+on   = [ "m" ]
+run  = [ 'select --state=true', 'arrow 1' ]
 
 [[manager.prepend_keymap]]
-on = [ "U" ]
-run = [ 'select_all --state=false' ]
+on   = [ "u" ]
+run  = [ 'select --state=false', 'arrow 1' ]
 
 [[manager.prepend_keymap]]
-on = [ "t" ]
-run = [ 'select_all --state=none' ]
+on   = [ "U" ]
+run  = [ 'select_all --state=false' ]
 
 [[manager.prepend_keymap]]
-on = [ "<C-t>" ]
-run = [ 'tab_create --current' ]
+on   = [ "t" ]
+run  = [ 'select_all --state=none' ]
+
+[[manager.prepend_keymap]]
+on   = [ "<C-t>" ]
+run  = [ 'tab_create --current' ]
+
+[[manager.prepend_keymap]]
+on   = [ "!" ]
+run  = [ 'shell --interactive --block' ]
+
+[[manager.prepend_keymap]]
+on   = [ "&" ]
+run  = [ 'shell --interactive' ]
+
+[[manager.prepend_keymap]]
+on   = [ "g", "f" ]
+run  = 'search_do --via=fd --args="-d 3"'
+desc = "Switch to the flat view with a max depth of 3"

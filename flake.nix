@@ -28,6 +28,7 @@
         overlays = [ emacs-overlay.overlay ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+      isLinux = pkgs.stdenv.hostPlatform.isLinux;
       username = if isDarwin then "admin" else "prashant";
       homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
       dotfilesPath = "${homeDirectory}/dotfiles";
@@ -45,9 +46,9 @@
           # misc
           git fish yazi kitty stow
           tmux direnv nix-direnv cachix
-          emacs
+          emacs-git
           # mpv # nix is building and not downloading binary
-          # glibcLocales # not needed on darwin
+          (if isLinux then glibcLocales else rectangle)
 
           # utilities
           fzf fishPlugins.fzf-fish
