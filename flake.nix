@@ -3,7 +3,6 @@
 
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
-    allowUnfree = true;
     # requires updating trusted-users in /etc/nix/nix.conf
     extra-substituters = [
       "https://nix-community.cachix.org/"
@@ -25,6 +24,7 @@
       system = "x86_64-darwin";
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
         overlays = [ emacs-overlay.overlay ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
@@ -37,7 +37,7 @@
         name = "packages-dev";
         paths = with pkgs; [
           # dev
-          tectonic pandoc
+          tectonic pandoc ghostscript
           imagemagick ffmpeg
           janet racket-minimal
           gdb go gopls rustup
@@ -59,7 +59,7 @@
 
           # fonts
           (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "VictorMono" ]; })
-          merriweather iosevka-comfy.comfy
+          merriweather iosevka-comfy.comfy ia-writer-duospace ia-writer-quattro
         ];
 
         pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
