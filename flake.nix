@@ -38,7 +38,7 @@
         paths = with pkgs; [
           # dev
           tectonic pandoc ghostscript
-          imagemagick ffmpeg
+          imagemagick ffmpeg yt-dlp
           janet racket-minimal
           gdb go gopls rustup
           tree-sitter zig zls
