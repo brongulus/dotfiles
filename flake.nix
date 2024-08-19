@@ -46,12 +46,12 @@
           # misc
           git fish yazi kitty stow
           tmux direnv nix-direnv cachix
-          emacs-git
+          syncthing emacs-git
           # mpv # nix is building and not downloading binary
           (if isLinux then glibcLocales else rectangle)
 
           # utilities
-          fzf fishPlugins.fzf-fish
+          fzf fishPlugins.fzf-fish fishPlugins.z
           ripgrep bat fd delta
           tmuxPlugins.resurrect
           tmuxPlugins.tmux-fzf
@@ -84,6 +84,7 @@
         enable = true;
         plugins = with pkgs.fishPlugins; [
           fzf-fish.src
+          z.src
         ];
       };
       programs.fzf.enableFishIntegration = false;
