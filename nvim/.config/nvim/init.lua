@@ -11,8 +11,9 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 vim.opt.termguicolors = true
 
 require("lazy").setup({
-  { "folke/tokyonight.nvim", opts = { transparent = true, } },
+  -- { "folke/tokyonight.nvim", opts = { transparent = true, } },
    -- "JoosepAlviste/palenightfall.nvim",
+  { "navarasu/onedark.nvim", opts = {transparent = true, style = 'cool'} },
   "nvim-tree/nvim-web-devicons",
   { "prichrd/netrw.nvim", config = true },
   { "tpope/vim-fugitive", cmd = {'Gclog', 'G'}},
@@ -78,7 +79,7 @@ require("lazy").setup({
         stdin = true,
         ignore_patterns = { "**/param.j2" },
       })
-      require("guard").setup({ fmt_on_save = true, lsp_as_default_formatter = false })
+      require('guard').setup({ fmt_on_save = true, lsp_as_default_formatter = false, })
     end
   },
   { "nvim-treesitter/nvim-treesitter", event = "VeryLazy", build = ":TSUpdate",
@@ -100,7 +101,7 @@ require("lazy").setup({
   { "williamboman/mason-lspconfig.nvim",
     config = function ()
       require('mason-lspconfig').setup({
-        ensure_installed = { "clangd", "pyright", "cmake" },
+        ensure_installed = { "clangd", "basedpyright", "cmake" },
         automatic_installation = true,
       })
     end
@@ -182,7 +183,8 @@ require("lazy").setup({
       end
     end,
     opts = {
-      options = { theme = 'tokyonight', }, -- palenight 
+      options = { theme = 'onedark' }, -- palenight 
+      section_separators = '', component_separators = '',
       sections = { 
         lualine_c = { { 'filename', path = 1, } },
         lualine_x = { 'searchcount', 'filetype' }, lualine_b = { { 'branch', icon = '' }, 'diff', 'diagnostics' } },
@@ -243,7 +245,7 @@ set nofixendofline
 set shortmess-=S
 set nowrap
 
-colorscheme tokyonight-moon "palenightfall
+colorscheme onedark "palenightfall
 set fillchars+=diff:\  "diffview
 set diffopt+=iwhiteall,iblank
 set diffexpr=""
@@ -296,6 +298,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
   pattern = { "*" },
 })
 
-command("DiffviewCommit", function (args)
+-- Auto CD
+vim.api.nvim_create_augroup("WorkingDirectory", { clear = true })
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  pattern = {"*.*"}, 
+  callback = function()
+    local path = vim.fn.expand('%:h')..'/'
+    path = "cd "..path
+    vim.api.nvim_command(path)
+  end,
+  group = "WorkingDirectory",
+})
+
+vim.api.nvim_create_user_command("DiffviewCommit", function (args)
   vim.cmd("DiffviewOpen " .. args['args'] .. "~1..." .. args['args'] .. " --imply-local")
 end, { nargs = 1 })
