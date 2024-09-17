@@ -5,16 +5,18 @@
   user = brongulus
 [FORGE "HOST"]
   user = brongulus
+# https://jvns.ca/blog/2024/02/16/popular-git-config-options/
 [push]
-    # Automatically set origin as the remote for current branch
-    autoSetupRemote = true
+  # Automatically set origin as the remote for current branch
+  autoSetupRemote = true
+[merge]
+  conflictstyle = zdiff3
+# Delta
 [core]
-    pager = delta
+  pager = delta
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-    side-by-side = true
-    navigate = true    # use n and N to move between diff sections
-    light = false      # set to true if you're in a terminal w/ a light background color
-
-
+  side-by-side = true
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color
