@@ -2,9 +2,9 @@
 # VERSION: 3.0
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/admin/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/admin/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/Users/admin\x24
+SETUVAR Z_DATA:/home/prashant/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/home/prashant/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e\x24HOME\x24
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:4D5566
 SETUVAR fish_color_cancel:\x2d\x2dreverse

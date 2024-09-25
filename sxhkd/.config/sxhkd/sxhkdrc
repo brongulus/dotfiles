@@ -225,8 +225,7 @@ super+ F1
   emacsclient -c -a ""
 
 super + F2
-	qutebrowser
-  # microsoft-edge-stable
+	firefox # qutebrowser
 
 super + F3
   thunar

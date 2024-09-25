@@ -119,6 +119,11 @@ if status is-interactive
                                     (delete-other-windows))"
     end
 
+    # z.fish
+    mkdir -p $HOME/.local/share/z
+    set -U Z_DATA_DIR "$HOME/.local/share/z"
+    set -U Z_DATA "$HOME/.local/share/z/data"
+   
     if type -q nix
        # set -gx LC_ALL "C" # messes up emacs -nw icons
        # set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf

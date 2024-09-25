@@ -17,15 +17,17 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs"; # To use cachix dont follow
+    nixgl.url = "github:nix-community/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, emacs-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, emacs-overlay, nixgl, ... }@inputs:
     let
-      system = "x86_64-darwin";
+      system = builtins.currentSystem; # --impure
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ emacs-overlay.overlay ];
+        overlays = [ emacs-overlay.overlay nixgl.overlay ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
@@ -48,7 +50,9 @@
           tmux direnv nix-direnv cachix
           syncthing emacs-git
           # mpv # nix is building and not downloading binary
-          (if isLinux then glibcLocales else rectangle)
+          (if isLinux
+           then (import nixgl {inherit pkgs; }).auto.nixGLDefault # --impure
+           else rectangle)
 
           # utilities
           fzf fishPlugins.fzf-fish fishPlugins.z
