@@ -34,11 +34,20 @@
       username = if isDarwin then "admin" else "prashant";
       homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
       dotfilesPath = "${homeDirectory}/dotfiles";
+      # Claude kitty nixgl wrapper
+      wrappedKitty = if isLinux then
+        pkgs.writeShellScriptBin "kitty" ''
+          ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
+        ''
+      else
+        pkgs.kitty;
     in {
       defaultPackage.${system} = pkgs.buildEnv {
         name = "packages-dev";
         paths = with pkgs; [
           # dev
+          nixVersions.latest
+          
           tectonic pandoc ghostscript
           imagemagick ffmpeg yt-dlp
           janet racket-minimal
@@ -46,7 +55,7 @@
           tree-sitter zig zls
 
           # misc
-          git fish yazi kitty stow
+          git fish yazi wrappedKitty stow
           tmux direnv nix-direnv cachix
           syncthing emacs-git
           # mpv # nix is building and not downloading binary
@@ -63,16 +72,16 @@
 
           # fonts
           (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "VictorMono" ]; })
-          merriweather iosevka-comfy.comfy ia-writer-duospace ia-writer-quattro
+          merriweather ia-writer-duospace ia-writer-quattro # iosevka-comfy.comfy
         ];
 
-        pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
-                        "/share/fish" "/share/tmux-plugins" "/share/applications"
-                        "/bin" "/lib" "/Applications" ];
-        extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
+        # pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
+        #                 "/share/fish" "/share/tmux-plugins" "/share/applications"
+        #                 "/bin" "/lib" "/Applications" ];
+        # extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
 
         postBuild =  ''
-          if [ "$(uname)" == "Darwin"]; then
+          if [ "$(uname)" == "Darwin" ]; then
             ~/dotfiles/bin/bin/nix-mac-app
           fi 
         '';
@@ -89,7 +98,7 @@
         };
       };
       
-      fonts.fontconfig.enable = true;
+      fonts.fontconfig.enable = true; # export FONTCONFIG in bash on linux
 
       programs.bash.enable = true;
       

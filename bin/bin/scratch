@@ -21,11 +21,11 @@ elif command -v xst >/dev/null; then
         -f "$(xrdb -query | grep 'scratch\.font' | cut -f2)" \
         -e $SHELL -c "$CMD"
 elif command -v kitty >/dev/null; then
-    nixGL kitty --name $SCRID \
-        -e bash -c "$CMD"
+    kitty --name $SCRID \
+          -e bash -c "$CMD"
 elif command -v alacritty >/dev/null; then
     alacritty --class $SCRID \
-        -e elvish -c "$CMD"
+              -e bash -c "$CMD"
 else
     >&2 echo "No shell to launch the scratch terminal with"
     exit 1

@@ -4,10 +4,10 @@
 
 # terminal emulator
 super + Return
-	nixGL kitty -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
+  kitty -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
 super + alt + Return
-	nixGL kitty
+  kitty
 
 super + alt + t
 	kitty
@@ -18,9 +18,7 @@ super + x
 
 # program launcher
 super + d
-	rofi  -matching fuzzy -show combi -combi-modi 'drun,run' -modi combi -line-padding 4 \
-                -columns 2 -padding 50 -hide-scrollbar -terminal kitty \
-                -show-icons -font "Droid Sans Regular 14"
+	rofi -matching fuzzy -show combi -combi-modi 'drun,run' -modi combi -line-padding 4 -columns 2 -padding 50 -hide-scrollbar -terminal kitty -show-icons -font 'VictorMono NFM SemiBold 12'
 
 # everything
 super + s
@@ -30,13 +28,13 @@ super + s
 super + ctrl + d
 	rofi -modi drun -show window -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar -terminal kitty \
-                -show-icons -font "Droid Sans Regular 10"
+                -show-icons -font "VictorMono NFM SemiBold 12"
 
 # show ssh sesssions
 super + shift + d
 	rofi -modi drun -show ssh -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar -terminal kitty \
-                -show-icons  -font "Droid Sans Regular 10"
+                -show-icons  -font "VictorMono NFM SemiBold 12"
 
 # open rofi-edit
 super + e
@@ -222,7 +220,7 @@ Print
 
 # Shortcuts
 super+ F1
-  emacsclient -c -a ""
+  emacs # emacsclient -c -a ""
 
 super + F2
 	firefox # qutebrowser

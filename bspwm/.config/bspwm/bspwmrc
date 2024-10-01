@@ -63,7 +63,7 @@ pkill mpd; mpd &
 /usr/bin/dunst &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dex -a -s /etc/xdg/autostart/:~/.config/autostart/
-picom -CGb --config ~/picom.conf #--window-shader-fg=/home/prashant/config/bw_picom.glsl &
+picom -b --config ~/picom.conf #--window-shader-fg=/home/prashant/config/bw_picom.glsl &
 nm-applet --indicator &
 xsetroot -cursor_name left_ptr &
 xset b off &
@@ -75,9 +75,9 @@ setxkbmap -option caps:ctrl_modifier,shift:both_capslock &
 xcape -e 'Caps_Lock=Escape' &
 fcitx5 --replace -d &
 killall -q polybar; polybar -r top &
+pkill syncthing; syncthing --no-browser &
 nitrogen --set-zoom-fill ~/Pictures/rocks.png
 
-pgrep -x syncthing > /dev/null || syncthing &
 # ~/bin/wall.sh &
 # xterm -e "~/bin/startup" & # why does this need a terminal? ;-;
 

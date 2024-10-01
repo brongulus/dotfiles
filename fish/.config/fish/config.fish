@@ -125,8 +125,11 @@ if status is-interactive
     set -U Z_DATA "$HOME/.local/share/z/data"
    
     if type -q nix
+       set XDG_DATA_DIRS ~/.nix-profile/share/applications $XDG_DATA_DIRS
        # set -gx LC_ALL "C" # messes up emacs -nw icons
-       # set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf
+       if test $(uname) = Linux
+          set --global --export FONTCONFIG_FILE ~/.config/fontconfig/.conf.d/10-nix-fonts.conf
+       end
     end
 
     if type -q direnv
