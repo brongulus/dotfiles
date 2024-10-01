@@ -23,7 +23,7 @@ GNU Stow instead for dotfiles symlink.
 * Set-up the packages
 - Create [[./flake.nix]]
 - Run =nix --extra-experimental-features "nix-command flakes" profile install . --impure= in the dotfiles directory.
-- Run =stow <dir>= to symlink the dotfiles. e.g.: =stow nix=
+- Run =stow <dir>= to symlink the dotfiles. e.g.: =stow nix= (To not link and see what the stow command will do, run =stow -nv linux=)
 - To upgrade the packages, run =nix flake update= and then =nix profile upgrade dotfiles --impure=
 - To upgrade specific flake inputs =nix flake update --update-input nixpkgs --update-input nix=
 - Remember to run =nix-collect-garbage -d= to clean up old generations and to save space.
