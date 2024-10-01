@@ -67,8 +67,15 @@
         ];
 
         pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
-                        "/share/fish" "/share/tmux-plugins" "/bin" "/lib" "/Applications" ];
+                        "/share/fish" "/share/tmux-plugins" "/share/applications"
+                        "/bin" "/lib" "/Applications" ];
         extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
+
+        postBuild =  ''
+          if [ "$(uname)" == "Darwin"]; then
+            ~/dotfiles/bin/bin/nix-mac-app
+          fi 
+        '';
       };
 
       programs.direnv = {
@@ -83,6 +90,8 @@
       };
       
       fonts.fontconfig.enable = true;
+
+      programs.bash.enable = true;
       
       programs.fish = {
         enable = true;
