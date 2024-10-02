@@ -31,7 +31,7 @@ super + ctrl + d
                 -show-icons -font "VictorMono NFM SemiBold 12"
 
 # show ssh sesssions
-super + shift + d
+super + shift + s
 	rofi -modi drun -show ssh -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar -terminal kitty \
                 -show-icons  -font "VictorMono NFM SemiBold 12"
@@ -161,6 +161,10 @@ super + ctrl + shift + space
 # move/resize
 #
 
+# Rotate tree
+super + shift + {d,a}
+  bspc node @/ -C {forward,backward}
+
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -232,7 +236,7 @@ super + F4
 	anki -b /mnt/Data/AnkiData
 
 super + F5
-  emacsclient -c -a "" /mnt/Data/Documents/problems/Codeforces/
+  emacs  /mnt/Data/Documents/problems/Codeforces/
 	# kitty -e bash -c 'nvim /mnt/Data/Documents/problems/Codeforces/'
 
 super + w

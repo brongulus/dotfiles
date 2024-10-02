@@ -30,15 +30,15 @@ user_interface = "alternative"
 # alternative_ui_separator_color = "magenta" # it's some bar on top separating the songs from status data
 colors_enabled = "yes"
 # from the docs: One of the colors used in Song info, Tiny tag editor and Search engine
-color1 = "magenta"
+color1 = "yellow"
 # from the docs: One of the colors used in Song info, Tiny tag editor and Search engine
-color2 = "green"
+color2 = "cyan"
 # Columns color #
 # this is basically the color that they use to color columns and some of the text
 main_window_color = "cyan"
 # main_window_highlight_color = "green" # deprecated, use the two below
-current_item_prefix = "$(green)$r"
-current_item_suffix = "$/r$(green)"
+current_item_prefix = "$(blue)$r"
+current_item_suffix = "$/r$(white)"
 # state_line_color = "blue"
 # state_flags_color = "green" #this seems to change color of volume displayer
 
@@ -59,7 +59,7 @@ progressbar_look = "━━─"
 #progressbar_look = "◾◾◽"
 # progressbar_look = "─╼─"
 progressbar_color = "black"
-progressbar_elapsed_color = "green" #this basically sets it to the foreground color
+progressbar_elapsed_color = "cyan" #this basically sets it to the foreground color
 
 ### Song status ###
 # this is the info you're shown as whether the song is playing,
@@ -89,7 +89,7 @@ alternative_header_first_line_format = "$b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
 # song_columns_list_format = "(25)[white]{a} (25)[blue]{brE} (47)[white]{t|f} (6f)[blue]{l}"
 # song_columns_list_format = "(15)[yellow]{lr} (1)[black]{} (40)[red]{a} (40)[green]{t}"
 # song_columns_list_format = "(40)[magenta]{ar} (40)[green]{t}" # this one is like the one below, but not quite centered
-song_columns_list_format = "(50)[magenta]{ar} (50)[green]{t}"
+song_columns_list_format = "(50)[yellow]{ar} (50)[blue]{t}"
 playlist_display_mode = "columns" #possible values: columns/classic
 
 ###################
