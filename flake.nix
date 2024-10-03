@@ -60,7 +60,7 @@
           syncthing emacs-git
           # mpv # nix is building and not downloading binary
           (if isLinux
-           then (import nixgl {inherit pkgs; }).auto.nixGLDefault # --impure
+           then pkgs.nixgl.auto.nixGLDefault # --impure
            else rectangle)
 
           # utilities
