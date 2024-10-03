@@ -81,7 +81,7 @@ servers = (
     port = "6667";
     use_tls = "no";
     tls_verify = "yes";
-    autoconnect = "yes";
+    autoconnect = "no";
   },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
   { 
