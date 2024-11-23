@@ -11,7 +11,8 @@ function fish_right_prompt
 
     # The git prompt's default format is ' (%s)'.
     # We don't want the leading space.
-    set -l vcs (fish_vcs_prompt '(%s)' 2>/dev/null)
+    set -l kube (kubectl_status)(set_color normal)
+    set -l git_vc (fish_vcs_prompt '(%s)' 2>/dev/null)
 
     set -l d (set_color brblue)(date "+%R")(set_color normal)
 
@@ -28,5 +29,5 @@ function fish_right_prompt
     and set -l venv (string replace -r '.*/' '' -- "$VIRTUAL_ENV")
 
     set_color normal
-    string join " " -- $venv $duration $vcs $d
+    string join " " -- $venv $duration $kube $git_vc $d
 end

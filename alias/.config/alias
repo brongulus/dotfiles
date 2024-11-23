@@ -5,7 +5,7 @@
 alias ytm="yt-dlp -f 'ba' -x --audio-format mp3 --add-metadata --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
 alias ytsub="yt-dlp --write-auto-sub --embed-subs --merge-output-format mp4 --embed-thumbnail --metadata-from-title \"%(artist)s - %(title)s\""
 alias dlp='yt-dlp -o "%(playlist_title)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s" --download-archive archive.txt'
-alias yt-dlp='yt-dlp -R 5000'
+alias yt-dlp='yt-dlp -R 5000 --embed-chapters'
 alias tmux="tmux -u"
 alias mp="ncmpcpp"
 alias nightmode="redshift -O 4500 -m randr -v"
@@ -22,9 +22,12 @@ alias precomp="sudo g++ -H -std=c++17 -Wall -Wextra -Wshadow -O2 /usr/include/c+
 alias dired="emacs -nw --eval '(dired default-directory)'"
 alias grep='grep --binary-files=text'
 alias gss='git status -s'
+alias gd='git diff'
 alias glog='git log --oneline --graph'
 alias ghist='git log --follow -p --'
 alias glist='git show --pretty="" --name-only'
+alias groot='cd $(git rev-parse --show-toplevel)'
+alias gg='git graph --style round --color always'
 alias mwps='push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds'
 alias r='radian'
 alias irb='irb --simple-prompt'
@@ -41,3 +44,7 @@ alias mclf='tmux split -h lf; lf'
 alias vmacs='emacs -nw'
 alias nb='newsboat'
 alias spotdl='spotdl --m3u'
+alias k=kubectl
+alias kb=kubebuilder
+alias kctx=kubectx
+alias kns=kubens

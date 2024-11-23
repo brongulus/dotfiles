@@ -11,7 +11,7 @@ if status is-interactive
 
     source ~/.config/fish/eat
     alias find-file="_eat_msg ff"
-    
+
     set PATH ~/.emacs.d/bin $PATH
     set PATH ~/bin $PATH
     set PATH ~/.cargo/bin $PATH
@@ -23,6 +23,8 @@ if status is-interactive
     set --export ALTERNATE_EDITOR ""
     set --export EDITOR "emacs -nw"
     set --export COLORTERM "truecolor"
+
+    set --export K9S_CONFIG_DIR "/Users/I752152/.config/k9s/"
 
     ###########
     ### FZF ###
@@ -123,7 +125,12 @@ if status is-interactive
     mkdir -p $HOME/.local/share/z
     set -U Z_DATA_DIR "$HOME/.local/share/z"
     set -U Z_DATA "$HOME/.local/share/z/data"
-   
+
+    # toggle kube-ps
+    function kps
+      set -U __kube_ps_enabled (math abs\((math $__kube_ps_enabled - 1)\))
+    end
+
     if type -q nix
        set XDG_DATA_DIRS ~/.nix-profile/share/applications $XDG_DATA_DIRS
        # set -gx LC_ALL "C" # messes up emacs -nw icons
