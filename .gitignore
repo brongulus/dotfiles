@@ -1,4 +1,5 @@
 */.log/*
+clusters/
 cache
 currentTrack.plist
 .DS_Store

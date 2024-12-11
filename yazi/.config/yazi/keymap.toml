@@ -12,19 +12,19 @@ run  = [ 'yank --cut' ]
 
 [[manager.prepend_keymap]]
 on   = [ "m" ]
-run  = [ 'select --state=true', 'arrow 1' ]
+run  = [ 'toggle --state=true', 'arrow 1' ]
 
 [[manager.prepend_keymap]]
 on   = [ "u" ]
-run  = [ 'select --state=false', 'arrow 1' ]
+run  = [ 'toggle --state=false', 'arrow 1' ]
 
 [[manager.prepend_keymap]]
 on   = [ "U" ]
-run  = [ 'select_all --state=false' ]
+run  = [ 'toggle_all --state=off' ]
 
 [[manager.prepend_keymap]]
 on   = [ "t" ]
-run  = [ 'select_all --state=none' ]
+run  = [ 'toggle_all' ]
 
 [[manager.prepend_keymap]]
 on   = [ "<C-t>" ]

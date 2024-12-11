@@ -20,6 +20,13 @@ if status is-interactive
     set PATH ~/.spicetify $PATH
     set PATH ~/.nix-profile/bin $PATH
 
+    # gardener kind setup
+    set PATH $(brew --prefix)/opt/coreutils/libexec/gnubin $PATH
+    set PATH $(brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
+    set PATH $(brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
+    set PATH $(brew --prefix)/opt/grep/libexec/gnubin $PATH
+    set PATH $(brew --prefix)/opt/gzip/bin $PATH
+
     set --export ALTERNATE_EDITOR ""
     set --export EDITOR "emacs -nw"
     set --export COLORTERM "truecolor"
@@ -125,6 +132,15 @@ if status is-interactive
     mkdir -p $HOME/.local/share/z
     set -U Z_DATA_DIR "$HOME/.local/share/z"
     set -U Z_DATA "$HOME/.local/share/z/data"
+
+    function k --wraps kubectl
+      command kubecolor $argv
+    end
+
+    # reuse "kubectl" completions on "kubecolor"
+    function kubecolor --wraps kubectl
+      command kubecolor $argv
+    end
 
     # toggle kube-ps
     function kps
