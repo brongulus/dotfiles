@@ -12,26 +12,30 @@ if status is-interactive
     source ~/.config/fish/eat
     alias find-file="_eat_msg ff"
 
-    set PATH ~/.emacs.d/bin $PATH
-    set PATH ~/bin $PATH
-    set PATH ~/.cargo/bin $PATH
-    set PATH ~/.local/bin $PATH
-    set PATH ~/.local/share/gem/ruby/3.0.0/bin $PATH
-    set PATH ~/.spicetify $PATH
-    set PATH ~/.nix-profile/bin $PATH
+    fish_add_path ~/.emacs.d/bin
+    fish_add_path ~/bin
+    fish_add_path ~/.cargo/bin
+    fish_add_path ~/go/bin
+    fish_add_path ~/.local/bin
+    fish_add_path ~/.local/share/gem/ruby/3.0.0/bin
+    fish_add_path ~/.spicetify
+    fish_add_path ~/.nix-profile/bin
+    fish_add_path ~/dotfiles/bin/bin
 
     # gardener kind setup
+    set --export GOPATH "$HOME/go"
     set PATH $(brew --prefix)/opt/coreutils/libexec/gnubin $PATH
     set PATH $(brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
     set PATH $(brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
     set PATH $(brew --prefix)/opt/grep/libexec/gnubin $PATH
     set PATH $(brew --prefix)/opt/gzip/bin $PATH
+    [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
     set --export ALTERNATE_EDITOR ""
     set --export EDITOR "emacs -nw"
     set --export COLORTERM "truecolor"
 
-    set --export K9S_CONFIG_DIR "/Users/I752152/.config/k9s/"
+    set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"
 
     ###########
     ### FZF ###

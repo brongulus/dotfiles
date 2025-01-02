@@ -20,3 +20,6 @@
   side-by-side = true
   navigate = true    # use n and N to move between diff sections
   light = false      # set to true if you're in a terminal w/ a light background color
+# Ref: https://stackoverflow.com/a/43654115 (git config --list)
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig

@@ -1,5 +1,7 @@
 */.log/*
+benchmarks/
 clusters/
+screen-dumps/
 cache
 currentTrack.plist
 .DS_Store

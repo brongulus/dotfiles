@@ -50,8 +50,8 @@ alias kctx=kubectx
 alias kns=kubens
 alias g='gardenctl'
 alias gtv='gardenctl target view -oyaml'
-alias gk='eval $(gardenctl kubectl-env bash)'
-alias gp='eval $(gardenctl provider-env bash)'
+alias gk='eval $(gardenctl kubectl-env fish)'
+alias gp='eval $(gardenctl provider-env fish)'
 alias gtc='gardenctl target --control-plane'
 alias gtg='gardenctl target --garden'
 # alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
