@@ -13,12 +13,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixgl.url = "github:nix-community/nixGL";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
-    
-    # Conditionally include Darwin-specific inputs
     darwin.url = "github:LnL7/nix-darwin";
-    # darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +36,7 @@
     };
   };
   
-  outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, emacs-overlay, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, emacs-overlay, nixgl, rust-overlay, ... }@inputs:
     let
       system = builtins.currentSystem;
       user = builtins.getEnv "USER";
@@ -41,19 +44,16 @@
         inherit system;
         config.allowUnfree = true;
         config.input-fonts.acceptLicense = true;
-        overlays = [ emacs-overlay.overlay nixgl.overlay ];
+        overlays = [ emacs-overlay.overlay nixgl.overlay rust-overlay.overlays.default ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
       hostname = builtins.getEnv "HOSTNAME";
       
-      # Platform-specific kitty wrapper
-      wrappedKitty = if isLinux then
-        pkgs.writeShellScriptBin "kitty" ''
-          ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
-        ''
-      else
-        pkgs.kitty;
+      # Kitty on linux requires nixGL
+      wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
+        ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
+      '';
 
       # Common packages for all platforms
       commonPackages = with pkgs; [
@@ -61,9 +61,10 @@
         nixVersions.latest
         tectonic pandoc ghostscript
         imagemagick ffmpeg yt-dlp
-        janet go gopls rustup rust-analyzer
-        pry basedpyright shellcheck
-        tree-sitter zig zls
+        rust-bin.nightly.latest.minimal
+        rust-analyzer clippy rustfmt
+        go gopls pry basedpyright janet
+        shellcheck tree-sitter zig zls
         
         # Core utilities
         git fish yazi gh stow
@@ -132,13 +133,13 @@
                   upgrade = true;
                   cleanup = "zap";
                 };
-		            
-		            taps = [
-		              "derailed/k9s"
-		              "gardener/tap"
-		              "gitguardian/tap"
-		              "int128/kubelogin"
-		            ];
+                
+                taps = [
+                  "derailed/k9s"
+                  "gardener/tap"
+                  "gitguardian/tap"
+                  "int128/kubelogin"
+                ];
 
                 brews = [
                   # deps
@@ -146,9 +147,7 @@
                   # workPackages
                   "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
                   "lazydocker" "k9s" "kubecolor"
-                  "gardenctl-v2"
-                  "ggshield"
-                  "kubelogin"
+                  "gardenlogin" "gardenctl-v2" "ggshield" "kubelogin"
                   "yaml-language-server" "helm-ls"
                   # personal
                   "minimal-racket" "mpv"
