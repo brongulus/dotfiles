@@ -9,13 +9,13 @@ function kubectl_status
   set -l config $KUBECONFIG
   [ -z "$config" ]; and set -l config "$HOME/.kube/config"
   if [ ! -f $config ]; or [ -z "$KUBECONFIG" ]
-    echo (set_color red)$KUBECTL_PROMPT_ICON" "(set_color white) #"no config"
+    echo (set_color red)$KUBECTL_PROMPT_ICON(set_color white) #"no config"
     return
   end
 
   set -l context (kubectl config current-context 2>/dev/null)
   if [ $status -ne 0 ]
-    echo (set_color grey)$KUBECTL_PROMPT_ICON" "(set_color white) #"no context"
+    echo (set_color grey)$KUBECTL_PROMPT_ICON(set_color white) #"no context"
     return
   end
 

@@ -97,7 +97,8 @@ if status is-interactive
                 (require 'magit)
                 (when (require 'popper nil t)
                   (popper-mode -1))
-                (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+                  (setq magit-display-buffer-function
+                  #'magit-display-buffer-fullframe-status-v1)
                 (magit-status \"$git_root\"))"
     end
 
@@ -161,5 +162,9 @@ if status is-interactive
 
     if type -q direnv
        direnv hook fish | source
+    end
+
+    if [ -z "$TMUX" ]; and [ "$TERM" = "xterm-kitty" ];
+        tmux attach || exec tmux new-session && exit;
     end
 end
