@@ -1,9 +1,7 @@
 {
   description = "Dotfiles configuration";
-
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
-    # requires updating trusted-users in /etc/nix/nix.conf
     extra-substituters = [
       "https://nix-community.cachix.org/"
     ];
@@ -12,81 +10,243 @@
     ];
   };
   
-  # Specify the sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs"; # To use cachix dont follow
     nixgl.url = "github:nix-community/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
+    
+    # Conditionally include Darwin-specific inputs
+    darwin.url = "github:LnL7/nix-darwin";
+    # darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    homebrew-core = {
+      url = "github:Homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:Homebrew/homebrew-cask";
+      flake = false;
+    };
   };
-
-  outputs = { self, nixpkgs, emacs-overlay, nixgl, ... }@inputs:
+  
+  outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, emacs-overlay, nixgl, ... }@inputs:
     let
-      system = builtins.currentSystem; # --impure
+      system = builtins.currentSystem;
+      user = builtins.getEnv "USER";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        config.input-fonts.acceptLicense = true;
         overlays = [ emacs-overlay.overlay nixgl.overlay ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
-      username = if isDarwin then "admin" else "prashant";
-      homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
-      dotfilesPath = "${homeDirectory}/dotfiles";
-      # Claude kitty nixgl wrapper
+      hostname = builtins.getEnv "HOSTNAME";
+      
+      # Platform-specific kitty wrapper
       wrappedKitty = if isLinux then
         pkgs.writeShellScriptBin "kitty" ''
           ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
         ''
       else
         pkgs.kitty;
-    in {
-      defaultPackage.${system} = pkgs.buildEnv {
-        name = "packages-dev";
-        paths = with pkgs; [
-          # dev
-          nixVersions.latest
-          
-          tectonic pandoc ghostscript
-          imagemagick ffmpeg yt-dlp
-          janet racket-minimal
-          gdb go gopls rustup
-          tree-sitter zig zls
 
-          # misc
-          git fish yazi wrappedKitty stow
-          tmux direnv nix-direnv cachix
-          syncthing emacs-git
-          # mpv # nix is building and not downloading binary
-          (if isLinux
-           then pkgs.nixgl.auto.nixGLDefault # --impure
-           else rectangle)
+      # Common packages for all platforms
+      commonPackages = with pkgs; [
+        # Development tools
+        nixVersions.latest
+        tectonic pandoc ghostscript
+        imagemagick ffmpeg yt-dlp
+        janet go gopls rustup rust-analyzer
+        pry basedpyright shellcheck
+        tree-sitter zig zls
+        
+        # Core utilities
+        git fish yazi gh stow
+        direnv nix-direnv cachix
+        
+        # CLI tools
+        fzf fishPlugins.fzf-fish fishPlugins.z
+        ripgrep bat fd delta yq jq tmux
+        tmuxPlugins.resurrect
+        tmuxPlugins.tmux-fzf
+        tmuxPlugins.tmux-thumbs
+      ];
 
-          # utilities
-          fzf fishPlugins.fzf-fish fishPlugins.z
-          ripgrep bat fd delta
-          tmuxPlugins.resurrect
-          tmuxPlugins.tmux-fzf
-          tmuxPlugins.tmux-thumbs
+      # Linux-specific packages
+      linuxPackages = with pkgs; [
+        nixgl.auto.nixGLDefault
+        emacs-git
+        racket-minimal
+        wrappedkitty
+        syncthing
+        git-graph
+        gdb mpv
+        # Fonts
+        nerd-fonts.symbols-only
+        nerd-fonts.victor-mono
+        merriweather input-fonts fira-sans
+        # ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
+      ];
 
-          # fonts
-          (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "VictorMono" ]; })
-          merriweather ia-writer-duospace ia-writer-quattro # iosevka-comfy.comfy
-        ];
+      # Darwin-specific packages
+      darwinPackages = with pkgs; [
+        # moved to brew
+      ];
+      
+      # Create platform-specific outputs
+      platformOutputs = if isDarwin then {
+        darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            ({ config, ... }: {
+              homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+            })
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix.settings.trusted-users = [ "${user}" ]; # FIXME
+              nix-homebrew = {
+                user = "${user}";
+                enable = true;
+                enableRosetta = true;
+                autoMigrate = true;
+                mutableTaps = true;
+              };
 
-        # pathsToLink = [ "/share/man" "/share/doc" "/share/fonts" "/share/nix-direnv"
-        #                 "/share/fish" "/share/tmux-plugins" "/share/applications"
-        #                 "/bin" "/lib" "/Applications" ];
-        # extraOutputsToInstall = [ "man" "doc" "fonts" "nix-direnv" "fish" "tmux-plugins" ];
+              fonts.packages = [
+                pkgs.nerd-fonts.symbols-only
+                pkgs.nerd-fonts.victor-mono
+                pkgs.merriweather
+                pkgs.input-fonts
+                pkgs.fira-sans
+              ];
+              
+              homebrew = {
+                enable = true;
+                onActivation = {
+                  autoUpdate = true;
+                  upgrade = true;
+                  cleanup = "zap";
+                };
+		            
+		            taps = [
+		              "derailed/k9s"
+		              "gardener/tap"
+		              "gitguardian/tap"
+		              "int128/kubelogin"
+		            ];
 
-        postBuild =  ''
-          if [ "$(uname)" == "Darwin" ]; then
-            ~/dotfiles/bin/bin/nix-mac-app
-          fi 
-        '';
+                brews = [
+                  # deps
+                  "coreutils" "gnu-sed" "gnu-tar" "grep" "gzip" "parallel" "iproute2mac"
+                  # workPackages
+                  "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
+                  "lazydocker" "k9s" "kubecolor"
+                  "gardenctl-v2"
+                  "ggshield"
+                  "kubelogin"
+                  "yaml-language-server" "helm-ls"
+                  # personal
+                  "minimal-racket" "mpv"
+                ];
+                
+                casks = [
+                  "emacs@pretest"
+                  "kitty"
+                  "syncthing"
+                  "rectangle"
+                  "jordanbaird-ice"
+                  "ubersicht"
+                  "docker"
+                ];
+              };
+              
+              programs.fish.enable = true;
+              programs.zsh.enable = true;
+              programs.tmux.enable = true;
+              
+              environment = {
+                shells = [ pkgs.fish ];
+                systemPackages = commonPackages ++ darwinPackages;
+              };
+
+              # NOTE doesnt work with tmux: https://github.com/LnL7/nix-darwin/pull/1020
+              security.pam.enableSudoTouchIdAuth = true;
+              system = {
+                keyboard = {
+                  enableKeyMapping = true;
+                  remapCapsLockToControl = true;
+                };
+                defaults = {
+                  dock = {
+                    tilesize = 50;
+                    autohide = false;
+                    orientation = "bottom";
+                    show-recents = false;
+                  };
+                  finder = {
+                    AppleShowAllExtensions = true;
+                    AppleShowAllFiles = true;
+                    ShowPathbar = true;
+                    FXEnableExtensionChangeWarning = false;
+                  };
+                  trackpad = {
+                    Clicking = true;
+                    TrackpadThreeFingerDrag = true;
+                  };
+                  LaunchServices = {
+                    # Disable quarantine for downloaded apps
+                    LSQuarantine = false;
+                  };
+                  NSGlobalDomain = {
+                    AppleShowAllExtensions = true;
+                    InitialKeyRepeat = 15;
+                    KeyRepeat = 1;
+                  };
+                  CustomSystemPreferences = {
+                    "com.apple.finder" = {
+                      # Show directories first
+                      _FXSortFoldersFirst = true; # TODO: https://github.com/LnL7/nix-darwin/pull/594
+                      # New window use the $HOME path
+                      NewWindowTarget = "PfHm";
+                      NewWindowTargetPath = "file://$HOME/";
+                    };
+                    "com.apple.AdLib" = {
+                      # Disable personalized advertising
+                      forceLimitAdTracking = true;
+                      allowApplePersonalizedAdvertising = false;
+                      allowIdentifierForAdvertising = false;
+                    };
+                  };
+                };
+                ## run darwin-rebuild changelog to check this
+                stateVersion = 5;
+              };
+              system.activationScripts.setting.text = ''
+                  # Allow opening apps from any source
+                  sudo spctl --master-disable
+              '';
+            }
+          ];
+        };
+        
+        defaultPackage.${system} = pkgs.buildEnv {
+          name = "packages-darwin";
+          paths = commonPackages ++ darwinPackages;
+        };
+      } else {
+        defaultPackage.${system} = pkgs.buildEnv {
+          name = "packages-linux";
+          paths = commonPackages ++ linuxPackages;
+        };
       };
-
+      
+    in platformOutputs // {
+      # Shared configuration that's platform-independent
       programs.direnv = {
         package = pkgs.direnv;
         silent = false;
@@ -98,8 +258,7 @@
         };
       };
       
-      fonts.fontconfig.enable = true; # export FONTCONFIG in bash on linux
-
+      fonts.fontconfig.enable = true;
       programs.bash.enable = true;
       
       programs.fish = {
