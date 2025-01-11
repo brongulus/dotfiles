@@ -24,11 +24,13 @@ if status is-interactive
 
     # gardener kind setup
     set --export GOPATH "$HOME/go"
-    set PATH $(brew --prefix)/opt/coreutils/libexec/gnubin $PATH
-    set PATH $(brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
-    set PATH $(brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
-    set PATH $(brew --prefix)/opt/grep/libexec/gnubin $PATH
-    set PATH $(brew --prefix)/opt/gzip/bin $PATH
+    if [ "$(uname)" = "Darwin" ];
+       set PATH $(brew --prefix)/opt/coreutils/libexec/gnubin $PATH
+       set PATH $(brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
+       set PATH $(brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
+       set PATH $(brew --prefix)/opt/grep/libexec/gnubin $PATH
+       set PATH $(brew --prefix)/opt/gzip/bin $PATH
+    end
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
     set --export ALTERNATE_EDITOR ""

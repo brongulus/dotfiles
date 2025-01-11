@@ -80,10 +80,10 @@
 
       # Linux-specific packages
       linuxPackages = with pkgs; [
-        nixgl.auto.nixGLDefault
+        pkgs.nixgl.auto.nixGLDefault
         emacs-git
         racket-minimal
-        wrappedkitty
+        wrappedKitty
         syncthing
         git-graph
         gdb mpv
