@@ -63,12 +63,14 @@
         imagemagick ffmpeg yt-dlp
         rust-bin.nightly.latest.minimal
         rust-analyzer clippy rustfmt
-        go gopls pry basedpyright janet
+        go gopls basedpyright janet
         shellcheck tree-sitter zig zls
+
+        ruby rubyPackages.pry colorls rubyPackages.reline
         
         # Core utilities
-        git fish yazi gh stow
-        direnv nix-direnv cachix
+        wezterm git fish yazi gh stow
+        zellij direnv nix-direnv cachix
         
         # CLI tools
         fzf fishPlugins.fzf-fish fishPlugins.z
@@ -90,7 +92,7 @@
         # Fonts
         nerd-fonts.symbols-only
         nerd-fonts.victor-mono
-        merriweather input-fonts fira-sans
+        merriweather input-fonts fira-sans victor-mono
         # ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
       ];
 
@@ -121,6 +123,7 @@
               fonts.packages = [
                 pkgs.nerd-fonts.symbols-only
                 pkgs.nerd-fonts.victor-mono
+                pkgs.victor-mono
                 pkgs.merriweather
                 pkgs.input-fonts
                 pkgs.fira-sans
@@ -151,6 +154,8 @@
                   "yaml-language-server" "helm-ls"
                   # personal
                   "minimal-racket" "mpv"
+                  # pdf-tools
+                  "pkg-config" "poppler" "autoconf" "automake"
                 ];
                 
                 casks = [

@@ -1,20 +1,21 @@
 #!/bin/bash
+# Letting nix-darwin take care of this for now
 # Link fonts from nix to macos
-if [[ -d ~/.nix-profile/share/fonts ]]; then
-    cd ~/.nix-profile/share/fonts;
-    # mkdir -p ~/.local/share/fonts
-    find -L ~/.nix-profile/share/fonts -type f -o -name "*.ttf" -o -name "*.otf" | while read -r font_file; do
-        font_name=$(basename "$font_file")
-        # cp "$font_file" "$HOME/.local/share/fonts/$font_name"
-        rm -f "$HOME/Library/Fonts/$font_name"
-        cp "$font_file" "$HOME/Library/Fonts/$font_name"
-    done
-    fc-cache -r
-fi
+# if [[ -d ~/.nix-profile/share/fonts ]]; then
+#     cd ~/.nix-profile/share/fonts;
+#     # mkdir -p ~/.local/share/fonts
+#     find -L ~/.nix-profile/share/fonts -type f -o -name "*.ttf" -o -name "*.otf" | while read -r font_file; do
+#         font_name=$(basename "$font_file")
+#         # cp "$font_file" "$HOME/.local/share/fonts/$font_name"
+#         rm -f "$HOME/Library/Fonts/$font_name"
+#         cp "$font_file" "$HOME/Library/Fonts/$font_name"
+#     done
+#     fc-cache -r
+# fi
 
 # Install all nix top level graphical apps
-if [[ -d ~/.nix-profile/Applications ]]; then
-    (cd ~/.nix-profile/Applications;
+if [[ -d /Applications/Nix\ Apps/ ]]; then
+    (cd /Applications/Nix\ Apps/;
      mkdir -p ~/Applications/
      for f in *.app ; do
          # Remove if an alias already exists
