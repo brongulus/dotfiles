@@ -163,6 +163,7 @@ if status is-interactive
     end
 
     if type -q direnv
+       # set --export DIRENV_LOG_FORMAT "" # need nix-direnv logs ;-;
        direnv hook fish | source
     end
 

@@ -28,6 +28,12 @@ function fish_right_prompt
     set -q VIRTUAL_ENV
     and set -l venv (string replace -r '.*/' '' -- "$VIRTUAL_ENV")
 
+    # show flake if direnv active
+    set direnv ""
+    if set -q DIRENV_DIR
+        set direnv ""(set_color blue)"❄️"" "
+    end
+    
     set_color normal
-    string join " " -- $venv $duration $kube $git_vc $d
+    string join -n " " -- $venv $duration $direnv $kube $git_vc $d
 end

@@ -4,7 +4,7 @@ function kubectl_status
     return
   end
   
-  [ -z "$KUBECTL_PROMPT_ICON" ]; and set -l KUBECTL_PROMPT_ICON "⎈"
+  [ -z "$KUBECTL_PROMPT_ICON" ]; and set -l KUBECTL_PROMPT_ICON "󱃾 "
   [ -z "$KUBECTL_PROMPT_SEPARATOR" ]; and set -l KUBECTL_PROMPT_SEPARATOR "|"
   set -l config $KUBECONFIG
   [ -z "$config" ]; and set -l config "$HOME/.kube/config"
