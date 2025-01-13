@@ -1,13 +1,13 @@
 [status]
-separator_open  = ""
-separator_close = ""
+# separator_open  = ""
+# separator_close = ""
 # separator_style = { fg = "red", bg = "black" }
 
 [mode]
-normal_main = { bg = "lightblue",    bold = false }
-normal_alt = { bg = "lightmagenta",    bold = false }
-select_main = { bg = "lightgreen",   bold = false }
-select_alt = { fg = "lightgreen", bg = "white",   bold = false }
+normal_main = { bg = "lightblue", fg = "black", bold = false }
+normal_alt = { bg = "lightmagenta", fg = "black", bold = false }
+select_main = { bg = "lightgreen", bold = false }
+select_alt = { fg = "lightgreen", bg = "white", bold = false }
 unset_main  = { bg = "lightmagenta", bold = false }
 unset_alt  = { fg = "lightmagenta", bg = "white", bold = false }
 
