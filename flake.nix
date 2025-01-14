@@ -65,8 +65,11 @@
         rust-analyzer clippy rustfmt
         go gopls basedpyright janet
         shellcheck tree-sitter zig zls
+        lua-language-server
 
-        ruby rubyPackages.pry colorls rubyPackages.reline
+        # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
+        ruby rubyPackages.pry colorls ruby-lsp # <- LSP not working
+        rubyPackages.reline rubyPackages.prism # <- FIXME lsp needs 0.22-0.24
         
         # Core utilities
         wezterm git fish yazi gh stow

@@ -1,8 +1,9 @@
 -- Ref: https://alexplescan.com/posts/2024/08/10/wezterm/
 -- https://github.com/wez/wezterm/discussions/3901#discussioncomment-9884262
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-resurrect.periodic_save({ interval_seconds = 15 * 60, save_windows = true })
+resurrect.periodic_save({ interval_seconds = 5 * 60, save_windows = true })
 
 --- Utility functions
 function Scheme_for_appearance(appearance)
@@ -49,40 +50,54 @@ function on_format_tab_title(tab, _tabs, _panes, _config, _hover, _max_width)
   if tab.active_pane.is_zoomed then
     zoomed = '⏺ '
   end
-  return {{ Text = string.format(' %d %s%s ', index, zoomed, title) }}
+  return { { Text = string.format(' %d %s%s ', index, zoomed, title) } }
 end
 
 wezterm.on('format-tab-title', on_format_tab_title)
 
+-- wezterm.on('format-window-title', function()
+--   -- local title = '[' .. wezterm.mux.get_active_workspace() .. ']'
+--   -- title = title .. ' ' .. wezterm.mux.get_domain():name()
+--   -- title = title .. ' - $W'
+--   -- some logic here
+--   title = 'autosave-window'
+--   return title
+-- end)
+
 --- Notify on session resurrect and save or failure
-function emit_message_status(window, msg)
+function emit_message_status(window, msg, duration)
   local current_color_scheme = window:effective_config().resolved_palette
   window:set_right_status(wezterm.format {
-    { Foreground = { Color = current_color_scheme.background }},
-    { Background = { Color = current_color_scheme.foreground }},
+    { Foreground = { Color = current_color_scheme.background } },
+    { Background = { Color = current_color_scheme.ansi[4] } },
     { Text = msg }
   })
-  wezterm.time.call_after(2, function()
+  wezterm.time.call_after(duration, function()
     window:set_right_status(wezterm.format {
+      { Foreground = { Color = current_color_scheme.background } },
+      { Background = { Color = current_color_scheme.ansi[3] } },
       { Text = '' }
+      -- { Text = string.format(' %s ', wezterm.gui.gui_windows()[1]:active_pane():get_title()) }
     })
   end)
 end
 
 local last_win = nil
-wezterm.on('update-right-status', function(window, pane)
-  last_win = window
+wezterm.on('update-status', function(window, pane)
+    last_win = window
 end)
 
 local is_periodic_save = false
 wezterm.on("resurrect.periodic_save", function()
+  -- making window 'autosave-window' for resurrect
+  wezterm.gui.gui_windows()[1]:mux_window():set_title('autosave-window')
   is_periodic_save = true
 end)
 
 wezterm.on("resurrect.error", function(err)
   if last_win then
     wezterm.log_error("ERROR!")
-    emit_message_status(last_win, ' err ')
+    emit_message_status(last_win, ' err ', 4)
   end
 end)
 
@@ -90,28 +105,32 @@ wezterm.on('resurrect.save_state.finished', function(...)
   if last_win then
     if is_periodic_save then
       is_periodic_save = false
-      emit_message_status(last_win, ' Periodic Save ')
+      emit_message_status(last_win, ' Periodic Save ', 4)
     else
-      emit_message_status(last_win, ' Resurrect: Saved ')
+      emit_message_status(last_win, ' Resurrect: Saved ', 2)
     end
   end
 end)
 
 wezterm.on('resurrect.window_state.restore_window.finished', function()
   if last_win then
-    emit_message_status(last_win, ' Resurrect: Restored ')
+    emit_message_status(last_win, ' Resurrect: Restored ', 2)
   end
 end)
 
 --- Setup
 return {
   scrollback_lines = 10000,
+  -- Ref: https://github.com/motemen/dotfiles/blob/master/.config/wezterm/wezterm.lua
+  quick_select_patterns = {
+    '[0-9a-zA-Z]+[._-][0-9a-zA-Z._-]+',
+  },
   -- fonts
   font = wezterm.font_with_fallback {
-    { family = 'Victor Mono', weight = 'DemiBold' },
+    { family = 'Victor Mono',            weight = 'DemiBold' },
     { family = 'Symbols Nerd Font Mono', scale = 0.90 },
   },
-  font_size = 14.0;
+  font_size = 14.0,
   line_height = 1.15,
   underline_position = -9,
   underline_thickness = '150%',
@@ -122,7 +141,7 @@ return {
   color_schemes = {
     ["OneHalfDark"] = {
       background = '#282C33',
-      foreground = '#FFFFFF',  
+      foreground = '#FFFFFF',
       cursor_border = '#00C2FF',
       cursor_bg = '#00C2FF',
       tab_bar = {
@@ -133,29 +152,29 @@ return {
         },
       },
       ansi = {
-        '#30343d',  -- black (subtle-color dark)
-        '#c47779',  -- red (red-color dark)
-        '#a7bf87',  -- green (green-color dark)
-        '#d9c18c',  -- yellow (yellow-color dark)
-        '#81a2be',  -- blue (blue-color dark)
-        '#b294bb',  -- magenta (magenta-color dark)
-        '#7db2bd',  -- cyan (cyan-color dark)
-        '#cccccc',  -- white (foreground-color dark)
+        '#30343d', -- black (subtle-color dark)
+        '#c47779', -- red (red-color dark)
+        '#a7bf87', -- green (green-color dark)
+        '#d9c18c', -- yellow (yellow-color dark)
+        '#81a2be', -- blue (blue-color dark)
+        '#b294bb', -- magenta (magenta-color dark)
+        '#7db2bd', -- cyan (cyan-color dark)
+        '#cccccc', -- white (foreground-color dark)
       },
       brights = {
-        '#848993',  -- bright black (inactive-color dark)
-        '#c47779',  -- bright red (same as normal)
-        '#a7bf87',  -- bright green (same as normal)
-        '#d9c18c',  -- bright yellow (same as normal)
-        '#81a2be',  -- bright blue (same as normal)
-        '#b294bb',  -- bright magenta (same as normal)
-        '#7db2bd',  -- bright cyan (same as normal)
-        '#ffffff',  -- bright white
+        '#848993', -- bright black (inactive-color dark)
+        '#c47779', -- bright red (same as normal)
+        '#a7bf87', -- bright green (same as normal)
+        '#d9c18c', -- bright yellow (same as normal)
+        '#81a2be', -- bright blue (same as normal)
+        '#b294bb', -- bright magenta (same as normal)
+        '#7db2bd', -- bright cyan (same as normal)
+        '#ffffff', -- bright white
       },
     },
     ["OneHalfLight"] = {
       background = '#f7f7f7',
-      foreground = '#1A1A1A',  
+      foreground = '#1A1A1A',
       cursor_border = '#00C2FF',
       cursor_bg = '#00C2FF',
       tab_bar = {
@@ -170,30 +189,30 @@ return {
         inactive_tab_hover = { bg_color = '#e0e3ed', fg_color = '#5e636a', italic = true },
       },
       ansi = {
-        '#EEEEEE',  -- black (subtle-color light)
-        '#c56655',  -- red (red-color light)
-        '#5f8700',  -- green (green-color light)
-        '#bb9200',  -- yellow (yellow-color light)
-        '#6079db',  -- blue (blue-color light)
-        '#7646c1',  -- magenta (magenta-color light)
-        '#6594bd',  -- cyan (cyan-color light)
-        '#1a1a1a',  -- white (foreground-color light)
+        '#EEEEEE', -- black (subtle-color light)
+        '#c56655', -- red (red-color light)
+        '#5f8700', -- green (green-color light)
+        '#bb9200', -- yellow (yellow-color light)
+        '#6079db', -- blue (blue-color light)
+        '#7646c1', -- magenta (magenta-color light)
+        '#6594bd', -- cyan (cyan-color light)
+        '#1a1a1a', -- white (foreground-color light)
       },
       brights = {
-        '#5e636e',  -- bright black (inactive-color light)
-        '#c56655',  -- bright red (same as normal)
-        '#5f8700',  -- bright green (same as normal)
-        '#eab700',  -- bright yellow (light-yellow-color light)
-        '#6079db',  -- bright blue (same as normal)
-        '#7646c1',  -- bright magenta (same as normal)
-        '#6594bd',  -- bright cyan (same as normal)
-        '#000000',  -- bright white
+        '#5e636e', -- bright black (inactive-color light)
+        '#c56655', -- bright red (same as normal)
+        '#5f8700', -- bright green (same as normal)
+        '#eab700', -- bright yellow (light-yellow-color light)
+        '#6079db', -- bright blue (same as normal)
+        '#7646c1', -- bright magenta (same as normal)
+        '#6594bd', -- bright cyan (same as normal)
+        '#000000', -- bright white
       },
     },
   },
   -- command palette
   window_frame = {
-      font = wezterm.font("Fira Sans"),
+    font = wezterm.font("Fira Sans"),
   },
   command_palette_rows = 10,
   ui_key_cap_rendering = 'Emacs',
@@ -213,7 +232,7 @@ return {
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
   tab_max_width = 32,
-  window_padding = { left = '1cell', right = '1cell', top = '0.6cell', bottom = 0, },
+  window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = 0, },
   -- keyboard
   enable_kitty_keyboard = true,
   send_composed_key_when_left_alt_is_pressed = false,
@@ -224,17 +243,17 @@ return {
     {
       key = 'v',
       mods = 'LEADER',
-      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
     },
     {
       key = 's',
       mods = 'LEADER',
-      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+      action = act.SplitVertical { domain = 'CurrentPaneDomain' },
     },
     {
       key = 'c',
       mods = 'LEADER',
-      action = wezterm.action.ActivateCopyMode
+      action = act.ActivateCopyMode
     },
     move_pane('DownArrow', 'Down'),
     move_pane('UpArrow', 'Up'),
@@ -243,27 +262,27 @@ return {
     { -- TODO reload pane on zoom toggle
       key = 'z',
       mods = 'LEADER',
-      action = wezterm.action.TogglePaneZoomState,
+      action = act.TogglePaneZoomState,
     },
     {
       key = '6',
       mods = 'LEADER',
-      action = wezterm.action.EmitEvent 'toggle-colorscheme',
+      action = act.EmitEvent 'toggle-colorscheme',
     },
     {
       key = 'a',
       mods = 'LEADER',
-      action = wezterm.action.AttachDomain 'unix',
+      action = act.AttachDomain 'unix',
     },
     {
       key = 'd',
       mods = 'LEADER',
-      action = wezterm.action.DetachDomain { DomainName = 'unix' },
+      action = act.DetachDomain { DomainName = 'unix' },
     },
     {
       key = ',',
       mods = 'LEADER',
-      action = wezterm.action.PromptInputLine {
+      action = act.PromptInputLine {
         description = 'Enter new name for tab',
         action = wezterm.action_callback(
           function(window, pane, line)
@@ -277,44 +296,56 @@ return {
     {
       key = 'w',
       mods = 'LEADER',
-      action = wezterm.action.ShowTabNavigator,
+      action = act.ShowTabNavigator,
     },
     {
-      key="x",
-      mods="LEADER",
-      action = wezterm.action{ CloseCurrentPane = { confirm = true }}
+      key = "x",
+      mods = "LEADER",
+      action = act { CloseCurrentPane = { confirm = true } }
     },
     {
       key = "Space",
       mods = "LEADER",
-      action = wezterm.action.RotatePanes "Clockwise"
+      action = act.RotatePanes "Clockwise"
     },
+    { -- FIXME
+      key = 'L',
+      mods = 'CTRL',
+      action = wezterm.action_callback(function(window, pane)
+        local pos = pane:get_cursor_position()
+        local dims = pane:get_dimensions()
+        local move_viewport_to_scrollback = string.rep('\r\n', pos.y - dims.physical_top)
+        pane:inject_output(move_viewport_to_scrollback)
+        pane:send_text('\x0c') -- CTRL-L
+      end)
+    },
+    -- TODO: https://gitlab.freedesktop.org/Per_Bothner/specifications/-/blob/master/proposals/prompts-data/shell-integration.fish
+    { key = 'UpArrow',   mods = 'LEADER', action = act.ScrollToPrompt(-1) },
+    { key = 'DownArrow', mods = 'LEADER', action = act.ScrollToPrompt(1) },
     -- Don't intercept these keys
     {
       key = 'Tab',
       mods = 'CTRL',
-      action = wezterm.action.SendKey { key = 'Tab', mods = 'CTRL' },
+      action = act.SendKey { key = 'Tab', mods = 'CTRL' },
     },
     {
       key = 'Tab',
       mods = 'CTRL|SHIFT',
-      action = wezterm.action.SendKey { key = 'Tab', mods = 'CTRL|SHIFT' },
+      action = act.SendKey { key = 'Tab', mods = 'CTRL|SHIFT' },
     },
     {
       key = 'a',
       mods = 'LEADER|CTRL',
-      action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' },
+      action = act.SendKey { key = 'a', mods = 'CTRL' },
     },
     -- resurrect
     {
       key = "s",
       mods = "LEADER|CTRL",
-      action = resurrect.window_state.save_window_action(),
-      -- action = wezterm.action_callback(function(win, pane)
-      --   -- resurrect.save_state(resurrect.workspace_state.get_workspace_state())
-      --   resurrect.window_state.save_window_action()
-      --   resurrect.tab_state.save_tab_action()
-      -- end),
+      action = wezterm.action_callback(function(win, pane)
+        local state = resurrect.window_state.get_window_state(win:mux_window())
+        resurrect.save_state(state, "manual-save")
+      end),
     },
     {
       key = "r",
@@ -322,8 +353,8 @@ return {
       action = wezterm.action_callback(function(win, pane)
         resurrect.fuzzy_load(win, pane, function(id, label)
           local type = string.match(id, "^([^/]+)") -- match before '/'
-          id = string.match(id, "([^/]+)$") -- match after '/'
-          id = string.match(id, "(.+)%..+$") -- remove file extention
+          id = string.match(id, "([^/]+)$")         -- match after '/'
+          id = string.match(id, "(.+)%..+$")        -- remove file extention
           local opts = {
             relative = true,
             restore_text = true,
@@ -350,13 +381,13 @@ return {
       action = wezterm.action_callback(function(win, pane)
         resurrect.fuzzy_load(win, pane, function(id)
           resurrect.delete_state(id)
-          end,
-          {
-            title = "Delete State",
-            fuzzy_description = "State to Delete [Enter: accept, Esc: cancel, /: filter] ",
-            description = "Search State to Delete: ",
-            is_fuzzy = true,
-          })
+        end,
+        {
+          title = "Delete State",
+          fuzzy_description = "State to Delete [Enter: accept, Esc: cancel, /: filter] ",
+          description = "Search State to Delete: ",
+          is_fuzzy = true,
+        })
       end),
     },
   },
