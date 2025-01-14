@@ -200,7 +200,7 @@
                   };
                   trackpad = {
                     Clicking = true;
-                    TrackpadThreeFingerDrag = true;
+                    TrackpadThreeFingerDrag = false;
                   };
                   LaunchServices = {
                     # Disable quarantine for downloaded apps
