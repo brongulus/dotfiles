@@ -9,6 +9,9 @@
 [push]
   # Automatically set origin as the remote for current branch
   autoSetupRemote = true
+  autoSetupMerge = always
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"
 [merge]
   conflictstyle = zdiff3
 # Delta

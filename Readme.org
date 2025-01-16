@@ -38,3 +38,5 @@ alias nix-update-mac='HOSTNAME=$(hostname -s) nix build .#darwinConfigurations.$
 alias darwin-rebuild-mac='HOSTNAME=$(hostname -s) ./result/sw/bin/darwin-rebuild switch --flake . --impure'
 #+end_src
 - Refer [[https://nix.dev/guides/troubleshooting#macos-update-breaks-nix-installation][macOS update breaks nix installation]] 
+
+* TODO Check for [[https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265/5][declarative browser]] configuration

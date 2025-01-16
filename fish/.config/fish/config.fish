@@ -167,7 +167,7 @@ if status is-interactive
        direnv hook fish | source
     end
 
-    if [ -z "$TMUX" ]; and [ "$TERM" = "xterm-kitty" ];
-        tmux attach || exec tmux new-session && exit;
-    end
+    # if [ -z "$TMUX" ]; and [ "$TERM" = "xterm-kitty" ];
+    #     tmux attach || exec tmux new-session && exit;
+    # end
 end

@@ -5,6 +5,8 @@ local act = wezterm.action
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 resurrect.periodic_save({ interval_seconds = 5 * 60, save_windows = true })
 
+local tab_color = require("tab_color_icon")
+
 --- Utility functions
 function Scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
@@ -32,37 +34,14 @@ wezterm.on('toggle-colorscheme', function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
---- Add zoom indicator to tab title
-local function tab_title(tab_info)
-  local title = tab_info.tab_title
-  -- if the tab title is explicitly set, take that
-  if title and #title > 0 then
-    return title
-  end
-  -- Otherwise, use the title from the active pane
-  return tab_info.active_pane.title
-end
-
-function on_format_tab_title(tab, _tabs, _panes, _config, _hover, _max_width)
-  local zoomed = ''
-  local index = tab.tab_index + 1
-  local title = tab_title(tab)
-  if tab.active_pane.is_zoomed then
-    zoomed = '⏺ '
-  end
-  return { { Text = string.format(' %d %s%s ', index, zoomed, title) } }
-end
-
-wezterm.on('format-tab-title', on_format_tab_title)
-
--- wezterm.on('format-window-title', function()
---   -- local title = '[' .. wezterm.mux.get_active_workspace() .. ']'
---   -- title = title .. ' ' .. wezterm.mux.get_domain():name()
---   -- title = title .. ' - $W'
---   -- some logic here
---   title = 'autosave-window'
---   return title
--- end)
+wezterm.on('format-window-title', function()
+  -- local title = '[' .. wezterm.mux.get_active_workspace() .. ']'
+  -- title = title .. ' ' .. wezterm.mux.get_domain():name()
+  -- title = title .. ' - $W'
+  -- some logic here
+  title = 'autosave-window'
+  return title
+end)
 
 --- Notify on session resurrect and save or failure
 function emit_message_status(window, msg, duration)
@@ -105,7 +84,7 @@ wezterm.on('resurrect.save_state.finished', function(...)
   if last_win then
     if is_periodic_save then
       is_periodic_save = false
-      emit_message_status(last_win, ' Periodic Save ', 4)
+      emit_message_status(last_win, ' ' .. wezterm.nerdfonts.cod_save_all .. ' ', 3)
     else
       emit_message_status(last_win, ' Resurrect: Saved ', 2)
     end
@@ -127,7 +106,7 @@ return {
   },
   -- fonts
   font = wezterm.font_with_fallback {
-    { family = 'Victor Mono',            weight = 'DemiBold' },
+    { family = 'Victor Mono',            weight = 'Bold' },
     { family = 'Symbols Nerd Font Mono', scale = 0.90 },
   },
   font_size = 14.0,
@@ -142,7 +121,7 @@ return {
     ["OneHalfDark"] = {
       background = '#282C33',
       foreground = '#FFFFFF',
-      cursor_border = '#00C2FF',
+      cursor_border = '#282C33', -- hide cursor in inactive pane
       cursor_bg = '#00C2FF',
       tab_bar = {
         background = 'rgba(0,0,0,0)',
@@ -150,6 +129,8 @@ return {
           bg_color = 'rgba(0,0,0,0)',
           fg_color = '#ffffff',
         },
+        inactive_tab = { bg_color = 'rgba(0,0,0,0)', fg_color = '#848993' },
+        inactive_tab_hover = { bg_color = 'rgba(0,0,0,0)', fg_color = '#848993', italic = true },
       },
       ansi = {
         '#30343d', -- black (subtle-color dark)
@@ -175,7 +156,7 @@ return {
     ["OneHalfLight"] = {
       background = '#f7f7f7',
       foreground = '#1A1A1A',
-      cursor_border = '#00C2FF',
+      cursor_border = '#f7f7f7', -- hide cursor in inactive pane
       cursor_bg = '#00C2FF',
       tab_bar = {
         background = 'rgba(0,0,0,0)',
@@ -183,10 +164,10 @@ return {
           bg_color = 'rgba(0,0,0,0)',
           fg_color = '#1a1a1a',
         },
-        inactive_tab = { bg_color = '#e0e3ed', fg_color = '#5e636a' },
+        inactive_tab = { bg_color = 'rgba(0,0,0,0)', fg_color = '#5e636a' },
+        inactive_tab_hover = { bg_color = 'rgba(0,0,0,0)', fg_color = '#5e636a', italic = true },
         new_tab = { bg_color = '#e0e3ed', fg_color = '#5e636a' },
         new_tab_hover = { bg_color = '#e0e3ed', fg_color = '#5e636a', italic = true },
-        inactive_tab_hover = { bg_color = '#e0e3ed', fg_color = '#5e636a', italic = true },
       },
       ansi = {
         '#EEEEEE', -- black (subtle-color light)
@@ -217,7 +198,7 @@ return {
   command_palette_rows = 10,
   ui_key_cap_rendering = 'Emacs',
   -- window and UI
-  max_fps = 240,
+  max_fps = 120,
   default_cursor_style = "BlinkingBlock",
   cursor_thickness = "0.1cell",
   cursor_blink_rate = 800,
@@ -232,13 +213,20 @@ return {
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
   tab_max_width = 32,
-  window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = 0, },
+  window_padding = { left = '1cell', right = '1cell', top = '0.3cell', bottom = '0.3cell', },
   -- keyboard
   enable_kitty_keyboard = true,
   send_composed_key_when_left_alt_is_pressed = false,
   send_composed_key_when_right_alt_is_pressed = false,
   -- Shortcuts
   leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+  -- mouse_bindings = {
+  --     {
+  --         event = { Down = { streak = 3, button = 'Left' } },
+  --         action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
+  --         mods = 'NONE',
+  --     },
+  -- },
   keys = {
     {
       key = 'v',
@@ -308,16 +296,21 @@ return {
       mods = "LEADER",
       action = act.RotatePanes "Clockwise"
     },
-    { -- FIXME
-      key = 'L',
-      mods = 'CTRL',
-      action = wezterm.action_callback(function(window, pane)
-        local pos = pane:get_cursor_position()
-        local dims = pane:get_dimensions()
-        local move_viewport_to_scrollback = string.rep('\r\n', pos.y - dims.physical_top)
-        pane:inject_output(move_viewport_to_scrollback)
-        pane:send_text('\x0c') -- CTRL-L
-      end)
+    -- { -- FIXME
+    --   key = 'L',
+    --   mods = 'CTRL',
+    --   action = wezterm.action_callback(function(window, pane)
+    --     local pos = pane:get_cursor_position()
+    --     local dims = pane:get_dimensions()
+    --     local move_viewport_to_scrollback = string.rep('\r\n', pos.y - dims.physical_top)
+    --     pane:inject_output(move_viewport_to_scrollback)
+    --     pane:send_text('\x0c') -- CTRL-L
+    --   end)
+    -- },
+    {
+        key = '`',
+        mods = 'SUPER',
+        action = wezterm.action.ActivateLastTab,
     },
     -- TODO: https://gitlab.freedesktop.org/Per_Bothner/specifications/-/blob/master/proposals/prompts-data/shell-integration.fish
     { key = 'UpArrow',   mods = 'LEADER', action = act.ScrollToPrompt(-1) },
