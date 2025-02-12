@@ -63,9 +63,9 @@
         imagemagick ffmpeg yt-dlp
         rust-bin.nightly.latest.minimal
         rust-analyzer clippy rustfmt
-        go gopls basedpyright janet
-        shellcheck tree-sitter zig zls
-        lua-language-server
+        go_1_24 gopls basedpyright ruff
+        uv janet bacon shellcheck
+        tree-sitter zig zls lua-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
         ruby rubyPackages.pry colorls ruby-lsp # <- LSP not working
@@ -96,6 +96,7 @@
         nerd-fonts.symbols-only
         nerd-fonts.victor-mono
         merriweather input-fonts fira-sans victor-mono
+        maple-mono-SC-NF
         # ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
       ];
 
@@ -130,6 +131,8 @@
                 pkgs.merriweather
                 pkgs.input-fonts
                 pkgs.fira-sans
+                pkgs.maple-mono-SC-NF
+                pkgs.national-park-typeface
               ];
               
               homebrew = {
@@ -145,6 +148,7 @@
                   "gardener/tap"
                   "gitguardian/tap"
                   "int128/kubelogin"
+                  "nikitabobko/tap" # aerospace
                 ];
 
                 brews = [
@@ -166,6 +170,7 @@
                   "kitty"
                   "syncthing"
                   "rectangle"
+                  "aerospace"
                   "jordanbaird-ice"
                   "ubersicht"
                   "docker"
