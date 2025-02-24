@@ -123,9 +123,7 @@
       "inputs": {
         "brew-src": "brew-src",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1736041957,
@@ -227,6 +225,22 @@
       "locked": {
         "lastModified": 1740126099,
         "narHash": "sha256-ozoOtE2hGsqh4XkTJFsrTkNxkRgShxpQxDynaPZUGxk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "32fb99ba93fea2798be0e997ea331dd78167f814",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1740126099,
+        "narHash": "sha256-ozoOtE2hGsqh4XkTJFsrTkNxkRgShxpQxDynaPZUGxk=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "32fb99ba93fea2798be0e997ea331dd78167f814",
@@ -247,7 +261,7 @@
         "homebrew-core": "homebrew-core",
         "nix-homebrew": "nix-homebrew",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "rust-overlay": "rust-overlay"
       }
     },

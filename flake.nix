@@ -22,10 +22,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
       flake = false;
@@ -166,7 +163,10 @@
                 ];
                 
                 casks = [
-                  "emacs@pretest"
+                  {
+                    name = "emacs@pretest";
+                    greedy = true;
+                  }
                   "kitty"
                   "syncthing"
                   "rectangle"
@@ -186,7 +186,7 @@
                 systemPackages = commonPackages ++ darwinPackages;
               };
 
-              # NOTE doesnt work with tmux: https://github.com/LnL7/nix-darwin/pull/1020
+              # NOTE tmux woes: https://github.com/LnL7/nix-darwin/pull/1344
               security.pam.enableSudoTouchIdAuth = true;
               system = {
                 keyboard = {
@@ -205,6 +205,9 @@
                     AppleShowAllFiles = true;
                     ShowPathbar = true;
                     FXEnableExtensionChangeWarning = false;
+                    _FXSortFoldersFirst = true;
+                    # New window use the $HOME path
+                    NewWindowTarget = "Home";
                   };
                   trackpad = {
                     Clicking = true;
@@ -220,13 +223,6 @@
                     KeyRepeat = 1;
                   };
                   CustomSystemPreferences = {
-                    "com.apple.finder" = {
-                      # Show directories first
-                      _FXSortFoldersFirst = true; # TODO: https://github.com/LnL7/nix-darwin/pull/594
-                      # New window use the $HOME path
-                      NewWindowTarget = "PfHm";
-                      NewWindowTargetPath = "file://$HOME/";
-                    };
                     "com.apple.AdLib" = {
                       # Disable personalized advertising
                       forceLimitAdTracking = true;
