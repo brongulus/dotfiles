@@ -17,6 +17,7 @@
 # Delta
 [core]
   pager = delta
+  editor = "emacsclient -a="
   # sshCommand = ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes
 [interactive]
   diffFilter = delta --color-only
@@ -27,3 +28,5 @@
 # Ref: https://stackoverflow.com/a/43654115 (git config --list)
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig
+[includeIf "gitdir:~/go/src/github.com/gardener/"]
+  path = ~/go/src/github.com/gardener/.gitconfig

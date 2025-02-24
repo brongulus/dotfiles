@@ -15,6 +15,7 @@ GNU Stow instead for dotfiles symlink.
 - [[https://blog.mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html][Installing a specific version with nix]] (explains how to work with overlays)
 - [[https://www.bekk.christmas/post/2021/16/dotfiles-with-nix-and-home-manager][Declarative management of dotfiles with Nix and Home Manager]]
 - [[https://seroperson.me/2024/01/16/managing-dotfiles-with-nix/][Managing dotfiles with nix]]
+- [[https://samuel.dionne-riel.com/blog/2024/05/07/its-not-flakes-vs-channels.html][Flakes vs Channels]]
 
 * Installation
 - Get the list of packages to replace using =brew leaves=.
@@ -27,7 +28,7 @@ GNU Stow instead for dotfiles symlink.
   Run =nix --extra-experimental-features "nix-command flakes" profile install . --impure= in the dotfiles directory.
 - Run =stow <dir>= to symlink the dotfiles. e.g.: =stow nix= (To not link and see what the stow command will do, run =stow -nv linux=)
 - To upgrade the packages, run =nix flake update= and then =nix profile upgrade dotfiles --impure=
-- To upgrade specific flake inputs =nix flake update emacs-overlay=
+- To upgrade specific flake inputs =nix flake update emacs-overlay=, to check status of channels [[https://status.nixos.org/][visit this]].
 - Remember to run =nix-collect-garbage -d= to clean up old generations and to save space.
 
 * Macos exclusive stuff
@@ -40,3 +41,5 @@ alias darwin-rebuild-mac='HOSTNAME=$(hostname -s) ./result/sw/bin/darwin-rebuild
 - Refer [[https://nix.dev/guides/troubleshooting#macos-update-breaks-nix-installation][macOS update breaks nix installation]] 
 
 * TODO Check for [[https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265/5][declarative browser]] configuration
+
+* TODO Check [[https://yashgarg.dev/posts/nix-devenv/][this]] for WSL setup?

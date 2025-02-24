@@ -31,9 +31,14 @@ function fish_right_prompt
     # show flake if direnv active
     set direnv ""
     if set -q DIRENV_DIR
-        set direnv ""(set_color blue)"❄️"" "
+        set direnv ""(set_color blue)"❄" 
     end
     
     set_color normal
-    string join -n " " -- $venv $duration $direnv $kube $git_vc $d
+    
+    if [ "$TERM" = "eterm-color" ]
+        echo -n ""
+    else
+        string join -n " " -- $venv $duration $direnv $kube $git_vc $d
+    end
 end

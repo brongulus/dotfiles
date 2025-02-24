@@ -67,8 +67,8 @@ export const className = css`
   .checkbox {
     width: 10px;
     height: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 3px;
+    border: 2px solid #f19a38;
+    border-radius: 13px;
     margin-right: 4px;
   }
   

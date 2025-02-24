@@ -99,6 +99,8 @@ end)
 
 --- Setup
 return {
+  front_end = "OpenGL",
+  enable_wayland = false,
   scrollback_lines = 10000,
   -- Ref: https://github.com/motemen/dotfiles/blob/master/.config/wezterm/wezterm.lua
   quick_select_patterns = {
@@ -202,8 +204,8 @@ return {
   default_cursor_style = "BlinkingBlock",
   cursor_thickness = "0.1cell",
   cursor_blink_rate = 800,
-  text_background_opacity = 0.98,
-  window_background_opacity = 0.98,
+  text_background_opacity = 0.75,
+  window_background_opacity = 0.95,
   macos_window_background_blur = 10,
   window_decorations = "RESIZE",
   window_close_confirmation = 'NeverPrompt',
@@ -213,7 +215,7 @@ return {
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
   tab_max_width = 32,
-  window_padding = { left = '1cell', right = '1cell', top = '0.3cell', bottom = '0.3cell', },
+  window_padding = { left = '1cell', right = '1cell', top = '0.3cell', bottom = '1cell', },
   -- keyboard
   enable_kitty_keyboard = true,
   send_composed_key_when_left_alt_is_pressed = false,

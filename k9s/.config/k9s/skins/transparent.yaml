@@ -24,7 +24,8 @@ k9s:
       bgColor: default
       counterColor: default
     menu:
-      fgColor: fuchsia
+      fgColor: default
+      fgStyle: bold
   views:
     charts:
       bgColor: default

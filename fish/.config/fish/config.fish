@@ -1,12 +1,13 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    set fish_greeting
-
+    function fish_greeting
+        clear
+    end
     ########################
     ### Aliases and Vars ###
     ########################
     if [ -f $HOME/.config/alias ]
-    source $HOME/.config/alias
+        source $HOME/.config/alias
     end
 
     source ~/.config/fish/eat
@@ -34,7 +35,7 @@ if status is-interactive
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
     set --export ALTERNATE_EDITOR ""
-    set --export EDITOR "emacs -nw"
+    set --export EDITOR "emacsclient -a="
     set --export COLORTERM "truecolor"
 
     set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"
@@ -42,10 +43,11 @@ if status is-interactive
     ###########
     ### FZF ###
     ###########
-    set --export BAT_THEME "OneHalfDark"
+    set --export BAT_THEME "ansi" # Solarized (dark)
+    
     set --export FZF_COMPLETION_TRIGGER "``"
     set --export FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
-    set --export FZF_DEFAULT_OPTS "--bind 'tab:down,shift-tab:up'
+    set --export FZF_DEFAULT_OPTS "--bind 'tab:down,shift-tab:up' --style=full
                                    --reverse --cycle --border=sharp --color=dark
                                    --color=fg:-1,bg:-1,hl:#a7bf87,fg+:-1,bg+:-1,hl+:#d9c18c
                                    --color=info:#81a2be,prompt:#a7bf87,pointer:#b294bb
