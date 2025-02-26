@@ -164,13 +164,14 @@
                 
                 casks = [
                   {
-                    name = "emacs@pretest";
+                    name = "emacs";
                     greedy = true;
                   }
                   "kitty"
                   "syncthing"
                   "rectangle"
                   "aerospace"
+                  "hammerspoon"
                   "jordanbaird-ice"
                   "ubersicht"
                   "docker"
@@ -186,8 +187,12 @@
                 systemPackages = commonPackages ++ darwinPackages;
               };
 
-              # NOTE tmux woes: https://github.com/LnL7/nix-darwin/pull/1344
-              security.pam.enableSudoTouchIdAuth = true;
+              security.pam.services.sudo_local = {
+                enable = true;
+                reattach = true;
+                touchIdAuth = true;
+              };
+              
               system = {
                 keyboard = {
                   enableKeyMapping = true;
@@ -228,6 +233,11 @@
                       forceLimitAdTracking = true;
                       allowApplePersonalizedAdvertising = false;
                       allowIdentifierForAdvertising = false;
+                    };
+                  };
+                  CustomUserPreferences = {
+                    "org.hammerspoon.Hammerspoon" = {
+                      MJConfigFile = "~/.config/hammerspoon/init.lua";
                     };
                   };
                 };
