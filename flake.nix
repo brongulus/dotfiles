@@ -22,6 +22,10 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zig = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
@@ -33,7 +37,8 @@
     };
   };
   
-  outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, emacs-overlay, nixgl, rust-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask,
+  emacs-overlay, nixgl, rust-overlay, zig, ... }@inputs:
     let
       system = builtins.currentSystem;
       user = builtins.getEnv "USER";
@@ -41,7 +46,7 @@
         inherit system;
         config.allowUnfree = true;
         config.input-fonts.acceptLicense = true;
-        overlays = [ emacs-overlay.overlay nixgl.overlay rust-overlay.overlays.default ];
+        overlays = [ emacs-overlay.overlay nixgl.overlay rust-overlay.overlays.default zig.overlays.default ];
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
@@ -62,15 +67,16 @@
         rust-analyzer clippy rustfmt
         go_1_24 gopls basedpyright ruff
         uv janet bacon shellcheck
-        tree-sitter zig zls lua-language-server
+        zigpkgs.master zls
+        tree-sitter lua-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
         ruby rubyPackages.pry colorls ruby-lsp # <- LSP not working
         rubyPackages.reline rubyPackages.prism # <- FIXME lsp needs 0.22-0.24
         
         # Core utilities
-        wezterm git fish yazi gh stow
-        zellij direnv nix-direnv cachix
+        wezterm git fish zoxide yazi gh stow
+        zellij direnv nix-direnv cachix helix
         
         # CLI tools
         fzf fishPlugins.fzf-fish fishPlugins.z
@@ -137,7 +143,7 @@
                 onActivation = {
                   autoUpdate = true;
                   upgrade = true;
-                  cleanup = "zap";
+                  cleanup = "uninstall";
                 };
                 
                 taps = [
@@ -173,6 +179,7 @@
                   "aerospace"
                   "hammerspoon"
                   "jordanbaird-ice"
+                  "zen-browser"
                   "ubersicht"
                   "docker"
                 ];
@@ -201,7 +208,7 @@
                 defaults = {
                   dock = {
                     tilesize = 50;
-                    autohide = false;
+                    autohide = true;
                     orientation = "bottom";
                     show-recents = false;
                   };
