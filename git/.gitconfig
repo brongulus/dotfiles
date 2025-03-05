@@ -5,6 +5,19 @@
   user = brongulus
 [FORGE "HOST"]
   user = brongulus
+# https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[column]
+  ui = auto
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+[rebase]
+  autoStash = true
+  updateRefs = true
 # https://jvns.ca/blog/2024/02/16/popular-git-config-options/
 [push]
   # Automatically set origin as the remote for current branch
@@ -16,15 +29,15 @@
   conflictstyle = zdiff3
 # Delta
 [core]
-  pager = delta
+  # pager = delta --pager='bat --style=plain'
   editor = "emacsclient -a="
+  excludesfile = ~/.gitignore
   # sshCommand = ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes
 [interactive]
   diffFilter = delta --color-only
 [delta]
   side-by-side = true
   navigate = true    # use n and N to move between diff sections
-  light = false      # set to true if you're in a terminal w/ a light background color
 # Ref: https://stackoverflow.com/a/43654115 (git config --list)
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig

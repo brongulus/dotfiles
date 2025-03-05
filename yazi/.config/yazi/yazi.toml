@@ -12,5 +12,5 @@ max_height   = 2300
 
 [opener]
 edit = [
-  { run = 'emacs -nw "$@"', block = true },
+  { run = 'emacs -nw --init-directory=~/.emacs.d/nano "$@"', block = true },
 ]

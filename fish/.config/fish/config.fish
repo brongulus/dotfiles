@@ -170,6 +170,12 @@ if status is-interactive
        direnv hook fish | source
     end
 
+    if type -q zoxide
+       # export _ZO_DATA_DIR=$Z_DATA
+       zoxide init fish | source
+       # zoxide import --from=z $Z_DATA
+    end
+
     # if [ -z "$TMUX" ]; and [ "$TERM" = "xterm-kitty" ];
     #     tmux attach || exec tmux new-session && exit;
     # end
