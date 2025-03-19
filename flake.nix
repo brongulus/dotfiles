@@ -80,10 +80,14 @@
         
         # CLI tools
         fzf fishPlugins.fzf-fish fishPlugins.z
-        ripgrep bat fd delta yq jq tmux
-        tmuxPlugins.resurrect
-        tmuxPlugins.tmux-fzf
+        ripgrep bat fd delta ansifilter yq jq tmux
+        tmuxPlugins.resurrect tmuxPlugins.tmux-fzf
         tmuxPlugins.tmux-thumbs
+
+        # Misc
+        # modlist: modmenu, simplefog, betterclouds
+        # iris, simplynoshading, fabulouslyoptimized
+        anki-bin prismlauncher
       ];
 
       # Linux-specific packages
@@ -105,7 +109,7 @@
 
       # Darwin-specific packages
       darwinPackages = with pkgs; [
-        # moved to brew
+        gcc
       ];
       
       # Create platform-specific outputs
@@ -161,7 +165,7 @@
                   "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
                   "lazydocker" "k9s" "kubecolor"
                   "gardenlogin" "gardenctl-v2" "ggshield" "kubelogin"
-                  "yaml-language-server" "helm-ls"
+                  "yaml-language-server" "helm-ls" "prometheus"
                   # personal
                   "minimal-racket" "mpv"
                   # pdf-tools
