@@ -36,7 +36,7 @@ if status is-interactive
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
     set --export ALTERNATE_EDITOR ""
-    set --export EDITOR "emacsclient -a="
+    set --export EDITOR "emacs --init-directory='~/.emacs.d/nano' -nw"
     set --export COLORTERM "truecolor"
 
     set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"

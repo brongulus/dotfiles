@@ -28,7 +28,7 @@
 # Delta
 [core]
   # pager = delta --pager='bat --style=plain'
-  editor = "emacsclient -a="
+  editor = "emacsclient --init-directory='~/.emacs.d/nano' -a="
   excludesfile = ~/.gitignore
   # sshCommand = ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes
 [interactive]

@@ -71,16 +71,18 @@
         tree-sitter lua-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
-        ruby rubyPackages.pry colorls ruby-lsp # <- LSP not working
-        rubyPackages.reline rubyPackages.prism # <- FIXME lsp needs 0.22-0.24
+        ruby rubyPackages.pry colorls ruby-lsp
+        rubyPackages.reline rubyPackages.prism
         
         # Core utilities
         wezterm git fish zoxide yazi gh stow
         zellij direnv nix-direnv cachix helix
         
         # CLI tools
-        fzf fishPlugins.fzf-fish fishPlugins.z
-        ripgrep bat fd delta ansifilter yq jq tmux
+        fzf fishPlugins.fishtape_3 ## fishPlugins.fzf-fish # <-- broken?
+        fishPlugins.z
+        ripgrep bat fd delta difftastic ansifilter
+        yq jq tmux
         tmuxPlugins.resurrect tmuxPlugins.tmux-fzf
         tmuxPlugins.tmux-thumbs
 
@@ -103,7 +105,7 @@
         nerd-fonts.symbols-only
         nerd-fonts.victor-mono
         merriweather input-fonts fira-sans victor-mono
-        maple-mono-SC-NF
+        maple-mono.NF-CN
         # ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
       ];
 
@@ -138,7 +140,7 @@
                 pkgs.merriweather
                 pkgs.input-fonts
                 pkgs.fira-sans
-                pkgs.maple-mono-SC-NF
+                pkgs.maple-mono.NF-CN
                 pkgs.national-park-typeface
               ];
               
@@ -293,6 +295,7 @@
       programs.fish = {
         enable = true;
         plugins = with pkgs.fishPlugins; [
+          fishtape.src
           fzf-fish.src
           z.src
         ];
