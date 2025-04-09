@@ -165,7 +165,7 @@
                   "coreutils" "gnu-sed" "gnu-tar" "grep" "gzip" "parallel" "iproute2mac"
                   # workPackages
                   "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
-                  "lazydocker" "k9s" "kubecolor"
+                  "lazydocker" "k9s" "kubecolor" "krew"
                   "gardenlogin" "gardenctl-v2" "ggshield" "kubelogin"
                   "yaml-language-server" "helm-ls" "prometheus"
                   # personal

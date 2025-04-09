@@ -23,6 +23,7 @@ if status is-interactive
     fish_add_path ~/.spicetify
     fish_add_path ~/.nix-profile/bin
     fish_add_path ~/dotfiles/bin/bin
+    fish_add_path ~/.krew/bin
 
     # gardener kind setup
     set --export GOPATH "$HOME/go"
@@ -65,9 +66,14 @@ if status is-interactive
 
     function fzf-open
        set -l file
-       set file (fzf --height 60% --border --reverse
+       set file (fzf --height 60% --border --reverse \
                      --preview 'bat --style changes --color=always {} | head -500') &&
-       setsid xdg-open "$file"
+       switch (uname)
+           case Darwin
+                open "$file"
+           case '*'
+                setsid xdg-open "$file"
+        end
     end
 
     # fzf --preview 'fzf-preview.sh {}'
