@@ -1,0 +1,74 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "shift-z": "editor::Redo",
+      "u": "editor::Undo",
+      "d": "vim::DeleteRight",
+      "x": "editor::SelectLine",
+      ";": "editor::Cancel",
+      "shift-i": "vim::InsertFirstNonWhitespace",
+      "shift-a": "vim::InsertEndOfLine",
+      // Goto mode
+      // "tab": "pane::ActivateNextItem",
+      // "shift-tab": "pane::ActivatePrevItem",
+      "g e": "vim::EndOfLine",
+      "g l": "vim::EndOfLine",
+      "g h": "vim::StartOfLine",
+      "g a": "vim::FirstNonWhitespace", // "g s" default behavior is "space s"
+      "g j": "vim::EndOfDocument",
+      "g k": "vim::StartOfDocument",
+      "g r": "editor::FindAllReferences", // zed specific
+      // Window mode
+      "space w h": "workspace::ActivatePaneLeft",
+      "space w l": "workspace::ActivatePaneRight",
+      "space w k": "workspace::ActivatePaneUp",
+      "space w j": "workspace::ActivatePaneDown",
+      "space c": "pane::CloseActiveItem",
+      "space w q": "pane::CloseActiveItem",
+      "space w s": "pane::SplitRight",
+      "space w v": "pane::SplitDown",
+      // Space mode
+      "space f": "file_finder::Toggle",
+      "space k": "editor::Hover",
+      "space s": "outline::Toggle",
+      "space shift-s": "project_symbols::Toggle",
+      "space d": "editor::GoToDiagnostic",
+      "space shift-d": "diagnostics::Deploy",
+      "space r": "editor::Rename",
+      "space a": "editor::ToggleCodeActions",
+      "space h": "editor::SelectAllMatches",
+      // Match mode
+      "m m": "vim::Matching",
+      "m i w": ["workspace::SendKeystrokes", "v i w"],
+      // Misc
+      // "shift-k": "editor::MoveLineUp",
+      // "shift-j": "editor::MoveLineDown",
+      "ctrl-k": "editor::MoveLineUp",
+      "ctrl-j": "editor::MoveLineDown",
+      // Fold
+      "z c": "editor::Fold",
+      "z s": "editor::UnfoldLines",
+      "z f": "editor::FoldSelectedRanges"
+    }
+  }
+]
