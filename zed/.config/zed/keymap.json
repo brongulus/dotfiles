@@ -9,7 +9,17 @@
   {
     "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      "ctrl-x ctrl-m": "command_palette::Toggle",
+      "space x f": "workspace::OpenFiles",
+      "space p p": "projects::OpenRecent",
+      "space p f": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      "space f": "file_finder::Toggle",
+      "space s": "outline::Toggle",
+      "space shift-s": "project_symbols::Toggle",
+      "space shift-d": "diagnostics::Deploy",
+      "alt-x": "command_palette::Toggle",
+      "ctrl-x ctrl-f": "file_finder::Toggle"
     }
   },
   {
@@ -50,6 +60,7 @@
       "ctrl-x ctrl-s": "workspace::Save",
       "ctrl-space": "vim::ToggleVisual",
       "ctrl-x h": "editor::SelectAll",
+      "ctrl-x d": "project_panel::ToggleFocus",
       "ctrl-a": "editor::MoveToBeginningOfLine",
       "ctrl-e": "editor::MoveToEndOfLine",
       "ctrl-b": "editor::MoveLeft",
@@ -74,6 +85,7 @@
       "ctrl-x v P": "git::Push",
       "ctrl-x v D": "git::Diff",
       "ctrl-x v f": "git::ForcePush",
+      "ctrl-x v g": "git::Blame",
       "alt-.": "editor::GoToDefinition",
       "ctrl-\\": "workspace::NewTerminal",
       "alt-j": "workspace::ToggleBottomDock",
@@ -85,18 +97,20 @@
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      "shift-z": "editor::Redo",
-      "u": "editor::Undo",
       "d": "vim::HelixDelete",
       "x": "editor::SelectLine",
       ";": "editor::Cancel",
       "s": "vim::Search",
+      "q": "pane::CloseActiveItem",
       "`": "workspace::ToggleBottomDock",
+      "u": "editor::Undo",
+      "shift-z": "editor::Redo",
+      "shift-r": "vim::Substitute",
       "shift-i": "vim::InsertFirstNonWhitespace",
       "shift-a": "vim::InsertEndOfLine",
       // Goto mode
-      // "tab": "pane::ActivateNextItem",
-      // "shift-tab": "pane::ActivatePrevItem",
+      "tab": "pane::ActivateNextItem",
+      "shift-tab": "pane::ActivatePreviousItem",
       "g e": "vim::EndOfLine",
       "g l": "vim::EndOfLine",
       "g h": "vim::StartOfLine",
@@ -105,6 +119,7 @@
       "g k": "vim::StartOfDocument",
       "g r": "editor::FindAllReferences", // zed specific
       "g /": "editor::GoToDefinitionSplit",
+      "g s": "project_symbols::Toggle",
       "g x": "diagnostics::Deploy",
       "g i": "editor::GoToImplementation",
       "g b": "pane::GoBack",
@@ -118,6 +133,7 @@
       "o": "workspace::ActivateNextPane",
       // Space mode
       "space x": null,
+      "space d": "project_panel::ToggleFocus",
       "space x f": "workspace::OpenFiles",
       "space x s": "workspace::Save",
       "space p p": "projects::OpenRecent",
@@ -127,7 +143,6 @@
       "space k": "pane::CloseActiveItem",
       "space s": "outline::Toggle",
       "space shift-s": "project_symbols::Toggle",
-      "space d": "editor::GoToDiagnostic",
       "space shift-d": "diagnostics::Deploy",
       "space r": "editor::Rename",
       "space +": "editor::ToggleCodeActions",
@@ -140,6 +155,8 @@
       "space v v": "git_panel::ToggleFocus",
       "space v P": "git::Push",
       "space v f": "git::ForcePush",
+      "space v D": "git::Diff",
+      "space v g": "git::Blame",
       "shift-j": "editor::JoinLines",
       "shift-o": "pane::DeploySearch",
       // Fold

@@ -28,9 +28,10 @@
   },
   "terminal": {
     "font_size": 14,
-    "toolbar": {
-      "breadcrumbs": false
-    }
+    "shell": { "program": "fish" },
+    "toolbar": { "breadcrumbs": false }
   },
+  "diagnostics": { "inline": { "enabled": true } },
+  "inlay_hints": { "enabled": true },
   "always_treat_brackets_as_autoclosed": true
 }

@@ -9,7 +9,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
-  
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -36,7 +36,7 @@
       flake = false;
     };
   };
-  
+
   outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask,
   emacs-overlay, nixgl, rust-overlay, zig, ... }@inputs:
     let
@@ -51,7 +51,7 @@
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
       hostname = builtins.getEnv "HOSTNAME";
-      
+
       # Kitty on linux requires nixGL
       wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
         ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
@@ -67,17 +67,18 @@
         rust-analyzer clippy rustfmt
         go_1_24 gopls basedpyright ruff
         uv janet bacon shellcheck
+        sqlite lazysql litecli
         zigpkgs.master zls
         tree-sitter lua-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
         ruby rubyPackages.pry colorls ruby-lsp
         rubyPackages.reline rubyPackages.prism
-        
+
         # Core utilities
         wezterm git fish zoxide yazi gh stow
         zellij direnv nix-direnv cachix helix
-        
+
         # CLI tools
         fzf fishPlugins.fishtape_3 ## fishPlugins.fzf-fish # <-- broken?
         fishPlugins.z
@@ -113,7 +114,7 @@
       darwinPackages = with pkgs; [
         gcc
       ];
-      
+
       # Create platform-specific outputs
       platformOutputs = if isDarwin then {
         darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
@@ -143,7 +144,7 @@
                 pkgs.maple-mono.NF-CN
                 pkgs.national-park-typeface
               ];
-              
+
               homebrew = {
                 enable = true;
                 onActivation = {
@@ -151,7 +152,7 @@
                   upgrade = true;
                   cleanup = "uninstall";
                 };
-                
+
                 taps = [
                   "derailed/k9s"
                   "gardener/tap"
@@ -173,7 +174,7 @@
                   # pdf-tools
                   "pkg-config" "poppler" "autoconf" "automake"
                 ];
-                
+
                 casks = [
                   {
                     name = "emacs";
@@ -190,11 +191,11 @@
                   "docker"
                 ];
               };
-              
+
               programs.fish.enable = true;
               programs.zsh.enable = true;
               programs.tmux.enable = true;
-              
+
               environment = {
                 shells = [ pkgs.fish ];
                 systemPackages = commonPackages ++ darwinPackages;
@@ -205,7 +206,7 @@
                 reattach = true;
                 touchIdAuth = true;
               };
-              
+
               system = {
                 keyboard = {
                   enableKeyMapping = true;
@@ -264,7 +265,7 @@
             }
           ];
         };
-        
+
         defaultPackage.${system} = pkgs.buildEnv {
           name = "packages-darwin";
           paths = commonPackages ++ darwinPackages;
@@ -275,7 +276,7 @@
           paths = commonPackages ++ linuxPackages;
         };
       };
-      
+
     in platformOutputs // {
       # Shared configuration that's platform-independent
       programs.direnv = {
@@ -288,10 +289,10 @@
           package = pkgs.nix-direnv;
         };
       };
-      
+
       fonts.fontconfig.enable = true;
       programs.bash.enable = true;
-      
+
       programs.fish = {
         enable = true;
         plugins = with pkgs.fishPlugins; [
