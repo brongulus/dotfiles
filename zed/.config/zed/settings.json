@@ -7,6 +7,13 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
+  },
   "vim_mode": true,
   "telemetry": {
     "metrics": false,
@@ -26,6 +33,11 @@
     "git_status": true,
     "show_diagnostics": "errors"
   },
+  "scrollbar": { "show": "never" },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
+  },
   "terminal": {
     "font_size": 14,
     "shell": { "program": "fish" },
@@ -33,5 +45,7 @@
   },
   "diagnostics": { "inline": { "enabled": true } },
   "inlay_hints": { "enabled": true },
-  "always_treat_brackets_as_autoclosed": true
+  "always_treat_brackets_as_autoclosed": true,
+  "preferred_line_length": 98,
+  "soft_wrap": "preferred_line_length"
 }

@@ -60,16 +60,17 @@
       # Common packages for all platforms
       commonPackages = with pkgs; [
         # Development tools
-        nixVersions.latest
+        nixVersions.latest gawk
         tectonic pandoc ghostscript
         imagemagick ffmpeg yt-dlp
         rust-bin.nightly.latest.minimal
         rust-analyzer clippy rustfmt
         go_1_24 gopls basedpyright ruff
         uv janet bacon shellcheck
-        sqlite lazysql litecli
-        zigpkgs.master zls
+        sqlite gobang litecli elinks
+        zigpkgs.master zls gnuplot
         tree-sitter lua-language-server
+        # copilot-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
         ruby rubyPackages.pry colorls ruby-lsp
@@ -159,6 +160,7 @@
                   "gitguardian/tap"
                   "int128/kubelogin"
                   "nikitabobko/tap" # aerospace
+                  "damascenorafael/tap" # reminders-menubar
                 ];
 
                 brews = [
@@ -180,15 +182,12 @@
                     name = "emacs";
                     greedy = true;
                   }
-                  "kitty"
-                  "syncthing"
-                  "rectangle"
-                  "aerospace"
-                  "hammerspoon"
-                  "jordanbaird-ice"
-                  "zen-browser"
-                  "ubersicht"
-                  "docker"
+                  "kitty" "syncthing"
+                  "rectangle" "aerospace"
+                  "hammerspoon" "jordanbaird-ice"
+                  "zen-browser" "ubersicht"
+                  "docker" "reminders-menubar"
+                  "shortcat" "battery"
                 ];
               };
 
