@@ -11,7 +11,6 @@ function fish_right_prompt
 
     # The git prompt's default format is ' (%s)'.
     # We don't want the leading space.
-    set -l kube (kubectl_status)(set_color normal)
     set -l git_vc (fish_vcs_prompt '(%s)' 2>/dev/null)
 
     set -l d (set_color brblue)(date "+%R")(set_color normal)
@@ -39,6 +38,11 @@ function fish_right_prompt
     if [ "$TERM" = "eterm-color" ]
         echo -n ""
     else
-        string join -n " " -- $venv $duration $direnv $kube $git_vc $d
+        if [ -n "$TMUX" ]
+            string join -n " " -- $venv $duration $direnv $git_vc $d
+        else
+            set -l kube (kubectl_status)(set_color normal)
+            string join -n " " -- $venv $duration $direnv $kube $git_vc $d
+        end
     end
 end

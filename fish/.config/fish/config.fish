@@ -11,8 +11,8 @@ if status is-interactive
         source $HOME/.config/alias
     end
 
-    source ~/.config/fish/eat
-    alias find-file="_eat_msg ff"
+    # source ~/.config/fish/eat
+    # alias find-file="_eat_msg ff"
 
     fish_add_path ~/.emacs.d/bin
     fish_add_path ~/bin
@@ -28,11 +28,12 @@ if status is-interactive
     # gardener kind setup
     set --export GOPATH "$HOME/go"
     if [ "$(uname)" = "Darwin" ];
-       set PATH $(brew --prefix)/opt/coreutils/libexec/gnubin $PATH
-       set PATH $(brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
-       set PATH $(brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
-       set PATH $(brew --prefix)/opt/grep/libexec/gnubin $PATH
-       set PATH $(brew --prefix)/opt/gzip/bin $PATH
+       set -l BREW_PREFIX (brew --prefix)
+       set PATH {$BREW_PREFIX}/opt/coreutils/libexec/gnubin $PATH
+       set PATH {$BREW_PREFIX}/opt/gnu-sed/libexec/gnubin $PATH
+       set PATH {$BREW_PREFIX}/opt/gnu-tar/libexec/gnubin $PATH
+       set PATH {$BREW_PREFIX}/opt/grep/libexec/gnubin $PATH
+       set PATH {$BREW_PREFIX}/opt/gzip/bin $PATH
     end
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
@@ -85,7 +86,7 @@ if status is-interactive
               --delimiter ':' \
               # --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
               --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-              --bind 'enter:become(emacs -nw +{2} {1})'
+              --bind 'enter:become(emacs --init-directory="~/.emacs.d/nano" -nw +{2} {1})'
     end
 
     function zi --description "Like z, but choose with fzf"
@@ -185,4 +186,11 @@ if status is-interactive
     # if [ -z "$TMUX" ]; and [ "$TERM" = "xterm-kitty" ];
     #     tmux attach || exec tmux new-session && exit;
     # end
+    function kcfg
+        export KUBECONFIG="$argv"
+        if [ -n "$TMUX" ]
+          tmux set-environment -g KUBECONFIG "$KUBECONFIG"
+          tmux refresh-client -S
+        end
+    end
 end

@@ -41,6 +41,7 @@
   emacs-overlay, nixgl, rust-overlay, zig, ... }@inputs:
     let
       system = builtins.currentSystem;
+      hostname = builtins.getEnv "HOSTNAME";
       user = builtins.getEnv "USER";
       pkgs = import nixpkgs {
         inherit system;
@@ -50,12 +51,17 @@
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
-      hostname = builtins.getEnv "HOSTNAME";
 
       # Kitty on linux requires nixGL
       wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
         ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
       '';
+
+      fzf-fish = pkgs.fishPlugins.fzf-fish.overrideAttrs {
+        nativeCheckInputs = [];
+        checkPlugins = [];
+        checkPhase = "";
+      };
 
       # Common packages for all platforms
       commonPackages = with pkgs; [
@@ -65,10 +71,10 @@
         imagemagick ffmpeg yt-dlp
         rust-bin.nightly.latest.minimal
         rust-analyzer clippy rustfmt
-        go_1_24 gopls basedpyright ruff
+        gopls python3Minimal basedpyright ruff
         uv janet bacon shellcheck
         sqlite gobang litecli elinks
-        zigpkgs.master zls gnuplot
+        zigpkgs.master zls gnuplot graphviz
         tree-sitter lua-language-server
         # copilot-language-server
 
@@ -81,7 +87,7 @@
         zellij direnv nix-direnv cachix helix
 
         # CLI tools
-        fzf fishPlugins.fishtape_3 ## fishPlugins.fzf-fish # <-- broken?
+        fzf fishPlugins.fishtape_3 fzf-fish
         fishPlugins.z
         ripgrep bat fd delta difftastic ansifilter
         yq jq tmux
@@ -102,7 +108,7 @@
         wrappedKitty
         syncthing
         git-graph
-        gdb mpv
+        go gdb mpv
         # Fonts
         nerd-fonts.symbols-only
         nerd-fonts.victor-mono
@@ -113,10 +119,11 @@
 
       # Darwin-specific packages
       darwinPackages = with pkgs; [
-        gcc
+        # gcc
+        gdlv
       ];
 
-      # Create platform-specific outputs
+      # create platform-specific outputs
       platformOutputs = if isDarwin then {
         darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
           inherit system;
@@ -126,9 +133,9 @@
             })
             nix-homebrew.darwinModules.nix-homebrew
             {
-              nix.settings.trusted-users = [ "${user}" ]; # FIXME
+              nix.settings.trusted-users = [ user ]; # FIXME
               nix-homebrew = {
-                user = "${user}";
+                user = user;
                 enable = true;
                 enableRosetta = true;
                 autoMigrate = true;
@@ -147,6 +154,7 @@
               ];
 
               homebrew = {
+                user = user;
                 enable = true;
                 onActivation = {
                   autoUpdate = true;
@@ -161,6 +169,7 @@
                   "int128/kubelogin"
                   "nikitabobko/tap" # aerospace
                   "damascenorafael/tap" # reminders-menubar
+                  "smudge/smudge" # nightlight
                 ];
 
                 brews = [
@@ -168,11 +177,12 @@
                   "coreutils" "gnu-sed" "gnu-tar" "grep" "gzip" "parallel" "iproute2mac"
                   # workPackages
                   "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
-                  "lazydocker" "k9s" "kubecolor" "krew"
+                  "lazydocker" "k9s" "kubecolor" "krew" "stern" "delve"
                   "gardenlogin" "gardenctl-v2" "ggshield" "kubelogin"
                   "yaml-language-server" "helm-ls" "prometheus"
                   # personal
-                  "minimal-racket" "mpv"
+                  "minimal-racket" "mpv" "gnu-time" "gcc"
+                  "nightlight"
                   # pdf-tools
                   "pkg-config" "poppler" "autoconf" "automake"
                 ];
@@ -187,7 +197,7 @@
                   "hammerspoon" "jordanbaird-ice"
                   "zen-browser" "ubersicht"
                   "docker" "reminders-menubar"
-                  "shortcat" "battery"
+                  "shortcat" "battery" "lookaway"
                 ];
               };
 
@@ -206,6 +216,7 @@
                 touchIdAuth = true;
               };
 
+              system.primaryUser = user;
               system = {
                 keyboard = {
                   enableKeyMapping = true;
@@ -214,7 +225,7 @@
                 defaults = {
                   dock = {
                     tilesize = 50;
-                    autohide = true;
+                    autohide = false;
                     orientation = "bottom";
                     show-recents = false;
                   };
@@ -239,6 +250,7 @@
                     AppleShowAllExtensions = true;
                     InitialKeyRepeat = 15;
                     KeyRepeat = 1;
+                    AppleWindowTabbingMode = "always";
                   };
                   CustomSystemPreferences = {
                     "com.apple.AdLib" = {

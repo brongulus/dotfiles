@@ -228,7 +228,8 @@ return {
   --         action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
   --         mods = 'NONE',
   --     },
-  -- },
+
+ -- },
   keys = {
     {
       key = 'v',
@@ -390,7 +391,7 @@ return {
   unix_domains = {
     { name = 'unix', no_serve_automatically = true, },
   },
-  default_domain = 'unix',
+  -- default_domain = 'unix',
   -- term
   -- default_prog = { '~/.nix-profile/bin/fish', '-l' },
   -- term = "wezterm",
