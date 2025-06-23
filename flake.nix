@@ -43,6 +43,7 @@
       system = builtins.currentSystem;
       hostname = builtins.getEnv "HOSTNAME";
       user = builtins.getEnv "USER";
+      sudo_user = builtins.getEnv "SUDO_USER";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -71,7 +72,7 @@
         imagemagick ffmpeg yt-dlp
         rust-bin.nightly.latest.minimal
         rust-analyzer clippy rustfmt
-        gopls python3Minimal basedpyright ruff
+        gopls python3Full basedpyright ruff
         uv janet bacon shellcheck
         sqlite gobang litecli elinks
         zigpkgs.master zls gnuplot graphviz
@@ -154,7 +155,7 @@
               ];
 
               homebrew = {
-                user = user;
+                user = sudo_user;
                 enable = true;
                 onActivation = {
                   autoUpdate = true;
@@ -170,6 +171,7 @@
                   "nikitabobko/tap" # aerospace
                   "damascenorafael/tap" # reminders-menubar
                   "smudge/smudge" # nightlight
+                  "socsieng/tap" # sendkeys
                 ];
 
                 brews = [
@@ -182,22 +184,23 @@
                   "yaml-language-server" "helm-ls" "prometheus"
                   # personal
                   "minimal-racket" "mpv" "gnu-time" "gcc"
-                  "nightlight"
+                  "nightlight" "cliclick" "sendkeys"
                   # pdf-tools
                   "pkg-config" "poppler" "autoconf" "automake"
                 ];
 
                 casks = [
                   {
-                    name = "emacs";
+                    name = "emacs@nightly";
                     greedy = true;
                   }
+                  "google-cloud-sdk"
                   "kitty" "syncthing"
                   "rectangle" "aerospace"
                   "hammerspoon" "jordanbaird-ice"
                   "zen-browser" "ubersicht"
                   "docker" "reminders-menubar"
-                  "shortcat" "battery" "lookaway"
+                  "shortcat" "battery" "breaktimer"
                 ];
               };
 

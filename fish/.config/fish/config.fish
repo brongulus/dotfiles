@@ -34,6 +34,7 @@ if status is-interactive
        set PATH {$BREW_PREFIX}/opt/gnu-tar/libexec/gnubin $PATH
        set PATH {$BREW_PREFIX}/opt/grep/libexec/gnubin $PATH
        set PATH {$BREW_PREFIX}/opt/gzip/bin $PATH
+       source "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc"
     end
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
@@ -42,6 +43,7 @@ if status is-interactive
     set --export COLORTERM "truecolor"
 
     set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"
+    set --export KUBECOLOR_THEME_BASE_MUTED "black:italic"
 
     ###########
     ### FZF ###
