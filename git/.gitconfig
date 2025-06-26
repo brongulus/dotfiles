@@ -37,7 +37,7 @@
   side-by-side = true
   navigate = true    # use n and N to move between diff sections
 [mergetool "ediff"]
-  cmd = emacs --init-directory="~/.emacs.d/nano" -nw --eval \"(progn \
+  cmd = emacs -nw --eval \"(progn \
   (setq smerge-command-prefix \\\"v\\\") \
   (find-file \\\"$MERGED\\\") \
   (setq confirm-kill-emacs nil hl-line-mode nil) \
@@ -46,7 +46,7 @@
   (setq diff-refine 'navigation) \
   (map-keymap (lambda (_key cmd) (when (symbolp cmd) \
        (put cmd 'repeat-map 'smerge-basic-map))) smerge-basic-map))\"
-#   cmd = emacs --init-directory="~/.emacs.d/nano" -nw --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
+#   cmd = emacs -nw --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [mergetool]
   keepBackup = false
 [merge]

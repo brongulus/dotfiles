@@ -39,7 +39,7 @@ if status is-interactive
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
 
     set --export ALTERNATE_EDITOR ""
-    set --export EDITOR "emacs --init-directory='~/.emacs.d/nano' -nw"
+    set --export EDITOR "emacs -nw"
     set --export COLORTERM "truecolor"
 
     set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"
@@ -88,7 +88,7 @@ if status is-interactive
               --delimiter ':' \
               # --preview "bat --color=always {1} --theme='OneHalfDark' --highlight-line {2}" \
               --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-              --bind 'enter:become(emacs --init-directory="~/.emacs.d/nano" -nw +{2} {1})'
+              --bind 'enter:become(emacs -nw +{2} {1})'
     end
 
     function zi --description "Like z, but choose with fzf"

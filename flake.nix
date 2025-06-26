@@ -91,7 +91,7 @@
         fzf fishPlugins.fishtape_3 fzf-fish
         fishPlugins.z
         ripgrep bat fd delta difftastic ansifilter
-        yq jq tmux
+        yq jq fx tmux
         tmuxPlugins.resurrect tmuxPlugins.tmux-fzf
         tmuxPlugins.tmux-thumbs
 
@@ -185,8 +185,8 @@
                   # personal
                   "minimal-racket" "mpv" "gnu-time" "gcc"
                   "nightlight" "cliclick" "sendkeys"
-                  # pdf-tools
-                  "pkg-config" "poppler" "autoconf" "automake"
+                  # pdf-tools / doc-view
+                  "pkg-config" "poppler" "autoconf" "automake" "mupdf"
                 ];
 
                 casks = [
