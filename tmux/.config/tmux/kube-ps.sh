@@ -1,36 +1,53 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# eval $(gardenctl kubectl-env bash)
+# Get KUBECONFIG from tmux pane variable or use default
+get_kubeconfig() {
+  local kubeconfig
+  kubeconfig=$(tmux show-options -t "$pane" -p @kubeconfig 2>/dev/null | cut -d' ' -f2-)
+  if [ -n "$kubeconfig" ]; then
+    echo "$kubeconfig"
+  else
+    echo "${HOME}/.kube/config"
+  fi
+}
 
 # Function to get current context
 get_context() {
-  if [ -n "$KUBECONFIG" ]; then
-    kubectl --kubeconfig="$KUBECONFIG" config current-context 2>/dev/null || echo "󱃾 "
+  local kubeconfig
+  kubeconfig=$(get_kubeconfig)
+  
+  if [ -f "$kubeconfig" ]; then
+    kubectl --kubeconfig="$kubeconfig" config current-context 2>/dev/null || echo "󱃾"
   else
-    KUBECONFIG=${HOME}/.kube/config
-    kubectl config current-context 2>/dev/null || echo "󱃾 "
+    echo "󱃾"
   fi
 }
 
 # Function to get current namespace
 get_namespace() {
-  local context
+  local kubeconfig context
+  kubeconfig=$(get_kubeconfig)
   context=$(get_context)
-  if [ "$context" != "󱃾 " ]; then
-    if [ -n "$KUBECONFIG" ]; then
-      kubectl --kubeconfig="$KUBECONFIG" config view -o "jsonpath={.contexts[?(@.name==\"$context\")].context.namespace}" 2>/dev/null || echo "󱃾 "
+  
+  if [ "$context" != "󱃾" ] && [ -f "$kubeconfig" ]; then
+    local namespace
+    namespace=$(kubectl --kubeconfig="$kubeconfig" config view -o "jsonpath={.contexts[?(@.name==\"$context\")].context.namespace}" 2>/dev/null)
+    if [ -n "$namespace" ]; then
+      echo "$namespace"
     else
-      KUBECONFIG=${HOME}/.kube/config
-      kubectl config view -o "jsonpath={.contexts[?(@.name==\"$context\")].context.namespace}" 2>/dev/null || echo "󱃾 "
+      echo "default"
     fi
   else
-    echo "󱃾 "
+    echo "󱃾"
   fi
 }
 
-# Output based on argument
-case "$1" in
-  "context") get_context ;;
-  "namespace") get_namespace ;;
-  *) echo "Usage: $0 {context|namespace}" ;;
-esac
+# Display context and namespace
+context=$(get_context)
+namespace=$(get_namespace)
+
+if [ "$context" != "󱃾" ]; then
+  echo " (${context}|${namespace}) "
+else
+  echo ""
+fi

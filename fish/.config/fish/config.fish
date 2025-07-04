@@ -156,6 +156,10 @@ if status is-interactive
       command kubecolor $argv
     end
 
+    function ky --wraps kubectl
+      command kubecolor $argv -oyaml
+    end
+
     # reuse "kubectl" completions on "kubecolor"
     function kubecolor --wraps kubectl
       command kubecolor $argv
@@ -191,7 +195,7 @@ if status is-interactive
     function kcfg
         export KUBECONFIG="$argv"
         if [ -n "$TMUX" ]
-          tmux set-environment -g KUBECONFIG "$KUBECONFIG"
+          tmux set-option -p @kubeconfig "$KUBECONFIG"
           tmux refresh-client -S
         end
     end
