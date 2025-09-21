@@ -2,43 +2,43 @@
 on   = [ "<Esc>" ]
 run  = [ 'close' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "+" ]
 run  = [ 'create' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "R" ]
 run  = [ 'yank --cut' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "m" ]
 run  = [ 'toggle --state=true', 'arrow 1' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "u" ]
 run  = [ 'toggle --state=false', 'arrow 1' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "U" ]
 run  = [ 'toggle_all --state=off' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "t" ]
 run  = [ 'toggle_all' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "<C-t>" ]
 run  = [ 'tab_create --current' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "!" ]
 run  = [ 'shell --interactive --block' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "&" ]
 run  = [ 'shell --interactive' ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "f" ]
 run  = 'search_do --via=fd --args="-d 3"'
 desc = "Switch to the flat view with a max depth of 3"

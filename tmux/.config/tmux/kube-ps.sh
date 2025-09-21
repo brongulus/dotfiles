@@ -6,8 +6,6 @@ get_kubeconfig() {
   kubeconfig=$(tmux show-options -t "$pane" -p @kubeconfig 2>/dev/null | cut -d' ' -f2-)
   if [ -n "$kubeconfig" ]; then
     echo "$kubeconfig"
-  else
-    echo "${HOME}/.kube/config"
   fi
 }
 

@@ -141,6 +141,7 @@ local mKeys = {
     ["j"] = '~/.nix-profile/bin/yabai -m window --focus south',
     ["k"] = '~/.nix-profile/bin/yabai -m window --focus north',
     ["l"] = '~/.nix-profile/bin/yabai -m window --focus east || ~/.nix-profile/bin/yabai -m window --focus stack.next || ~/.nix-profile/bin/yabai -m window --focus stack.first',
+    ["x"] = '~/.nix-profile/bin/yabai -m window --toggle split',
 }
 
 local moveWin = {
@@ -200,11 +201,11 @@ hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(evt)
     return false
 end):start()
 
--- Preview jk shortcuts
+-- Preview jk shortcuts (FIXME)
 local previewBindings = {}
 function applicationWatcher(appName, eventType, appObject)
     if (eventType == hs.application.watcher.activated) then
-        if (appName == "Preview") then
+        if (appName == "Preview.app") then
             -- enable your custom bindings here
             previewBindings[#previewBindings + 1] = hs.hotkey.bind({}, "j", function()
                 hs.eventtap.keyStroke({}, "down")  -- Next page/item

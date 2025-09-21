@@ -4,10 +4,10 @@ function fish_prompt
     set -l normal (set_color normal)
     set -l usercolor (set_color $fish_color_user)
 
-    set -l delim "> "
-    #\U25BA\ 
+    set -l delim (set_color green)"❯ "$normal
     # If we don't have unicode use a simpler delimiter
     string match -qi "*.utf-8" -- $LANG $LC_CTYPE $LC_ALL; or set delim "> "
+    test $last_status -ne 0; and set delim (set_color $fish_color_error)"❯ $normal"
 
     fish_is_root_user; and set delim (set_color red)" # "$normal
 
@@ -32,10 +32,6 @@ function fish_prompt
         set cwd (set_color $col)
     end
 
-    # Prompt status only if it's not 0
-    set -l prompt_status
-    test $last_status -ne 0; and set prompt_status (set_color $fish_color_error)"[$last_status]$normal"
-
     # Only show host if in SSH or container
     # Store this in a global variable because it's slow and unchanging
     if not set -q prompt_host
@@ -53,8 +49,8 @@ function fish_prompt
     set -l pwd (prompt_pwd)
 
     if [ -n "$TMUX" ]
-        echo -n -s $prompt_host $normal $prompt_status $delim
+        echo -n -s $prompt_host $normal $delim
     else 
-        echo -n -s $prompt_host $cwd $pwd $normal $prompt_status " " $delim
+        echo -n -s $prompt_host $cwd $pwd $normal " " $delim
     end
 end

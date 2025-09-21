@@ -7,7 +7,7 @@
 // from the command palette.
 [
   {
-    "context": "Workspace && !VimWaiting && vim_mode != insert",
+    "context": "Workspace && !VimWaiting && vim_mode != insert && !(GitPanel && CommitEditor) && !AgentPanel",
     "bindings": {
       "ctrl-x ctrl-m": "command_palette::Toggle",
       "space x f": "workspace::OpenFiles",
@@ -92,8 +92,10 @@
     }
   },
   {
-    "context": "Editor && VimControl && !VimWaiting && !menu && vim_mode != insert",
+    "context": "Editor && VimControl && !menu && vim_mode != insert && !(GitPanel && CommitEditor) && !AgentPanel",
     "bindings": {
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }],
       "d": "vim::HelixDelete",
       "x": "editor::SelectLine",
       ";": "editor::Cancel",
@@ -158,9 +160,9 @@
       "shift-j": "editor::JoinLines",
       "shift-o": "pane::DeploySearch",
       // Fold
-      "z c": "editor::Fold",
+      "z c": "editor::FoldAll",
       "z s": "editor::UnfoldLines",
-      "z f": "editor::FoldSelectedRanges"
+      "z f": "editor::ToggleFold"
     }
   }
 ]

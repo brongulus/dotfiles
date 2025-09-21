@@ -11,12 +11,11 @@ export const refreshFrequency = 1000
 
 // Styling for the widget
 export const className = css`
-  bottom: 0px;
+  bottom: 5px;
   left: 10px;
   width: 18%;
-  color: #fff;
-  font-family: VictorMono Nerd Font Mono, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: semi-bold;
+  color: #efefef;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   cursor: pointer;
   
   .task-container {
@@ -25,6 +24,7 @@ export const className = css`
       rgba(0, 0, 0, 0.7) 100%);
     padding: 2px;
     padding-left: 10px;
+    padding-bottom: 5px;
     border-radius: 16px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px)

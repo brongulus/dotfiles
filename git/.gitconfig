@@ -28,7 +28,7 @@
 # Delta
 [core]
   # pager = delta --pager='bat --style=plain'
-  editor = "emacsclient -a="
+  editor = "emacs"
   excludesfile = ~/.gitignore
   # sshCommand = ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes
 [interactive]
@@ -57,3 +57,5 @@
   path = ~/work/.gitconfig
 [includeIf "gitdir:~/go/src/"]
   path = ~/go/src/.gitconfig
+[http]
+	sslVerify = false

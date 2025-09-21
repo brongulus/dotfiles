@@ -18,14 +18,22 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+    copyparty = {
+      url = "github:9001/copyparty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig = {
-      url = "github:mitchellh/zig-overlay";
+    doxx = {
+      url = "github:bgreenwell/doxx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # rust-overlay = {
+    #   url = "github:oxalica/rust-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # zig = {
+    #   url = "github:mitchellh/zig-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
@@ -38,7 +46,7 @@
   };
 
   outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask,
-  emacs-overlay, nixgl, rust-overlay, zig, ... }@inputs:
+  copyparty, doxx, emacs-overlay, nixgl, ... }@inputs: # rust-overlay, zig
     let
       system = builtins.currentSystem;
       hostname = builtins.getEnv "HOSTNAME";
@@ -48,7 +56,7 @@
         inherit system;
         config.allowUnfree = true;
         config.input-fonts.acceptLicense = true;
-        overlays = [ emacs-overlay.overlay nixgl.overlay rust-overlay.overlays.default zig.overlays.default ];
+        overlays = [ copyparty.overlays.default emacs-overlay.overlay nixgl.overlay ]; # rust-overlay.overlays.default zig.overlays.default
       };
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       isLinux = pkgs.stdenv.hostPlatform.isLinux;
@@ -70,13 +78,14 @@
         nixVersions.latest gawk
         tectonic pandoc ghostscript
         imagemagick ffmpeg yt-dlp
-        rust-bin.nightly.latest.minimal
-        rust-analyzer clippy rustfmt
-        gopls python3Full basedpyright ruff
+        rustc rust-analyzer clippy rustfmt
+        gopls reftools python314 basedpyright ruff
         uv janet bacon shellcheck
         sqlite gobang litecli elinks
-        zigpkgs.master zls gnuplot graphviz
+        zig zls gnuplot graphviz # zigpkgs.master
         tree-sitter lua-language-server
+        ocaml dune_3 opam
+        ocamlPackages.utop ocamlPackages.ocaml-lsp
         # copilot-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
@@ -91,14 +100,15 @@
         fzf fishPlugins.fishtape_3 fzf-fish
         fishPlugins.z
         ripgrep bat fd delta difftastic ansifilter
-        yq jq fx tmux
+        yq-go jq fx miller tmux
         tmuxPlugins.resurrect tmuxPlugins.tmux-fzf
         tmuxPlugins.tmux-thumbs
 
         # Misc
         # modlist: modmenu, simplefog, betterclouds
         # iris, simplynoshading, fabulouslyoptimized
-        anki-bin prismlauncher
+        copyparty mg durden cat9 anki-bin prismlauncher
+        doxx.packages.${system}.default tickrs ollama viddy
       ];
 
       # Linux-specific packages
@@ -121,7 +131,7 @@
       # Darwin-specific packages
       darwinPackages = with pkgs; [
         # gcc
-        gdlv
+        gdlv yabai jankyborders
       ];
 
       # create platform-specific outputs
@@ -181,26 +191,26 @@
                   "kubernetes-cli" "kubebuilder" "kubectx" "kind" "helm"
                   "lazydocker" "k9s" "kubecolor" "krew" "stern" "delve"
                   "gardenlogin" "gardenctl-v2" "ggshield" "kubelogin"
-                  "yaml-language-server" "helm-ls" "prometheus"
+                  "yaml-language-server" "helm-ls" "prometheus" "kwok"
+                  "openstackclient" "awscli" "azure-cli" "aliyun-cli"
                   # personal
                   "minimal-racket" "mpv" "gnu-time" "gcc"
                   "nightlight" "cliclick" "sendkeys"
                   # pdf-tools / doc-view
-                  "pkg-config" "poppler" "autoconf" "automake" "mupdf"
+                  "pkg-config" "poppler" "autoconf" "automake" "mupdf-tools"
                 ];
 
                 casks = [
                   {
-                    name = "emacs@nightly";
+                    name = "emacs-app@nightly";
                     greedy = true;
                   }
-                  "google-cloud-sdk"
-                  "kitty" "syncthing"
-                  "rectangle" "aerospace"
+                  "gcloud-cli" # work
+                  "kitty" "syncthing-app"
                   "hammerspoon" "jordanbaird-ice"
-                  "zen-browser" "ubersicht"
-                  "docker" "reminders-menubar"
-                  "shortcat" "battery" "breaktimer"
+                  "zen" "ubersicht" # "logi-options+" "dash"
+                  "docker-desktop" "reminders-menubar"
+                  "battery" "breaktimer" # "shortcat"
                 ];
               };
 
@@ -228,7 +238,7 @@
                 defaults = {
                   dock = {
                     tilesize = 50;
-                    autohide = false;
+                    autohide = true;
                     orientation = "bottom";
                     show-recents = false;
                   };
@@ -254,6 +264,8 @@
                     InitialKeyRepeat = 15;
                     KeyRepeat = 1;
                     AppleWindowTabbingMode = "always";
+                    NSStatusItemSpacing = 4;
+                    NSStatusItemSelectionPadding = 0;
                   };
                   CustomSystemPreferences = {
                     "com.apple.AdLib" = {

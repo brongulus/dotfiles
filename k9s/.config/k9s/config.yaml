@@ -1,5 +1,6 @@
 k9s:
   ui:
     logoless: true
+    headless: true
     reactive: true
     skin: transparent
