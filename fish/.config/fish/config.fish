@@ -16,6 +16,22 @@ end
 
 set fish_greeting
 
+
+if [ "$(uname)" = "Darwin" ];
+   set -l BREW_PREFIX "/opt/homebrew" #(brew --prefix)
+   if test -x {$BREW_PREFIX}/bin/brew
+      # eval ({$BREW_PREFIX}/bin/brew shellenv)
+      set --global --export HOMEBREW_PREFIX "/opt/homebrew";
+      set --global --export HOMEBREW_CELLAR "/opt/homebrew/Cellar";
+      set --global --export HOMEBREW_REPOSITORY "/opt/homebrew/Library/.homebrew-is-managed-by-nix";
+      fish_add_path --global --move --path "/opt/homebrew/bin" "/opt/homebrew/sbin";
+      if test -n "$MANPATH[1]"; set --global --export MANPATH '' $MANPATH; end;
+      if not contains "/opt/homebrew/share/info" $INFOPATH; set --global --export INFOPATH "/opt/homebrew/share/info" $INFOPATH; end;
+   end
+   if [ -f "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc" ]
+      source "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc"
+   end
+end
 ###########
 ### FZF ###
 ###########

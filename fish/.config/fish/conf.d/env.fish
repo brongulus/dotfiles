@@ -1,6 +1,4 @@
 if status is-login
-    set -l uname (uname)
-
     fish_add_path ~/.emacs.d/bin
     fish_add_path ~/.cargo/bin
     fish_add_path ~/go/bin
@@ -21,15 +19,6 @@ if status is-login
 
     # Gardener
     [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
-    if [ "{$uname}" = "Darwin" ];
-       set -l BREW_PREFIX "/opt/homebrew" #(brew --prefix)
-       if test -x {$BREW_PREFIX}/bin/brew
-          eval ({$BREW_PREFIX}/bin/brew shellenv)
-       end
-       if [ -f "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc"]
-          source "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc"
-       end
-    end
 
     ###########
     ### FZF ###
@@ -44,7 +33,7 @@ if status is-login
                                    --color=info:#81a2be,prompt:#a7bf87,pointer:#b294bb
                                    --color=marker:#d9c18c,spinner:#d9c18c"
 
-    switch uname
+    switch (uname)
         case Darwin
              set fzf_directory_opts --bind "enter:become(open {} &> /dev/tty)"
         case '*'
