@@ -79,8 +79,9 @@
         tectonic pandoc ghostscript
         imagemagick ffmpeg yt-dlp
         rustc rust-analyzer clippy rustfmt
-        gopls reftools python314 basedpyright ruff
-        uv janet bacon shellcheck
+        go-tools gopls reftools golangci-lint
+        python314 basedpyright ruff
+        uv janet bacon hyperfine shellcheck
         sqlite gobang litecli elinks
         zig zls gnuplot graphviz # zigpkgs.master
         tree-sitter lua-language-server
@@ -264,8 +265,8 @@
                     InitialKeyRepeat = 15;
                     KeyRepeat = 1;
                     AppleWindowTabbingMode = "always";
-                    NSStatusItemSpacing = 4;
-                    NSStatusItemSelectionPadding = 0;
+                    # NSStatusItemSpacing = 2;
+                    # NSStatusItemSelectionPadding = 2;
                   };
                   CustomSystemPreferences = {
                     "com.apple.AdLib" = {
