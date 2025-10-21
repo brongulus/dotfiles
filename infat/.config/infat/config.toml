@@ -1,0 +1,13 @@
+[types]
+text = "Emacs"
+plain-text = "Emacs"
+makefile = "Emacs"
+sourcecode = "Emacs"
+unix-executable = "Kitty"
+video = "Mpv"
+movie = "Mpv"
+mp4-audio = "Mpv"
+mp4-movie = "Mpv"
+
+[extensions]
+md = "Emacs"

@@ -16,6 +16,10 @@ end
 
 set fish_greeting
 
+# z.fish
+mkdir -p $HOME/.local/share/z
+set -U Z_DATA_DIR "$HOME/.local/share/z"
+set -U Z_DATA "$HOME/.local/share/z/data"
 
 if [ "$(uname)" = "Darwin" ];
    set -l BREW_PREFIX "/opt/homebrew" #(brew --prefix)

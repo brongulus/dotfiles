@@ -26,6 +26,14 @@
       url = "github:bgreenwell/doxx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kanata-tray = {
+      url = "github:rszyma/kanata-tray";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dict-gcide = {
+      url = "github:takoverflow/dict-gcide";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # rust-overlay = {
     #   url = "github:oxalica/rust-overlay";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +54,7 @@
   };
 
   outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask,
-  copyparty, doxx, emacs-overlay, nixgl, ... }@inputs: # rust-overlay, zig
+  copyparty, doxx, kanata-tray, emacs-overlay, nixgl, dict-gcide, ... }@inputs: # rust-overlay, zig
     let
       system = builtins.currentSystem;
       hostname = builtins.getEnv "HOSTNAME";
@@ -55,6 +63,8 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        config.allowBroken = true;
+        config.allowUnsupportedSystem = true;
         config.input-fonts.acceptLicense = true;
         overlays = [ copyparty.overlays.default emacs-overlay.overlay nixgl.overlay ]; # rust-overlay.overlays.default zig.overlays.default
       };
@@ -76,12 +86,11 @@
       commonPackages = with pkgs; [
         # Development tools
         nixVersions.latest gawk
-        tectonic pandoc ghostscript
+        tectonic pandoc quarto ghostscript
         imagemagick ffmpeg yt-dlp
-        rustc rust-analyzer clippy rustfmt
-        go-tools gopls reftools golangci-lint
-        python314 basedpyright ruff
+        rustup clippy python314 basedpyright ruff
         uv janet bacon hyperfine shellcheck
+        go-tools gotools gopls reftools golangci-lint
         sqlite gobang litecli elinks
         zig zls gnuplot graphviz # zigpkgs.master
         tree-sitter lua-language-server
@@ -94,7 +103,7 @@
         rubyPackages.reline rubyPackages.prism
 
         # Core utilities
-        wezterm git fish zoxide yazi gh stow
+        wezterm git fish zoxide yazi gh act stow
         zellij direnv nix-direnv cachix helix
 
         # CLI tools
@@ -110,19 +119,20 @@
         # iris, simplynoshading, fabulouslyoptimized
         copyparty mg durden cat9 anki-bin prismlauncher
         doxx.packages.${system}.default tickrs ollama viddy
+        timewarrior kanata-with-cmd kanata-tray # needs karabiner virtualHIDdev
+        dict dictdDBs.jpn2eng
+        dict-gcide.packages.${system}.default
       ];
 
       # Linux-specific packages
       linuxPackages = with pkgs; [
         pkgs.nixgl.auto.nixGLDefault
-        emacs-git
-        racket-minimal
-        wrappedKitty
-        syncthing
-        git-graph
-        go gdb mpv
+        emacs-git racket-minimal
+        wrappedKitty meowpdf syncthing
+        git-graph go gdb mpv
         # Fonts
         nerd-fonts.symbols-only
+        nerd-fonts.victor-mono
         nerd-fonts.victor-mono
         merriweather input-fonts fira-sans victor-mono
         maple-mono.NF-CN
@@ -157,12 +167,13 @@
               fonts.packages = [
                 pkgs.nerd-fonts.symbols-only
                 pkgs.nerd-fonts.victor-mono
-                pkgs.victor-mono
-                pkgs.merriweather
-                pkgs.input-fonts
-                pkgs.fira-sans
-                pkgs.maple-mono.NF-CN
-                pkgs.national-park-typeface
+                pkgs.nerd-fonts.shure-tech-mono
+                pkgs.victor-mono pkgs.merriweather
+                pkgs.input-fonts pkgs.fira-sans
+                pkgs.nerd-fonts.commit-mono
+                # pkgs.sarasa-gothic
+                # pkgs.maple-mono.NF-CN
+                # pkgs.national-park-typeface
               ];
 
               homebrew = {
@@ -195,8 +206,8 @@
                   "yaml-language-server" "helm-ls" "prometheus" "kwok"
                   "openstackclient" "awscli" "azure-cli" "aliyun-cli"
                   # personal
-                  "minimal-racket" "mpv" "gnu-time" "gcc"
-                  "nightlight" "cliclick" "sendkeys"
+                  "minimal-racket" "gnu-time" "gcc"
+                  "nightlight" "cliclick" "sendkeys" "infat"
                   # pdf-tools / doc-view
                   "pkg-config" "poppler" "autoconf" "automake" "mupdf-tools"
                 ];
@@ -207,7 +218,7 @@
                     greedy = true;
                   }
                   "gcloud-cli" # work
-                  "kitty" "syncthing-app"
+                  "kitty" "syncthing-app" "stolendata-mpv"
                   "hammerspoon" "jordanbaird-ice"
                   "zen" "ubersicht" # "logi-options+" "dash"
                   "docker-desktop" "reminders-menubar"
@@ -215,7 +226,7 @@
                 ];
               };
 
-              programs.fish.enable = true;
+              # programs.fish.enable = true;
               programs.zsh.enable = true;
               programs.tmux.enable = true;
 
@@ -234,7 +245,7 @@
               system = {
                 keyboard = {
                   enableKeyMapping = true;
-                  remapCapsLockToControl = true;
+                  # remapCapsLockToControl = true; # testing kanata
                 };
                 defaults = {
                   dock = {
@@ -285,9 +296,12 @@
                 ## run darwin-rebuild changelog to check this
                 stateVersion = 5;
               };
-              system.activationScripts.setting.text = ''
+              system.activationScripts.postActivation.text = ''
+                  #!/usr/bin/env -i bash
+                  set -e
+                  set -o pipefail
                   # Allow opening apps from any source
-                  sudo spctl --master-disable
+                  # sudo spctl --master-disable
               '';
             }
           ];
@@ -296,11 +310,13 @@
         defaultPackage.${system} = pkgs.buildEnv {
           name = "packages-darwin";
           paths = commonPackages ++ darwinPackages;
+          ignoreCollisions = true;
         };
       } else {
         defaultPackage.${system} = pkgs.buildEnv {
           name = "packages-linux";
           paths = commonPackages ++ linuxPackages;
+          ignoreCollisions = true;
         };
       };
 

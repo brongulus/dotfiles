@@ -1,0 +1,90 @@
+#|
+1. Need to install Karabiner-DriverKit-VirtualHIDDevice-x.x.0.pkg
+2. /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
+3. sudo '/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'
+4. sudo kanata -c ./mac.kbd
+|#
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes yes
+  danger-enable-cmd yes
+)
+
+(defsrc
+  esc    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps   a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
+  fn   lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+)
+
+(deflayer qwerty
+  esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
+  @grl   1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab    q    w    e    r    t    y    u    i    o    p    [    ]    @bsl
+  @cap   a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
+  fn   @lct  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+)
+
+(deflayer dvorak
+  esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
+  @grl   1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+  tab    '    ,    .    p    y    f    g    c    r    l    /    =    @bsl
+  @cap   a    o    e    u    i    d    h    t    n    s    -    ret
+  lsft   ;    q    j    k    x    b    m    w    v    z    ▲   rsft
+  fn   @lct  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+)
+
+(deflayer hs
+  _    @oem   _    _    _  @ozn   _    _    _    _    _    _    _
+  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+  _      _    _    _  @tns   _    _    _    _    _    _    _    _    _
+  _      _    _    _  @ytf   _  @yfw @yfs @yfn @yfe   _    _   @okt
+  _      _  @yts   _    _    _    _    _    _    _    _    _    _
+  _      _    _    _            @ytm        _    _    _    _    _
+)
+
+(deflayer layers
+  _      _    _    _    _    _    _    _    _    _    _    _    _
+  _      @qwr @dvk lrld _    _    _    _    _    _    _    _    _    _
+  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+  _      _    _    _    _    _    _    _    _    _    _    _    _
+  _      _    _    _    _    _    _    _    _    _    _    _    _
+  _      _    _    _              _         _    _    _    _    _
+)
+
+(defalias
+  grl (tap-hold 200 200 grv (layer-toggle layers))
+  dvk (layer-switch dvorak)
+  qwr (layer-switch qwerty)
+  cap (tap-hold-press 200 200 esc lctl)
+  lct (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
+  bsl (tap-hold-press 200 200 \ bspc)
+)
+
+(defalias
+  okt (cmd open -a "kitty")
+  oem (cmd open -a "Emacs")
+  ozn (cmd open -a "Zen")
+)
+
+(defalias
+  tns (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/nightlight toggle")
+  
+  ytf (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle zoom-fullscreen")
+  ytm (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle float")
+  yts (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle split")
+
+  ysw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap west")
+  yss (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap south")
+  ysn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap north")
+  yse (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap east")
+
+  yfw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus west || ~/.nix-profile/bin/yabai -m window --focus stack.prev || ~/.nix-profile/bin/yabai -m window --focus stack.last")
+  yfs (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus south")
+  yfn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus north")
+  yfe (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus east || ~/.nix-profile/bin/yabai -m window --focus stack.next || ~/.nix-profile/bin/yabai -m window --focus stack.first")
+)

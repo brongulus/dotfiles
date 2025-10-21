@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Needs hostess and timew
+
+CATEGORIES=(
+    "WORK"
+    "TINKER"
+	"WASTE"
+    "LEARN"
+	"STOP"
+)
+
+blocked="youtube reddit x linkedin"
+
+selected=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --margin=10% --bind 'q:abort')
+fzf_status=$?
+
+if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
+    exit 0
+fi
+
+if [[ "$selected" == "STOP" ]]; then
+    timew stop > /dev/null 2>&1
+    tmux set -g status-right "#[fg=black,bg=white] #(TZ=UTC date -u +%%H:%%M:%%S)Z "
+else
+    timew start "$selected" > /dev/null 2>&1
+    tmux set -g status-right "$selected #[fg=black,bg=white] #(TZ=UTC date -u +%%H:%%M:%%S)Z "
+
+    # for site in $blocked; do
+    #     if [[ "$selected" == "WASTE" ]]; then
+    #         hostess rm www.$site.com > /dev/null 2>&1
+    #     else
+    #         hostess add www.$site.com 127.0.0.1 > /dev/null 2>&1
+    #     fi
+    # done
+            
+fi

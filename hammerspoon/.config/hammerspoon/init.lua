@@ -169,7 +169,7 @@ for key, fn in pairs(moveWin) do
     end)
 end
 
--- Sends "escape" if "caps lock" is held for less than .2 seconds, and no other keys are pressed.
+-- Sends "escape" if "caps lock" is held for less than .2 seconds, and no other keys are pressed. (FIXME)
 local send_escape = false
 local last_mods = {}
 local control_key_timer = hs.timer.delayed.new(0.2, function()
@@ -194,7 +194,6 @@ hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(evt)
     end
     return false
 end):start()
-
 
 hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(evt)
     send_escape = false

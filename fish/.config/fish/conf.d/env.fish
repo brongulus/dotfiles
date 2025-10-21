@@ -42,11 +42,6 @@ if status is-login
     set fzf_fd_opts --hidden --color=never --exclude=.git
     set fzf_diff_highlighter delta --paging=never --width=80
 
-    # z.fish
-    mkdir -p $HOME/.local/share/z
-    set -U Z_DATA_DIR "$HOME/.local/share/z"
-    set -U Z_DATA "$HOME/.local/share/z/data"
-
     if type -q nix
        set XDG_DATA_DIRS ~/.nix-profile/share/applications $XDG_DATA_DIRS
        # set -gx LC_ALL "C" # messes up emacs -nw icons

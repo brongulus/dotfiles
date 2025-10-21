@@ -14,7 +14,7 @@
   sort = version:refname
 [diff]
   algorithm = histogram
-  colorMoved = plain
+  colorMoved = default #plain
 [rebase]
   autoStash = true
   updateRefs = true
@@ -36,6 +36,24 @@
 [delta]
   side-by-side = true
   navigate = true    # use n and N to move between diff sections
+  hyperlinks = true
+  # hyperlinks-file-link-format = "emacsclient://open?url=file://{path}&line={line}"
+  map-styles = bold purple => syntax purple, bold cyan => syntax cyan # for colorMoved
+  # features = zebra-light zebra-dark
+[mergetool]
+  keepBackup = false
+[merge]
+  tool = ediff
+  conflictstyle = zdiff3
+[alias]
+    pr = "!f() { git fetch origin pull/$1/head:$2; git checkout $2 }; f"
+# Ref: https://stackoverflow.com/a/43654115 (git config --list)
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
+[includeIf "gitdir:~/go/src/"]
+  path = ~/go/src/.gitconfig
+[http]
+    sslVerify = false
 [mergetool "ediff"]
   cmd = emacs -nw --eval \"(progn \
   (setq smerge-command-prefix \\\"v\\\") \
@@ -47,15 +65,3 @@
   (map-keymap (lambda (_key cmd) (when (symbolp cmd) \
        (put cmd 'repeat-map 'smerge-basic-map))) smerge-basic-map))\"
 #   cmd = emacs -nw --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
-[mergetool]
-  keepBackup = false
-[merge]
-  tool = ediff
-  conflictstyle = zdiff3
-# Ref: https://stackoverflow.com/a/43654115 (git config --list)
-[includeIf "gitdir:~/work/"]
-  path = ~/work/.gitconfig
-[includeIf "gitdir:~/go/src/"]
-  path = ~/go/src/.gitconfig
-[http]
-	sslVerify = false
