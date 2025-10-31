@@ -3,12 +3,18 @@
 2. /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
 3. sudo '/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'
 4. sudo kanata -c ./mac.kbd
+
+Alt: (There are just too many issues, just run the karabiner daemon and launch kanata with tmux and call it a day)
+1. Copy the daemons (karabiner.plist and kanata.plist) in /Library/LaunchDaemons/
+2. Bootstrap: sudo launchctl bootstrap system /Library/LaunchDaemons/...
+3. Enable: sudo launchctl enable system/...
 |#
 
 (defcfg
   process-unmapped-keys yes
   log-layer-changes yes
   danger-enable-cmd yes
+  ;; movemouse-inherit-accel-state yes
 )
 
 (defsrc
@@ -24,33 +30,51 @@
   esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
   @grl   1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab    q    w    e    r    t    y    u    i    o    p    [    ]    @bsl
-  @cap   a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
-  fn   @lct  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+  @cap   a    s    d    f    g    h    j    k    l    ;    '   @rat
+  lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   ▲   rsft
+  @fnl @lct  lalt lmet          spc        @rmet ralt ◀    ▼    ▶
 )
 
 (deflayer dvorak
   esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
   @grl   1    2    3    4    5    6    7    8    9    0    [    ]    bspc
   tab    '    ,    .    p    y    f    g    c    r    l    /    =    @bsl
-  @cap   a    o    e    u    i    d    h    t    n    s    -    ret
+  @cap   a    o    e    u    i    d    h    t    n    s    -   @rat
   lsft   ;    q    j    k    x    b    m    w    v    z    ▲   rsft
-  fn   @lct  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+  @fnl @lct  lalt lmet          spc        @rmet ralt ◀    ▼    ▶
 )
 
+;; (deflayer hhkb
+;;   esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
+;;   @grl   1    2    3    4    5    6    7    8    9    0    -    =    |   bspc
+;;   tab    q    w    e    r    t    y    u    i    o    p    [    ]   @rat
+;;   @cap   a    s    d    f    g    h    j    k    l    ;    '   bspc
+;;   lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   @bsl ▲   rsft
+;;   @fnl @lct  lmet lalt @lct spc        @rc @rmet ralt fn   ◀    ▼    ▶
+;; )
+
 (deflayer hs
-  _    @oem   _    _    _  @ozn   _    _    _    _    _    _    _
+  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
+  _      f1   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
+  _      f4   f5   f6  @tns  _    _    _    _    _    _    _    _    _
+  _      f7   f8   f9  @ytf  _  @yfw @yfs @yfn @yfe   _    _   @okt
+  _      f10  f11  f12 @yts  _    _    _    _    _    _  @mwd   _
+  _      _    _    _            @ytm        _    _   @cl @mwu  @cr
+)
+
+(deflayer hs-alt
+  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
-  _      _    _    _  @tns   _    _    _    _    _    _    _    _    _
-  _      _    _    _  @ytf   _  @yfw @yfs @yfn @yfe   _    _   @okt
-  _      _  @yts   _    _    _    _    _    _    _    _    _    _
-  _      _    _    _            @ytm        _    _    _    _    _
+  _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _    _    _    _
+  _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
+  _    @cl  @mwr @mwl  @cr   _    _    _    _    _    _  @mwd   _
+  _      _    _    _            @ytm       @qwr  _   @cl @mwu  @cr
 )
 
 (deflayer layers
   _      _    _    _    _    _    _    _    _    _    _    _    _
-  _      @qwr @dvk lrld _    _    _    _    _    _    _    _    _    _
-  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+  _      @qwr @dvk _    _    _    _    _    _    _    _    _    _    _
+  _      _    _    _   lrld  _    _    _    _    _    _    _    _    _
   _      _    _    _    _    _    _    _    _    _    _    _    _
   _      _    _    _    _    _    _    _    _    _    _    _    _
   _      _    _    _              _         _    _    _    _    _
@@ -60,15 +84,41 @@
   grl (tap-hold 200 200 grv (layer-toggle layers))
   dvk (layer-switch dvorak)
   qwr (layer-switch qwerty)
+  ;; hkb (layer-switch hkb)
   cap (tap-hold-press 200 200 esc lctl)
   lct (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
+  fnl (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
+  rmet (tap-hold-press 200 400 (layer-switch hs-alt) rmet)
+  rat (tap-hold-press 200 200 ret (layer-toggle hs-alt))
   bsl (tap-hold-press 200 200 \ bspc)
+  ;; lc (tap-hold 200 200 z lctl)
+  ;; la (tap-hold 200 200 x lalt)
+  ;; lm (tap-hold 200 200 c lmet)
+  rm (tap-hold 200 200 , rmet)
+  ra (tap-hold 200 200 . lalt)
+  rc (tap-hold 200 200 / rctl)
+
+  ;; mwu (mwheel-accel-up 3 1200 1.15 0.93)
+  ;; mwd (mwheel-accel-down 3 1200 1.15 0.93)
+  mwu (mwheel-up 25 5)
+  mwd (mwheel-down 25 5)
+  mwl (mwheel-left 25 5)
+  mwr (mwheel-right 25 5)
+  msu (movemouse-accel-up 4 1000 1 5)
+  msd (movemouse-accel-down 4 1000 1 5)
+  msl (movemouse-accel-left 4 1000 1 5)
+  msr (movemouse-accel-right 4 1000 1 5)
+
+  cd C-down
+  cu C-up
+  cl C-left
+  cr C-right
 )
 
 (defalias
-  okt (cmd open -a "kitty")
-  oem (cmd open -a "Emacs")
-  ozn (cmd open -a "Zen")
+  okt (cmd sudo -u I752152 open -a "kitty")
+  oem (cmd sudo -u I752152 open -a "Emacs")
+  ozn (cmd sudo -u I752152 open -a "Zen")
 )
 
 (defalias
@@ -78,13 +128,18 @@
   ytm (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle float")
   yts (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle split")
 
-  ysw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap west")
-  yss (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap south")
-  ysn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap north")
-  yse (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap east")
-
   yfw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus west || ~/.nix-profile/bin/yabai -m window --focus stack.prev || ~/.nix-profile/bin/yabai -m window --focus stack.last")
   yfs (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus south")
   yfn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus north")
   yfe (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus east || ~/.nix-profile/bin/yabai -m window --focus stack.next || ~/.nix-profile/bin/yabai -m window --focus stack.first")
+
+  yiw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window west --insert stack; ~/.nix-profile/bin/yabai -m window --warp west")
+  yis (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window south --insert stack; ~/.nix-profile/bin/yabai -m window --warp south")
+  yin (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window north --insert stack; ~/.nix-profile/bin/yabai -m window --warp north")
+  yie (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window east --insert stack; ~/.nix-profile/bin/yabai -m window --warp east")
+
+  ysw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap west")
+  yss (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap south")
+  ysn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap north")
+  yse (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap east")
 )
