@@ -1,113 +1,56 @@
 #!/usr/bin/env bash
-# TODO Look into checking for when channels go live and add an
-# icon in front of channel name
 # MEGA TODO Look into incorporating chat w/ emotes alongwith mpv
-
-# follows(){
-#     printf "1.Forsen\n"
-#     printf "2.ppy\n"
-#     printf "3.XQC\n"
-#     printf "4.Pokimane\n"
-#     printf "5.lilypichu\n"
-#     printf "6.AriaSaki\n"
-#     printf "7.ecnerwala\n"
-#     printf "8.pashka\n"
-#     printf "9.petr\n"
-#     printf "10.tourist\n"
-#     printf "11.Neal Wu\n"
-#     printf "12.Monogon\n"
-#     printf "13.S1mple\n"
-#     printf "14.Hyoon\n"
-#     printf "15.Vylerria\n"
-# }
+follows(){
+    printf "forsen\n"
+    printf "ppy\n"
+    printf "xqc\n"
+    printf "pokimane\n"
+    printf "lilypichu\n"
+    printf "ariasaki\n"
+    printf "igumdrop\n"
+    printf "ecnerwala\n"
+    printf "pmavrin\n"
+    printf "petrmitrichev\n"
+    printf "the__tourist\n"
+    printf "nealu\n"
+    printf "s1mple\n"
+    printf "hyoon\n"
+    printf "vylerria\n"
+}
 
 main(){
-    channel=$(echo "" | rofi -dmenu -p "Channel" -theme-str 'listview { enabled: false;}');
-
-    # choice=$(follows | rofi -i -dmenu | cut -d. -f1)
-
-    # case $choice in
-    #     1)
-    #         channel="forsen"
-    #         break
-    #         ;;
-    #     2)
-    #         channel="ppy"
-    #         break
-    #         ;;
-    #     3)
-    #         channel="xqc"
-    #         break
-    #         ;;
-    #     4)
-    #         channel="pokimane"
-    #         break
-    #         ;;
-    #     5)
-    #         channel="lilypichu"
-    #         break
-    #         ;;
-    #     6)
-    #         channel="ariasaki"
-    #         break
-    #         ;;
-    #     7)
-    #         channel="ecnerwala"
-    #         break
-    #         ;;
-    #     8)
-    #         channel="pmavrin"
-    #         break
-    #         ;;
-    #     9)
-    #         channel="petrmitrichev"
-    #         break
-    #         ;;
-    #     10)
-    #         channel="the__tourist"
-    #         break
-    #         ;;
-    #     11)
-    #         channel="nealwu"
-    #         break
-    #         ;;
-    #     12)
-    #         channel="monogoncoding"
-    #         break
-    #         ;;
-    #     13)
-    #         channel="s1mple"
-    #         break;;
-    #     14)
-    #         channel="hyoon"
-    #         break;;
-    #     15)
-    #         channel="vylerria"
-    #         break;;
-    #     *)
-    #         if [[ -z "${choice// }" ]]; then
-    #             exit 1
-    #         fi
-    #         break
-    #         ;;
-    # esac
-
-    
+    channel=$(follows | fzf --print-query --prompt "Channel: " | tail -n1);
     if [[ -z "${channel// }" ]]; then
         exit 1
     fi
 
     off_check=$(curl -sL https://twitch.tv/$channel | grep -c isLiveBroadcast)
 
-    if [[ $off_check == 0 ]]
-    then
-        echo $channel 'is offline' | rofi -dmenu -l 1;
-        main
+    if [[ $off_check == 0 ]]; then
+
+        selected=$(yt-dlp --flat-playlist --dump-json "https://twitch.tv/${channel}/videos?filter=all&sort=time" | jq -r '"\(.title)`\(.url)"' | fzf --height=60% \
+          --header="Select a VOD (ESC to cancel) - ${channel}" \
+          --delimiter="\`" \
+          --with-nth=1 \
+          --preview='echo {2}' \
+          --preview-window=down:1:wrap)
+
+        if [ -z "$selected" ]; then
+        echo $channel ': No VOD selected' | fzf --prompt "Press Enter to try again: " --print-query > /dev/null;
+            main
+        fi
+
+        echo -n "Url is: "
+        vod=$(echo $selected | cut -d'`' -f2)
+        echo ${vod}
+        mpv --ytdl-format="bestvideo[height<=?1080]+bestaudio/best" ${vod} & sleep 5;
+        # echo $channel 'is offline' | fzf --prompt "Press Enter to try again: " --print-query > /dev/null;
+        # main
     else
         mpv --ytdl-format="bestvideo[height<=?1080]+bestaudio/best" --no-resume-playback https://twitch.tv/$channel & sleep 5;
-        if [[ $channel == "forsen" ]]; then 
-            chatterino -c $channel;
-        fi
+        # if [[ $channel == "forsen" ]]; then 
+        #     chatterino -c $channel;
+        # fi
     fi
 
 # ytdl-format="bestvideo[height<=?1080]+bestaudio/best"

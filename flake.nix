@@ -26,10 +26,6 @@
       url = "github:bgreenwell/doxx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kanata-tray = {
-      url = "github:rszyma/kanata-tray";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     dict-gcide = {
       url = "github:takoverflow/dict-gcide";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +50,7 @@
   };
 
   outputs = { self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask,
-  copyparty, doxx, kanata-tray, emacs-overlay, nixgl, dict-gcide, ... }@inputs: # rust-overlay, zig
+  copyparty, doxx, emacs-overlay, nixgl, dict-gcide, ... }@inputs: # rust-overlay, zig
     let
       system = builtins.currentSystem;
       hostname = builtins.getEnv "HOSTNAME";
@@ -93,9 +89,9 @@
         go-tools gotools gopls reftools golangci-lint
         sqlite gobang litecli elinks
         zig zls gnuplot graphviz # zigpkgs.master
-        tree-sitter lua-language-server
-        ocaml dune_3 opam
+        tree-sitter ocaml dune_3 opam
         ocamlPackages.utop ocamlPackages.ocaml-lsp
+        luarocks lua-language-server luajitPackages.luasocket luajitPackages.luasec
         # copilot-language-server
 
         # Ref: https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
@@ -119,9 +115,9 @@
         # iris, simplynoshading, fabulouslyoptimized
         copyparty mg durden cat9 anki-bin prismlauncher
         doxx.packages.${system}.default tickrs ollama viddy
-        timewarrior kanata-with-cmd kanata-tray # needs karabiner virtualHIDdev
+        timewarrior kanata-with-cmd # needs karabiner virtualHIDdev
         dict dictdDBs.jpn2eng
-        dict-gcide.packages.${system}.default
+        # dict-gcide.packages.${system}.default
       ];
 
       # Linux-specific packages
@@ -142,7 +138,7 @@
       # Darwin-specific packages
       darwinPackages = with pkgs; [
         # gcc
-        gdlv yabai jankyborders
+        gdlv yabai jankyborders mpv socat
       ];
 
       # create platform-specific outputs
@@ -206,7 +202,7 @@
                   "yaml-language-server" "helm-ls" "prometheus" "kwok"
                   "openstackclient" "awscli" "azure-cli" "aliyun-cli"
                   # personal
-                  "minimal-racket" "gnu-time" "gcc"
+                  "minimal-racket" "gnu-time" "gcc" #"kanata" (non cmd)
                   "nightlight" "cliclick" "sendkeys" "infat"
                   # pdf-tools / doc-view
                   "pkg-config" "poppler" "autoconf" "automake" "mupdf-tools"
