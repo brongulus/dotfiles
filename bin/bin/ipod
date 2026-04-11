@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p out
+base="${1%.*}"
+ffmpeg -i "$1" -c:v mpeg2video -maxrate 768k -vf "subtitles=${base}.vtt,scale=w=min(320\,iw):h=min(240\,ih),select='eq(n,0)+if(gt(t-prev_selected_t,1/30.50),1,0)'" -c:a mp3 "out/${base}.mpg"

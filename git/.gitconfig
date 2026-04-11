@@ -45,8 +45,11 @@
 [merge]
   tool = ediff
   conflictstyle = zdiff3
+[rerere]
+  # Ref: http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
+  enabled = true  
 [alias]
-    pr = "!f() { git fetch origin pull/$1/head:$2; git checkout $2 }; f"
+    pr = "!f() { git fetch origin pull/$1/head:$2; git checkout $2; }; f"
 # Ref: https://stackoverflow.com/a/43654115 (git config --list)
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig

@@ -14,10 +14,11 @@ yabai -m config right_padding                8
 yabai -m config window_gap                   8
 yabai -m config window_gap                   8
 # yabai -m config external_bar main:0:60
-yabai -m rule --add app="Emacs" role="AXTextField" subrole="AXStandardWindow" manage=on
+# yabai -m rule --add app="Emacs" role="AXTextField" subrole="AXStandardWindow" manage=on
+yabai -m signal --add event=window_created app="Emacs" action="~/.config/yabai/yabai-emacs.sh"
 yabai -m rule --add app="^(Finder|Calculator|System Preferences|Archive Utility|mpv|System Settings|Activity Monitor)$" manage=off
 yabai -m rule --add title="JetBrains Toolbox" manage=off mouse_follows_focus=off
 yabai -m rule --add app="^Extension:.*Bitwarden$" manage=off
 
 # Requires jankyborder
-borders hidpi=on style=round active_color=0xffe1e3e4 inactive_color=0xff494d64 width=4.0 &
+# borders hidpi=on style=round active_color=0xffe1e3e4 inactive_color=0xff494d64 width=4.0 blacklist="Emacs,BreakTimer" &

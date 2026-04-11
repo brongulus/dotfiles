@@ -5,6 +5,9 @@
 if status is-interactive
     test -f "$HOME/.config/alias"; and source "$HOME/.config/alias"
 
+    # Gardener
+    [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
+
     # Commands to run in interactive sessions can go here
     # source ~/.config/fish/eat
     # alias find-file="_eat_msg ff"
@@ -29,7 +32,14 @@ if [ "$(uname)" = "Darwin" ];
       set --global --export HOMEBREW_CELLAR "/opt/homebrew/Cellar";
       set --global --export HOMEBREW_REPOSITORY "/opt/homebrew/Library/.homebrew-is-managed-by-nix";
       fish_add_path --global --move --path "/opt/homebrew/bin" "/opt/homebrew/sbin";
-      if test -n "$MANPATH[1]"; set --global --export MANPATH '' $MANPATH; end;
+      
+      set PATH {$BREW_PREFIX}/opt/coreutils/libexec/gnubin $PATH
+      set PATH {$BREW_PREFIX}/opt/gnu-sed/libexec/gnubin $PATH
+      set PATH {$BREW_PREFIX}/opt/gnu-tar/libexec/gnubin $PATH
+      set PATH {$BREW_PREFIX}/opt/grep/libexec/gnubin $PATH
+      set PATH {$BREW_PREFIX}/opt/gzip/bin $PATH
+      
+     if test -n "$MANPATH[1]"; set --global --export MANPATH '' $MANPATH; end;
       if not contains "/opt/homebrew/share/info" $INFOPATH; set --global --export INFOPATH "/opt/homebrew/share/info" $INFOPATH; end;
    end
    if [ -f "$BREW_PREFIX/share/google-cloud-sdk/path.fish.inc" ]
@@ -79,12 +89,12 @@ function magit
     set -l git_root (git rev-parse --show-toplevel)
     emacs -nw --eval "
         (progn
+            (package-activate-all)
+            (setq magit-auto-revert-mode nil
+                  magit-display-buffer-function
+                  #'magit-display-buffer-fullframe-status-v1)
             (require 'magit)
-            (when (require 'popper nil t)
-              (popper-mode -1))
-              (setq magit-display-buffer-function
-              #'magit-display-buffer-fullframe-status-v1)
-            (magit-status \"$git_root\"))"
+            (magit-status \"$git_root\")))"
 end
 
 function mkcd -d "Create a directory and set CWD"

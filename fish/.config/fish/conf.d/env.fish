@@ -17,9 +17,6 @@ if status is-login
     set --export K9S_CONFIG_DIR "$HOME/.config/k9s/"
     set --export KUBECOLOR_THEME_BASE_MUTED "black:italic"
 
-    # Gardener
-    [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || set -gx GCTL_SESSION_ID (uuidgen)
-
     ###########
     ### FZF ###
     ###########
@@ -52,12 +49,12 @@ if status is-login
 
     if type -q direnv
        # set --export DIRENV_LOG_FORMAT "" # need nix-direnv logs ;-;
-       ~/.nix-profile/bin/direnv hook fish | source
+       /opt/homebrew/bin/direnv hook fish | source
     end
 
     if type -q zoxide
        # export _ZO_DATA_DIR=$Z_DATA
-       ~/.nix-profile/bin/zoxide init fish | source
+       /opt/homebrew/bin/zoxide init fish | source
        # zoxide import --from=z $Z_DATA
     end
 

@@ -81,16 +81,17 @@
       # Common packages for all platforms
       commonPackages = with pkgs; [
         # Development tools
-        nixVersions.latest gawk
-        tectonic pandoc quarto ghostscript
-        imagemagick ffmpeg yt-dlp
+        nixVersions.latest
+        gawk tectonic pandoc quarto ghostscript
+        imagemagick ffmpeg yt-dlp ncspot
+        # rustup component add rust-analyzer
         rustup clippy python314 basedpyright ruff
         uv janet bacon hyperfine shellcheck
         go-tools gotools gopls reftools golangci-lint
         sqlite gobang litecli elinks
         zig zls gnuplot graphviz # zigpkgs.master
         tree-sitter ocaml dune_3 opam
-        ocamlPackages.utop ocamlPackages.ocaml-lsp
+        ocamlPackages.utop ocamlPackages.ocaml-lsp irssi senpai
         luarocks lua-language-server luajitPackages.luasocket luajitPackages.luasec
         # copilot-language-server
 
@@ -113,10 +114,11 @@
         # Misc
         # modlist: modmenu, simplefog, betterclouds
         # iris, simplynoshading, fabulouslyoptimized
-        copyparty mg durden cat9 anki-bin prismlauncher
+        copyparty mg durden cat9 # prismlauncher <-- broken
         doxx.packages.${system}.default tickrs ollama viddy
         timewarrior kanata-with-cmd # needs karabiner virtualHIDdev
-        dict dictdDBs.jpn2eng
+        dict dictdDBs.jpn2eng micro-with-xclip
+        mpd rmpc spotdl eyed3 flac beets mediainfo
         # dict-gcide.packages.${system}.default
       ];
 
@@ -125,14 +127,12 @@
         pkgs.nixgl.auto.nixGLDefault
         emacs-git racket-minimal
         wrappedKitty meowpdf syncthing
-        git-graph go gdb mpv
+        git-graph go gdb mpv anki-bin
         # Fonts
         nerd-fonts.symbols-only
         nerd-fonts.victor-mono
-        nerd-fonts.victor-mono
         merriweather input-fonts fira-sans victor-mono
-        maple-mono.NF-CN
-        # ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
+        # maple-mono.NF-CN ia-writer-duospace ia-writer-quattro iosevka-comfy.comfy
       ];
 
       # Darwin-specific packages
@@ -160,16 +160,17 @@
                 mutableTaps = true;
               };
 
-              fonts.packages = [
-                pkgs.nerd-fonts.symbols-only
-                pkgs.nerd-fonts.victor-mono
-                pkgs.nerd-fonts.shure-tech-mono
-                pkgs.victor-mono pkgs.merriweather
-                pkgs.input-fonts pkgs.fira-sans
-                pkgs.nerd-fonts.commit-mono
-                # pkgs.sarasa-gothic
-                # pkgs.maple-mono.NF-CN
-                # pkgs.national-park-typeface
+              fonts.packages = with pkgs; [
+                nerd-fonts.symbols-only
+                nerd-fonts.victor-mono
+                victor-mono merriweather
+                input-fonts fira-sans
+                nerd-fonts.commit-mono
+                alegreya alegreya-sans ibm-plex
+                noto-fonts-cjk-sans
+                # sarasa-gothic # iosveka-ar...
+                # maple-mono.NF-CN
+                # national-park-typeface
               ];
 
               homebrew = {
@@ -186,6 +187,7 @@
                   "gardener/tap"
                   "gitguardian/tap"
                   "int128/kubelogin"
+                  "jimeh/emacs-builds" # emacs
                   "nikitabobko/tap" # aerospace
                   "damascenorafael/tap" # reminders-menubar
                   "smudge/smudge" # nightlight
@@ -208,9 +210,10 @@
                   "pkg-config" "poppler" "autoconf" "automake" "mupdf-tools"
                 ];
 
+                # Unverified apps: xattr -d com.apple.quarantine /Applications/App.app
                 casks = [
                   {
-                    name = "emacs-app@nightly";
+                    name = "emacs-app-nightly";
                     greedy = true;
                   }
                   "gcloud-cli" # work
@@ -218,7 +221,7 @@
                   "hammerspoon" "jordanbaird-ice"
                   "zen" "ubersicht" # "logi-options+" "dash"
                   "docker-desktop" "reminders-menubar"
-                  "battery" "breaktimer" # "shortcat"
+                  "breaktimer" # "shortcat"
                 ];
               };
 
@@ -272,6 +275,7 @@
                     InitialKeyRepeat = 15;
                     KeyRepeat = 1;
                     AppleWindowTabbingMode = "always";
+                    NSAutomaticWindowAnimationsEnabled = false;
                     # NSStatusItemSpacing = 2;
                     # NSStatusItemSelectionPadding = 2;
                   };

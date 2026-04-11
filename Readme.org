@@ -1,13 +1,17 @@
-#+TITLE: Flake it till you make it!
+#+TITLE: Brew it, no flaking it
+
+Just look at [[./Brewfile]] and [[./install.sh]]
 
 The dots used to be managed by a custom [[./bin/bin/make_symlink][script]] that I wrote,
-which was very much prone to breakages, so I took a flaky approach.
+which was very much prone to breakages, so I just use stow now.
+
+Ditched nix, it was killing my disk and cpu. Brewfile it is.
+Ignore the below.
 
 This is an experimental branch where I'm testing nix.
 
 I wish to work with a single file mindset and see how far I can
-take it, that's why I opted to not use home-manager and use
-GNU Stow instead for dotfiles symlink.
+take it, that's why I opted to not use home-manager.
 
 * References
 - [[https://blog.kubukoz.com/flakes-first-steps/][Flakes first steps]]

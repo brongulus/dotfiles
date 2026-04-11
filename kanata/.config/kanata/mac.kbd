@@ -27,18 +27,18 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 )
 
 (deflayer qwerty
-  esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
-  @grl   1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab    q    w    e    r    t    y    u    i    o    p    [    ]    @bsl
-  @cap   a    s    d    f    g    h    j    k    l    ;    '   @rat
-  lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   ▲   rsft
+  @esp  🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
+  grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @cap   a    s    d    f    g    h    j    k    l   @scl  '   @rat
+  lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
   @fnl @lct  lalt lmet          spc        @rmet ralt ◀    ▼    ▶
 )
 
 (deflayer dvorak
-  esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
-  @grl   1    2    3    4    5    6    7    8    9    0    [    ]    bspc
-  tab    '    ,    .    p    y    f    g    c    r    l    /    =    @bsl
+  @esp  🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
+  grv    1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+  tab    '    ,    .    p    y    f    g    c    r    l    /    =    \
   @cap   a    o    e    u    i    d    h    t    n    s    -   @rat
   lsft   ;    q    j    k    x    b    m    w    v    z    ▲   rsft
   @fnl @lct  lalt lmet          spc        @rmet ralt ◀    ▼    ▶
@@ -49,26 +49,26 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 ;;   @grl   1    2    3    4    5    6    7    8    9    0    -    =    |   bspc
 ;;   tab    q    w    e    r    t    y    u    i    o    p    [    ]   @rat
 ;;   @cap   a    s    d    f    g    h    j    k    l    ;    '   bspc
-;;   lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   @bsl ▲   rsft
+;;   lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   \    ▲   rsft
 ;;   @fnl @lct  lmet lalt @lct spc        @rc @rmet ralt fn   ◀    ▼    ▶
 ;; )
 
 (deflayer hs
-  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
-  _      f1   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
-  _      f4   f5   f6  @tns  _    _    _    _    _    _    _    _    _
+  _    @oem  @oen  f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
+  _    @oem  @oen  f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
+  @tld   f4   f5   f6  @tns  _    _    _    _    _    _    _    _    _
   _      f7   f8   f9  @ytf  _  @yfw @yfs @yfn @yfe   _    _   @okt
-  _      f10  f11  f12 @yts  _    _    _    _    _    _  @mwd   _
+  grv    f10  f11  f12 @yts  _  @ecp @eag   _    _    _  @mwd   _
   _      _    _    _            @ytm        _    _   @cl @mwu  @cr
 )
 
 (deflayer hs-alt
-  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
+  _    @oem  @oen f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _    _    _    _
+  _    mlft @msu mrgt @mdb   _  @ysw @yss @ysn @yse   _    _    _   @mgr
   _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
-  _    @cl  @mwr @mwl  @cr   _    _    _    _    _    _  @mwd   _
-  _      _    _    _            @ytm       @qwr  _   @cl @mwu  @cr
+  _    @cl  @mwr @mwl  @cr   _  @ecp   _    _    _    _  @cu    _
+  _      _    _    _            @ytm       @qwr  _   @cl @cd   @cr
 )
 
 (deflayer layers
@@ -81,36 +81,39 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 )
 
 (defalias
-  grl (tap-hold 200 200 grv (layer-toggle layers))
   dvk (layer-switch dvorak)
   qwr (layer-switch qwerty)
   ;; hkb (layer-switch hkb)
+  esp (tap-hold-press 200 200 esc (layer-toggle layers))
   cap (tap-hold-press 200 200 esc lctl)
   lct (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
   fnl (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
+  scl (tap-hold-press 200 400 ; (layer-toggle hs))
   rmet (tap-hold-press 200 400 (layer-switch hs-alt) rmet)
   rat (tap-hold-press 200 200 ret (layer-toggle hs-alt))
-  bsl (tap-hold-press 200 200 \ bspc)
   ;; lc (tap-hold 200 200 z lctl)
   ;; la (tap-hold 200 200 x lalt)
   ;; lm (tap-hold 200 200 c lmet)
-  rm (tap-hold 200 200 , rmet)
-  ra (tap-hold 200 200 . lalt)
-  rc (tap-hold 200 200 / rctl)
+  ;; rm (tap-hold 200 200 , rmet)
+  ;; ra (tap-hold 200 200 . lalt)
+  ;; rc (tap-hold 200 200 / @lct)
 
   ;; mwu (mwheel-accel-up 3 1200 1.15 0.93)
   ;; mwd (mwheel-accel-down 3 1200 1.15 0.93)
-  mwu (mwheel-up 25 5)
-  mwd (mwheel-down 25 5)
+  mwu (mwheel-up 50 5)
+  mwd (mwheel-down 50 5)
   mwl (mwheel-left 25 5)
   mwr (mwheel-right 25 5)
+  mdb (macro (mltp 200 mlft))
   msu (movemouse-accel-up 4 1000 1 5)
   msd (movemouse-accel-down 4 1000 1 5)
   msl (movemouse-accel-left 4 1000 1 5)
   msr (movemouse-accel-right 4 1000 1 5)
+  mgr C-mlft ;; FIXME
 
+  tld S-grv
   cd C-down
-  cu C-up
+  cu mctl
   cl C-left
   cr C-right
 )
@@ -118,28 +121,32 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 (defalias
   okt (cmd sudo -u I752152 open -a "kitty")
   oem (cmd sudo -u I752152 open -a "Emacs")
+  oen (cmd sudo -u I752152 open -a "Emacs" --args --init-directory ~/.emacs.d/minimal)
   ozn (cmd sudo -u I752152 open -a "Zen")
 )
 
 (defalias
   tns (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/nightlight toggle")
   
-  ytf (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle zoom-fullscreen")
-  ytm (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle float")
-  yts (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --toggle split")
+  ytf (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen")
+  ytm (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --toggle float")
+  yts (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --toggle split")
 
-  yfw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus west || ~/.nix-profile/bin/yabai -m window --focus stack.prev || ~/.nix-profile/bin/yabai -m window --focus stack.last")
-  yfs (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus south")
-  yfn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus north")
-  yfe (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --focus east || ~/.nix-profile/bin/yabai -m window --focus stack.next || ~/.nix-profile/bin/yabai -m window --focus stack.first")
+  yfw (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m window --focus stack.prev || /opt/homebrew/bin/yabai -m window --focus stack.last")
+  yfs (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --focus south")
+  yfn (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --focus north")
+  yfe (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m window --focus stack.next || /opt/homebrew/bin/yabai -m window --focus stack.first")
 
-  yiw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window west --insert stack; ~/.nix-profile/bin/yabai -m window --warp west")
-  yis (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window south --insert stack; ~/.nix-profile/bin/yabai -m window --warp south")
-  yin (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window north --insert stack; ~/.nix-profile/bin/yabai -m window --warp north")
-  yie (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window east --insert stack; ~/.nix-profile/bin/yabai -m window --warp east")
+  yiw (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window west --insert stack; /opt/homebrew/bin/yabai -m window --warp west")
+  yis (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window south --insert stack; /opt/homebrew/bin/yabai -m window --warp south")
+  yin (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window north --insert stack; /opt/homebrew/bin/yabai -m window --warp north")
+  yie (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window east --insert stack; /opt/homebrew/bin/yabai -m window --warp east")
 
-  ysw (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap west")
-  yss (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap south")
-  ysn (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap north")
-  yse (cmd sudo -u I752152 bash -c "~/.nix-profile/bin/yabai -m window --swap east")
+  ysw (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --swap west")
+  yss (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --swap south")
+  ysn (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --swap north")
+  yse (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/yabai -m window --swap east")
+
+  ecp (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-org-capture)'")
+  eag (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-my/agenda)'")
 )

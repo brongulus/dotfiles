@@ -4,7 +4,7 @@ sort_by      = "natural"
 linemode     = "size"
 show_hidden  = true
 show_symlink = true
-mouse_events   = [ "click", "scroll", "move" ] # need a new release
+# mouse_events   = [ "click", "scroll", "move" ] # need a new release
 
 [preview]
 tab_width    = 2

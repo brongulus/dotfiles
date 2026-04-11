@@ -1,0 +1,6 @@
+  --replace-in-metadata "title" "｜" "|"
+  --replace-in-metadata "title" "：" ":"
+  --replace-in-metadata "title" "！" "!"
+  --replace-in-metadata "title" "？" "?"
+  --replace-in-metadata "title" "（" "("
+  --replace-in-metadata "title" "）" ")"
