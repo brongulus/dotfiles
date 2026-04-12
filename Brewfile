@@ -70,6 +70,7 @@ cask "ubersicht"
 cask "docker-desktop" 
 cask "breaktimer"
 cask "quarto"
+cask "prismlauncher"
 
 # fonts
 cask "font-input" 

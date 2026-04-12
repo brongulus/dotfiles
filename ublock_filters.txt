@@ -1,0 +1,172 @@
+! Jun 21, 2025 https://x.com
+!https://x.com/*
+x.com##.r-ttdzmv.r-vacyoi.css-175oi2r
+x.com##.r-1ny4l3l.r-6416eg.r-o7ynqc.r-1loqt21.r-1pi2tsx.r-16y2uox.r-eqz5dr.r-6koalj.css-175oi2r
+x.com##.r-1loqt21.r-1xc7w19.r-cgjvx2.r-8oi148.r-j3xhw6.r-st84sj.css-175oi2r
+x.com##a.r-1loqt21.r-1ny4l3l.r-13qz1uu.r-cnw61z.r-1habvwh.r-16y2uox.r-eqz5dr.r-6koalj.css-175oi2r > .r-6416eg.r-o7ynqc.r-xyw6el.r-1777fci.r-18u37iz.r-1awozwy.r-dnmrzs.r-sdzlij.css-175oi2r
+
+hltv.org
+!twitch.tv
+
+
+! Jul 13, 2025 https://discord.com
+!discord.com
+discord.com##.channelNotice__4c43d
+
+twitch.tv##+js(twitch-videoad)
+
+! Jul 16,2025 https://news.ycombinator.com
+news.ycombinator.com##tr.submission:has(:has-text(/AI|GPT|ai|LLM|agentic/)) + tr + tr
+news.ycombinator.com##tr.submission:has(:has-text(/AI|GPT|ai|LLM|agentic/)) + tr
+news.ycombinator.com##tr.submission:has(*:has-text(/AI|GPT|ai|LLM|agentic/))
+
+! Jul 28, 2025 https://x.com
+x.com##.r-bnwqim.r-95jzfe.r-1l7z4oj.r-1777fci.r-1pi2tsx.r-18u37iz.r-6koalj.r-1awozwy.r-majxgm.r-rjixqe.r-a023e6.r-37j5jr.r-qvutc0.r-1ttztb7.r-bcqeeo.css-146c3p1
+
+! Jul 29, 2025 https://dev.to
+dev.to##.mt-6.mb-2.body-billboard.js-billboard.crayons-bb.crayons-card--secondary.crayons-card
+dev.to##.js-billboard-container.break-word.gap-4.grid.crayons-article-sticky > div > .js-billboard.bb-placement.crayons-bb.crayons-card--secondary.crayons-card
+dev.to##.crayons-layout__comments-billboard.pb-4.js-billboard-container > div > .js-billboard.bb-placement.crayons-bb.crayons-card--secondary.crayons-card
+
+! Sep 1, 2025 https://www.twitch.tv
+www.twitch.tv##.root-scrollable__wrapper.igZqfU.Layout-sc-1xcs6mc-0 > .LJevC.Layout-sc-1xcs6mc-0
+
+! Sep 19, 2025 https://www.twitch.tv
+www.twitch.tv##.ffPTzE.Layout-sc-1xcs6mc-0
+
+! Oct 7, 2025 https://www.duckduckgo.com
+duckduckgo.com##li:has(a[href*="msn.com/en-us"])
+duckduckgo.com##li:has(a[href*="msn.com"])
+
+! Oct 23, 2025 https://github.com
+github.com##.mb-5.feed-right-sidebar
+github.com##copilot-dashboard-entrypoint
+
+! Oct 30, 2025 https://www.reddit.com
+www.reddit.com##.block.xs\:pb-0.pb-xl.xs\:max-w-\[316px\].xs\:w-\[316px\].w-full.min-w-0.right-sidebar
+www.reddit.com##left-nav-top-section
+www.reddit.com###RESOURCES
+www.reddit.com###TOPICS
+www.reddit.com##.w-full.masthead
+www.reddit.com##.flex-auto.right-sidebar-contents
+
+! Dec 1, 2025 https://www.youtube.com
+www.youtube.com##ytd-item-section-renderer.ytd-watch-next-secondary-results-renderer.style-scope
+www.youtube.com###scroll-container > .yt-chip-cloud-renderer.style-scope
+
+! Dec 1, 2025 https://github.com
+github.com##.CopilotChatInputPartial-module__inputContainer--EE6LJ
+
+! Dec 9, 2025 https://www.instagram.com
+||instagram.fblr22-2.fna.fbcdn.net/v/t51.2885-15/581444390_18511468219064657_3780762071021237516_n.jpg?stp=*dst-jpg_e35_*tt6&*_nc_ht=instagram.fblr22-2.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QGfTcLZofOSrKQzPRCZ_p8_Yl9abiN9eCYNNaLVnDH3-stNFu2GlQIk0BEfEgFotsQ&_nc_ohc=mNjPfz_uscMQ7kNvwFOG8Ry&_nc_gid=qIYruBSAQlEai2tnkvJE-A&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Af*&oe=693E302C&_nc_sid=8b3546$image
+||instagram.fblr22-2.fna.fbcdn.net/v/t51.2885-15/571941522_18509233702064657_240190407013467829_n.jpg?stp=dst-jpg_e35_s*tt6&*_nc_ht=instagram.fblr22-2.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QG2efxYqjI_ZE7ChslCVz2pdXEwaNhEcXSi-MH3xIg7O-beZXeLfwvyizZ6wP_RtRw&_nc_ohc=4oqOQw0s_4QQ7kNvwEu5OcF&_nc_gid=Rdb4fApIPXeqhSuwoKLQLg&edm=APU89FABAAAA&ccb=7-5&oh=00_Af*&oe=693E1328&_nc_sid=bc0c2c$image
+
+! Dec 21, 2025 https://github.com
+github.com###\:r1q\:
+github.com###\:r1r\:
+
+! Dec 22, 2025 https://quirinebrouwer.substack.com
+quirinebrouwer.substack.com##.post.newsletter-post.typography > div > .pc-reset.pc-paddingBottom-32.pc-paddingTop-32.pc-gap-16.pc-flexDirection-column.pc-display-flex.pencraft
+
+! Jan 4, 2026 https://www.youtube.com
+www.youtube.com##.ytp-fullscreen-grid-stills-container
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(5)
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(4)
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(1)
+
+! Jan 6, 2026 https://livebook.manning.com
+livebook.manning.com##.upsell-container
+
+! Jan 6, 2026 https://aws.amazon.com
+aws.amazon.com##.box_module_box__fd47f1a1.subnavDesktop_module_subnavDsk__d38f3c32.dropShadow_module_always__1b128b86.dropShadow_module_grayscale__1b128b86.dropShadow_module_shadow__1b128b86
+
+! Jan 11, 2026 https://www.twitch.tv
+www.twitch.tv##.oneTapStoreMenu--hyv_R.hOOTGF.Layout-sc-1xcs6mc-0
+
+! Jan 16, 2026 https://www.reddit.com
+www.reddit.com##.font-normal > faceplate-tracker > .mt-0.list-none.relative > .s\:rounded-2.bg-transparent.-outline-offset-1.py-2xs.cursor-pointer.hover\:no-underline.hover\:bg-neutral-background-hover.hover\:text-secondary-hover.text-secondary.gap-\[0\.5rem\].px-md.relative.justify-between.flex
+
+! Jan 17, 2026 https://www.youtube.com
+www.youtube.com##.ytd-rich-section-renderer.style-scope > .ytd-rich-shelf-renderer.style-scope
+
+! Jan 18, 2026 https://www.aliexpress.com
+www.aliexpress.com##.slick-track
+www.aliexpress.com###nav-moretolove > .pdp-wrap
+
+! Jan 18, 2026 https://noai.duckduckgo.com
+noai.duckduckgo.com##.footer
+
+! Jan 20, 2026 https://nopixel.fandom.com
+nopixel.fandom.com##.navigation-panel__content.explore-scrollable-content.ExplorePanel-module_wrapperLeftPanel__3O2wj
+nopixel.fandom.com##.navigation-panel--left.navigation-panel
+nopixel.fandom.com##.global-explore-navigation__top
+
+! Jan 21, 2026 https://genius.com
+||genius.com/songs/11135890/apple_music_player?react=1$subdocument
+
+! Jan 22, 2026 https://discord.com
+discord.com##._4c43da90f61b5c6e-channelNotice
+discord.com##.wrapper__19b5e
+
+! Jan 22, 2026 https://genius.com
+||genius.com/songs/84848/apple_music_player?react=1$subdocument
+
+! Jan 24, 2026 https://www.youtube.com
+www.youtube.com##ytd-watch-next-secondary-results-renderer.ytd-watch-flexy.style-scope > .ytd-watch-next-secondary-results-renderer.style-scope
+
+! Jan 27, 2026 https://www.twitch.tv
+www.twitch.tv##.krtRyi.Layout-sc-1xcs6mc-0
+www.twitch.tv##.community-highlight-stack__card--wide.community-highlight-stack__card.Layout-sc-1xcs6mc-0
+
+! Feb 4, 2026 https://kubernetes.io
+kubernetes.io##.announcement-main
+
+! Feb 6, 2026 https://www.reddit.com
+www.reddit.com##.justify-end.items-center.flex.gap-xs.ps-lg
+
+! Feb 7, 2026 https://genius.com
+genius.com##.fAjlEy.LyricsSidebarAd__Recommendations-sc-176cacbb-1.hvuumx.RecommendedSongs__Container-sc-9fb733c3-0
+||genius.com/songs/11504033/apple_music_player?react=1$subdocument
+
+! Feb 14, 2026 https://www.twitch.tv
+www.twitch.tv##.side-nav--collapsed.side-nav.kHqXhd.Layout-sc-1xcs6mc-0
+
+! Feb 15, 2026 https://henry.codes
+henry.codes##.callout
+
+! Feb 20, 2026 https://www.youtube.com
+www.youtube.com###comments > .ytd-comments.style-scope
+
+! Feb 21, 2026 https://www.youtube.com
+www.youtube.com##.ytVideoDescriptionYouchatSectionViewModelHost
+www.youtube.com###video-summary
+
+! Feb 26, 2026 https://mastodon.social
+mastodon.social##.navigation-panel__portal
+
+! Feb 28, 2026 https://www.youtube.com
+www.youtube.com##button.yt-spec-button-shape-next[aria-label="Download"]
+www.youtube.com##button.yt-spec-button-shape-next[aria-label="Ask"]
+www.youtube.com##button.yt-spec-button-shape-next[aria-label="Join this channel"]
+www.youtube.com##.ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper
+www.youtube.com###owner-sub-count
+www.youtube.com##span.yt-formatted-string.style-scope:nth-of-type(1)
+www.youtube.com##span.yt-formatted-string.style-scope:nth-of-type(2)
+www.youtube.com##ytd-video-description-infocards-section-renderer.ytd-structured-description-content-renderer.style-scope
+www.youtube.com##ytd-reel-shelf-renderer.ytd-structured-description-content-renderer.style-scope
+
+! Mar 3, 2026 https://mail.google.com
+mail.google.com##button[aria-label="Try Gemini"]
+mail.google.com##div[data-rp-placement-id="gemkick-pep-icon-callout-id"]
+
+! Mar 17, 2026 https://thepermanentilliterate.wordpress.com
+thepermanentilliterate.wordpress.com##.noskim.marketing-bar
+
+! Mar 19, 2026 https://developer.nvidia.com
+developer.nvidia.com##.sticky-share-buttons > .entry-meta-social-links-list
+
+! Mar 22, 2026 https://www.premierleague.com
+www.premierleague.com##.main-nav__action-menu--updated-position.main-nav__action-menu
+
+! Apr 4, 2026 https://lemire.me
+lemire.me##.sidebar
