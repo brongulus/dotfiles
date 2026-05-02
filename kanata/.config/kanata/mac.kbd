@@ -54,8 +54,8 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 ;; )
 
 (deflayer hs
-  _    @oem  @oen  f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
-  _    @oem  @oen  f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
+  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
+  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
   @tld   f4   f5   f6  @tns  _    _    _    _    _    _    _    _    _
   _      f7   f8   f9  @ytf  _  @yfw @yfs @yfn @yfe   _    _   @okt
   grv    f10  f11  f12 @yts  _  @ecp @eag   _    _    _  @mwd   _
@@ -63,7 +63,7 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 )
 
 (deflayer hs-alt
-  _    @oem  @oen f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
+  _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
   _    mlft @msu mrgt @mdb   _  @ysw @yss @ysn @yse   _    _    _   @mgr
   _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
@@ -121,7 +121,6 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 (defalias
   okt (cmd sudo -u I752152 open -a "kitty")
   oem (cmd sudo -u I752152 open -a "Emacs")
-  oen (cmd sudo -u I752152 open -a "Emacs" --args --init-directory ~/.emacs.d/minimal)
   ozn (cmd sudo -u I752152 open -a "Zen")
 )
 

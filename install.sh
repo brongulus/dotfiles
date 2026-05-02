@@ -53,10 +53,14 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 defaults write com.apple.AdLib forceLimitAdTracking -bool true
 defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
 defaults write com.apple.AdLib allowIdentifierForAdvertising -bool false
+
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+defaults write org.gnu.Emacs NSWindowResizeTime -float 0.001
+defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write com.apple.universalaccess reduceMotion -bool true
 
 echo "Restarting affected services..."
 killall SystemUIServer || true
