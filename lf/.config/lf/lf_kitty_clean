@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# FIXME: not working with tmux
-kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
