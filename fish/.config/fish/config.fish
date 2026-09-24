@@ -2,6 +2,27 @@
 # To sort: cat /tmp/start.prof | sort -nk2 | tac | head
 ## In fish with nix on mac: sourcing /etc/fish/config.fish was causing immense slowdown
 
+if [ "$INSIDE_EMACS" != "" ]
+    set -Ua fish_features no-query-term
+    set -Ua fish_features no-keyboard-protocols
+    set -x TERM eterm-color
+    set -g KUBECTL_PROMPT_ICON '☸ '
+    functions -e fish_title
+    function fish_prompt
+        set -l last_status $status
+        echo -n (kubectl_status)(set_color normal)
+        echo -n (set_color green)(prompt_pwd)
+        if test $last_status -ne 0
+            set_color red
+        else
+            set_color normal
+        end
+        echo -n ' λ '
+    end
+    function fish_right_prompt
+    end
+end
+
 if status is-interactive
     test -f "$HOME/.config/alias"; and source "$HOME/.config/alias"
 
@@ -151,3 +172,12 @@ function kcfg
       tmux refresh-client -S
     end
 end
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+test -r '/Users/I752152/.opam/opam-init/init.fish' && source '/Users/I752152/.opam/opam-init/init.fish' > /dev/null 2> /dev/null; or true
+# END opam configuration
