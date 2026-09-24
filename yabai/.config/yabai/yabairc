@@ -20,5 +20,9 @@ yabai -m rule --add app="^(Finder|Calculator|System Preferences|Archive Utility|
 yabai -m rule --add title="JetBrains Toolbox" manage=off mouse_follows_focus=off
 yabai -m rule --add app="^Extension:.*Bitwarden$" manage=off
 
+# Ghostty tabs issue https://ghostty.org/docs/help/macos-tiling-wms
+# yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout bsp'
+# yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout bsp'
+
 # Requires jankyborder
 # borders hidpi=on style=round active_color=0xffe1e3e4 inactive_color=0xff494d64 width=4.0 blacklist="Emacs,BreakTimer" &

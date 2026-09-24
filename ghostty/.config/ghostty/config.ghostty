@@ -12,14 +12,19 @@ adjust-overline-thickness = -50%
 adjust-cursor-thickness = 200%
 
 macos-titlebar-style = hidden
+macos-window-buttons = hidden
+# macos-hidden = always # problems with yabai
 mouse-hide-while-typing = true
 resize-overlay = never
 window-padding-y = 5,0
 window-padding-x = 15,10
 window-padding-color = extend
 
-foreground = #f8f9e8
-background = #191919
+clipboard-read = allow
+clipboard-write = allow
+
+foreground = "#f8f9e8"
+background = "#191919"
 
 keybind = global:unconsumed:cmd+r=reload_config
 

@@ -119,7 +119,7 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 )
 
 (defalias
-  okt (cmd sudo -u I752152 open -a "kitty")
+  okt (cmd sudo -u I752152 open -a "ghostty")
   oem (cmd sudo -u I752152 open -a "Emacs")
   ozn (cmd sudo -u I752152 open -a "Zen")
 )
