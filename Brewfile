@@ -1,15 +1,15 @@
 # brew bundle --file=./Brewfile
 
-tap "derailed/k9s"
-tap "gardener/tap"
-tap "gitguardian/tap"
-tap "int128/kubelogin"
-tap "jimeh/emacs-builds"
-tap "nikitabobko/tap"
-tap "damascenorafael/tap"
-tap "smudge/smudge"
-tap "socsieng/tap"
-tap "asmvik/formulae"
+tap "derailed/k9s", trusted: true
+tap "gardener/tap", trusted: true
+tap "gitguardian/tap", trusted: true
+tap "int128/kubelogin", trusted: true
+tap "jimeh/emacs-builds", trusted: true
+tap "nikitabobko/tap", trusted: true
+tap "damascenorafael/tap", trusted: true
+tap "smudge/smudge", trusted: true
+tap "socsieng/tap", trusted: true
+tap "asmvik/formulae", trusted: true
 
 # deps
 brew "coreutils"
@@ -19,7 +19,6 @@ brew "grep"
 brew "gzip"
 brew "parallel"
 brew "iproute2mac"
-
 # workPackages
 brew "kubernetes-cli"
 brew "kubebuilder"
@@ -32,7 +31,7 @@ brew "k9s"
 brew "kubecolor"
 brew "krew"
 
-brew "stern"
+brew "lnav"
 brew "delve"
 brew "gardenlogin"
 brew "gardenctl-v2"
@@ -43,7 +42,7 @@ brew "kubelogin"
 brew "yaml-language-server"
 brew "helm-ls"
 brew "prometheus"
-brew "kwok"
+# brew "kwok" # HACK: undo later
 
 brew "openstackclient"
 brew "awscli"
@@ -60,15 +59,14 @@ brew "mupdf-tools"
 cask "emacs-app-nightly", greedy: true
 
 cask "gcloud-cli"
-cask "kitty"
+cask "ghostty" # kitty
 cask "syncthing-app"
 # cask "hammerspoon" # cask "jordanbaird-ice" # cask "reminders-menubar"
 cask "karabiner-elements"
 cask "zen"
 cask "ubersicht"
 cask "docker-desktop"
-cask "breaktimer"
-cask "quarto"
+cask "lookaway"
 cask "prismlauncher"
 
 # fonts
@@ -85,6 +83,7 @@ brew "gcc"
 brew "nightlight"
 brew "infat"
 brew "asmvik/formulae/yabai"
+brew "chenyukang/tap/ghr-cli", trusted: true
 
 brew "felinks"
 brew "gnuplot"
@@ -93,6 +92,9 @@ brew "ghostscript"
 
 brew "tectonic"
 brew "pandoc"
+brew "ledger"
+brew "beancount"
+brew "flow-control"
 
 # programming
 
@@ -104,6 +106,7 @@ brew "golangci-lint"
 brew "python@3.14"
 brew "ty"
 brew "uv"
+brew "pipx" # mpd-now-playable
 
 brew "ocaml"
 brew "dune"
@@ -124,13 +127,14 @@ brew "zls"
 brew "janet"
 
 cask "temurin"
-brew "clojure/tools/clojure"
+brew "clojure/tools/clojure", trusted: true
 brew "clojure-lsp"
 
 brew "tree-sitter"
 brew "llama.cpp"
 
 brew "git"
+brew "fossil"
 brew "fzf"
 brew "zoxide"
 brew "yazi"
