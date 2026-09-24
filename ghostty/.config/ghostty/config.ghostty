@@ -1,0 +1,45 @@
+command = /opt/homebrew/bin/fish -l -i
+
+font-family = Input Mono Narrow
+font-size = 14
+font-thicken = true
+
+adjust-cell-height = +34%
+adjust-underline-position = 3
+adjust-overline-position = -3
+adjust-underline-thickness = -50%
+adjust-overline-thickness = -50%
+adjust-cursor-thickness = 200%
+
+macos-titlebar-style = hidden
+mouse-hide-while-typing = true
+resize-overlay = never
+window-padding-y = 5,0
+window-padding-x = 15,10
+window-padding-color = extend
+
+foreground = #f8f9e8
+background = #191919
+
+keybind = global:unconsumed:cmd+r=reload_config
+
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+shift+c=copy_to_clipboard
+keybind = super+shift+v=paste_from_clipboard
+keybind = super+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+zero=reset_font_size
+keybind = super+q=quit
+keybind = super+shift+comma=reload_config
+keybind = super+k=clear_screen
+keybind = super+n=new_window
+keybind = super+w=close_surface
+keybind = super+shift+w=close_window
+keybind = super+t=new_tab
+keybind = super+shift+left_bracket=previous_tab
+keybind = super+shift+right_bracket=next_tab
+keybind = super+d=new_split:right
+keybind = super+shift+d=new_split:down
+keybind = super+right_bracket=goto_split:next
+keybind = super+left_bracket=goto_split:previous
