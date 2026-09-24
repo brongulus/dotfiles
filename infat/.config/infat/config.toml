@@ -1,3 +1,4 @@
+# infat --config ~/.config/infat/config.toml
 [types]
 text = "Emacs"
 plain-text = "Emacs"
@@ -9,5 +10,7 @@ movie = "Mpv"
 mp4-audio = "Mpv"
 mp4-movie = "Mpv"
 
+# infat set --type m3u Mpv
 [extensions]
 md = "Emacs"
+m3u = "Mpv"
