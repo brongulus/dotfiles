@@ -1,14 +1,28 @@
+Status:children_remove(3,Status.LEFT)
+Status:children_remove(4,Status.RIGHT)
+
 function Entity:click(event, up)
   if up then
     return  -- don't care about mouse release events
   end
   -- Hover on the file we just clicked
   ya.emit("reveal", { self._file.url })
-  if event.is_middle then     -- Middle click
+  
+  if event.is_left then
+    ya.emit("enter", {})
+  elseif event.is_right then
     ya.emit("open", {})
-  elseif event.is_right then  -- Right click
-    ya.emit("plugin", { "smart-enter" })
   end
+end
+
+local old_highlights = Entity.highlights
+
+function Entity:highlights()
+	local line = old_highlights(self)
+	if self._file.cha.is_dir then
+		line = ui.Line { line, ui.Span("/") }
+	end
+	return line
 end
 
 --- @since 25.2.26
@@ -53,4 +67,4 @@ local function setup(_, opts)
 	end
 end
 
-setup()
+-- setup()

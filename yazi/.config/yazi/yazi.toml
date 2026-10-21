@@ -1,10 +1,10 @@
 [mgr]
-ratio        = [ 1, 2, 3 ]
+ratio        = [ 0, 1, 2 ]
 sort_by      = "natural"
-linemode     = "size"
+linemode     = "none"
 show_hidden  = true
 show_symlink = true
-# mouse_events   = [ "click", "scroll", "move" ] # need a new release
+mouse_events   = [ "click", "scroll", "move" ] # need a new release
 
 [preview]
 tab_width    = 2
@@ -13,5 +13,5 @@ max_height   = 2300
 
 [opener]
 edit = [
-  { run = 'emacs -nw "$@"', block = true },
+  { run = 'emacs -nw %s', block = true },
 ]

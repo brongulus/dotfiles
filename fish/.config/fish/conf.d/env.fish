@@ -1,5 +1,6 @@
 if status is-login
     fish_add_path ~/.emacs.d/bin
+    fish_add_path ~/.rustup/toolchains/stable-aarch64-apple-darwin/bin
     fish_add_path ~/.cargo/bin
     fish_add_path ~/go/bin
     fish_add_path ~/.local/bin
@@ -47,10 +48,10 @@ if status is-login
        end
     end
 
-    if type -q direnv
-       # set --export DIRENV_LOG_FORMAT "" # need nix-direnv logs ;-;
-       /opt/homebrew/bin/direnv hook fish | source
-    end
+    # if type -q direnv
+    #    # set --export DIRENV_LOG_FORMAT "" # need nix-direnv logs ;-;
+    #    /opt/homebrew/bin/direnv hook fish | source
+    # end
 
     if type -q zoxide
        # export _ZO_DATA_DIR=$Z_DATA

@@ -1,18 +1,35 @@
+[mgr]
+cwd = { bg = "black", underline = true }
+border_style = { hidden = true }
+syntect_theme = "~/.config/yazi/nothing.tmTheme"
+
 [status]
-# separator_open  = ""
-# separator_close = ""
-# separator_style = { fg = "red", bg = "black" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+[indicator]
+current = { reversed = true }
+padding = { open = "▐", close = "▌" }
+preview = { underline = false }
+
+[icon]
+globs = []
+dirs  = []
+files = []
+exts  = []
+conds = []
 
 [mode]
-normal_main = { bg = "lightblue", fg = "black", bold = false }
-normal_alt = { bg = "lightmagenta", fg = "black", bold = false }
-select_main = { bg = "lightgreen", bold = false }
-select_alt = { fg = "lightgreen", bg = "white", bold = false }
-unset_main  = { bg = "lightmagenta", bold = false }
-unset_alt  = { fg = "lightmagenta", bg = "white", bold = false }
+normal_main = { bg = "black", bold = false }
+normal_alt = { bg = "black", bold = false }
+select_main = { reversed = true, bold = false }
+select_alt = { bg = "black", bold = false }
+unset_main  = { bg = "black", bold = false }
+unset_alt  = { bg = "black", bold = false }
 
-# [filetype]
-# rules = [
-#     # Fallback
-#     { name = "*", fg = "white" }
-# ]
+[filetype]
+rules = [
+	# Fallback
+	{ url = "*/", bold = true },
+  { url = "*", fg = "grey" }
+]

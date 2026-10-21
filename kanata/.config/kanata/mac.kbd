@@ -11,9 +11,18 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 |#
 
 (defcfg
-  process-unmapped-keys yes
+  process-unmapped-keys no
   log-layer-changes yes
+  log-layer-changes-name-only yes
   danger-enable-cmd yes
+  ;; https://github.com/jtroo/kanata/issues/1982
+  ;; macos-dev-names-include (
+  ;;   "Apple Internal Keyboard / Trackpad"
+  ;;   "HHKB-Hybrid_1"
+  ;;   "HHKB-Classic"
+  ;;   "MINILA-R Convertible"
+  ;; )
+  macos-continue-if-no-devs-found yes
   ;; movemouse-inherit-accel-state yes
 )
 
@@ -58,7 +67,7 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   _    @oem   f2   f3   f4 @ozn   f6   f7   f8   f9   f10  f11  f12  _
   @tld   f4   f5   f6  @tns  _    _    _    _    _    _    _    _    _
   _      f7   f8   f9  @ytf  _  @yfw @yfs @yfn @yfe   _    _   @okt
-  grv    f10  f11  f12 @yts  _  @ecp @eag   _    _    _  @mwd   _
+  grv    f10  f11  f12 @yts  _  @ecp @eag @cl  @cr    -  @mwd   _
   _      _    _    _            @ytm        _    _   @cl @mwu  @cr
 )
 
@@ -67,7 +76,7 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
   _    mlft @msu mrgt @mdb   _  @ysw @yss @ysn @yse   _    _    _   @mgr
   _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
-  _    @cl  @mwr @mwl  @cr   _  @ecp   _    _    _    _  @cu    _
+  _    @cl  @mwr @mwl  @cr   _  @ecp   _   @cl  @cr   _  @cu    _
   _      _    _    _            @ytm       @qwr  _   @cl @cd   @cr
 )
 
@@ -86,7 +95,8 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   ;; hkb (layer-switch hkb)
   esp (tap-hold-press 200 200 esc (layer-toggle layers))
   cap (tap-hold-press 200 200 esc lctl)
-  lct (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
+  lct (tap-hold-press 200 200 esc lctl)
+  ;; lct (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
   fnl (tap-hold-press 200 200 (layer-toggle qwerty) (layer-toggle hs))
   scl (tap-hold-press 200 400 ; (layer-toggle hs))
   rmet (tap-hold-press 200 400 (layer-switch hs-alt) rmet)
