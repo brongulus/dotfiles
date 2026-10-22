@@ -2,9 +2,11 @@ fish-shell
 pipewire
 pulsemixer
 xdg-utils
+xorg
 tlp
 bluez
 libspa-bluetooth
+xclip
 kanata
 fprintd
 emacs-gtk3
@@ -13,6 +15,9 @@ mpv
 yazi
 cwm
 bspwm
+i3
+feh
+rofi
 lemonbar-xft
 ffmpeg
 git

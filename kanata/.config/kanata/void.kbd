@@ -31,7 +31,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   @esp  🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
   grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @cap   a    s    d    f    g    h    j    k    l    ;    '    @rat
+  @cap   a    s    d    f    g    h    j    k    l   @scl  '   @rat
   lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
   @fnl lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
 )
@@ -45,22 +45,31 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   @fnl lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
 )
 
-;; (deflayer hhkb
-;;   esc   🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
-;;   @grl   1    2    3    4    5    6    7    8    9    0    -    =    |   bspc
-;;   tab    q    w    e    r    t    y    u    i    o    p    [    ]   @rat
-;;   @cap   a    s    d    f    g    h    j    k    l    ;    '   bspc
-;;   lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   \    ▲   rsft
-;;   @fnl @lct  lmet lalt @lct spc        @rc @rmet ralt fn   ◀    ▼    ▶
-;; )
+(deflayer hs
+  _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+  _     mlft @msu mrgt @yts  _    _    _    _    _    _    _    _    _
+  _     @msl @msd @msr @ytf  _  @yfw @yfs @yfn @yfe   _    _    _
+  _     @cl  @mwr @mwl @yts  _    _    _   @cl  @cr   _  @mwd   _
+  _      _    _    _            @ytm        _    _   @cl @mwu  @cr
+)
 
 (deflayer hs-alt
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    mlft @msu mrgt @mdb   _    _    _    _    _    _    _    _    _
-  _    @msl @msd @msr   _    _    _    _    _    _  @mwu @mwd   _
-  _    @cl  @mwr @mwl  @cr   _    _    _    @cl @cr   _    _    _
-  _      _    _    _              _         _    _    _    _    _
+  _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _    _    _    _
+  _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
+  _    @cl  @mwr @mwl  @cr   _    _    _   @cl  @cr   _    _    _
+  _      _    _    _            @ytm        _    _   @cl   _   @cr
+)
+
+(deflayer fn-lyr
+  _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+ @rft    _    _    _   lrld  _    _    _    _    _    _    _    _    _
+  _      _    _    _    _    _    _    _    _    _    _    _   @okt
+  _      _    _    _    _    _    _   @bpm  _    _    _    _    _
+  _      _    _    _            @rfo        _    _    _    _    _
 )
 
 (deflayer layers
@@ -79,29 +88,48 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   esp (tap-hold-press 200 200 esc (layer-toggle layers))
   cap (tap-hold-press 200 200 esc lctl)
   lct (tap-hold-press 200 200 esc lctl)
-  fnl (tap-hold-press 200 200 ret (layer-toggle hs-alt))
+  fnl (tap-hold-press 200 200 ret (layer-toggle fn-lyr))
+  scl (tap-hold-press 200 400 ; (layer-toggle hs))
   rat (tap-hold-press 200 200 ret (layer-toggle hs-alt))
-  ;; lc (tap-hold 200 200 z lctl)
-  ;; la (tap-hold 200 200 x lalt)
-  ;; lm (tap-hold 200 200 c lmet)
-  ;; rm (tap-hold 200 200 , rmet)
-  ;; ra (tap-hold 200 200 . lalt)
-  ;; rc (tap-hold 200 200 / @lct)
 
-  ;; mwu (mwheel-accel-up 3 1200 1.15 0.93)
-  ;; mwd (mwheel-accel-down 3 1200 1.15 0.93)
   mwu (mwheel-up 50 5)
   mwd (mwheel-down 50 5)
   mwl (mwheel-left 25 5)
   mwr (mwheel-right 25 5)
-  mdb (macro (mltp 200 mlft))
   msu (movemouse-accel-up 4 1000 1 5)
   msd (movemouse-accel-down 4 1000 1 5)
   msl (movemouse-accel-left 4 1000 1 5)
   msr (movemouse-accel-right 4 1000 1 5)
-  mgr C-mlft ;; FIXME
 
-  cl C-A-left
-  cr C-A-right
+  cl (cmd bash -c "bspc desktop -f prev.local")
+  cr (cmd bash -c "bspc desktop -f next.local")
 )
 
+(defalias
+  ytf (cmd bash -c "bspc node -t fullscreen")
+  ytm (cmd bash -c "bspc node -t floating")
+  yts (cmd bash -c "bspc node @/ -C forward")
+
+  yfw (cmd bash -c "bspc node -f west")
+  yfs (cmd bash -c "bspc node -f south")
+  yfn (cmd bash -c "bspc node -f north")
+  yfe (cmd bash -c "bspc node -f east")
+
+  yiw (cmd bash -c "bspc node west -p east; bspc node -n west")
+  yis (cmd bash -c "bspc node -n south")
+  yin (cmd bash -c "bspc node -n north")
+  yie (cmd bash -c "bspc node -n east")
+
+  ysw (cmd bash -c "bspc node -s west")
+  yss (cmd bash -c "bspc node -s south")
+  ysn (cmd bash -c "bspc node -s north")
+  yse (cmd bash -c "bspc node -s east")
+
+  ;; ecp (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-org-capture)'")
+  ;; eag (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-my/agenda)'")
+
+  bpm (cmd bash -c "bspc node --flag hidden=on")
+  rfo (cmd bash -c "rofi -matching fuzzy -show combi -combi-modi 'drun,run' -modi combi")
+  rft (cmd bash -c "rofi -modi drun -show window")
+  okt (cmd bash -c "ghostty")
+)

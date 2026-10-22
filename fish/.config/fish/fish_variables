@@ -2,8 +2,8 @@
 # VERSION: 3.0
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/I752152/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/I752152/\x2elocal/share/z
+SETUVAR Z_DATA:/home/brongulus/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/home/brongulus/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/Users/I752152\x24
 SETUVAR __fish_initialized:4300
 SETUVAR __kube_ps_enabled:1
@@ -47,4 +47,4 @@ SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
 SETUVAR fish_prompt_marking_enabled:false\x1efalse
-SETUVAR fish_user_paths:/Users/I752152/\x2erustup/toolchains/stable\x2daarch64\x2dapple\x2ddarwin/bin\x1e/Users/I752152/bin\x1e/Users/I752152/\x2ekrew/bin\x1e/Users/I752152/\x2enix\x2dprofile/bin\x1e/Users/I752152/\x2elocal/bin\x1e/Users/I752152/dotfiles/bin/bin\x1e/Users/I752152/go/bin\x1e/Users/I752152/\x2ecargo/bin
+SETUVAR fish_user_paths:/home/brongulus/dotfiles/bin/bin\x1e/home/brongulus/\x2ecargo/bin\x1e/Users/I752152/\x2erustup/toolchains/stable\x2daarch64\x2dapple\x2ddarwin/bin\x1e/Users/I752152/bin\x1e/Users/I752152/\x2ekrew/bin\x1e/Users/I752152/\x2enix\x2dprofile/bin\x1e/Users/I752152/\x2elocal/bin\x1e/Users/I752152/dotfiles/bin/bin\x1e/Users/I752152/go/bin\x1e/Users/I752152/\x2ecargo/bin
