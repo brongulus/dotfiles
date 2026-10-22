@@ -1,18 +1,11 @@
 #|
-1. Need to install Karabiner-DriverKit-VirtualHIDDevice-x.x.0.pkg
-2. /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
-3. sudo '/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'
-4. sudo kanata -c ./mac.kbd
-
-Alt: (There are just too many issues, just run the karabiner daemon and launch kanata with tmux and call it a day)
-1. Copy the daemons (karabiner.plist and kanata.plist) in /Library/LaunchDaemons/
-2. Bootstrap: sudo launchctl bootstrap system /Library/LaunchDaemons/...
-3. Enable: sudo launchctl enable system/...
+https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 |#
 
 (defcfg
   process-unmapped-keys no
   log-layer-changes yes
+  linux-output-device-bus-type USB
   ;; log-layer-changes-name-only yes
   danger-enable-cmd yes
   ;; https://github.com/jtroo/kanata/issues/1982
@@ -22,7 +15,6 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   ;;   "HHKB-Classic"
   ;;   "MINILA-R Convertible"
   ;; )
-  macos-continue-if-no-devs-found yes
   ;; movemouse-inherit-accel-state yes
 )
 
@@ -32,25 +24,25 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps   a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
-  fn   lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+  wkup lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
 )
 
 (deflayer qwerty
   @esp  🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
   grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @cap   a    s    d    f    g    h    j    k    l    ;    '    ret
+  @cap   a    s    d    f    g    h    j    k    l    ;    '    @rat
   lsft   z    x    c    v    b    n    m    ,    .    /    ▲   rsft
-  fn   lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+  @fnl lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
 )
 
 (deflayer dvorak
   @esp  🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉  🔊
   grv    1    2    3    4    5    6    7    8    9    0    [    ]    bspc
   tab    '    ,    .    p    y    f    g    c    r    l    /    =    \
-  @cap   a    o    e    u    i    d    h    t    n    s    -   ret
+  @cap   a    o    e    u    i    d    h    t    n    s    -   @rat
   lsft   ;    q    j    k    x    b    m    w    v    z    ▲   rsft
-  fn   lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
+  @fnl lctl  lalt lmet          spc         rmet ralt ◀    ▼    ▶
 )
 
 ;; (deflayer hhkb
@@ -61,6 +53,15 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
 ;;   lsft   z    x    c    v    b    n    m   @rm  @ra  @rc   \    ▲   rsft
 ;;   @fnl @lct  lmet lalt @lct spc        @rc @rmet ralt fn   ◀    ▼    ▶
 ;; )
+
+(deflayer hs-alt
+  _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    mlft @msu mrgt @mdb   _    _    _    _    _    _    _    _    _
+  _    @msl @msd @msr   _    _    _    _    _    _  @mwu @mwd   _
+  _    @cl  @mwr @mwl  @cr   _    _    _    @cl @cr   _    _    _
+  _      _    _    _              _         _    _    _    _    _
+)
 
 (deflayer layers
   _      _    _    _    _    _    _    _    _    _    _    _    _
@@ -78,6 +79,8 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   esp (tap-hold-press 200 200 esc (layer-toggle layers))
   cap (tap-hold-press 200 200 esc lctl)
   lct (tap-hold-press 200 200 esc lctl)
+  fnl (tap-hold-press 200 200 ret (layer-toggle hs-alt))
+  rat (tap-hold-press 200 200 ret (layer-toggle hs-alt))
   ;; lc (tap-hold 200 200 z lctl)
   ;; la (tap-hold 200 200 x lalt)
   ;; lm (tap-hold 200 200 c lmet)
@@ -98,10 +101,7 @@ Alt: (There are just too many issues, just run the karabiner daemon and launch k
   msr (movemouse-accel-right 4 1000 1 5)
   mgr C-mlft ;; FIXME
 
-  tld S-grv
-  cd C-down
-  cu mctl
-  cl C-left
-  cr C-right
+  cl C-A-left
+  cr C-A-right
 )
 
