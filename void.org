@@ -1,0 +1,51 @@
+* Setup
+** Networking
+   Ensure you've enabled the =dhpcd= and =wpa_supplicant= services post installation
+   
+   #+begin_src sh
+sudo wpa_passphrase "WIFI_NAME" "WIFI_PASS" >> /etc/wpa_supplicant/wpa_supplicant.conf
+   #+end_src
+
+** System upgrade
+
+   #+begin_src sh
+sudo xbps-install -Su
+sudo xbps-install git
+   #+end_src
+
+   After git is installed, clone your dotfiles containing the package list
+
+   #+begin_src sh
+git clone https://github.com/brongulus/dotfiles --depth 1
+sudo xargs -a ~/dotfiles/.pkg-list xbps-install -S
+   #+end_src
+
+   Also clone the emacs dots, to aid in editing stuff
+
+   #+begin_src 
+git clone https://github.com/brongulus/.emacs.d --depth 1
+   #+end_src
+
+   And use stow for stuff you've already installed i.e. =tmux=, =fish=, =alias= etc.
+
+** Setup login environment
+   - After rustup is installed, setup rust using `rustup-init`
+   - Use cargo to install `kanata`: =cargo install kanata --features cmd=
+   - Setup kanata using: [[https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md][docs/setup-linux.md]] (=input= group should already be there, just create and add user to =uinput= group)
+   - Stow the =void= setup, this symlinks =bspwm=, =xinitrc= and =bash_profile= with the startx command.
+
+** Working environment
+   - Use =ssh-keygen=, upload the public key to github known keys.
+   - Firefox: install =bitwarden=, =ublock origin= and =vimium=. Disable AI, switch engine to ddg and restore last tabs on reopen.
+   - Auto mount drives: `devmon` (udevil), post install remove `, nonempty` from `/etc/udevil/udevil.conf`
+   - Setup audio (Requires dbus, also dependency of elogind)
+     #+begin_src sh
+sudo ln -s /etc/sv/elogind /var/service
+sudo ln -s /etc/sv/dbus /var/service
+sudo sv up elogind
+sudo sv up dbus
+     #+end_src
+
+     - Setup fprintd
+     - Setup synaptics, amdgpu and rc.local (/etc/...)
+       
