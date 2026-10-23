@@ -1,0 +1,79 @@
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+  // Taken from derguguh/rmpc-gruvbox
+  
+  // Directories
+  cache_dir: Some(".config/rmpc/cache"),
+  // Render
+  theme: Some("base"),
+  lyrics_dir: None,
+  duration_format: "%t->%m:%S",
+  max_fps: 30,
+  // Mouse
+  scrolloff: 1,
+  wrap_navigation: false,
+
+  // Music Queue
+  select_current_song_on_change: true,
+  center_current_song_on_change: true,
+
+  // Events
+  // on_song_change: ["~/.config/rmpc/notify.sh"],
+  on_exit: Some(["rmpc", "--address", "@mpd", "pause"]),
+  reflect_changes_to_playlist: false,
+
+  // List
+  ignore_leading_the: true,
+  browser_song_sort: [Title, Track, Disc, Artist],
+
+  // Keybinds
+  keybinds: (
+    global: {
+      "1":          SwitchToTab("Queue"),
+      "2":          SwitchToTab("Directories"),
+      "3":          SwitchToTab("Playlists"),
+    }
+  ),
+
+  // Structure
+  tabs: [
+    (
+      name: "Queue",
+      pane: Split(
+        direction: Horizontal,
+        panes: [
+          (
+            pane: Pane(Empty()),
+            size: "1",
+          ),
+          (
+            pane: Pane(AlbumArt),
+            size: "40%",
+            borders: "RIGHT",
+          ),
+          (
+            pane: Pane(Queue),
+            size: "60%",
+          ),
+          (
+            pane: Pane(Empty()),
+            size: "1",
+          ),
+        ],
+        size: "100%",
+      ),
+    ),
+    (
+      name: "Directories",
+      pane: Pane(Directories),
+      size: "100%",
+    ),
+    (
+      name: "Playlists",
+      pane: Pane(Playlists),
+      size: "100%",
+    ),
+  ],
+)

@@ -20,10 +20,10 @@ smart_gaps on
 hide_edge_borders both
 
 # client.<class>        border     background  text     indicator  child_border
-client.focused          #cdcab100  #cdcab100   #ffffff  #cdcab100  #cdcab100
-client.focused_inactive #01000000  #01000000   #ffffff  #01000000  #01000000
-client.unfocused        #01000000  #01000000   #ffffff  #01000000  #01000000
-client.urgent           #01000000  #01000000   #ffffff  #01000000  #01000000
+client.focused          #cdcab100  #cdcab100   #cdcab1  #cdcab100  #cdcab100
+client.focused_inactive #01000000  #01000000   #696a6c  #01000000  #01000000
+client.unfocused        #01000000  #01000000   #696a6c  #01000000  #01000000
+client.urgent           #01000000  #01000000   #cdcab1  #01000000  #01000000
 
 # ---- Workspaces (bspc monitor -d I II III IV V) ----
 set $ws1 "I"
