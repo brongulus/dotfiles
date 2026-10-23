@@ -1,0 +1,99 @@
+# ---- Required ----
+font pango:Input Mono Narrow 10
+bindsym Mod4+Return exec ghostty
+
+# ---- Behavior ----
+focus_on_window_activation none     # ignore_ewmh_focus true
+focus_follows_mouse yes             # focus_follows_pointer true
+mouse_warping none                  # pointer_follows_focus false
+
+# ---- Mouse ----
+# Mod4+left-drag moves, Mod4+right-drag resizes (floating windows)
+floating_modifier Mod4
+
+# ---- Look ----
+default_border pixel 1
+default_floating_border pixel 1
+
+gaps inner 5
+smart_gaps on
+hide_edge_borders both
+
+# client.<class>        border     background  text     indicator  child_border
+client.focused          #cdcab100  #cdcab100   #ffffff  #cdcab100  #cdcab100
+client.focused_inactive #01000000  #01000000   #ffffff  #01000000  #01000000
+client.unfocused        #01000000  #01000000   #ffffff  #01000000  #01000000
+client.urgent           #01000000  #01000000   #ffffff  #01000000  #01000000
+
+# ---- Workspaces (bspc monitor -d I II III IV V) ----
+set $ws1 "I"
+set $ws2 "II"
+set $ws3 "III"
+set $ws4 "IV"
+set $ws5 "V"
+
+bindsym Mod4+1 workspace $ws1
+bindsym Mod4+2 workspace $ws2
+bindsym Mod4+3 workspace $ws3
+bindsym Mod4+4 workspace $ws4
+bindsym Mod4+5 workspace $ws5
+bindsym Mod4+Shift+1 move container to workspace $ws1
+bindsym Mod4+Shift+2 move container to workspace $ws2
+bindsym Mod4+Shift+3 move container to workspace $ws3
+bindsym Mod4+Shift+4 move container to workspace $ws4
+bindsym Mod4+Shift+5 move container to workspace $ws5
+
+# ---- Rules ----
+# Check with: xprop | grep WM_CLASS   (first string = instance, second = class)
+
+# Gimp (desktop ^8 doesn't exist with only I..V, so this is inert until you add VIII)
+for_window [class="Gimp"] floating enable, move to workspace "VIII", workspace "VIII"
+
+for_window [class="Pavucontrol"]      floating enable, resize set 600 300, move absolute position 1120 730
+for_window [class="Blueman-manager"]  floating enable, resize set 500 400, move absolute position 1350 630
+for_window [class="mpv"]         floating enable
+for_window [class="Yad"]              floating enable
+for_window [class="MEGAsync"]         floating enable, resize set 400 500, move absolute position 1500 480
+for_window [class="Gnome-pomodoro"]   floating enable, resize set 300 400, move absolute position 20 20
+for_window [class="easyeffects"]      floating enable
+for_window [class="chatterino"]       floating enable
+
+# class:instance pairs from bspwm map to class= instance=
+for_window [class="Emacs" instance="doom-capture"] floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
+for_window [class="emacs-anywhere"]   floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
+
+# '*:scratch' -> any class with instance "scratch"
+for_window [instance="scratch"]       floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
+
+for_window [class="nmtui"]            floating enable, resize set 500 550, move absolute position 20 450
+
+# pseudo_tiled has no i3 equivalent; floating is the closest
+for_window [class="ru-turikhay-tlauncher-bootstrap-Bootstrap"] floating enable
+
+# manage=off has no equivalent; this is the closest approximation
+for_window [class="Screenkey"]        floating enable, border none
+no_focus [class="Screenkey"]
+
+# Kupfer.py focus=on
+for_window [class="Kupfer.py"]        focus
+
+# Workspace placement
+# follow=on -> move, then switch to it
+for_window [class="Code"]             move to workspace $ws2, workspace $ws2
+# no follow -> plain assign
+assign [class="Microsoft Teams - Preview"] → workspace $ws4
+
+bar {
+    font pango:Input Mono Narrow 10
+    status_command i3status
+    separator_symbol " "
+    colors {
+        background #121212
+        statusline #cdcab1
+
+        focused_workspace #f8f9e8 #242424 #f8f9e8
+    }
+}
+
+# Rules that need nothing in i3 because tiled is the default:
+#   mpv, Emacs, Zathura, Microsoft-edge

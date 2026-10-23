@@ -48,7 +48,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 (deflayer hs
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   _      _    _    _    _    _    _    _    _    _    _    _    _    _
-  _     mlft @msu mrgt @yts  _    _    _    _    _    _    _    _    _
+  _     mlft @msu mrgt @i3r  _    _    _    _    _    _    _    _    _
   _     @msl @msd @msr @ytf  _  @yfw @yfs @yfn @yfe   _    _    _
   _     @cl  @mwr @mwl @yts  _    _    _   @cl  @cr   _  @mwd   _
   _      _    _    _            @ytm        _    _   @cl @mwu  @cr
@@ -65,10 +65,10 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 
 (deflayer fn-lyr
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  _      _    _    _    _    _    _    _    _    _    _    _    _    _
- @rft    _    _    _   lrld  _    _    _    _    _    _    _    _    _
+ @rft    _    _    _    _    _    _    _    _    _   @vmt @vlw @vup  _
+ @rft   @i3k  _    _   @rfp  _    _    _    _    _    _    _    _    _
   _      _    _    _    _    _    _    _    _    _    _    _   @okt
-  _      _    _    _    _    _    _   @bpm  _    _    _    _    _
+  _      _   @rfo  _    _    _    _   @bpm  _    _    _    _    _
   _      _    _    _            @rfo        _    _    _    _    _
 )
 
@@ -101,35 +101,47 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   msl (movemouse-accel-left 4 1000 1 5)
   msr (movemouse-accel-right 4 1000 1 5)
 
-  cl (cmd bash -c "bspc desktop -f prev.local")
-  cr (cmd bash -c "bspc desktop -f next.local")
+  vmt (cmd bash -c "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
+  vlw (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+  vup (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
+
+  ;; lsp (cmd bash -c "loginctl suspend")
+  ;; lrb (cmd bash -c "loginctl reboot")
+  ;; lpo (cmd bash -c "loginctl poweroff")
+  i3k (cmd bash -c "i3-msg kill")
+  i3r (cmd bash -c "i3-msg restart")
+  cl (cmd bash -c "i3-msg workspace prev")
+  cr (cmd bash -c "i3-msg workspace next")
 )
 
 (defalias
-  ytf (cmd bash -c "bspc node -t fullscreen")
-  ytm (cmd bash -c "bspc node -t floating")
-  yts (cmd bash -c "bspc node @/ -C forward")
+  ytf (cmd bash -c "i3-msg fullscreen toggle")
+  ytm (cmd bash -c "i3-msg floating toggle")
+  yts (cmd bash -c "i3-msg layout toggle split")
 
-  yfw (cmd bash -c "bspc node -f west")
-  yfs (cmd bash -c "bspc node -f south")
-  yfn (cmd bash -c "bspc node -f north")
-  yfe (cmd bash -c "bspc node -f east")
+  yfw (cmd bash -c "i3-msg focus left")
+  yfs (cmd bash -c "i3-msg focus down")
+  yfn (cmd bash -c "i3-msg focus up")
+  yfe (cmd bash -c "i3-msg focus right")
 
-  yiw (cmd bash -c "bspc node west -p east; bspc node -n west")
-  yis (cmd bash -c "bspc node -n south")
-  yin (cmd bash -c "bspc node -n north")
-  yie (cmd bash -c "bspc node -n east")
+  ysw (cmd bash -c "i3-msg move left")
+  yss (cmd bash -c "i3-msg move down")
+  ysn (cmd bash -c "i3-msg move up")
+  yse (cmd bash -c "i3-msg move right")
 
-  ysw (cmd bash -c "bspc node -s west")
-  yss (cmd bash -c "bspc node -s south")
-  ysn (cmd bash -c "bspc node -s north")
-  yse (cmd bash -c "bspc node -s east")
+  yiw (cmd bash -c "i3-msg 'focus left; split v; layout stacking; mark _dst; focus right; move container to mark _dst; unmark _dst'")
+  yis (cmd bash -c "i3-msg 'focus down; split v; layout stacking; mark _dst; focus up; move container to mark _dst; unmark _dst'")
+  yin (cmd bash -c "i3-msg 'focus up; split v; layout stacking; mark _dst; focus down; move container to mark _dst; unmark _dst'")
+  yie (cmd bash -c "i3-msg 'focus right; split v; layout stacking; mark _dst; focus left; move container to mark _dst; unmark _dst'")
 
-  ;; ecp (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-org-capture)'")
-  ;; eag (cmd sudo -u I752152 bash -c "/opt/homebrew/bin/emacsclient -e '(popup-frame-my/agenda)'")
+  ;; ysw (cmd bash -c "i3-msg mark _swp; i3-msg focus left; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
+  ;; yss (cmd bash -c "i3-msg mark _swp; i3-msg focus down; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
+  ;; ysn (cmd bash -c "i3-msg mark _swp; i3-msg focus up; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
+  ;; yse (cmd bash -c "i3-msg mark _swp; i3-msg focus right; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
 
   bpm (cmd bash -c "bspc node --flag hidden=on")
-  rfo (cmd bash -c "rofi -matching fuzzy -show combi -combi-modi 'drun,run' -modi combi")
-  rft (cmd bash -c "rofi -modi drun -show window")
+  rfp (cmd bash -c "~/.config/i3/power.sh")
+  rfo (cmd bash -c "dmenu_run -i -b -nb '#121212' -nf '#cdcab1' -sb '#242424' -fn 'monospace:10'")
+  rft (cmd bash -c "~/.config/i3/window.sh")
   okt (cmd bash -c "ghostty")
 )

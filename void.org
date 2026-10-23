@@ -42,8 +42,17 @@ git clone https://github.com/brongulus/.emacs.d --depth 1
      #+begin_src sh
 sudo ln -s /etc/sv/elogind /var/service
 sudo ln -s /etc/sv/dbus /var/service
+sudo ln -s /etc/sv/bluetoothd /var/service
 sudo sv up elogind
 sudo sv up dbus
+sudo sv up bluetoothd
+
+sudo usermod -aG bluetooth "$USER"
+
+bluetoothctl power on
+bluetoothctl discoverable on
+
+bluetui
      #+end_src
 
      - Setup fprintd

@@ -1,0 +1,4 @@
+# https://wiki.archlinux.org/title/Fprint
+# sudo fprintd-enroll "$USER"
+# fprintd-verify
+auth sufficient pam_fprintd.so max-tries=1 timeout=10

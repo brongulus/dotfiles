@@ -3,5 +3,5 @@
 . "$HOME/.cargo/env"
 
 if [[ -z "$DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
-    exec startx
+    exec startx > /tmp/startx.log 2>&1
 fi
