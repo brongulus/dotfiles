@@ -7,6 +7,8 @@ alsa-utils
 bluetui
 libspa-bluetooth
 bluez
+mpd
+rmpc
 xdg-utils
 xorg
 xrdb

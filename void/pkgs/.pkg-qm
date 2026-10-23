@@ -1,0 +1,10 @@
+meson
+pkgconf
+curl
+cmake
+libX11-devel
+libXext-devel
+libXrender-devel
+libXrandr-devel
+mpv-devel
+noto-fonts-ttf

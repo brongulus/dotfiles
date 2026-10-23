@@ -1,5 +1,5 @@
 # ---- Required ----
-font pango:Input Mono Narrow 10
+font pango:Input Mono Narrow Bold 8
 bindsym Mod4+Return exec ghostty
 
 # ---- Behavior ----

@@ -4,6 +4,7 @@ border_style = { hidden = true }
 syntect_theme = "~/.config/yazi/nothing.tmTheme"
 
 [status]
+progress_label = { fg = "black", bold = true }
 sep_left = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 

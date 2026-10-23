@@ -46,7 +46,7 @@ path_exists VPN {
 }
 
 tztime local {
-    format = "%d,%a %H:%M"
+    format = "%d,%a %H:%M "
 }
 
 memory {
