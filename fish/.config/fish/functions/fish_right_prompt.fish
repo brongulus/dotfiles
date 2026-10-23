@@ -45,10 +45,10 @@ function fish_right_prompt
         echo -n ""
     else
         if [ -n "$TMUX" ]
-            string join -n " " -- $prompt_status $venv $duration $direnv $git_vc $d
+            string join -n " " -- $prompt_status $venv $duration $direnv $git_vc # $d
         else
             set -l kube (kubectl_status)(set_color normal)
-            string join -n " " -- $prompt_status $venv $duration $direnv $kube $git_vc $d
+            string join -n " " -- $prompt_status $venv $duration $direnv $kube $git_vc # $d
         end
     end
 end

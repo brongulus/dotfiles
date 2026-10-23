@@ -10,7 +10,8 @@ order += "memory"
 order += "tztime local"
 
 wireless wlp3s0 {
-    format_up = "W: %essid, %bitrate"
+    # format_up = "W: %essid, %bitrate"
+    format_up = ""
     format_down = "W: down"
 }
 
@@ -20,10 +21,10 @@ ethernet eth0 {
 }
 
 battery 0 {
-    format = "%status %percentage %remaining"
+    format = "%status %percentage"# %remaining"
     format_down = "No battery"
     status_chr = "⚡"
-    status_bat = "BAT"
+    status_bat = ""
     status_unk = "?"
     status_full = "FULL"
     status_idle = "IDLE"
@@ -46,7 +47,7 @@ path_exists VPN {
 }
 
 tztime local {
-    format = "%d,%a %H:%M "
+    format = "%d/%m %a %H:%M "
 }
 
 memory {
