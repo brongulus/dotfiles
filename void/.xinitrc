@@ -1,13 +1,12 @@
 #!/bin/sh
 
-xsetroot -solid "#121212"
+hsetroot -solid "#121212"
 
 kanata -n -c ~/dotfiles/kanata/.config/kanata/void.kbd > /tmp/kanata.log 2>&1 &
 devmon --no-gui &
 xrdb -merge ~/.Xresources &
-xset r rate 250 40 &
 pipewire &
 pipewire-pulse &
-# volumeicon &
+dunst &
 
-exec dbus-run-session i3
+exec dbus-run-session -- i3

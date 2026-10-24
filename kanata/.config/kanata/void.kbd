@@ -47,7 +47,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 
 (deflayer hs
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+ @prm    _    _    _    _    _    _    _    _    _    _    _    _    _
   _     mlft @msu mrgt @i3r  _    _    _    _    _    _    _    _    _
   _     @msl @msd @msr @ytf  _  @yfw @yfs @yfn @yfe   _    _    _
   _     @cl  @mwr @mwl @yts  _    _    _   @cl  @cr   _  @mwd   _
@@ -56,7 +56,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 
 (deflayer hs-alt
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  _      _    _    _    _    _    _    _    _    _    _    _    _    _
+ @prm   _    _    _     _    _    _    _    _    _    _    _    _    _
   _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _    _    _    _
   _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
   _    @cl  @mwr @mwl  @cr   _    _    _   @cl  @cr   _    _    _
@@ -65,7 +65,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 
 (deflayer fn-lyr
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
- @rft    _    _    _    _    _    _    _    _    _   @vmt @vlw @vup  _
+ @rft   @oem  _    _    _   @off  _    _    _    _   @vmt @vlw @vup  _
  @rft   @i3k  _    _   @rfp  _    _    _    _    _    _    _    _    _
   _      _    _    _    _    _    _    _    _    _    _    _   @okt
   _      _   @rfo  _    _    _    _   @bpm  _    _    _    _    _
@@ -92,8 +92,8 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   scl (tap-hold-press 200 400 ; (layer-toggle hs))
   rat (tap-hold-press 200 200 ret (layer-toggle hs-alt))
 
-  mwu (mwheel-up 50 120)
-  mwd (mwheel-down 50 120)
+  mwu (mwheel-down 50 120)
+  mwd (mwheel-up 50 120)
   mwl (mwheel-left 25 120)
   mwr (mwheel-right 25 120)
   msu (movemouse-accel-up 4 1000 1 5)
@@ -105,9 +105,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   vlw (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
   vup (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
 
-  ;; lsp (cmd bash -c "loginctl suspend")
-  ;; lrb (cmd bash -c "loginctl reboot")
-  ;; lpo (cmd bash -c "loginctl poweroff")
+  prm (cmd bash -c "(pgrep picom && pkill picom) || picom")
   i3k (cmd bash -c "i3-msg kill")
   i3r (cmd bash -c "i3-msg restart")
   cl (cmd bash -c "i3-msg workspace prev")
@@ -134,14 +132,11 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   yin (cmd bash -c "i3-msg 'focus up; split v; layout tabbed; mark _dst; focus down; move container to mark _dst; unmark _dst'")
   yie (cmd bash -c "i3-msg 'focus right; split v; layout tabbed; mark _dst; focus left; move container to mark _dst; unmark _dst'")
 
-  ;; ysw (cmd bash -c "i3-msg mark _swp; i3-msg focus left; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
-  ;; yss (cmd bash -c "i3-msg mark _swp; i3-msg focus down; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
-  ;; ysn (cmd bash -c "i3-msg mark _swp; i3-msg focus up; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
-  ;; yse (cmd bash -c "i3-msg mark _swp; i3-msg focus right; i3-msg swap container with mark _swp; i3-msg '[con_mark=_swp] focus'; i3-msg unmark _swp")
-
   bpm (cmd bash -c "bspc node --flag hidden=on")
   rfp (cmd bash -c "~/.config/i3/power.sh")
   rfo (cmd bash -c "dmenu_run -i -b -nb '#121212' -nf '#cdcab1' -sb '#242424' -fn 'monospace:10'")
   rft (cmd bash -c "~/.config/i3/window.sh")
   okt (cmd bash -c "ghostty")
+  oem (cmd bash -c "emacs")
+  off (cmd bash -c "firefox")
 )

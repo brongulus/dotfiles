@@ -6,7 +6,6 @@ general {
 
 order += "wireless wlp3s0"
 order += "battery 0"
-order += "memory"
 order += "tztime local"
 
 wireless wlp3s0 {
@@ -47,7 +46,7 @@ path_exists VPN {
 }
 
 tztime local {
-    format = "%d/%m %a %H:%M "
+    format = "%H:%M "
 }
 
 memory {
