@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=gruvbox-Compact-Gruvbox
+Comment=An Flat Gtk+ theme based on Elegant Design
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=gruvbox-Compact-Gruvbox
+MetacityTheme=gruvbox-Compact-Gruvbox
+IconTheme=Colloid-Gruvbox
+CursorTheme=gruvbox-cursors
+ButtonLayout=close,minimize,maximize:menu
