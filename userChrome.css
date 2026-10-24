@@ -1,0 +1,101 @@
+
+/* ==========================================================
+   Firefox userChrome.css
+   extensions: adaptive tab bar color, ublock, vimium, bitwarden,
+               hide discord sidebar
+   about:config
+     browser.nova.enabled = false
+     toolkit.legacyUserProfileCustomizations.stylesheets = true
+   about:support > open directory (profile) > mkdir chrome
+
+   ========================================================== */
+
+/* ---------- Global appearance ---------- */
+
+:root {
+  --uc-tab-radius: 7px;
+  --uc-control-radius: 8px;
+  --uc-tab-gap: 0px;
+
+  /* For adaptive tab bar color */
+  --ext-theme-background-transition: none !important;
+  --inactive-window-transition: none !important;
+
+}
+
+/* Bookmarks Toolbar: Hide the empty toolbar message */
+#personal-toolbar-empty {
+  visibility: hidden !important;
+}
+
+/* ---------- Navigation toolbar ---------- */
+
+#nav-bar {
+  min-height: 36px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* Rounded address bar, preserving native theme colors */
+#urlbar-background {
+  border-radius: var(--uc-control-radius) !important;
+}
+
+/* Keep toolbar buttons visually consistent */
+#nav-bar .toolbarbutton-1 {
+  border-radius: var(--uc-control-radius) !important;
+}
+
+/* ---------- Vertical tabs ---------- */
+
+/* Compact tab rows */
+#vertical-tabs .tabbrowser-tab {
+  min-height: 30px !important;
+  margin-block: var(--uc-tab-gap) !important;
+}
+
+/* Rounded tab shapes */
+#vertical-tabs .tab-background {
+  border-radius: var(--uc-tab-radius) !important;
+}
+
+/* Softer hover state */
+/* #vertical-tabs .tabbrowser-tab:hover */
+/*   > .tab-stack */
+/*   > .tab-background:not([selected="true"]) { */
+/*   background-color: color-mix( */
+/*     in srgb, */
+/*     currentColor 8%, */
+/*     transparent */
+/*   ) !important; */
+/* } */
+
+/* Subtle separation for the selected tab */
+#vertical-tabs .tab-background[selected="true"] {
+  border-radius: var(--uc-tab-radius) !important;
+}
+
+/* ---------- Sidebar launcher ---------- */
+
+/* Preserve your existing compact sidebar layout */
+#sidebar-main {
+  min-width: 40px !important;
+}
+
+/* ---------- Tab and toolbar transitions ---------- */
+
+/* #vertical-tabs .tab-background, */
+/* #nav-bar .toolbarbutton-1 { */
+/*   transition: */
+/*     background-color 120ms ease, */
+/*     border-radius 120ms ease !important; */
+/* } */
+
+/* ---------- Respect reduced-motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  #vertical-tabs .tab-background,
+  #nav-bar .toolbarbutton-1 {
+    transition: none !important;
+  }
+}
