@@ -6,7 +6,7 @@
 
   background_color:             None,
   text_color:                   None,
-  highlighted_item_style:       (fg: None, bg: "#cdcab1"),
+  highlighted_item_style:       (fg: None, bg: "#696a6c", modifiers: "Bold"),
   current_item_style:           (fg: "black", bg: "#cdcab1"),
   borders_style:                (fg: "#696a6c"),
   highlight_border_style:       (fg: "#a89984"),

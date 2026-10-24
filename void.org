@@ -56,5 +56,5 @@ bluetui
      #+end_src
 
      - Setup fprintd
-     - Setup synaptics, amdgpu and rc.local (/etc/...)
+     - Setup libinput, amdgpu and rc.local (/etc/...)
        
