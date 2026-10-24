@@ -4,7 +4,6 @@
    extensions: adaptive tab bar color, ublock, vimium, bitwarden,
                hide discord sidebar
    about:config
-     browser.nova.enabled = false
      toolkit.legacyUserProfileCustomizations.stylesheets = true
    about:support > open directory (profile) > mkdir chrome
 
@@ -45,51 +44,6 @@
 #nav-bar .toolbarbutton-1 {
   border-radius: var(--uc-control-radius) !important;
 }
-
-/* ---------- Vertical tabs ---------- */
-
-/* Compact tab rows */
-#vertical-tabs .tabbrowser-tab {
-  min-height: 30px !important;
-  margin-block: var(--uc-tab-gap) !important;
-}
-
-/* Rounded tab shapes */
-#vertical-tabs .tab-background {
-  border-radius: var(--uc-tab-radius) !important;
-}
-
-/* Softer hover state */
-/* #vertical-tabs .tabbrowser-tab:hover */
-/*   > .tab-stack */
-/*   > .tab-background:not([selected="true"]) { */
-/*   background-color: color-mix( */
-/*     in srgb, */
-/*     currentColor 8%, */
-/*     transparent */
-/*   ) !important; */
-/* } */
-
-/* Subtle separation for the selected tab */
-#vertical-tabs .tab-background[selected="true"] {
-  border-radius: var(--uc-tab-radius) !important;
-}
-
-/* ---------- Sidebar launcher ---------- */
-
-/* Preserve your existing compact sidebar layout */
-#sidebar-main {
-  min-width: 40px !important;
-}
-
-/* ---------- Tab and toolbar transitions ---------- */
-
-/* #vertical-tabs .tab-background, */
-/* #nav-bar .toolbarbutton-1 { */
-/*   transition: */
-/*     background-color 120ms ease, */
-/*     border-radius 120ms ease !important; */
-/* } */
 
 /* ---------- Respect reduced-motion preferences ---------- */
 
