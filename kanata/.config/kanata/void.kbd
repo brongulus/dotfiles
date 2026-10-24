@@ -102,8 +102,8 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   msr (movemouse-accel-right 4 1000 1 5)
 
   vmt (cmd bash -c "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
-  vlw (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
-  vup (cmd bash -c "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
+  vlw (cmd bash -c "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+  vup (cmd bash -c "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
 
   prm (cmd bash -c "(pgrep picom && pkill picom) || picom")
   i3k (cmd bash -c "i3-msg kill")

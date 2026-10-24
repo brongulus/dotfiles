@@ -9,6 +9,10 @@ exec --no-startup-id syndaemon -i 0.5 -K -R
 font pango:Input Mono Narrow Bold 8
 bindsym Mod4+Return exec ghostty
 
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+
 # ---- Behavior ----
 focus_on_window_activation none
 focus_follows_mouse yes
@@ -27,11 +31,11 @@ gaps inner 8
 # smart_gaps on
 hide_edge_borders none
 
-# client.<class>        border   bg        text    indicator child_border
-client.focused          #cdcab1  #cdcab1  #191919  #cdcab1  #cdcab1
-client.focused_inactive #cdcab1  #cdcab1  #696a6c  #191919  #191919
-client.unfocused        #cdcab1  #cdcab1  #696a6c  #191919  #191919
-client.urgent           #191919  #191919  #cdcab1  #191919  #191919
+# client.<class>        border   bg       text     indicator child_border
+client.focused          #cdcab1  #cdcab1  #191919  #cdcab1   #cdcab1
+client.focused_inactive #cdcab1  #cdcab1  #696a6c  #191919   #191919
+client.unfocused        #cdcab1  #cdcab1  #696a6c  #191919   #191919
+client.urgent           #191919  #191919  #cdcab1  #191919   #191919
 
 # ---- Workspaces ----
 set $ws1 "1"
@@ -52,37 +56,32 @@ bindsym Mod4+Shift+4 move container to workspace $ws4
 bindsym Mod4+Shift+5 move container to workspace $ws5
 
 # ---- Rules ----
-# Check with: xprop | grep WM_CLASS   (first string = instance, second = class)
-
-# Gimp (desktop ^8 doesn't exist with only I..V, so this is inert until you add VIII)
-for_window [class="firefox"] move to workspace $ws5, workspace $ws5
-
-for_window [class="dunst"] border pixel r
-for_window [class="ghostty"] border pixel r
+# Check with: xprop | grep WM_CLASS (first string = instance, second = class)
+# for_window [class="firefox"] move to workspace $ws3
+for_window [class="dunst"]            border pixel r
+for_window [class="ghostty"]          border pixel r
 for_window [class="pavucontrol"]      floating enable, resize set 600 300,move absolute position 1320 750
-for_window [class="Blueman-manager"]  floating enable, resize set 500 400, move absolute position 1380 650
+for_window [class="Blueman-manager"]  floating enable, resize set 500 400, move absolute position 1370 650
 for_window [class="Arandr"]           floating enable, resize set 800 500
 for_window [class="mpv"]              floating enable
 for_window [class="easyeffects"]      floating enable
 for_window [class="chatterino"]       floating enable
-
-# class:instance pairs from bspwm map to class= instance=
 for_window [class="emacs-anywhere"]   floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
 # '*:scratch' -> any class with instance "scratch"
 for_window [instance="scratch"]       floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
-# manage=off has no equivalent; this is the closest approximation
-for_window [class="Screenkey"]        floating enable, border none
-no_focus [class="Screenkey"]
 
 bar {
-    font pango:Input Mono Narrow 10
+    i3bar_command i3bar --transparency
     status_command i3status
+
+    font pango:Input Mono Narrow 10
     separator_symbol " "
+    
     colors {
-        background #121212
+        background #12121200
         statusline #cdcab1
 
-        focused_workspace  #121212 #121212 #f8f9e8
-        inactive_workspace #121212 #121212 #696a6c
+        focused_workspace  #12121200 #12121200 #f8f9e8
+        inactive_workspace #12121200 #12121200 #696a6c
     }
 }

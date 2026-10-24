@@ -151,7 +151,7 @@
     // Use system (fontconfig) fonts
     "use_system_fonts": false,
     // Use system (~/.config/mpv) mpv.conf instead of the one provided by QuickMedia
-    "use_system_mpv_config": false,
+    "use_system_mpv_config": true,
     // Which mpv profile to use when |use_system_mpv_config| is set to true
     "system_mpv_profile": "",
     // Enable shaders. Only set to false if you have a very slow computer or dont care about graphical effects

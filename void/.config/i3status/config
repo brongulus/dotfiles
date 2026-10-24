@@ -1,5 +1,5 @@
 general {
-    # output_format = "i3bar"
+    output_format = "i3bar"
     colors = false
     interval = 5
 }
@@ -29,20 +29,6 @@ battery 0 {
     status_idle = "IDLE"
     path = "/sys/class/power_supply/BAT%d/uevent"
     low_threshold = 10
-}
-
-run_watch DHCP {
-    pidfile = "/var/run/dhclient*.pid"
-}
-
-run_watch VPNC {
-    # file containing the PID of a vpnc process
-    pidfile = "/var/run/vpnc/pid"
-}
-
-path_exists VPN {
-    # path exists when a VPN tunnel launched by nmcli/nm-applet is active
-    path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
 tztime local {

@@ -6,16 +6,17 @@ in vec2 texcoord;
 uniform sampler2D tex;
 
 vec4 window_shader() {
-    vec2 uv = texcoord / textureSize(tex, 0);
+    vec2 uv = texcoord / vec2(textureSize(tex, 0));
     vec4 pixColor = texture(tex, uv);
 
     float gray = dot(pixColor.rgb, vec3(0.299, 0.587, 0.114));
-    gray = clamp((gray - 0.12) / (0.88 - 0.12), 0.0, 1.0);
-    // gray = pow(gray, 1.2);
-    // gray = smoothstep(0.08, 0.92, gray);
 
-    vec3 paperColor = vec3(0.94, 0.92, 0.86);
-    vec3 inkColor = vec3(25.0 / 255.0);
+    // Softer tonal mapping preserves more shadow and highlight detail.
+    gray = smoothstep(0.025, 0.95, gray);
+
+    // Warm paper and slightly warm charcoal ink.
+    vec3 paperColor = vec3(0.918, 0.890, 0.808); // #eae3ce
+    vec3 inkColor   = vec3(0.075, 0.071, 0.063); // #131211
 
     vec3 result = mix(inkColor, paperColor, gray);
 

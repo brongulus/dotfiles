@@ -8,5 +8,6 @@ xrdb -merge ~/.Xresources &
 pipewire &
 pipewire-pulse &
 dunst &
+feh --bg-scale ~/dotfiles/void/lake.jpg &
 
 exec dbus-run-session -- i3
