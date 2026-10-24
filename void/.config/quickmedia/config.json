@@ -1,0 +1,170 @@
+{
+    "search": {
+        "font_size": 16
+    },
+    "tab": {
+        "font_size": 16
+    },
+    "body": {
+        "title_font_size": 16,
+        "author_font_size": 14,
+        "description_font_size": 14,
+        "timestamp_font_size": 10,
+        "reaction_font_size": 14,
+        "progress_font_size": 14,
+        "replies_font_size": 14,
+        "embedded_load_font_size": 14,
+        "loading_text_font_size": 30
+    },
+    "input": {
+        "font_size": 16
+    },
+    "animation": {
+        "move_speed": 30.0,
+        "loading_icon_speed": 400.0
+    },
+    "video": {
+        // Plugins that support max height will select a video source that is not taller than this
+        "max_height": 0
+    },
+    "local_manga": {
+        // The directory that contains your manga. See README.md local-manga section for expected directory structure
+        "directory": "",
+        // Sort manga by name. If false, then sort manga by most recently updated
+        "sort_by_name": false,
+        // Sort chapters by name. If false, then sort chapters by most recently updated
+        "sort_chapters_by_name": false
+    },
+    "local_anime": {
+        // The directory that contains your anime. See README.md local-anime section for expected directory structure
+        "directory": "",
+        // Sort anime (series) by name. If false, then sort anime by most recently updated
+        "sort_by_name": false,
+        "sort_episodes_by_name": true,
+        // If false, anime is displayed in the way they appear in the directory.
+        // If true, QuickMedia tries to group anime episodes into a folder (visually) with the name of the anime
+        "auto_group_episodes": true,
+        // If anime should be searched for recursively, where directories become anime and subdirectories become seasons.
+        // If false, only take the episodes directly in the "directory" path, useful on a slow harddrive when sort_episodes_by_name is set to true
+        // and the directory is for directly downloaded episodes without a structure.
+        // Setting this to false is ideal when the directory is the download directory for AutoMedia.
+        "recursive": true
+    },
+    "youtube": {
+        // If true, resume playback where you left off in youtube videos
+        "load_progress": true,
+        // The invidious instance to use. This is currently only used to show a video feed.
+        // If not set, then local recommendations are used instead.
+        "invidious_instance": "",
+        "sponsorblock": {
+            "enable": false,
+            "api_endpoint": "https://sponsor.ajay.app",
+            // If the sponsor segment has less votes than this in sponsorblock then it will be ignored
+            "min_votes": 0
+        }
+    },
+    "matrix": {
+        // List of homeservers to display in the "Room directory" tab
+        "known_homeservers": [
+            "midov.pl",
+            "matrix.org",
+            "kde.org",
+            "librem.one",
+            "maunium.net",
+            "halogen.city",
+            "gnome.org",
+            "shivering-isles.com",
+            "nerdsin.space",
+            "glowers.club",
+            "privacytools.io",
+            "linuxdelta.com",
+            "tchncs.de",
+            "jupiterbroadcasting.com"
+        ],
+        // The email of the gpg. Should match your matrix user id, but in email format. See README.md "Matrix gpg encryption" section
+        "gpg_user_id": "",
+        "room_name_font_size": 18,
+        "room_description_font_size": 12,
+        // If you want others to know that you have read their message or not
+        "send_read_receipts": true,
+        // If you want others to know when you are typing a message in the room
+        "send_typing_notifications": true,
+        "appear_online": true,
+        // If the chat message should be removed when you press ESC
+        "clear_message_on_escape": true
+    },
+    "peertube": {
+        // List of instances to display when opening peertube
+        "known_instances": [
+            "https://tube.midov.pl",
+            "https://videos.lukesmith.xyz",
+            "https://peertube.se",
+            "https://bittube.video",
+            "https://video.nobodyhasthe.biz",
+            "https://libre.tube",
+            "https://open.tube",
+            "https://runtube.re",
+            "https://tube.kenfm.de",
+            "https://tcode.kenfm.de",
+            "https://tube.querdenken-711.de",
+            "https://peertube.rage.lol",
+            "https://gegenstimme.tv",
+            "https://tv.poa.st",
+            "https://libre.video",
+            "https://gorf.tube",
+            "https://neogenesis.tv"
+        ]
+    },
+    "download": {
+        // Directores where to save different files when pressing ctrl+shift+s to save a file
+        "video_directory": "~/Downloads/qm",
+        "image_directory": "~/Downloads/qm",
+        "music_directory": "~/Downloads/qm",
+        "file_directory": "~/Downloads/qm"
+    },
+    // Font names should either be the full filepath to the font file or the font name. If font name is used then the fc-match command is used
+    // to find the font file that matches that font name.
+    // Example font name: "DejaVu Sans"
+    // Example bold font name: "DejaVu Sans:bold"
+    // The config "use_system_fonts" has to be set to false to use these font configs.
+    "font": {
+        "latin": "",
+        "latin_bold": "",
+        "latin_monospace": "",
+        "cjk": "",
+        "symbols": "",
+        "scale": {
+            "latin": 1.0,
+            "latin_bold": 1.0,
+            "latin_monospace": 1.0,
+            "cjk": 1.0,
+            "symbols": 1.0
+        }
+    },
+    "mangadex": {
+        "allow_hentai": false
+    },
+    "file_manager": {
+        // Set to true to enable grid view. If false, the file manager items are shown as a list instead
+        "grid_view": true
+    },
+    // Use system (fontconfig) fonts
+    "use_system_fonts": false,
+    // Use system (~/.config/mpv) mpv.conf instead of the one provided by QuickMedia
+    "use_system_mpv_config": false,
+    // Which mpv profile to use when |use_system_mpv_config| is set to true
+    "system_mpv_profile": "",
+    // Enable shaders. Only set to false if you have a very slow computer or dont care about graphical effects
+    // such as rounded corners. Rounded corners can also be disabled with the theme option "rounded_rectangles"
+    "enable_shaders": true,
+    // The theme to use. This should match the name of a file in either /usr/share/quickmedia/themes or ~/.config/quickmedia/themes, except without the .json at the end of the filename
+    "theme": "gruvbox",
+    // UI scale (all components)
+    "scale": 1.0,
+    // Font scale (only fonts)
+    "font_scale": 1.0,
+    // Spacing scale (only scaling the spacing between elements, nothing else)
+    "spacing_scale": 1.0,
+    // Can reduce latency, but might increase cpu usage a bit
+    "low_latency_mode": false
+}

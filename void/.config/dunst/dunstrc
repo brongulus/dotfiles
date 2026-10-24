@@ -1,0 +1,19 @@
+[global]
+  title = dunst
+  class = dunst
+  indicate_hidden = yes
+  shrink = yes
+  frame_width = 2
+  frame_color = "#f8f9e8"
+  font = Input Mono Narrow 10
+
+[urgency_low]
+    background = "#242424"
+    foreground = "#f8f9e8"
+    timeout = 5
+
+[urgency_normal]
+    background = "#242424"
+    foreground = "#f8f9e8"
+    timeout = 5
+  
