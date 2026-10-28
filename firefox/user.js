@@ -6,8 +6,11 @@ user_pref("browser.preonboarding.splashShown", true);
 user_pref("browser.warnOnQuitShortcut", false);
 user_pref("signon.rememberSignons", false);
 
+// Use s- instead of C-
+user_pref("ui.key.accelKey", 91);
 user_pref("browser.nova.enabled", false);
 user_pref("ui.systemUsesDarkTheme", 1);
+user_pref("apz.kinetic_scroll.enabled", true);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
 // Enable vertical tabs and hover expansion

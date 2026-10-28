@@ -5,5 +5,7 @@ screen-dumps/
 cache
 currentTrack.plist
 .DS_Store
+.uuid
+._.*
 lazy-lock.json
 result

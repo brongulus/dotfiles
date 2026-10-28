@@ -58,3 +58,5 @@ bluetui
      - Setup fprintd
      - Setup libinput, amdgpu and rc.local (/etc/...)
        
+** Window managers review
+    https://datagubbe.se/pickwm/

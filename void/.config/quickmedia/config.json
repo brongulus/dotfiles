@@ -63,58 +63,6 @@
             "min_votes": 0
         }
     },
-    "matrix": {
-        // List of homeservers to display in the "Room directory" tab
-        "known_homeservers": [
-            "midov.pl",
-            "matrix.org",
-            "kde.org",
-            "librem.one",
-            "maunium.net",
-            "halogen.city",
-            "gnome.org",
-            "shivering-isles.com",
-            "nerdsin.space",
-            "glowers.club",
-            "privacytools.io",
-            "linuxdelta.com",
-            "tchncs.de",
-            "jupiterbroadcasting.com"
-        ],
-        // The email of the gpg. Should match your matrix user id, but in email format. See README.md "Matrix gpg encryption" section
-        "gpg_user_id": "",
-        "room_name_font_size": 18,
-        "room_description_font_size": 12,
-        // If you want others to know that you have read their message or not
-        "send_read_receipts": true,
-        // If you want others to know when you are typing a message in the room
-        "send_typing_notifications": true,
-        "appear_online": true,
-        // If the chat message should be removed when you press ESC
-        "clear_message_on_escape": true
-    },
-    "peertube": {
-        // List of instances to display when opening peertube
-        "known_instances": [
-            "https://tube.midov.pl",
-            "https://videos.lukesmith.xyz",
-            "https://peertube.se",
-            "https://bittube.video",
-            "https://video.nobodyhasthe.biz",
-            "https://libre.tube",
-            "https://open.tube",
-            "https://runtube.re",
-            "https://tube.kenfm.de",
-            "https://tcode.kenfm.de",
-            "https://tube.querdenken-711.de",
-            "https://peertube.rage.lol",
-            "https://gegenstimme.tv",
-            "https://tv.poa.st",
-            "https://libre.video",
-            "https://gorf.tube",
-            "https://neogenesis.tv"
-        ]
-    },
     "download": {
         // Directores where to save different files when pressing ctrl+shift+s to save a file
         "video_directory": "~/Downloads/qm",
@@ -162,7 +110,7 @@
     // UI scale (all components)
     "scale": 1.0,
     // Font scale (only fonts)
-    "font_scale": 1.0,
+    "font_scale": 1.1,
     // Spacing scale (only scaling the spacing between elements, nothing else)
     "spacing_scale": 1.0,
     // Can reduce latency, but might increase cpu usage a bit

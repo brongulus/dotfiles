@@ -1,0 +1,21 @@
+# Lenovo Thinkpad T14 Gen2a
+# Allowed properties are:
+#    EVDEV_ABS_<axis>=<min>:<max>:<res>:<fuzz>:<flat>
+#
+# where <axis> is the hexadecimal EV_ABS code as listed in linux/input.h and
+# min, max, res, fuzz, flat are the decimal values to the respective fields of
+# the struct input_absinfo as listed in linux/input.h. If a field is missing
+# the field will be left as-is. Not all fields need to be present. e.g. ::45
+# sets the resolution to 45 units/mm.
+
+# To reload, execute as root:
+#   udevadm hwdb --update
+#   udevadm trigger /dev/input/eventXX (event2)
+# where /dev/input/eventXX is the device in question. If in doubt, simply use
+# /dev/input/event* to reload all input rules.
+
+evdev:name:SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*pvrThinkPadT14Gen2a**
+ EVDEV_ABS_00=::43
+ EVDEV_ABS_01=::49
+ EVDEV_ABS_35=::43
+ EVDEV_ABS_36=::49

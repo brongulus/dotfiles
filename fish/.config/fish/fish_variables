@@ -7,5 +7,6 @@ SETUVAR Z_DATA_DIR:/home/brongulus/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/Users/I752152\x24
 SETUVAR __fish_initialized:4300
 SETUVAR __kube_ps_enabled:1
+SETUVAR fish_features:no\x2dquery\x2dterm\x1eno\x2dkeyboard\x2dprotocols\x1eno\x2dquery\x2dterm\x1eno\x2dkeyboard\x2dprotocols\x1eno\x2dquery\x2dterm\x1eno\x2dkeyboard\x2dprotocols\x1eno\x2dquery\x2dterm\x1eno\x2dkeyboard\x2dprotocols\x1eno\x2dquery\x2dterm\x1eno\x2dkeyboard\x2dprotocols
 SETUVAR fish_prompt_marking_enabled:false\x1efalse
 SETUVAR fish_user_paths:/home/brongulus/bin\x1e/home/brongulus/dotfiles/bin/bin\x1e/home/brongulus/\x2ecargo/bin\x1e/Users/I752152/\x2erustup/toolchains/stable\x2daarch64\x2dapple\x2ddarwin/bin\x1e/Users/I752152/bin\x1e/Users/I752152/\x2ekrew/bin\x1e/Users/I752152/\x2enix\x2dprofile/bin\x1e/Users/I752152/\x2elocal/bin\x1e/Users/I752152/dotfiles/bin/bin\x1e/Users/I752152/go/bin\x1e/Users/I752152/\x2ecargo/bin

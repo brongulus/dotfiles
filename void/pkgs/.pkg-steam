@@ -1,0 +1,15 @@
+void-repo-multilib
+void-repo-nonfree
+void-repo-multilib-nonfree
+mesa-dri
+mesa-dri-32bit
+mesa-vulkan-radeon
+mesa-vulkan-radeon-32bit
+amdvlk
+xf86-video-amdgpu
+steam
+libgcc-32bit
+libstdc++-32bit
+libdrm-32bit
+libglvnd-32bit
+libva-32bit

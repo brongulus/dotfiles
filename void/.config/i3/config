@@ -1,17 +1,30 @@
 # ---- Apps ----
+exec --no-startup-id pipewire
+exec --no-startup-id pipewire-pulse
+exec --no-startup-id wireplumber
+exec --no-startup-id mpd
+exec --no-startup-id picom
 exec --no-startup-id blueman-applet
 exec --no-startup-id pasystray
 
+exec --no-startup-id libinput-gestures-setup stop start
 exec --no-startup-id xset r rate 250 40
 exec --no-startup-id syndaemon -i 0.5 -K -R
 
 # ---- Required ----
 font pango:Input Mono Narrow Bold 8
 bindsym Mod4+Return exec ghostty
+bindsym Mod4+x exec dmenu_run -i -b -nb '#121212' -nf '#cdcab1' -sb '#242424' -fn 'monospace:10'
+
+bindsym Mod4+q kill 
+bindsym Mod4+h move scratchpad
+bindsym Mod4+Tab scratchpad show
+bindsym Mod4+comma workspace prev
+bindsym Mod4+period workspace next
 
 bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
 
 # ---- Behavior ----
 focus_on_window_activation none
@@ -32,10 +45,10 @@ gaps inner 8
 hide_edge_borders none
 
 # client.<class>        border   bg       text     indicator child_border
-client.focused          #cdcab1  #cdcab1  #191919  #cdcab1   #cdcab1
-client.focused_inactive #cdcab1  #cdcab1  #696a6c  #191919   #191919
-client.unfocused        #cdcab1  #cdcab1  #696a6c  #191919   #191919
-client.urgent           #191919  #191919  #cdcab1  #191919   #191919
+client.focused          #d45b4b  #d45b4b  #191919  #d45b4b   #d45b4b
+client.focused_inactive #d45b4b  #d45b4b  #cdcab1  #191919   #191919
+client.unfocused        #d45b4b  #d45b4b  #cdcab1  #191919   #191919
+client.urgent           #191919  #191919  #d45b4b  #191919   #191919
 
 # ---- Workspaces ----
 set $ws1 "1"
@@ -58,21 +71,17 @@ bindsym Mod4+Shift+5 move container to workspace $ws5
 # ---- Rules ----
 # Check with: xprop | grep WM_CLASS (first string = instance, second = class)
 # for_window [class="firefox"] move to workspace $ws3
-for_window [class="dunst"]            border pixel r
-for_window [class="ghostty"]          border pixel r
-for_window [class="pavucontrol"]      floating enable, resize set 600 300,move absolute position 1320 750
-for_window [class="Blueman-manager"]  floating enable, resize set 500 400, move absolute position 1370 650
+for_window [class="pavucontrol"]      floating enable, sticky enable, resize set 700 500, move absolute position 1220 550
+for_window [class="Blueman-manager"]  floating enable, sticky enable, resize set 500 400, move absolute position 1350 650
 for_window [class="Arandr"]           floating enable, resize set 800 500
 for_window [class="mpv"]              floating enable
-for_window [class="easyeffects"]      floating enable
-for_window [class="chatterino"]       floating enable
-for_window [class="emacs-anywhere"]   floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
-# '*:scratch' -> any class with instance "scratch"
-for_window [instance="scratch"]       floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
+for_window [class="Emacs.*"]          floating enable, resize set 1400 800, move absolute position 260 140
+for_window [instance="*:scratch"]     floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
 
 bar {
     i3bar_command i3bar --transparency
     status_command i3status
+    tray_output primary
 
     font pango:Input Mono Narrow 10
     separator_symbol " "
