@@ -24,9 +24,9 @@ git
 hsetroot
 i3
 i3status
-kanata
 libinput-gestures
 libspa-bluetooth
+lxdm
 make
 mpd
 mpv
@@ -49,6 +49,7 @@ unzip
 void-repo-nonfree
 unrar
 wireplumber
+xbanish
 xclip
 xdg-utils
 xmirror

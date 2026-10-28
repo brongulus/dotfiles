@@ -1,4 +1,12 @@
 # ---- Apps ----
+exec --no-startup-id hsetroot -solid "#121212"
+exec --no-startup-id ~/.cargo/bin/kanata -n -c ~/dotfiles/kanata/.config/kanata/void.kbd > /tmp/kanata.log 2>&1
+exec --no-startup-id devmon --no-gui
+exec --no-startup-id xrdb -merge ~/.Xresources
+exec --no-startup-id dunst
+exec --no-startup-id xbanish
+exec --no-startup-id feh --bg-fill ~/dotfiles/void/lake.jpg
+
 exec --no-startup-id pipewire
 exec --no-startup-id pipewire-pulse
 exec --no-startup-id wireplumber
@@ -7,9 +15,9 @@ exec --no-startup-id picom
 exec --no-startup-id blueman-applet
 exec --no-startup-id pasystray
 
-exec --no-startup-id libinput-gestures-setup stop start
+# exec --no-startup-id libinput-gestures-setup stop start
+# exec --no-startup-id syndaemon -i 0.5 -K -R
 exec --no-startup-id xset r rate 250 40
-exec --no-startup-id syndaemon -i 0.5 -K -R
 
 # ---- Required ----
 font pango:Input Mono Narrow Bold 8
@@ -35,6 +43,16 @@ mouse_warping none
 # Mod4+left-drag moves, Mod4+right-drag resizes (floating windows)
 floating_modifier Mod4
 
+# ---- Rules ----
+# Check with: xprop | grep WM_CLASS (first string = instance, second = class)
+# for_window [class="firefox"] move to workspace $ws3
+for_window [class="pavucontrol"]      floating enable, sticky enable, resize set 700 500, move absolute position 1220 550
+for_window [class="Blueman-manager"]  floating enable, sticky enable, resize set 500 400, move absolute position 1350 650
+for_window [class="Arandr"]           floating enable, resize set 800 500
+for_window [class="mpv"]              floating enable
+for_window [class="Emacs.*"]          floating enable, resize set 1400 800, move absolute position 260 140
+for_window [instance="*:scratch"]     floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
+
 # ---- Look ----
 default_border pixel 4
 default_floating_border pixel 4
@@ -49,6 +67,23 @@ client.focused          #d45b4b  #d45b4b  #191919  #d45b4b   #d45b4b
 client.focused_inactive #d45b4b  #d45b4b  #cdcab1  #191919   #191919
 client.unfocused        #d45b4b  #d45b4b  #cdcab1  #191919   #191919
 client.urgent           #191919  #191919  #d45b4b  #191919   #191919
+
+bar {
+    i3bar_command i3bar --transparency
+    status_command i3status
+    tray_output primary
+
+    font pango:Input Mono Narrow 10
+    separator_symbol " "
+
+    colors {
+        background #12121200
+        statusline #cdcab1
+
+        focused_workspace  #12121200 #12121200 #f8f9e8
+        inactive_workspace #12121200 #12121200 #696a6c
+    }
+}
 
 # ---- Workspaces ----
 set $ws1 "1"
@@ -67,30 +102,3 @@ bindsym Mod4+Shift+2 move container to workspace $ws2
 bindsym Mod4+Shift+3 move container to workspace $ws3
 bindsym Mod4+Shift+4 move container to workspace $ws4
 bindsym Mod4+Shift+5 move container to workspace $ws5
-
-# ---- Rules ----
-# Check with: xprop | grep WM_CLASS (first string = instance, second = class)
-# for_window [class="firefox"] move to workspace $ws3
-for_window [class="pavucontrol"]      floating enable, sticky enable, resize set 700 500, move absolute position 1220 550
-for_window [class="Blueman-manager"]  floating enable, sticky enable, resize set 500 400, move absolute position 1350 650
-for_window [class="Arandr"]           floating enable, resize set 800 500
-for_window [class="mpv"]              floating enable
-for_window [class="Emacs.*"]          floating enable, resize set 1400 800, move absolute position 260 140
-for_window [instance="*:scratch"]     floating enable, sticky enable, resize set 1500 700, move absolute position 210 190
-
-bar {
-    i3bar_command i3bar --transparency
-    status_command i3status
-    tray_output primary
-
-    font pango:Input Mono Narrow 10
-    separator_symbol " "
-    
-    colors {
-        background #12121200
-        statusline #cdcab1
-
-        focused_workspace  #12121200 #12121200 #f8f9e8
-        inactive_workspace #12121200 #12121200 #696a6c
-    }
-}
