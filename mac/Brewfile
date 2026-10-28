@@ -89,12 +89,14 @@ brew "felinks"
 brew "gnuplot"
 brew "graphviz"
 brew "ghostscript"
+brew "sevenzip"
 
 brew "tectonic"
 brew "pandoc"
 brew "ledger"
 brew "beancount"
 brew "flow-control"
+brew "chawan"
 
 # programming
 
