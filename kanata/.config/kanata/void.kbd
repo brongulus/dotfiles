@@ -57,7 +57,7 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
 (deflayer hs-alt
   _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
  @prm   _    _    _     _    _    _    _    _    _    _    _    _    _
-  _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _    _    _    _
+  _    mlft @msu mrgt   _    _  @ysw @yss @ysn @yse   _   @mwl @mwr  _
   _    @msl @msd @msr   _    _  @yiw @yis @yin @yie @mwu @mwd   _
   _    @cl  @mwr @mwl  @cr   _    _    _   @cl  @cr   _    _    _
   _      _    _    _            @ytm        _    _   @cl   _   @cr
@@ -108,8 +108,8 @@ https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md
   prm (cmd bash -c "(pgrep picom && pkill picom) || picom")
   i3k (cmd bash -c "i3-msg kill")
   i3r (cmd bash -c "i3-msg restart")
-  cl (cmd bash -c "i3-msg workspace prev")
-  cr (cmd bash -c "i3-msg workspace next")
+  cl  (cmd bash -c "i3-msg workspace prev")
+  cr  (cmd bash -c "i3-msg workspace next")
 )
 
 (defalias

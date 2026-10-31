@@ -24,8 +24,10 @@ app-notifications = no-clipboard-copy
 clipboard-read = allow
 clipboard-write = allow
 
-foreground = "#f8f9e8"
-background = "#191919"
+foreground = "#212121"
+background = "#eae3ce"
+# https://www.ditig.com/256-colors-cheat-sheet
+palette = 8=#696a6c
 
 keybind = global:unconsumed:cmd+r=reload_config
 keybind = cmd+t=unbind

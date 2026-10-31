@@ -7,7 +7,7 @@ function fish_prompt
     set -l delim (set_color green)"❯ "$normal
     # If we don't have unicode use a simpler delimiter
     string match -qi "*.utf-8" -- $LANG $LC_CTYPE $LC_ALL; or set delim "> "
-    test $last_status -ne 0; and set delim (set_color $fish_color_error)"❯ $normal"
+    test $last_status -ne 0; and set delim (set_color red)"❯ $normal"
 
     fish_is_root_user; and set delim (set_color red)" # "$normal
 

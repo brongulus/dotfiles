@@ -30,8 +30,9 @@ lxdm
 make
 mpd
 mpv
-mupdf
+mupdf-tools
 noto-fonts-cjk
+noto-fonts-emoji
 pasystray
 pavucontrol
 picom
@@ -40,6 +41,7 @@ poppler
 rtkit
 ripgrep
 rmpc
+rtorrent
 rustup
 stow
 tlp

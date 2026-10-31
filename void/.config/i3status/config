@@ -26,8 +26,8 @@ battery 0 {
     status_chr = "⚡"
     status_bat = ""
     status_unk = "?"
-    status_full = "FULL"
-    status_idle = "IDLE"
+    status_full = ""
+    status_idle = ""
     path = "/sys/class/power_supply/BAT%d/uevent"
     low_threshold = 10
 }

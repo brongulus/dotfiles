@@ -2,6 +2,38 @@
 # To sort: cat /tmp/start.prof | sort -nk2 | tac | head
 ## In fish with nix on mac: sourcing /etc/fish/config.fish was causing immense slowdown
 
+# man set
+# https://codeberg.org/mkhl/nothing.fish
+set -g fish_color_autosuggestion '--dim' '--underline'
+set -g fish_color_cancel
+set -g fish_color_command normal
+set -g fish_color_comment '--dim' '--italics'
+set -g fish_color_cwd '--dim'
+set -g fish_color_cwd_root '--dim'
+set -g fish_color_end
+set -g fish_color_error '--bold' # red
+set -g fish_color_escape
+set -g fish_color_history_current
+set -g fish_color_host normal
+set -g fish_color_keyword '--bold'
+set -g fish_color_match
+set -g fish_color_normal normal
+set -g fish_color_operator
+set -g fish_color_option
+set -g fish_color_param
+set -g fish_color_quote '--dim'
+set -g fish_color_redirection
+set -g fish_color_search_match '--reverse'
+set -g fish_color_selection '--reverse'
+set -g fish_color_status normal
+set -g fish_color_user normal 
+set -g fish_color_valid_path
+set -g fish_pager_color_completion normal
+set -g fish_pager_color_description '--bold'
+set -g fish_pager_color_prefix '--underline'
+set -g fish_pager_color_progress '--bold'
+set -g fish_pager_color_selected_background '--reverse'
+
 if [ "$INSIDE_EMACS" != "" ]
     set -Ua fish_features no-query-term
     set -Ua fish_features no-keyboard-protocols

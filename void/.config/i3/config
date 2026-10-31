@@ -17,22 +17,25 @@ exec --no-startup-id pasystray
 
 # exec --no-startup-id libinput-gestures-setup stop start
 # exec --no-startup-id syndaemon -i 0.5 -K -R
-exec --no-startup-id xset r rate 250 40
+# https://forum.endeavouros.com/t/i3-autostart-xset-command-only-works-upon-reload/48440
+exec --no-startup-id (sleep 2 && xset r rate 250 40)&
 
 # ---- Required ----
 font pango:Input Mono Narrow Bold 8
 bindsym Mod4+Return exec ghostty
-bindsym Mod4+x exec dmenu_run -i -b -nb '#121212' -nf '#cdcab1' -sb '#242424' -fn 'monospace:10'
+bindsym Mod4+space exec dmenu_run -i -b -nb '#121212' -nf '#cdcab1' -sb '#242424' -fn 'monospace:10'
 
 bindsym Mod4+q kill 
 bindsym Mod4+h move scratchpad
-bindsym Mod4+Tab scratchpad show
+bindsym Mod4+s scratchpad show
+bindsym Mod4+Tab exec ~/dotfiles/void/.config/i3/window.sh
 bindsym Mod4+comma workspace prev
 bindsym Mod4+period workspace next
 
 bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
+bindsym XF86AudioMicMute exec ~/dotfiles/void/.config/i3/bluetooth.sh
 
 # ---- Behavior ----
 focus_on_window_activation none
