@@ -1,0 +1,32 @@
+Pre-requisite:
+1. Run =ifconfig= to see if the wifi interface was detected.
+2. Go through =man 8 afterboot=.
+
+Network setup:
+1. Edit =/etc/rc.conf= to ~wpa_supplicant=YES~ to enable the service on startup.
+2. Update =/etc/wpa_supplicant.conf= with
+   #+begin_src sh
+network={
+        ssid="name"
+        psk="pass"
+}
+   #+end_src
+   Ref: https://www.netbsd.org/docs/guide/en/chap-net-practice.html#chap-net-practice-lan-setup-wlan
+3. Start =service wpa_supplicant start= service
+4. Issue =ping netbsd.org= to check if things are working
+
+Moving over from root:
+1. useradd -G wheel -m <user> 
+2. passwd <user> --> enter <pass>
+3. ln -fs /usr/share/zoneinfo/Asia/Kolata /etc/localtime
+4. su <user>
+
+Preparing for setup:
+1. Switch to root user =su -l=
+#+begin_src sh
+PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$(uname -p)/$(uname -r | cut -d_ -f1)/All"
+export PKG_PATH
+pkg_add -v pkgin
+pkgin update
+#+end_src
+2. Install git: =pkgin install git=
