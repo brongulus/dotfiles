@@ -1,0 +1,36 @@
+[mgr]
+cwd = { underline = true }
+border_style = { hidden = true }
+syntect_theme = "~/.config/yazi/nothing.tmTheme"
+
+[status]
+progress_label = { fg = "#696a6c", bold = true }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+[indicator]
+current = { reversed = true }
+padding = { open = "▐", close = "▌" }
+preview = { underline = false }
+
+[icon]
+globs = []
+dirs  = []
+files = []
+exts  = []
+conds = []
+
+[mode]
+normal_main = { bg = "#696a6c", fg="white", bold = false }
+normal_alt = { bg = "#696a6c", fg="white", bold = false }
+select_main = { reversed = true, bold = false }
+select_alt = { bg = "#696a6c", fg="white", bold = false }
+unset_main  = { bg = "#696a6c", fg="white", bold = false }
+unset_alt  = { bg = "#696a6c", fg="white", bold = false }
+
+[filetype]
+rules = [
+	# Fallback
+	{ url = "*/", bold = true },
+  { url = "*", fg = "#696a6c" }
+]
