@@ -142,7 +142,7 @@ brew "zoxide"
 brew "yazi"
 brew "gh"
 brew "stow"
-brew "direnv"
+# brew "direnv"
 
 brew "fish"
 brew "fisher" # TODO: fish packages
